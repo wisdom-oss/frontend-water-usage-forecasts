@@ -13,8 +13,20 @@ export const wisdomInterface: WisdomInterface = {
   entryComponent: WaterUsageForecastsComponent,
   translations: {
     // empty for now
-    de_DE: {},
-    en_US: {}
+    de_DE: {
+      "water-usage-forecasts": {
+        "label": {
+          "name": "Prognose"
+        }
+      }
+    },
+    en_US: {
+      "water-usage-forecasts": {
+        "label": {
+          "name": "Prognosis"
+        }
+      }
+    }
   }
 }
 
