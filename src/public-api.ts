@@ -1,6 +1,4 @@
-/*
- * Public API Surface of water-usage-forecasts
- */
+/** Public API Surface of water-usage-forecasts. */
 
 import {WisdomInterface} from "common";
 
@@ -8,12 +6,12 @@ import {
   WaterUsageForecastsComponent
 } from "./lib/water-usage-forecasts.component";
 
+/** Public interface for the wisdom core to inject this module. */
 export const wisdomInterface: WisdomInterface = {
   path: "water-usage-forecasts",
   scopes: ["water-usage-forecasts"],
   entryComponent: WaterUsageForecastsComponent,
   translations: {
-    // empty for now
     de_DE: {
       "water-usage-forecasts": {
         "label": {

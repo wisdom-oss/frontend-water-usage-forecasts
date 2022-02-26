@@ -1,20 +1,20 @@
 import {Component, OnInit, AfterViewInit} from "@angular/core";
 import {Chart, ChartData} from "chart.js";
 
+// TODO: doc this
+
+/**
+ * Component displaying the request interface as well as the data provided by
+ * the server for the water usage forecasts.
+ */
 @Component({
   selector: "lib-water-usage-forecasts",
-  templateUrl: "./water-usage-forecasts.component.html",
-  styles: [
-  ]
+  templateUrl: "./water-usage-forecasts.component.html"
 })
 export class WaterUsageForecastsComponent implements OnInit {
 
-  constructor() { }
-
   barData?: ChartData<"bar">;
   lineData?: ChartData<"line">;
-
-  chart?: Chart<"bar">;
 
   ngOnInit(): void {
     this.barData = {
