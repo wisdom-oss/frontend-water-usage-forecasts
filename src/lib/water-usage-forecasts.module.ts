@@ -1,11 +1,16 @@
 import {CommonModule} from "@angular/common";
 import {NgModule} from "@angular/core";
+import {RouterModule} from "@angular/router";
+import {TranslateModule} from "@ngx-translate/core";
 import {ChartModule, WisdomModule} from "common";
 
 import {WaterUsageForecastsComponent} from "./water-usage-forecasts.component";
-import { MapSelectViewComponent } from './views/map-select-view/map-select-view.component';
-import { ResultDataViewComponent } from './views/result-data-view/result-data-view.component';
-import {RouterModule} from "@angular/router";
+import {
+  MapSelectViewComponent
+} from "./views/map-select-view/map-select-view.component";
+import {
+  ResultDataViewComponent
+} from "./views/result-data-view/result-data-view.component";
 
 @NgModule({
   declarations: [
@@ -17,7 +22,8 @@ import {RouterModule} from "@angular/router";
     WisdomModule,
     ChartModule,
     CommonModule,
-    RouterModule
+    RouterModule,
+    TranslateModule
   ],
   exports: [
     WaterUsageForecastsComponent
