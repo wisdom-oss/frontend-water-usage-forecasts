@@ -2,6 +2,8 @@
 
 import {WisdomInterface} from "common";
 
+import de_DE from "./i18n/de_DE";
+import en_US from "./i18n/en_US";
 import {
   WaterUsageForecastsComponent
 } from "./lib/water-usage-forecasts.component";
@@ -12,20 +14,8 @@ export const wisdomInterface: WisdomInterface = {
   scopes: ["water-usage-forecasts"],
   entryComponent: WaterUsageForecastsComponent,
   translations: {
-    de_DE: {
-      "water-usage-forecasts": {
-        "label": {
-          "name": "Prognose"
-        }
-      }
-    },
-    en_US: {
-      "water-usage-forecasts": {
-        "label": {
-          "name": "Prognosis"
-        }
-      }
-    }
+    de_DE,
+    en_US
   }
 }
 
