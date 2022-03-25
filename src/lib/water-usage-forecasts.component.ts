@@ -1,6 +1,6 @@
 import {Component, OnInit, AfterViewInit} from "@angular/core";
-import {Chart, ChartData} from "chart.js";
 import {ActivatedRoute} from "@angular/router";
+import {Chart, ChartData} from "chart.js";
 
 // TODO: doc this
 
@@ -25,7 +25,7 @@ export class WaterUsageForecastsComponent implements OnInit {
     // check for query parameters, upon change extract them and display correct
     // view
     this.route.queryParams.subscribe(({resolution, selection}) => {
-      if (!(resolution && selection) || Array.isArray(resolution)) {
+      if (!(resolution && selection) || Array.isArray(resolution) || !selection.length) {
         // missing or invalid parameters, display the map selection
         this.selectedView = "map-select";
         this.resolution = undefined;
