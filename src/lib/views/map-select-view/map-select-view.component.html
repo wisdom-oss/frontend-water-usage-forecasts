@@ -1,14 +1,19 @@
 <div class="card block">
   <div class="card-content p-0 is-clipped">
-    <map height="70vh"></map>
+    <map
+      height="70vh"
+      [layers]="{'lower-saxony': ['municipalities', 'districts', 'regions']}"
+      (selected)="mapSelection($event)"
+    ></map>
   </div>
 </div>
 <div class="columns is-justify-content-flex-end">
   <div class="column is-narrow">
     <a
       class="button is-primary"
+      [attr.disabled]="selectionReady ? null : true"
       routerLink="."
-      [queryParams]="{resolution: 'municipalities', selection: ['Cloppenburg', 'Ammerland']}"
+      [queryParams]="{resolution: resolution, selection: shapes}"
     >
       <span class="icon">
         <ion-icon name="stats-chart"></ion-icon>
