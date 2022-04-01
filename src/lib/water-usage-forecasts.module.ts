@@ -11,12 +11,14 @@ import {
 import {
   ResultDataViewComponent
 } from "./views/result-data-view/result-data-view.component";
+import { DataSetComponent } from './views/result-data-view/data-set/data-set.component';
 
 @NgModule({
   declarations: [
     WaterUsageForecastsComponent,
     MapSelectViewComponent,
-    ResultDataViewComponent
+    ResultDataViewComponent,
+    DataSetComponent
   ],
   imports: [
     WisdomModule,

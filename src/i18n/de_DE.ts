@@ -7,6 +7,9 @@ export default {
       "linear": "linear",
       "logarithmic": "logarithmisch",
       "polynomial": "polynomiell"
+    },
+    "display": {
+      "loading": "Prognose wird erstellt..."
     }
   }
 }

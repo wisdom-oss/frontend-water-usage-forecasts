@@ -1,3 +1,7 @@
+<page-loader
+  [title]="'water-usage-forecasts.display.loading' | translate"
+  [enable]="!didFinish"
+></page-loader>
 <div class="columns block">
   <div class="column">
     <div class="card">
@@ -67,7 +71,9 @@
           <div class="dropdown is-toggleable">
             <div class="dropdown-trigger">
               <button class="button">
-                <span>Linear</span>
+                <span>
+                  {{"water-usage-forecasts.parameter." + method | translate}}
+                </span>
                 <span class="icon">
               <ion-icon name="caret-down"></ion-icon>
             </span>
@@ -75,15 +81,34 @@
             </div>
             <div class="dropdown-menu">
               <div class="dropdown-content">
-                <a class="dropdown-item">Linear</a>
+                <a
+                  class="dropdown-item"
+                  (click)="method = regressionMethod.LINEAR"
+                >
+                  {{"water-usage-forecasts.parameter.linear" | translate}}
+                </a>
+                <a
+                  class="dropdown-item"
+                  (click)="method = regressionMethod.LOGARITHMIC"
+                >
+                  {{"water-usage-forecasts.parameter.logarithmic" | translate}}
+                </a>
+                <a
+                  class="dropdown-item"
+                  (click)="method = regressionMethod.POLYNOMIAL"
+                >
+                  {{"water-usage-forecasts.parameter.polynomial" | translate}}
+                </a>
               </div>
             </div>
           </div>
         </div>
+        <!--
         <div class="block">
           <p>Zeitraum</p>
 
         </div>
+        -->
       </div>
     </div>
   </div>
@@ -94,6 +119,14 @@
     <map height="200px"></map>
   </div>
 </div>
+
+<ng-container *ngFor="let item of data">
+  <div class="block">
+    <lib-data-set [data]="item"></lib-data-set>
+  </div>
+</ng-container>
+
+<!--
 
 <p class="title">Wasserbedarfe</p>
 <div class="columns block">
@@ -221,3 +254,5 @@
     <div class="column"></div>
   </div>
 </div>
+
+-->

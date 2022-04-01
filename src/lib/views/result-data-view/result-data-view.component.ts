@@ -1,16 +1,50 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild
+} from "@angular/core";
 import {ChartData} from "chart.js";
+
+import {ForecastType} from "../../forecast-type";
+import {WaterUsageForecastsService} from "../../water-usage-forecasts.service";
+import {ActivatedRoute} from "@angular/router";
+import {ForecastResponse} from "../../forecast-response";
 
 @Component({
   selector: 'lib-result-data-view',
   templateUrl: './result-data-view.component.html'
 })
-export class ResultDataViewComponent implements OnInit {
+export class ResultDataViewComponent implements OnInit, AfterViewInit {
+
+  @ViewChild("pageLoader") pageLoader!: ElementRef<HTMLDivElement>;
+
+  constructor(
+    private service: WaterUsageForecastsService,
+    private route: ActivatedRoute
+  ) {}
+
+  /** @internal just a re-export of the type */
+  regressionMethod = ForecastType;
+  method: ForecastType = ForecastType.LINEAR;
 
   barData?: ChartData<"bar">;
   lineData?: ChartData<"line">;
 
+  response?: Promise<ForecastResponse>;
+  didFinish = false;
+  data: ForecastResponse = [];
+
   ngOnInit(): void {
+    this.response = new Promise<ForecastResponse>(resolve => {
+      this.route.queryParams.subscribe(({resolution, selection}) => {
+        if (!resolution || !selection) return;
+        this.service.fetchForecastData(resolution, selection, ForecastType.LINEAR)
+          .subscribe(resolve);
+      });
+    });
+
     this.barData = {
       labels: ["Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange"],
       datasets: [{
@@ -45,6 +79,15 @@ export class ResultDataViewComponent implements OnInit {
         tension: 0.1
       }]
     }
+  }
+
+  ngAfterViewInit(): void {
+    this.response?.then(data => {
+      //this.pageLoader.nativeElement.classList.remove("is-active");
+      this.didFinish = true;
+      this.data = data;
+      console.log(data);
+    });
   }
 
 }

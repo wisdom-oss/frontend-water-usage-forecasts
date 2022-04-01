@@ -87,7 +87,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#fetchPrognosisData" >fetchPrognosisData</a>
+                                <a href="#fetchPrognosisData" >fetchForecastData</a>
                             </li>
                         </ul>
                     </td>
@@ -131,15 +131,15 @@
                                         <tbody>
                                                 <tr>
                                                         <td>http</td>
-                                                  
+
                                                         <td>
                                                                         <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
                                                         </td>
-                                                  
+
                                                     <td>
                                                             No
                                                     </td>
-                                                    
+
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -151,7 +151,7 @@
 </section>
 
             <section>
-    
+
     <h3 id="methods">
         Methods
     </h3>
@@ -161,14 +161,14 @@
                 <td class="col-md-4">
                     <a name="fetchPrognosisData"></a>
                     <span class="name">
-                        <span ><b>fetchPrognosisData</b></span>
+                        <span ><b>fetchForecastData</b></span>
                         <a href="#fetchPrognosisData"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>fetchPrognosisData(spatialUnit: "commune" | "county", district: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, forecastModel: <a href="../undefineds/RegressionMethod.html" target="_self">RegressionMethod</a>, consumerGroup?: "businesses" | "households_and_small_businesses" | "farming_forestry_fishing_industry" | "public_institutions" | "all")</code>
+<code>fetchForecastData(spatialUnit: "commune" | "county", district: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, forecastModel: <a href="../undefineds/RegressionMethod.html" target="_self">ForecastType</a>, consumerGroup?: "businesses" | "households_and_small_businesses" | "farming_forestry_fishing_industry" | "public_institutions" | "all")</code>
                 </td>
             </tr>
 
@@ -186,7 +186,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
-                        
+
                         <table class="params">
                             <thead>
                                 <tr>
@@ -223,7 +223,7 @@
                                 <tr>
                                     <td>forecastModel</td>
                                     <td>
-                                                <code><a href="../miscellaneous/enumerations.html#RegressionMethod" target="_self" >RegressionMethod</a></code>
+                                                <code><a href="../miscellaneous/enumerations.html#RegressionMethod" target="_self" >ForecastType</a></code>
                                     </td>
 
                                     <td>
@@ -254,7 +254,7 @@
 
                     </div>
                     <div class="io-description">
-                        
+
                     </div>
                 </td>
             </tr>
@@ -271,7 +271,7 @@ import {Injectable} from &quot;@angular/core&quot;;
 import {USE_API_URL} from &quot;common&quot;;
 import {Observable} from &quot;rxjs&quot;;
 
-import {RegressionMethod} from &quot;./regression-method&quot;;
+import {ForecastType} from &quot;./regression-method&quot;;
 
 const API_URL &#x3D; &quot;water-usage-forecasts&quot;;
 
@@ -285,10 +285,10 @@ export class WaterUsageForecastsService {
 
   constructor(private http: HttpClient) {}
 
-  fetchPrognosisData(
+  fetchForecastData(
     spatialUnit: &quot;commune&quot; | &quot;county&quot;,
     district: string,
-    forecastModel: RegressionMethod,
+    forecastModel: ForecastType,
     consumerGroup?:
       &quot;businesses&quot; |
       &quot;households_and_small_businesses&quot; |
