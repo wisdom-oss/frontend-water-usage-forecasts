@@ -11,14 +11,13 @@ import {ForecastType} from "../../forecast-type";
 import {WaterUsageForecastsService} from "../../water-usage-forecasts.service";
 import {ActivatedRoute} from "@angular/router";
 import {ForecastResponse} from "../../forecast-response";
+import {takeWhile} from "rxjs";
 
 @Component({
   selector: 'lib-result-data-view',
   templateUrl: './result-data-view.component.html'
 })
 export class ResultDataViewComponent implements OnInit, AfterViewInit {
-
-  @ViewChild("pageLoader") pageLoader!: ElementRef<HTMLDivElement>;
 
   constructor(
     private service: WaterUsageForecastsService,
@@ -38,11 +37,16 @@ export class ResultDataViewComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.response = new Promise<ForecastResponse>(resolve => {
-      this.route.queryParams.subscribe(({resolution, selection}) => {
-        if (!resolution || !selection) return;
-        this.service.fetchForecastData(resolution, selection, ForecastType.LINEAR)
-          .subscribe(resolve);
-      });
+      let done = false;
+      this.route.queryParams
+        .pipe(takeWhile(() => !done))
+        .subscribe(({resolution, selection}) => {
+          if (!resolution || !selection) return;
+          done = true;
+          this.service.fetchForecastData(resolution, selection, ForecastType.LINEAR)
+            .subscribe(resolve);
+        }
+      );
     });
 
     this.barData = {
@@ -83,10 +87,9 @@ export class ResultDataViewComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.response?.then(data => {
-      //this.pageLoader.nativeElement.classList.remove("is-active");
       this.didFinish = true;
       this.data = data;
-      console.log(data);
+      //console.log(data);
     });
   }
 
