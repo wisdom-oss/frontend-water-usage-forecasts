@@ -1,6 +1,6 @@
 import {HttpClient, HttpContext, HttpHeaders} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {USE_API_URL} from "common";
+import {USE_API_URL, USE_LOADER} from "common";
 import {Observable} from "rxjs";
 
 import {ForecastType} from "./forecast-type";
@@ -41,7 +41,7 @@ export class WaterUsageForecastsService {
         "Content-Type": "application/json"
       }),
       responseType: "json",
-      context: new HttpContext().set(USE_API_URL, true)
+      context: new HttpContext().set(USE_API_URL, true).set(USE_LOADER, true)
     }) as Observable<ForecastResponse>;
   }
 
