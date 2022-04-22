@@ -1,13 +1,8 @@
 import {ForecastType} from "./forecast-type";
 
-/** Response from the service for the forecast. */
-export interface ForecastResponse extends Array<{
+export interface Forecast {
   name: string,
-  consumerGroup: string |
-    "businesses" |
-    "households_and_small_businesses" |
-    "farming_forestry_fishing_industry" |
-    "public_institutions";
+  consumerGroup: string;
   forecastType: ForecastType,
   forecastEquation: string,
   forecastScore: number,
@@ -21,4 +16,13 @@ export interface ForecastResponse extends Array<{
     endYear: number,
     usageAmounts: number[]
   }
-}> {}
+}
+
+export interface ForecastError {
+  consumerGroup: string;
+  error: string;
+  name: string;
+}
+
+/** Response from the service for the forecast. */
+export interface ForecastResponse extends Array<Forecast | ForecastError> {}

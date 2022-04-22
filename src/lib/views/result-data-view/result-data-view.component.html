@@ -116,139 +116,44 @@
   </div>
 </div>
 
-<ng-container *ngFor="let item of data">
-  <div class="block">
-    <lib-data-set [data]="item"></lib-data-set>
+<div class="card block">
+  <div class="card-header">
+    <p class="card-header-title">Verbrauchergruppen</p>
   </div>
-</ng-container>
-
-<!--
-
-<p class="title">Wasserbedarfe</p>
-<div class="columns block">
-  <div class="column">
-    <div class="box">
-      <bar-chart [data]="barData"></bar-chart>
-    </div>
-  </div>
-  <div class="column">
-    <div class="box">
-      <bar-chart [data]="barData"></bar-chart>
-    </div>
+  <div class="card-content">
+    <bar-chart
+      [data]="consumerGroupData"
+      [options]="{scales: {y: {stacked: true}, x: {stacked: true}}}"
+    ></bar-chart>
   </div>
 </div>
 
-<p class="title">Teilgebiete</p>
-<div class="box">
-  <div class="columns">
-    <div class="column">
-      <div class="content">
-        <table class="table">
-          <thead>
-          <tr>
-            <th>Name</th>
-            <th><abbr title="Durchschnittlicher Wasserbedarf pro Jahr">&empty;WB/a</abbr></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let i of [1, 2, 3]">
-            <th>Oldenburg</th>
-            <td>1.300m³</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="column">
-      <bar-chart [data]="barData"></bar-chart>
-    </div>
+<div class="card block">
+  <div class="card-header">
+    <p class="card-header-title">Gebiete</p>
+  </div>
+  <div class="card-content">
+    <bar-chart
+      [data]="consumerAreaData"
+      [options]="{scales: {y: {stacked: true}, x: {stacked: true}}}"
+    ></bar-chart>
   </div>
 </div>
 
-<p class="title">Großkundler</p>
-<div class="box">
-  <div class="columns">
-    <div class="column">
-      <div class="content">
-        <table class="table">
-          <thead>
-          <tr>
-            <th>Name</th>
-            <th>Sparte</th>
-            <th><abbr title="Wasserbedarf">WB</abbr></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let i of [1, 2, 3]">
-            <th>Oldenburg</th>
-            <td>Dinge</td>
-            <td>1.300m³</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="column">
-      <bar-chart [data]="barData"></bar-chart>
+<div class="card block" *ngIf="areaNames.length > 1">
+  <div class="card-header">
+    <p class="card-header-title">Teilgebiete</p>
+  </div>
+  <div class="card-content">
+    <div class="tags">
+      <a
+        [routerLink]="['./']"
+        [queryParams]="{resolution: 'municipalities', selection: name}"
+        class="tag is-primary is-medium"
+        *ngFor="let name of areaNames"
+      >
+        {{name}}
+      </a>
     </div>
   </div>
 </div>
-
-<p class="title">Wasserrechte</p>
-<div class="box">
-  <div class="columns">
-    <div class="column">
-      <div class="content">
-        <table class="table">
-          <thead>
-          <tr>
-            <th>Name</th>
-            <th><abbr title="Menge pro Jahr">M/a</abbr></th>
-            <th><abbr title="Genehmigt bis">bis</abbr></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let i of [1, 2, 3]">
-            <th>Oldenburg</th>
-            <td>1.300m³</td>
-            <td>2040</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="column">
-      <bar-chart [data]="barData"></bar-chart>
-    </div>
-  </div>
-</div>
-
-<p class="title">Rohwasserfördermengen</p>
-<div class="box">
-  <div class="columns">
-    <div class="column">
-      <bar-chart [data]="barData"></bar-chart>
-    </div>
-    <div class="column"></div>
-  </div>
-</div>
-
-<p class="title">Daten</p>
-<div class="box">
-  <div class="columns block">
-    <div class="column">
-      <line-chart [data]="lineData"></line-chart>
-    </div>
-    <div class="column">
-      <line-chart [data]="lineData"></line-chart>
-    </div>
-  </div>
-  <div class="columns block">
-    <div class="column">
-      <line-chart [data]="lineData"></line-chart>
-    </div>
-    <div class="column"></div>
-  </div>
-</div>
-
--->

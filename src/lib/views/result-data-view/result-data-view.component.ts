@@ -1,23 +1,17 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild
-} from "@angular/core";
-import {ChartData} from "chart.js";
+import {AfterViewInit, Component, OnDestroy, OnInit} from "@angular/core";
 
 import {ForecastType} from "../../forecast-type";
 import {WaterUsageForecastsService} from "../../water-usage-forecasts.service";
 import {ActivatedRoute} from "@angular/router";
-import {ForecastResponse} from "../../forecast-response";
+import {Forecast, ForecastResponse} from "../../forecast-response";
 import {takeWhile} from "rxjs";
+import {stringToColor} from "common";
 
 @Component({
   selector: 'lib-result-data-view',
   templateUrl: './result-data-view.component.html'
 })
-export class ResultDataViewComponent implements OnInit, AfterViewInit {
+export class ResultDataViewComponent implements OnInit, OnDestroy {
 
   constructor(
     private service: WaterUsageForecastsService,
@@ -28,69 +22,166 @@ export class ResultDataViewComponent implements OnInit, AfterViewInit {
   regressionMethod = ForecastType;
   method: ForecastType = ForecastType.LINEAR;
 
-  barData?: ChartData<"bar">;
-  lineData?: ChartData<"line">;
-
   response?: Promise<ForecastResponse>;
   didFinish = false;
-  data: ForecastResponse = [];
+  data: Forecast[] = [];
+
+  consumerGroupData: any = null;
+  consumerAreaData: any = null;
+  areaNames: string[] = [];
+
+  private subscribeQuery = true;
 
   ngOnInit(): void {
-    this.response = new Promise<ForecastResponse>(resolve => {
-      let done = false;
-      this.route.queryParams
-        .pipe(takeWhile(() => !done))
-        .subscribe(({resolution, selection}) => {
-          if (!resolution || !selection) return;
-          done = true;
-          this.service.fetchForecastData(resolution, selection, ForecastType.LINEAR)
-            .subscribe(resolve);
-        }
-      );
-    });
-
-    this.barData = {
-      labels: ["Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange"],
-      datasets: [{
-        label: "# of Votes",
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)"
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)"
-        ],
-        borderWidth: 1
-      }]
-    };
-    this.lineData = {
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July"],
-      datasets: [{
-        label: "My First Dataset",
-        data: [65, 59, 80, 81, 56, 55, 40],
-        fill: false,
-        borderColor: "rgb(75, 192, 192)",
-        tension: 0.1
-      }]
-    }
+    this.route.queryParams
+      .pipe(takeWhile(() => this.subscribeQuery))
+      .subscribe(({resolution, selection}) => {
+        if (!resolution || !selection) return;
+        this.service.fetchForecastData(resolution, selection, ForecastType.LINEAR)
+          .subscribe(data => {
+            this.updateConsumerGroups(data);
+            this.updateAreas(data);
+          })
+      })
   }
 
-  ngAfterViewInit(): void {
-    this.response?.then(data => {
-      this.didFinish = true;
-      this.data = data;
-      //console.log(data);
-    });
+  ngOnDestroy(): void {
+    this.subscribeQuery = false;
+  }
+
+  updateConsumerGroups(data: ForecastResponse): void {
+    let references: Record<string, Record<string, number>> = {};
+    let forecasted: Record<string, Record<string, number>> = {};
+    let years: Set<string> = new Set();
+
+    for (let dEntry of data) {
+      if ("error" in dEntry) continue;
+
+      if (!references[dEntry.consumerGroup])
+        references[dEntry.consumerGroup] = {};
+      if (!forecasted[dEntry.consumerGroup])
+        forecasted[dEntry.consumerGroup] = {}
+
+      for (let i = 0; i < dEntry.forecastedUsages.usageAmounts.length; i++) {
+        let year = "" + (dEntry.forecastedUsages.startYear + i);
+        years.add(year);
+        if (forecasted[dEntry.consumerGroup][year]) {
+          forecasted[dEntry.consumerGroup][year]
+            += dEntry.forecastedUsages.usageAmounts[i];
+        }
+        else {
+          forecasted[dEntry.consumerGroup][year] = dEntry.forecastedUsages.usageAmounts[i];
+        }
+      }
+
+      for (let i = 0; i < dEntry.referenceUsages.usageAmounts.length; i++) {
+        let year = "" + (dEntry.referenceUsages.startYear + i);
+        years.add(year);
+        if (references[dEntry.consumerGroup][year]) {
+          references[dEntry.consumerGroup][year]
+            += dEntry.referenceUsages.usageAmounts[i];
+        }
+        else {
+          references[dEntry.consumerGroup][year] = dEntry.referenceUsages.usageAmounts[i];
+        }
+      }
+
+    }
+
+    let datasets = [];
+    for (let [consumerGroup, data] of Object.entries(forecasted)) {
+      datasets.push({
+        label: consumerGroup,
+        data,
+        backgroundColor: stringToColor(consumerGroup),
+        borderWidth: 1.5,
+        borderSkipped: "middle",
+        borderColor: "red"
+      })
+    }
+    for (let [consumerGroup, data] of Object.entries(references)) {
+      datasets.push({
+        label: consumerGroup,
+        data,
+        backgroundColor: stringToColor(consumerGroup),
+        borderWidth: 1.5,
+        borderSkipped: "middle",
+        borderColor: "blue"
+      })
+    }
+
+    this.consumerGroupData = {
+      labels: Array.from(years.values()).sort(),
+      datasets
+    };
+  }
+
+  updateAreas(data: ForecastResponse): void {
+    let references: Record<string, Record<string, number>> = {};
+    let forecasted: Record<string, Record<string, number>> = {};
+    let years: Set<string> = new Set();
+
+    for (let dEntry of data) {
+      if ("error" in dEntry) continue;
+
+      if (!references[dEntry.name])
+        references[dEntry.name] = {};
+      if (!forecasted[dEntry.name])
+        forecasted[dEntry.name] = {}
+
+      for (let i = 0; i < dEntry.forecastedUsages.usageAmounts.length; i++) {
+        let year = "" + (dEntry.forecastedUsages.startYear + i);
+        years.add(year);
+        if (forecasted[dEntry.name][year]) {
+          forecasted[dEntry.name][year]
+            += dEntry.forecastedUsages.usageAmounts[i];
+        }
+        else {
+          forecasted[dEntry.name][year] = dEntry.forecastedUsages.usageAmounts[i];
+        }
+      }
+
+      for (let i = 0; i < dEntry.referenceUsages.usageAmounts.length; i++) {
+        let year = "" + (dEntry.referenceUsages.startYear + i);
+        years.add(year);
+        if (references[dEntry.name][year]) {
+          references[dEntry.name][year]
+            += dEntry.referenceUsages.usageAmounts[i];
+        }
+        else {
+          references[dEntry.name][year] = dEntry.referenceUsages.usageAmounts[i];
+        }
+      }
+
+      let datasets = [];
+      for (let [name, data] of Object.entries(forecasted)) {
+        datasets.push({
+          label: name,
+          data,
+          backgroundColor: stringToColor(name),
+          borderWidth: 1.5,
+          borderSkipped: "middle",
+          borderColor: "red"
+        })
+      }
+      for (let [name, data] of Object.entries(references)) {
+        datasets.push({
+          label: name,
+          data,
+          backgroundColor: stringToColor(name),
+          borderWidth: 1.5,
+          borderSkipped: "middle",
+          borderColor: "blue"
+        })
+      }
+
+      this.areaNames = Object.keys(references).sort();
+
+      this.consumerAreaData = {
+        labels: Array.from(years.values()).sort(),
+        datasets
+      };
+    }
   }
 
 }
