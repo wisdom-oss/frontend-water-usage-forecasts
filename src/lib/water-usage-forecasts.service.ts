@@ -41,7 +41,9 @@ export class WaterUsageForecastsService {
         "Content-Type": "application/json"
       }),
       responseType: "json",
-      context: new HttpContext().set(USE_API_URL, true).set(USE_LOADER, true)
+      context: new HttpContext()
+        .set(USE_API_URL, true)
+        .set(USE_LOADER, "water-usage-forecasts.display.loading")
     }) as Observable<ForecastResponse>;
   }
 
