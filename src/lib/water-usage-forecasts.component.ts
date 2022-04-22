@@ -1,6 +1,5 @@
-import {Component, OnInit, AfterViewInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
-import {Chart, ChartData} from "chart.js";
 
 // TODO: doc this
 

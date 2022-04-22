@@ -4,7 +4,7 @@ import {USE_API_URL, USE_LOADER} from "common";
 import {Observable} from "rxjs";
 
 import {ForecastType} from "./forecast-type";
-import {Router, UrlSegment} from "@angular/router";
+import {Router} from "@angular/router";
 import {ForecastResponse} from "./forecast-response";
 
 const API_URL = "water-usage-forecasts";
