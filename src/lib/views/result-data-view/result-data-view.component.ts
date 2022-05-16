@@ -142,8 +142,5 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
       !chart.getDatasetMeta(item.datasetIndex + legend.legendItems.length).hidden;
     chart.update();
   }
-  chartTickFormat(value: number | string, index: number, ticks: Tick[]) {
-    return prettyPrintNum(+value) + " m³";
-  }
 
 }

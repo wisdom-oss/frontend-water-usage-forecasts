@@ -20,7 +20,7 @@ export default {
       "loading": "Calculating Prognosis..."
     },
     "chart": {
-      "consumption": "consumption",
+      "consumption": "consumption [m³]",
       "year": "year"
     }
   }
