@@ -125,7 +125,6 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
       components.set(entry.municipal.key, entry.municipal.name);
     }
     this.areaComponents = Array.from(components);
-    console.log(this.areaComponents);
   }
 
   chartLegendFilter(item: LegendItem, data: ChartData): boolean {
@@ -144,7 +143,7 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
     chart.update();
   }
   chartTickFormat(value: number | string, index: number, ticks: Tick[]) {
-    return prettyPrintNum(+value) + "m³";
+    return prettyPrintNum(+value) + " m³";
   }
 
 }
