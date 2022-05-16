@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from "@angular/core";
 
 import {ForecastType} from "../../forecast-type";
 import {WaterUsageForecastsService} from "../../water-usage-forecasts.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ForecastResponse, ForecastUsage} from "../../forecast-response";
 import {takeWhile} from "rxjs";
 import {prettyPrintNum, stringToColor} from "common";
@@ -16,7 +16,8 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
 
   constructor(
     private service: WaterUsageForecastsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   response?: Promise<ForecastResponse>;
@@ -32,10 +33,10 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.queryParams
       .pipe(takeWhile(() => this.subscribeQuery))
-      .subscribe(({key}) => {
+      .subscribe(({key, method}) => {
         if (!key) return;
         this.key = key;
-        this.fetchData(key, this._method);
+        this.fetchData(key, method ?? ForecastType.LINEAR);
       })
   }
 
@@ -46,13 +47,18 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
   /** @internal just a re-export of the type */
   regressionMethod = ForecastType;
   set method(m: ForecastType) {
-     this._method = m;
-     this.fetchData(this.key, m);
+     this.router.navigate([], {
+       relativeTo: this.route,
+       queryParams: Object.assign(
+         {},
+         this.route.snapshot.queryParams,
+         {method: m}
+       )
+     }).catch(console.error);
   }
   get method() {
-    return this._method;
+    return this.route.snapshot.queryParams["method"] ?? ForecastType.LINEAR;
   }
-  private _method: ForecastType = ForecastType.LINEAR;
 
   private fetchData(key: string | string[], method: ForecastType): void {
     this.service.fetchForecastData(key, method)
