@@ -115,6 +115,24 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
     }
     this.areaComponents = Array.from(components);
     console.log(this.areaComponents);
+  }
+
+  chartLegendFilter(item: LegendItem, data: ChartData): boolean {
+    //console.log([item, data]);
+    if (item.datasetIndex >= data.datasets.length / 2) return false;
+    item.lineWidth = 0;
+    return true;
+  }
+  chartLegendOnClick(event: ChartEvent, item: LegendItem, legend: any) {
+    console.log([event, item, legend]);
+    let chart = legend.chart;
+    chart.getDatasetMeta(item.datasetIndex).hidden =
+      !chart.getDatasetMeta(item.datasetIndex).hidden;
+    chart.getDatasetMeta(item.datasetIndex + legend.legendItems.length).hidden =
+      !chart.getDatasetMeta(item.datasetIndex + legend.legendItems.length).hidden;
+    chart.update();
+  }
+  chartTickFormat(value: number | string, index: number, ticks: Tick[]) {
     return prettyPrintNum(+value) + "m³";
   }
 

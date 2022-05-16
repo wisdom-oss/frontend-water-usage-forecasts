@@ -123,7 +123,35 @@
   <div class="card-content">
     <bar-chart
       [data]="consumerGroupData"
-      [options]="{scales: {y: {stacked: true}, x: {stacked: true}}}"
+      [options]="{
+        scales: {
+          y: {
+            stacked: true,
+            ticks: {
+              callback: chartTickFormat
+            },
+            title: {
+              display: true,
+              text: 'consumption'
+            }
+          },
+          x: {
+            stacked: true,
+            title: {
+              display: true,
+              text: 'year'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            onClick: chartLegendOnClick,
+            labels: {
+              filter: chartLegendFilter
+            }
+          }
+        }
+      }"
     ></bar-chart>
   </div>
 </div>
@@ -135,7 +163,35 @@
   <div class="card-content">
     <bar-chart
       [data]="consumerAreaData"
-      [options]="{scales: {y: {stacked: true}, x: {stacked: true}}}"
+      [options]="{
+        scales: {
+          y: {
+            stacked: true,
+            ticks: {
+              callback: chartTickFormat
+            },
+            title: {
+              display: true,
+              text: 'consumption'
+            }
+          },
+          x: {
+            stacked: true,
+            title: {
+              display: true,
+              text: 'year'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            onClick: chartLegendOnClick,
+            labels: {
+              filter: chartLegendFilter
+            }
+          }
+        }
+      }"
     ></bar-chart>
   </div>
 </div>
