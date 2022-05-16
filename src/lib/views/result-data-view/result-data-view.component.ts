@@ -3,9 +3,12 @@ import {Component, OnDestroy, OnInit} from "@angular/core";
 import {ForecastType} from "../../forecast-type";
 import {WaterUsageForecastsService} from "../../water-usage-forecasts.service";
 import {ActivatedRoute} from "@angular/router";
-import {Forecast, ForecastResponse} from "../../forecast-response";
-import {takeWhile} from "rxjs";
-import {stringToColor} from "common";
+import {
+  ForecastResponse, ForecastUsage
+} from "../../forecast-response";
+import {max, min, takeWhile} from "rxjs";
+import {stringToColor, prettyPrintNum} from "common";
+import {ChartData, ChartEvent, LegendItem, Tick} from "chart.js/auto";
 
 @Component({
   selector: 'lib-result-data-view',
@@ -24,23 +27,22 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
 
   response?: Promise<ForecastResponse>;
   didFinish = false;
-  data: Forecast[] = [];
 
   consumerGroupData: any = null;
   consumerAreaData: any = null;
-  areaNames: string[] = [];
+  areaComponents?: [string, string][];
 
   private subscribeQuery = true;
 
   ngOnInit(): void {
     this.route.queryParams
       .pipe(takeWhile(() => this.subscribeQuery))
-      .subscribe(({resolution, selection}) => {
-        if (!resolution || !selection) return;
-        this.service.fetchForecastData(resolution, selection, ForecastType.LINEAR)
+      .subscribe(({key}) => {
+        if (!key) return;
+        this.service.fetchForecastData(key, ForecastType.LINEAR)
           .subscribe(data => {
-            this.updateConsumerGroups(data);
-            this.updateAreas(data);
+            this.updateGraphs(data.accumulations);
+            this.updateAreaComponents(data.partials);
           })
       })
   }
@@ -49,139 +51,71 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
     this.subscribeQuery = false;
   }
 
-  updateConsumerGroups(data: ForecastResponse): void {
-    let references: Record<string, Record<string, number>> = {};
-    let forecasted: Record<string, Record<string, number>> = {};
-    let years: Set<string> = new Set();
-
-    for (let dEntry of data) {
-      if ("error" in dEntry) continue;
-
-      if (!references[dEntry.consumerGroup])
-        references[dEntry.consumerGroup] = {};
-      if (!forecasted[dEntry.consumerGroup])
-        forecasted[dEntry.consumerGroup] = {}
-
-      for (let i = 0; i < dEntry.forecastedUsages.usageAmounts.length; i++) {
-        let year = "" + (dEntry.forecastedUsages.startYear + i);
-        years.add(year);
-        if (forecasted[dEntry.consumerGroup][year]) {
-          forecasted[dEntry.consumerGroup][year]
-            += dEntry.forecastedUsages.usageAmounts[i];
-        }
-        else {
-          forecasted[dEntry.consumerGroup][year] = dEntry.forecastedUsages.usageAmounts[i];
-        }
-      }
-
-      for (let i = 0; i < dEntry.referenceUsages.usageAmounts.length; i++) {
-        let year = "" + (dEntry.referenceUsages.startYear + i);
-        years.add(year);
-        if (references[dEntry.consumerGroup][year]) {
-          references[dEntry.consumerGroup][year]
-            += dEntry.referenceUsages.usageAmounts[i];
-        }
-        else {
-          references[dEntry.consumerGroup][year] = dEntry.referenceUsages.usageAmounts[i];
-        }
-      }
-
+  updateGraphs(forecast: ForecastResponse["accumulations"]): void {
+    const colorMap = {
+      "Agriculture, Forestry, Fisheries": "green",
+      "Businesses": "#bcd9e0",
+      "Household": "#ba4c43",
+      "Public Institution": "#5443ba",
+      "Small Businesses": "#a9c940",
+      "Tourism": "#e02abf"
     }
-
-    let datasets = [];
-    for (let [consumerGroup, data] of Object.entries(forecasted)) {
-      datasets.push({
-        label: consumerGroup,
-        data,
-        backgroundColor: stringToColor(consumerGroup),
+    let [minYear, maxYear] = [Infinity, -Infinity];
+    function mapUsage(usage: ForecastUsage, type: "forecast" | "reference") {
+      minYear = Math.min(usage.startYear, minYear);
+      maxYear = Math.max(usage.endYear, maxYear);
+      let borderColor = "";
+      switch (type) {
+        case "forecast":
+          borderColor = "red";
+          break;
+        case "reference":
+          borderColor = "blue";
+          break;
+      }
+      return {
+        label: usage.displayName,
+        data: usage.usages.map((val, i) => ({x: i + usage.startYear, y: val})),
         borderWidth: 1.5,
         borderSkipped: "middle",
-        borderColor: "red"
-      })
+        borderColor,
+        backgroundColor: stringToColor(usage.displayName, colorMap)
+      }
     }
-    for (let [consumerGroup, data] of Object.entries(references)) {
-      datasets.push({
-        label: consumerGroup,
-        data,
-        backgroundColor: stringToColor(consumerGroup),
-        borderWidth: 1.5,
-        borderSkipped: "middle",
-        borderColor: "blue"
-      })
-    }
-
     this.consumerGroupData = {
-      labels: Array.from(years.values()).sort(),
-      datasets
-    };
+      datasets: [
+        Object
+          .values(forecast.consumerGroup.reference)
+          .map(el => mapUsage(el, "reference")),
+        Object
+          .values(forecast.consumerGroup.forecast)
+          .map(el => mapUsage(el, "forecast"))
+      ].flat()
+    }
+    this.consumerAreaData = {
+      datasets: [
+        Object
+          .values(forecast.municipal.reference)
+          .map(el => mapUsage(el, "reference")),
+        Object
+          .values(forecast.municipal.forecast)
+          .map(el => mapUsage(el, "forecast"))
+      ].flat()
+    }
+    let labels: number[] = [];
+    for (let y = minYear; y <= maxYear; y++) labels.push(y);
+    this.consumerGroupData.labels = labels;
+    this.consumerAreaData.labels = labels;
   }
 
-  updateAreas(data: ForecastResponse): void {
-    let references: Record<string, Record<string, number>> = {};
-    let forecasted: Record<string, Record<string, number>> = {};
-    let years: Set<string> = new Set();
-
-    for (let dEntry of data) {
-      if ("error" in dEntry) continue;
-
-      if (!references[dEntry.name])
-        references[dEntry.name] = {};
-      if (!forecasted[dEntry.name])
-        forecasted[dEntry.name] = {}
-
-      for (let i = 0; i < dEntry.forecastedUsages.usageAmounts.length; i++) {
-        let year = "" + (dEntry.forecastedUsages.startYear + i);
-        years.add(year);
-        if (forecasted[dEntry.name][year]) {
-          forecasted[dEntry.name][year]
-            += dEntry.forecastedUsages.usageAmounts[i];
-        }
-        else {
-          forecasted[dEntry.name][year] = dEntry.forecastedUsages.usageAmounts[i];
-        }
-      }
-
-      for (let i = 0; i < dEntry.referenceUsages.usageAmounts.length; i++) {
-        let year = "" + (dEntry.referenceUsages.startYear + i);
-        years.add(year);
-        if (references[dEntry.name][year]) {
-          references[dEntry.name][year]
-            += dEntry.referenceUsages.usageAmounts[i];
-        }
-        else {
-          references[dEntry.name][year] = dEntry.referenceUsages.usageAmounts[i];
-        }
-      }
-
-      let datasets = [];
-      for (let [name, data] of Object.entries(forecasted)) {
-        datasets.push({
-          label: name,
-          data,
-          backgroundColor: stringToColor(name),
-          borderWidth: 1.5,
-          borderSkipped: "middle",
-          borderColor: "red"
-        })
-      }
-      for (let [name, data] of Object.entries(references)) {
-        datasets.push({
-          label: name,
-          data,
-          backgroundColor: stringToColor(name),
-          borderWidth: 1.5,
-          borderSkipped: "middle",
-          borderColor: "blue"
-        })
-      }
-
-      this.areaNames = Object.keys(references).sort();
-
-      this.consumerAreaData = {
-        labels: Array.from(years.values()).sort(),
-        datasets
-      };
+  updateAreaComponents(forecast: ForecastResponse["partials"]): void {
+    let components =  new Map();
+    for (let entry of forecast) {
+      components.set(entry.municipal.key, entry.municipal.name);
     }
+    this.areaComponents = Array.from(components);
+    console.log(this.areaComponents);
+    return prettyPrintNum(+value) + "m³";
   }
 
 }

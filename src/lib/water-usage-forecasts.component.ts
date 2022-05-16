@@ -15,25 +15,22 @@ export class WaterUsageForecastsComponent implements OnInit {
 
   selectedView: "map-select" | "result-data" = "map-select";
 
-  private resolution?: string;
-  private selection?: string[];
+  private keys?: string[];
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     // check for query parameters, upon change extract them and display correct
     // view
-    this.route.queryParams.subscribe(({resolution, selection}) => {
-      if (!(resolution && selection) || Array.isArray(resolution) || !selection.length) {
+    this.route.queryParams.subscribe(({key}) => {
+      if (!key || !key.length) {
         // missing or invalid parameters, display the map selection
         this.selectedView = "map-select";
-        this.resolution = undefined;
-        this.selection = undefined;
+        this.keys = undefined;
         return;
       }
 
-      this.resolution = resolution;
-      this.selection = [selection].flat();
+      this.keys = [key].flat();
       this.selectedView = "result-data";
     });
   }

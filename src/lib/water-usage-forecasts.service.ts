@@ -23,8 +23,7 @@ export class WaterUsageForecastsService {
   ) {}
 
   fetchForecastData(
-    spatialUnit: "districts" | "municipalities",
-    district: string | string[],
+    key: string | string[],
     forecastModel: ForecastType,
     consumerGroup?:
       "businesses" |
@@ -33,9 +32,9 @@ export class WaterUsageForecastsService {
       "public_institutions" |
       "all"
   ): Observable<ForecastResponse> {
-    let url = this.router.parseUrl(`${API_URL}/${spatialUnit}/${forecastModel}`);
+    let url = this.router.parseUrl(`${API_URL}/${forecastModel}`);
     if (consumerGroup) url.queryParams["consumerGroup"] = consumerGroup;
-    url.queryParams["district"] = district;
+    url.queryParams["key"] = key;
     return this.http.get(url.toString(), {
       headers: new HttpHeaders({
         "Content-Type": "application/json"

@@ -8,16 +8,16 @@ export class MapSelectViewComponent {
 
   resolution?: string;
 
-  shapes?: string[];
+  keys?: string[];
 
   selectionReady = false;
 
   mapSelection(
-    selection: {layerName: string, resolution: string, shapes: string[]}
+    selection: {layerName: string, resolution: string, keys: string[]}
   ) {
     this.resolution = selection.resolution;
-    this.shapes = selection.shapes;
-    this.selectionReady = !!selection.shapes.length;
+    this.keys = selection.keys;
+    this.selectionReady = !!selection.keys.length;
   }
 
 }
