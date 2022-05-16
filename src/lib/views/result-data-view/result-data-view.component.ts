@@ -3,11 +3,9 @@ import {Component, OnDestroy, OnInit} from "@angular/core";
 import {ForecastType} from "../../forecast-type";
 import {WaterUsageForecastsService} from "../../water-usage-forecasts.service";
 import {ActivatedRoute} from "@angular/router";
-import {
-  ForecastResponse, ForecastUsage
-} from "../../forecast-response";
-import {max, min, takeWhile} from "rxjs";
-import {stringToColor, prettyPrintNum} from "common";
+import {ForecastResponse, ForecastUsage} from "../../forecast-response";
+import {takeWhile} from "rxjs";
+import {prettyPrintNum, stringToColor} from "common";
 import {ChartData, ChartEvent, LegendItem, Tick} from "chart.js/auto";
 
 @Component({
@@ -21,10 +19,6 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute
   ) {}
 
-  /** @internal just a re-export of the type */
-  regressionMethod = ForecastType;
-  method: ForecastType = ForecastType.LINEAR;
-
   response?: Promise<ForecastResponse>;
   didFinish = false;
 
@@ -32,6 +26,7 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
   consumerAreaData: any = null;
   areaComponents?: [string, string][];
 
+  private key!: string | string[];
   private subscribeQuery = true;
 
   ngOnInit(): void {
@@ -39,11 +34,8 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
       .pipe(takeWhile(() => this.subscribeQuery))
       .subscribe(({key}) => {
         if (!key) return;
-        this.service.fetchForecastData(key, ForecastType.LINEAR)
-          .subscribe(data => {
-            this.updateGraphs(data.accumulations);
-            this.updateAreaComponents(data.partials);
-          })
+        this.key = key;
+        this.fetchData(key, this._method);
       })
   }
 
@@ -51,7 +43,26 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
     this.subscribeQuery = false;
   }
 
-  updateGraphs(forecast: ForecastResponse["accumulations"]): void {
+  /** @internal just a re-export of the type */
+  regressionMethod = ForecastType;
+  set method(m: ForecastType) {
+     this._method = m;
+     this.fetchData(this.key, m);
+  }
+  get method() {
+    return this._method;
+  }
+  private _method: ForecastType = ForecastType.LINEAR;
+
+  private fetchData(key: string | string[], method: ForecastType): void {
+    this.service.fetchForecastData(key, method)
+      .subscribe(data => {
+        this.updateGraphs(data.accumulations);
+        this.updateAreaComponents(data.partials);
+      });
+  }
+
+  private updateGraphs(forecast: ForecastResponse["accumulations"]): void {
     const colorMap = {
       "Agriculture, Forestry, Fisheries": "green",
       "Businesses": "#bcd9e0",
@@ -108,7 +119,7 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
     this.consumerAreaData.labels = labels;
   }
 
-  updateAreaComponents(forecast: ForecastResponse["partials"]): void {
+  private updateAreaComponents(forecast: ForecastResponse["partials"]): void {
     let components =  new Map();
     for (let entry of forecast) {
       components.set(entry.municipal.key, entry.municipal.name);
