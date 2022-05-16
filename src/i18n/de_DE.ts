@@ -14,7 +14,7 @@ export default {
     "result-data": {
       "consumer-groups": "Verbrauchergruppen",
       "areas": "Gebiete",
-      "branches": "Teilgebiet"
+      "branches": "Teilgebiete"
     },
     "display": {
       "loading": "Prognose wird erstellt..."
