@@ -8,8 +8,20 @@ export default {
       "logarithmic": "logarithmisch",
       "polynomial": "polynomiell"
     },
+    "map-select": {
+      "get-results": "Berechne Prognose"
+    },
+    "result-data": {
+      "consumer-groups": "Verbrauchergruppen",
+      "areas": "Gebiete",
+      "branches": "Teilgebiet"
+    },
     "display": {
       "loading": "Prognose wird erstellt..."
+    },
+    "chart": {
+      "consumption": "Verbrauch",
+      "year": "Jahr"
     }
   }
 }

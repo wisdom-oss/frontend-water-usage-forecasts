@@ -118,7 +118,9 @@
 
 <div class="card block">
   <div class="card-header">
-    <p class="card-header-title">Verbrauchergruppen</p>
+    <p class="card-header-title" translate>
+      water-usage-forecasts.result-data.consumer-groups
+    </p>
   </div>
   <div class="card-content">
     <bar-chart
@@ -132,14 +134,14 @@
             },
             title: {
               display: true,
-              text: 'consumption'
+              text: 'water-usage-forecasts.chart.consumption'
             }
           },
           x: {
             stacked: true,
             title: {
               display: true,
-              text: 'year'
+              text: 'water-usage-forecasts.chart.year'
             }
           }
         },
@@ -158,7 +160,9 @@
 
 <div class="card block">
   <div class="card-header">
-    <p class="card-header-title">Gebiete</p>
+    <p class="card-header-title" translate>
+      water-usage-forecasts.result-data.areas
+    </p>
   </div>
   <div class="card-content">
     <bar-chart
@@ -172,14 +176,14 @@
             },
             title: {
               display: true,
-              text: 'consumption'
+              text: 'water-usage-forecasts.chart.consumption'
             }
           },
           x: {
             stacked: true,
             title: {
               display: true,
-              text: 'year'
+              text: 'water-usage-forecasts.chart.year'
             }
           }
         },
@@ -198,7 +202,9 @@
 
 <div class="card block" *ngIf="areaComponents && areaComponents.length > 1">
   <div class="card-header">
-    <p class="card-header-title">Teilgebiete</p>
+    <p class="card-header-title" translate>
+      water-usage-forecasts.result-data.branches
+    </p>
   </div>
   <div class="card-content">
     <div class="tags">
