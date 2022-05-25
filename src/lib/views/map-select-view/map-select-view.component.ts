@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+import {MapComponent} from "common";
 
 @Component({
   selector: 'lib-map-select-view',
@@ -6,16 +7,16 @@ import {Component} from "@angular/core";
 })
 export class MapSelectViewComponent {
 
-  resolution?: string;
+  // imported resolution from the map component
+  Resolution = MapComponent.Resolution;
 
   keys?: string[];
 
   selectionReady = false;
 
   mapSelection(
-    selection: {layerName: string, resolution: string, keys: string[]}
+    selection: {keys: string[]}
   ) {
-    this.resolution = selection.resolution;
     this.keys = selection.keys;
     this.selectionReady = !!selection.keys.length;
   }

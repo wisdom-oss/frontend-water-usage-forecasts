@@ -2,7 +2,10 @@
   <div class="card-content p-0 is-clipped">
     <map
       height="70vh"
-      [layers]="{'lower-saxony': ['municipalities', 'districts']}"
+      [layers]="{
+        districts: ['Landkreise', Resolution.DISTRICT, ['03']],
+        admin: ['Gemeinden', Resolution.ADMINISTRATION, ['03']]
+      }"
       (selected)="mapSelection($event)"
     ></map>
   </div>
