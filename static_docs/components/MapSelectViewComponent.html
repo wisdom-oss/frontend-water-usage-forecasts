@@ -123,14 +123,13 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Optional</span>
-                                <a href="#resolution" >resolution</a>
+                                <a href="#keys" >keys</a>
+                            </li>
+                            <li>
+                                <a href="#Resolution" >Resolution</a>
                             </li>
                             <li>
                                 <a href="#selectionReady" >selectionReady</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Optional</span>
-                                <a href="#shapes" >shapes</a>
                             </li>
                         </ul>
                     </td>
@@ -189,8 +188,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="15"
-                            class="link-to-prism">src/lib/views/map-select-view/map-select-view.component.ts:15</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="17"
+                            class="link-to-prism">src/lib/views/map-select-view/map-select-view.component.ts:17</a></div>
                 </td>
             </tr>
 
@@ -248,23 +247,48 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="resolution"></a>
+                    <a name="keys"></a>
                     <span class="name">
                             <span class="modifier">Optional</span>
-                        <span ><b>resolution</b></span>
-                        <a href="#resolution"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>keys</b></span>
+                        <a href="#keys"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                        <i>Type : </i>    <code>string[]</code>
 
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/lib/views/map-select-view/map-select-view.component.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/lib/views/map-select-view/map-select-view.component.ts:13</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Resolution"></a>
+                    <span class="name">
+                        <span ><b>Resolution</b></span>
+                        <a href="#Resolution"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>MapComponent.Resolution</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/lib/views/map-select-view/map-select-view.component.ts:11</a></div>
                         </td>
                     </tr>
 
@@ -289,34 +313,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/lib/views/map-select-view/map-select-view.component.ts:13</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="shapes"></a>
-                    <span class="name">
-                            <span class="modifier">Optional</span>
-                        <span ><b>shapes</b></span>
-                        <a href="#shapes"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>string[]</code>
-
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/lib/views/map-select-view/map-select-view.component.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/lib/views/map-select-view/map-select-view.component.ts:15</a></div>
                         </td>
                     </tr>
 
@@ -329,7 +326,8 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, OnInit, Input} from &quot;@angular/core&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component} from &quot;@angular/core&quot;;
+import {MapComponent} from &quot;common&quot;;
 
 @Component({
   selector: &#x27;lib-map-select-view&#x27;,
@@ -337,18 +335,18 @@
 })
 export class MapSelectViewComponent {
 
-  resolution?: string;
+  // imported resolution from the map component
+  Resolution &#x3D; MapComponent.Resolution;
 
-  shapes?: string[];
+  keys?: string[];
 
   selectionReady &#x3D; false;
 
   mapSelection(
-    selection: {layerName: string, resolution: string, shapes: string[]}
+    selection: {keys: string[]}
   ) {
-    this.resolution &#x3D; selection.resolution;
-    this.shapes &#x3D; selection.shapes;
-    this.selectionReady &#x3D; !!selection.shapes.length;
+    this.keys &#x3D; selection.keys;
+    this.selectionReady &#x3D; !!selection.keys.length;
   }
 
 }
@@ -360,7 +358,10 @@ export class MapSelectViewComponent {
   &lt;div class&#x3D;&quot;card-content p-0 is-clipped&quot;&gt;
     &lt;map
       height&#x3D;&quot;70vh&quot;
-      [layers]&#x3D;&quot;{&#x27;lower-saxony&#x27;: [&#x27;municipalities&#x27;, &#x27;districts&#x27;, &#x27;regions&#x27;]}&quot;
+      [layers]&#x3D;&quot;{
+        districts: [&#x27;Landkreise&#x27;, Resolution.DISTRICT, [&#x27;03&#x27;]],
+        municipal: [&#x27;Gemeinden&#x27;, Resolution.MUNICIPAL, [&#x27;03&#x27;]]
+      }&quot;
       (selected)&#x3D;&quot;mapSelection($event)&quot;
     &gt;&lt;/map&gt;
   &lt;/div&gt;
@@ -371,12 +372,12 @@ export class MapSelectViewComponent {
       class&#x3D;&quot;button is-primary&quot;
       [attr.disabled]&#x3D;&quot;selectionReady ? null : true&quot;
       routerLink&#x3D;&quot;.&quot;
-      [queryParams]&#x3D;&quot;{resolution: resolution, selection: shapes}&quot;
+      [queryParams]&#x3D;&quot;{key: keys}&quot;
     &gt;
       &lt;span class&#x3D;&quot;icon&quot;&gt;
         &lt;ion-icon name&#x3D;&quot;stats-chart&quot;&gt;&lt;/ion-icon&gt;
       &lt;/span&gt;
-      &lt;span&gt;Get Results&lt;/span&gt;
+      &lt;span translate&gt;water-usage-forecasts.map-select.get-results&lt;/span&gt;
     &lt;/a&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -409,7 +410,7 @@ export class MapSelectViewComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="card block">  <div class="card-content p-0 is-clipped">    <map      height="70vh"      [layers]="{\'lower-saxony\': [\'municipalities\', \'districts\', \'regions\']}"      (selected)="mapSelection($event)"    ></map>  </div></div><div class="columns is-justify-content-flex-end">  <div class="column is-narrow">    <a      class="button is-primary"      [attr.disabled]="selectionReady ? null : true"      routerLink="."      [queryParams]="{resolution: resolution, selection: shapes}"    >      <span class="icon">        <ion-icon name="stats-chart"></ion-icon>      </span>      <span>Get Results</span>    </a>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="card block">  <div class="card-content p-0 is-clipped">    <map      height="70vh"      [layers]="{        districts: [\'Landkreise\', Resolution.DISTRICT, [\'03\']],        municipal: [\'Gemeinden\', Resolution.MUNICIPAL, [\'03\']]      }"      (selected)="mapSelection($event)"    ></map>  </div></div><div class="columns is-justify-content-flex-end">  <div class="column is-narrow">    <a      class="button is-primary"      [attr.disabled]="selectionReady ? null : true"      routerLink="."      [queryParams]="{key: keys}"    >      <span class="icon">        <ion-icon name="stats-chart"></ion-icon>      </span>      <span translate>water-usage-forecasts.map-select.get-results</span>    </a>  </div></div></div>'
     var COMPONENTS = [{'name': 'MapSelectViewComponent', 'selector': 'lib-map-select-view'},{'name': 'ResultDataViewComponent', 'selector': 'lib-result-data-view'},{'name': 'WaterUsageForecastsComponent', 'selector': 'lib-water-usage-forecasts'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'MapSelectViewComponent'};

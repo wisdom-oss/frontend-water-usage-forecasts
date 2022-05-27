@@ -87,7 +87,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#fetchPrognosisData" >fetchForecastData</a>
+                                <a href="#fetchForecastData" >fetchForecastData</a>
                             </li>
                         </ul>
                     </td>
@@ -107,12 +107,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>)</code>
+<code>constructor(http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/lib/water-usage-forecasts.service.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/lib/water-usage-forecasts.service.ts:18</a></div>
                             </td>
                         </tr>
 
@@ -131,15 +131,27 @@
                                         <tbody>
                                                 <tr>
                                                         <td>http</td>
-
+                                                  
                                                         <td>
                                                                         <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
                                                         </td>
-
+                                                  
                                                     <td>
                                                             No
                                                     </td>
-
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -151,7 +163,7 @@
 </section>
 
             <section>
-
+    
     <h3 id="methods">
         Methods
     </h3>
@@ -159,24 +171,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="fetchPrognosisData"></a>
+                    <a name="fetchForecastData"></a>
                     <span class="name">
                         <span ><b>fetchForecastData</b></span>
-                        <a href="#fetchPrognosisData"><span class="icon ion-ios-link"></span></a>
+                        <a href="#fetchForecastData"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>fetchForecastData(spatialUnit: "commune" | "county", district: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, forecastModel: <a href="../undefineds/RegressionMethod.html" target="_self">ForecastType</a>, consumerGroup?: "businesses" | "households_and_small_businesses" | "farming_forestry_fishing_industry" | "public_institutions" | "all")</code>
+<code>fetchForecastData(key: string | string[], forecastModel: <a href="../undefineds/ForecastType.html" target="_self">ForecastType</a>, consumerGroup?: "businesses" | "households_and_small_businesses" | "farming_forestry_fishing_industry" | "public_institutions" | "all")</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="20"
-                            class="link-to-prism">src/lib/water-usage-forecasts.service.ts:20</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/lib/water-usage-forecasts.service.ts:25</a></div>
                 </td>
             </tr>
 
@@ -186,7 +198,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
-
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -197,21 +209,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>spatialUnit</td>
+                                    <td>key</td>
                                     <td>
-                                            <code>&quot;commune&quot; | &quot;county&quot;</code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>district</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            <code>string | string[]</code>
                                     </td>
 
                                     <td>
@@ -223,7 +223,7 @@
                                 <tr>
                                     <td>forecastModel</td>
                                     <td>
-                                                <code><a href="../miscellaneous/enumerations.html#RegressionMethod" target="_self" >ForecastType</a></code>
+                                                <code><a href="../miscellaneous/enumerations.html#ForecastType" target="_self" >ForecastType</a></code>
                                     </td>
 
                                     <td>
@@ -250,11 +250,11 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
+                        <b>Returns : </b>        <code><a href="../interfaces/ForecastResponse.html" target="_self" >Observable&lt;ForecastResponse&gt;</a></code>
 
                     </div>
                     <div class="io-description">
-
+                        
                     </div>
                 </td>
             </tr>
@@ -268,10 +268,12 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {HttpClient, HttpContext, HttpHeaders} from &quot;@angular/common/http&quot;;
 import {Injectable} from &quot;@angular/core&quot;;
-import {USE_API_URL} from &quot;common&quot;;
+import {USE_API_URL, USE_LOADER} from &quot;common&quot;;
 import {Observable} from &quot;rxjs&quot;;
 
-import {ForecastType} from &quot;./regression-method&quot;;
+import {ForecastType} from &quot;./forecast-type&quot;;
+import {Router} from &quot;@angular/router&quot;;
+import {ForecastResponse} from &quot;./forecast-response&quot;;
 
 const API_URL &#x3D; &quot;water-usage-forecasts&quot;;
 
@@ -283,11 +285,13 @@ const API_URL &#x3D; &quot;water-usage-forecasts&quot;;
 })
 export class WaterUsageForecastsService {
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   fetchForecastData(
-    spatialUnit: &quot;commune&quot; | &quot;county&quot;,
-    district: string,
+    key: string | string[],
     forecastModel: ForecastType,
     consumerGroup?:
       &quot;businesses&quot; |
@@ -295,16 +299,19 @@ export class WaterUsageForecastsService {
       &quot;farming_forestry_fishing_industry&quot; |
       &quot;public_institutions&quot; |
       &quot;all&quot;
-  ): Observable&lt;any&gt; {
-    let url &#x3D; encodeURI(&#x60;${API_URL}/${spatialUnit}/${district}/${forecastModel}&#x60;);
-    if (consumerGroup) url +&#x3D; &#x60;?consumerGroup&#x3D;${consumerGroup}&#x60;;
-    return this.http.get(url, {
+  ): Observable&lt;ForecastResponse&gt; {
+    let url &#x3D; this.router.parseUrl(&#x60;${API_URL}/${forecastModel}&#x60;);
+    if (consumerGroup) url.queryParams[&quot;consumerGroup&quot;] &#x3D; consumerGroup;
+    url.queryParams[&quot;key&quot;] &#x3D; key;
+    return this.http.get(url.toString(), {
       headers: new HttpHeaders({
         &quot;Content-Type&quot;: &quot;application/json&quot;
       }),
       responseType: &quot;json&quot;,
-      context: new HttpContext().set(USE_API_URL, true)
-    });
+      context: new HttpContext()
+        .set(USE_API_URL, true)
+        .set(USE_LOADER, &quot;water-usage-forecasts.display.loading&quot;)
+    }) as Observable&lt;ForecastResponse&gt;;
   }
 
 }

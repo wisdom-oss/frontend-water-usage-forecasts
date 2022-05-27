@@ -138,15 +138,10 @@ the server for the water usage forecasts.</p>
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Optional</span>
-                                <a href="#resolution" >resolution</a>
+                                <a href="#keys" >keys</a>
                             </li>
                             <li>
                                 <a href="#selectedView" >selectedView</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                    <span class="modifier">Optional</span>
-                                <a href="#selection" >selection</a>
                             </li>
                         </ul>
                     </td>
@@ -186,7 +181,7 @@ the server for the water usage forecasts.</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/lib/water-usage-forecasts.component.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/lib/water-usage-forecasts.component.ts:18</a></div>
                             </td>
                         </tr>
 
@@ -253,8 +248,8 @@ the server for the water usage forecasts.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="24"
-                            class="link-to-prism">src/lib/water-usage-forecasts.component.ts:24</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="22"
+                            class="link-to-prism">src/lib/water-usage-forecasts.component.ts:22</a></div>
                 </td>
             </tr>
 
@@ -280,24 +275,24 @@ the server for the water usage forecasts.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="resolution"></a>
+                    <a name="keys"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
                             <span class="modifier">Optional</span>
-                        <span ><b>resolution</b></span>
-                        <a href="#resolution"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>keys</b></span>
+                        <a href="#keys"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                        <i>Type : </i>    <code>string[]</code>
 
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/lib/water-usage-forecasts.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/lib/water-usage-forecasts.component.ts:18</a></div>
                         </td>
                     </tr>
 
@@ -328,35 +323,7 @@ the server for the water usage forecasts.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/lib/water-usage-forecasts.component.ts:17</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="selection"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                            <span class="modifier">Optional</span>
-                        <span ><b>selection</b></span>
-                        <a href="#selection"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>string[]</code>
-
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/lib/water-usage-forecasts.component.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/lib/water-usage-forecasts.component.ts:16</a></div>
                         </td>
                     </tr>
 
@@ -369,9 +336,8 @@ the server for the water usage forecasts.</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, OnInit, AfterViewInit} from &quot;@angular/core&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, OnInit} from &quot;@angular/core&quot;;
 import {ActivatedRoute} from &quot;@angular/router&quot;;
-import {Chart, ChartData} from &quot;chart.js&quot;;
 
 // TODO: doc this
 
@@ -387,25 +353,22 @@ export class WaterUsageForecastsComponent implements OnInit {
 
   selectedView: &quot;map-select&quot; | &quot;result-data&quot; &#x3D; &quot;map-select&quot;;
 
-  private resolution?: string;
-  private selection?: string[];
+  private keys?: string[];
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     // check for query parameters, upon change extract them and display correct
     // view
-    this.route.queryParams.subscribe(({resolution, selection}) &#x3D;&gt; {
-      if (!(resolution &amp;&amp; selection) || Array.isArray(resolution) || !selection.length) {
+    this.route.queryParams.subscribe(({key}) &#x3D;&gt; {
+      if (!key || !key.length) {
         // missing or invalid parameters, display the map selection
         this.selectedView &#x3D; &quot;map-select&quot;;
-        this.resolution &#x3D; undefined;
-        this.selection &#x3D; undefined;
+        this.keys &#x3D; undefined;
         return;
       }
 
-      this.resolution &#x3D; resolution;
-      this.selection &#x3D; [selection].flat();
+      this.keys &#x3D; [key].flat();
       this.selectedView &#x3D; &quot;result-data&quot;;
     });
   }
