@@ -5,7 +5,7 @@ import {WaterUsageForecastsService} from "../../water-usage-forecasts.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ForecastResponse, ForecastUsage} from "../../forecast-response";
 import {takeWhile} from "rxjs";
-import {prettyPrintNum, stringToColor} from "common";
+import {MapComponent, prettyPrintNum, stringToColor} from "common";
 import {
   ChartConfiguration,
   ChartData,
@@ -26,6 +26,8 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
+  Resolution = MapComponent.Resolution;
+
   response?: Promise<ForecastResponse>;
   didFinish = false;
 
@@ -34,7 +36,7 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
   areaComponents?: [string, string][];
   refProgSplit: number = 0;
 
-  private key!: string | string[];
+  key: string[] = [];
   private subscribeQuery = true;
 
   ngOnInit(): void {
@@ -42,7 +44,7 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
       .pipe(takeWhile(() => this.subscribeQuery))
       .subscribe(({key, method}) => {
         if (!key) return;
-        this.key = key;
+        this.key = [key].flat();
         this.fetchData(key, method ?? ForecastType.LINEAR);
       })
   }

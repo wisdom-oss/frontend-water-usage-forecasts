@@ -112,7 +112,12 @@
 
 <div class="card block">
   <div class="card-content p-0 is-clipped">
-    <map height="200px"></map>
+    <map
+      height="300px"
+      [layers]="{
+        shapes: ['', Resolution.MUNICIPAL, key]
+      }"
+    ></map>
   </div>
 </div>
 
