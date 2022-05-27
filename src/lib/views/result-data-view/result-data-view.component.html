@@ -143,14 +143,49 @@
             }
           }
         },
-        plugins: {
+        plugins: $any({
           legend: {
             onClick: chartLegendOnClick,
             labels: {
               filter: chartLegendFilter
             }
+          },
+          annotation: {
+            drawTime: 'beforeDraw',
+            annotations: {
+              reference: {
+                type: 'box',
+                backgroundColor: 'rgba(0, 196, 0, 0.5)',
+                borderWidth: 0,
+                xMax: refProgSplit - 0.5,
+                label: {
+                  drawTime: 'afterDraw',
+                  enabled: true,
+                  content: 'water-usage-forecasts.chart.reference' | translate,
+                  position: {
+                    x: 'center',
+                    y: 'start'
+                  }
+                }
+              },
+              prognosis: {
+                type: 'box',
+                backgroundColor:'rgba(233, 4, 58, 0.5)',
+                borderWidth: 0,
+                xMin: refProgSplit - 0.5,
+                label: {
+                  drawTime: 'afterDraw',
+                  enabled: true,
+                  content: 'water-usage-forecasts.chart.prognosis' | translate,
+                  position: {
+                    x: 'center',
+                    y: 'start'
+                  }
+                }
+              }
+            }
           }
-        }
+        })
       }"
     ></canvas>
   </div>
@@ -183,14 +218,49 @@
             }
           }
         },
-        plugins: {
+        plugins: $any({
           legend: {
             onClick: chartLegendOnClick,
             labels: {
               filter: chartLegendFilter
             }
+          },
+          annotation: {
+            drawTime: 'beforeDraw',
+            annotations: {
+              reference: {
+                type: 'box',
+                backgroundColor: 'rgba(0, 196, 0, 0.5)',
+                borderWidth: 0,
+                xMax: refProgSplit - 0.5,
+                label: {
+                  drawTime: 'afterDraw',
+                  enabled: true,
+                  content: 'water-usage-forecasts.chart.reference' | translate,
+                  position: {
+                    x: 'center',
+                    y: 'start'
+                  }
+                }
+              },
+              prognosis: {
+                type: 'box',
+                backgroundColor:'rgba(233, 4, 58, 0.5)',
+                borderWidth: 0,
+                xMin: refProgSplit - 0.5,
+                label: {
+                  drawTime: 'afterDraw',
+                  enabled: true,
+                  content: 'water-usage-forecasts.chart.prognosis' | translate,
+                  position: {
+                    x: 'center',
+                    y: 'start'
+                  }
+                }
+              }
+            }
           }
-        }
+        })
       }"
     ></canvas>
   </div>

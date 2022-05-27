@@ -21,7 +21,9 @@ export default {
     },
     "chart": {
       "consumption": "Verbrauch [m³]",
-      "year": "Jahr"
+      "year": "Jahr",
+      "reference": "Referenz",
+      "prognosis": "Prognose"
     }
   }
 }

@@ -6,7 +6,13 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ForecastResponse, ForecastUsage} from "../../forecast-response";
 import {takeWhile} from "rxjs";
 import {prettyPrintNum, stringToColor} from "common";
-import {ChartData, ChartEvent, LegendItem, Tick} from "chart.js/auto";
+import {
+  ChartConfiguration,
+  ChartData,
+  ChartEvent, ChartOptions,
+  LegendItem,
+  Tick
+} from "chart.js/auto";
 
 @Component({
   selector: 'lib-result-data-view',
@@ -26,6 +32,7 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
   consumerGroupData: any = null;
   consumerAreaData: any = null;
   areaComponents?: [string, string][];
+  refProgSplit: number = 0;
 
   private key!: string | string[];
   private subscribeQuery = true;
@@ -69,6 +76,10 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
   }
 
   private updateGraphs(forecast: ForecastResponse["accumulations"]): void {
+    for (let ref of Object.values(forecast.municipal.reference)) {
+      this.refProgSplit = ref.endYear - ref.startYear + 1;
+      break;
+    }
     const colorMap = {
       "Agriculture, Forestry, Fisheries": "green",
       "Businesses": "#bcd9e0",
@@ -81,21 +92,13 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
     function mapUsage(usage: ForecastUsage, type: "forecast" | "reference") {
       minYear = Math.min(usage.startYear, minYear);
       maxYear = Math.max(usage.endYear, maxYear);
-      let borderColor = "";
-      switch (type) {
-        case "forecast":
-          borderColor = "red";
-          break;
-        case "reference":
-          borderColor = "blue";
-          break;
-      }
+
       return {
         label: usage.displayName,
         data: usage.usages.map((val, i) => ({x: i + usage.startYear, y: val})),
-        borderWidth: 1.5,
+        borderWidth: 1,
         borderSkipped: "middle",
-        borderColor,
+        borderColor: "black",
         backgroundColor: stringToColor(usage.displayName, colorMap)
       }
     }
