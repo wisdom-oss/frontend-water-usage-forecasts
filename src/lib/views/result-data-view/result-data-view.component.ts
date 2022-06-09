@@ -4,7 +4,7 @@ import {ForecastType} from "../../forecast-type";
 import {WaterUsageForecastsService} from "../../water-usage-forecasts.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ForecastResponse, ForecastUsage} from "../../forecast-response";
-import {takeWhile} from "rxjs";
+import {combineLatest, takeWhile} from "rxjs";
 import {MapComponent, prettyPrintNum, stringToColor} from "common";
 import {
   ChartConfiguration,
@@ -13,6 +13,10 @@ import {
   LegendItem,
   Tick
 } from "chart.js/auto";
+import {icon} from "leaflet";
+import {WaterRightsService} from "../../water-rights.service";
+import {ConsumersService} from "../../consumers.service";
+import {mark} from "@angular/compiler-cli/src/ngtsc/perf/src/clock";
 
 @Component({
   selector: 'lib-result-data-view',
@@ -22,6 +26,8 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
 
   constructor(
     private service: WaterUsageForecastsService,
+    private waterRightService: WaterRightsService,
+    private consumersService: ConsumersService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -35,6 +41,16 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
   consumerAreaData: any = null;
   areaComponents?: [string, string][];
   refProgSplit: number = 0;
+
+  markers: MapComponent["inputMarkers"] = [];
+  waterRightIcon = icon({
+    iconUrl: "https://unpkg.com/ionicons@5.5.2/dist/svg/water.svg",
+    iconSize: [35, 35]
+  });
+  consumerIcon = icon({
+    iconUrl: "https://unpkg.com/ionicons@5.5.2/dist/svg/business.svg",
+    iconSize: [35, 35]
+  });
 
   key: string[] = [];
   private subscribeQuery = true;
@@ -75,6 +91,67 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
         this.updateGraphs(data.accumulations);
         this.updateAreaComponents(data.partials);
       });
+    combineLatest([
+      this.waterRightService.fetchWaterRightLocations({
+        in: [key].flat(),
+        isReal: true}
+      ),
+      this.consumersService.fetchConsumers({
+        in: [key].flat(),
+        // TODO: move this value elsewhere
+        usageAbove: 10000
+      })
+    ]).subscribe(data => {
+      let markers = [];
+
+      // iterate over locations of water rights
+      for (let marker of data[0]) {
+        markers.push({
+          coordinates: [
+            marker.geojson.coordinates[1],
+            marker.geojson.coordinates[0]
+          ] as [number, number],
+          tooltip: `
+            <b>Name</b>: ${marker.name}<br>
+            <b>Water Right No</b>: ${marker.waterRight}
+          `,
+          icon: this.waterRightIcon
+        })
+      }
+
+      // iterate over consumer locations
+      for (let marker of data[1]) {
+        markers.push({
+          coordinates: [
+            marker.geojson.coordinates[1],
+            marker.geojson.coordinates[0]
+          ] as [number, number],
+          tooltip: marker.name,
+          icon: this.consumerIcon
+        })
+      }
+
+      this.markers = markers;
+    });
+
+    /*
+    this.waterRightService.fetchWaterRightLocations({
+      in: [key].flat(),
+      isReal: true
+    }).subscribe(data => {
+      let markers = [];
+      for (let marker of data) {
+        markers.push({
+          coordinates: [
+            marker.geojson.coordinates[1],
+            marker.geojson.coordinates[0]
+          ] as [number, number],
+          tooltip: `${marker.water_right}`
+        })
+      }
+      this.markers = markers;
+    });
+    */
   }
 
   private updateGraphs(forecast: ForecastResponse["accumulations"]): void {
