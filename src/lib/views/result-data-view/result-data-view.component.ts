@@ -5,12 +5,13 @@ import {stringToColor, MapComponent, Resolution, MapService} from "common";
 import {icon} from "leaflet";
 import {combineLatest, takeWhile} from "rxjs";
 
-import {ForecastType} from "../../forecast-type";
-import {WaterUsageForecastsService} from "../../water-usage-forecasts.service";
-import {ForecastResponse, ForecastUsage} from "../../forecast-response";
-import {WaterRightsService} from "../../water-rights.service";
-import {ConsumersService} from "../../consumers.service";
 import {combineLatestWith} from "rxjs/operators";
+import {
+  ForecastResponse, ForecastType, ForecastUsage,
+  WaterUsageForecastsService
+} from "../../services/water-usage-forecasts.service";
+import {WaterRightsService} from "../../services/water-rights.service";
+import {ConsumersService} from "../../services/consumers.service";
 
 @Component({
   selector: 'lib-result-data-view',

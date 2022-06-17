@@ -3,11 +3,52 @@ import {Injectable} from "@angular/core";
 import {USE_API_URL, USE_LOADER} from "common";
 import {Observable} from "rxjs";
 
-import {ForecastType} from "./forecast-type";
 import {Router} from "@angular/router";
-import {ForecastResponse} from "./forecast-response";
 
 const API_URL = "water-usage-forecasts";
+
+export enum ForecastType {
+  LOGARITHMIC = "logarithmic",
+  LINEAR = "linear",
+  POLYNOMIAL = "polynomial"
+}
+
+export interface ForecastResponse {
+  accumulations: {
+    consumerGroup: ForecastEntry,
+    municipal: ForecastEntry
+  },
+  partials: {
+    consumerGroup: {
+      key: string,
+      name: string
+    },
+    municipal: ForecastResponse["partials"][0]["consumerGroup"],
+    referenceUsages: {
+      equation: string,
+      float: number,
+      model: "logarithmic" | "linear" | "polynomial",
+      usages: {
+        amounts: number[],
+        end: number,
+        start: number
+      }
+    },
+    forecast: ForecastResponse["partials"][0]["referenceUsages"]
+  }[]
+}
+
+export interface ForecastEntry {
+  forecast: Record<string, ForecastUsage>,
+  reference: Record<string, ForecastUsage>
+}
+
+export interface ForecastUsage {
+  displayName: string,
+  endYear: number,
+  startYear: number,
+  usages: number[]
+}
 
 /**
  * Service to interact with server providing the data to display.
