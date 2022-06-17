@@ -12,6 +12,8 @@ export default {
       "get-results": "Berechne Prognose"
     },
     "result-data": {
+      "results": "Ergebenisse",
+      "selection": "Auswahl",
       "consumer-groups": "Verbrauchergruppen",
       "areas": "Gebiete",
       "branches": "Teilgebiete"

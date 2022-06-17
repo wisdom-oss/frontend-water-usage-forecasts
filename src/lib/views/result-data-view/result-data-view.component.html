@@ -1,3 +1,5 @@
+<p class="title">{{"water-usage-forecasts.result-data.results" | translate}}</p>
+
 <div class="card block">
   <div class="card-content p-0 is-clipped">
     <map
@@ -16,38 +18,26 @@
   <div class="column">
     <div class="card">
       <div class="card-header">
-        <p class="card-header-title">Informationen</p>
+        <p class="card-header-title">
+          {{"water-usage-forecasts.result-data.selection" | translate}}
+        </p>
       </div>
       <div class="card-content">
         <div class="content">
-          <p>
-            <strong>Name:</strong>
-            Eine Stadt
-          </p>
-          <p>
-            <strong>Postleitzahl:</strong>
-            12345
-          </p>
-          <p>
-            <strong>Regionalschlüssel:</strong>
-            12345
-          </p>
-          <p>
-            <strong>OOWV Teilgebiet:</strong>
-            Ein Teilgebeit
-          </p>
-          <p>
-            <strong>OOWV Region:</strong>
-            Eine Region
-          </p>
-          <p>
-            <strong>Landkreis:</strong>
-            Ein Landkreis
-          </p>
-          <p>
-            <strong>Gemeinde:</strong>
-            Eine Gemeinde
-          </p>
+          <ng-template ngFor let-sel [ngForOf]="Object.entries(selection)">
+            <div *ngIf="sel[1].length">
+              <ng-template ngFor let-shape [ngForOf]="sel[1]">
+                <p>
+                  <strong>
+                    {{"common.map.resolution." + sel[0] | translate}}
+                  </strong>
+                  <span>
+                    {{shape[1]}} ({{shape[0]}})
+                  </span>
+                </p>
+              </ng-template>
+            </div>
+          </ng-template>
         </div>
       </div>
     </div>

@@ -32,6 +32,13 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
   response?: Promise<ForecastResponse>;
   didFinish = false;
 
+  selection: Record<Resolution, [string, string][]> = {
+    state: [],
+    district: [],
+    administration: [],
+    municipal: []
+  };
+
   consumerGroupData: any = null;
   consumerAreaData: any = null;
   areaComponents?: [string, string][];
@@ -85,6 +92,21 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         this.updateGraphs(data.accumulations);
         this.updateAreaComponents(data.partials);
+      });
+    this.mapService.fetchLayerData(null, [key].flat())
+      .then(data => {
+        let selection: this["selection"] = {
+          state: [],
+          district: [],
+          administration: [],
+          municipal: []
+        };
+        for (let shape of data.shapes) {
+          let res = Resolution.toEnum(shape.key.length);
+          if (!res) continue;
+          selection[res].push([shape.key, shape.name]);
+        }
+        this.selection = selection;
       });
     combineLatest([
       this.waterRightService.fetchWaterRightLocations({

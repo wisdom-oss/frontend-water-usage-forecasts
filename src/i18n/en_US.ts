@@ -12,6 +12,8 @@ export default {
       "get-results": "Get Results"
     },
     "result-data": {
+      "results": "Results",
+      "selection": "Selection",
       "consumer-groups": "Consumer Groups",
       "areas": "Areas",
       "branches": "Branches"
