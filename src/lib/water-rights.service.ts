@@ -32,7 +32,7 @@ export class WaterRightsService {
     in: string[],
     isActive: boolean,
     isReal: boolean
-  }>): Observable<WaterRightLocationResponse> {
+  }>): Observable<WaterRightLocationResponse | null> {
     let url = this.router.parseUrl(API_URL);
     if (params.in) url.queryParams["in"] = params.in;
     if (params.isActive) url.queryParams["is_active"] = params.isActive;

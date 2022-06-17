@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {MapComponent} from "common";
+import {Resolution} from "common";
 
 @Component({
   selector: 'lib-map-select-view',
@@ -8,7 +8,7 @@ import {MapComponent} from "common";
 export class MapSelectViewComponent {
 
   // imported resolution from the map component
-  Resolution = MapComponent.Resolution;
+  Resolution = Resolution;
 
   keys?: string[];
 

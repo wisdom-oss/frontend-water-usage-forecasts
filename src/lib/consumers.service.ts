@@ -35,7 +35,7 @@ export class ConsumersService {
     usageAbove: number,
     id: string[],
     in: string[]
-  }>): Observable<ConsumerLocationsResponse> {
+  }>): Observable<ConsumerLocationsResponse | null> {
     let url = this.router.parseUrl(API_URL);
     if (params.in) url.queryParams["in"] = params.in;
     if (params.id) url.queryParams["id"] = params.id;

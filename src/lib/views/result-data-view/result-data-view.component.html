@@ -1,3 +1,17 @@
+<div class="card block">
+  <div class="card-content p-0 is-clipped">
+    <map
+      height="500px"
+      [layers]="{
+        shapes: ['', Resolution.MUNICIPAL, key]
+      }"
+      [scrollWheelZoom]="false"
+      [layerSelectable]="false"
+      [markers]="markers"
+    ></map>
+  </div>
+</div>
+
 <div class="columns block">
   <div class="column">
     <div class="card">
@@ -107,20 +121,6 @@
         -->
       </div>
     </div>
-  </div>
-</div>
-
-<div class="card block">
-  <div class="card-content p-0 is-clipped">
-    <map
-      height="500px"
-      [layers]="{
-        shapes: ['', Resolution.MUNICIPAL, key]
-      }"
-      [scrollWheelZoom]="false"
-      [layerSelectable]="false"
-      [markers]="markers"
-    ></map>
   </div>
 </div>
 

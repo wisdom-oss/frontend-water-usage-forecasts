@@ -1,22 +1,15 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
+import {ActivatedRoute, Router} from "@angular/router";
+import {ChartData, ChartEvent, LegendItem} from "chart.js/auto";
+import {stringToColor, MapComponent, Resolution, MapService} from "common";
+import {icon} from "leaflet";
+import {combineLatest, takeWhile} from "rxjs";
 
 import {ForecastType} from "../../forecast-type";
 import {WaterUsageForecastsService} from "../../water-usage-forecasts.service";
-import {ActivatedRoute, Router} from "@angular/router";
 import {ForecastResponse, ForecastUsage} from "../../forecast-response";
-import {combineLatest, takeWhile} from "rxjs";
-import {MapComponent, prettyPrintNum, stringToColor} from "common";
-import {
-  ChartConfiguration,
-  ChartData,
-  ChartEvent, ChartOptions,
-  LegendItem,
-  Tick
-} from "chart.js/auto";
-import {icon} from "leaflet";
 import {WaterRightsService} from "../../water-rights.service";
 import {ConsumersService} from "../../consumers.service";
-import {mark} from "@angular/compiler-cli/src/ngtsc/perf/src/clock";
 
 @Component({
   selector: 'lib-result-data-view',
@@ -29,10 +22,12 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
     private waterRightService: WaterRightsService,
     private consumersService: ConsumersService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private mapService: MapService
   ) {}
 
-  Resolution = MapComponent.Resolution;
+  Object = Object;
+  Resolution = Resolution;
 
   response?: Promise<ForecastResponse>;
   didFinish = false;
@@ -105,7 +100,7 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
       let markers = [];
 
       // iterate over locations of water rights
-      for (let marker of data[0]) {
+      for (let marker of data[0] ?? []) {
         markers.push({
           coordinates: [
             marker.geojson.coordinates[1],
@@ -120,7 +115,7 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
       }
 
       // iterate over consumer locations
-      for (let marker of data[1]) {
+      for (let marker of data[1] ?? []) {
         markers.push({
           coordinates: [
             marker.geojson.coordinates[1],
