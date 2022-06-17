@@ -19,6 +19,6 @@ export const wisdomInterface: WisdomInterface = {
   }
 }
 
-export * from "./lib/water-usage-forecasts.service";
+export * from "./lib/services/water-usage-forecasts.service";
 export * from "./lib/water-usage-forecasts.component";
 export * from "./lib/water-usage-forecasts.module";
