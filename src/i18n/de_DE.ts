@@ -12,7 +12,7 @@ export default {
       "get-results": "Berechne Prognose"
     },
     "result-data": {
-      "results": "Ergebenisse",
+      "results": "Ergebnisse",
       "selection": "Auswahl",
       "consumer-groups": "Verbrauchergruppen",
       "areas": "Gebiete",
