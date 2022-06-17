@@ -12,6 +12,7 @@ import {
 } from "../../services/water-usage-forecasts.service";
 import {WaterRightsService} from "../../services/water-rights.service";
 import {ConsumersService} from "../../services/consumers.service";
+import {consumerIcon, waterRightIcon} from "../../map-icons";
 
 @Component({
   selector: 'lib-result-data-view',
@@ -47,14 +48,6 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
   refProgSplit: number = 0;
 
   markers: MapComponent["inputMarkers"] = [];
-  waterRightIcon = icon({
-    iconUrl: "https://unpkg.com/ionicons@5.5.2/dist/svg/water.svg",
-    iconSize: [35, 35]
-  });
-  consumerIcon = icon({
-    iconUrl: "https://unpkg.com/ionicons@5.5.2/dist/svg/business.svg",
-    iconSize: [35, 35]
-  });
 
   key: string[] = [];
   private subscribeQuery = true;
@@ -131,7 +124,7 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
             <b>Name</b>: ${marker.name}<br>
             <b>Water Right No</b>: ${marker.waterRight}
           `,
-          icon: this.waterRightIcon
+          icon: waterRightIcon
         })
       }
 
@@ -143,31 +136,16 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
             marker.geojson.coordinates[0]
           ] as [number, number],
           tooltip: marker.name,
-          icon: this.consumerIcon
+          icon: consumerIcon,
+          onClick: () => this.router.navigate(["./detail"], {
+            relativeTo: this.route,
+            queryParams: {consumer: marker.id}
+          })
         })
       }
 
       this.markers = markers;
     });
-
-    /*
-    this.waterRightService.fetchWaterRightLocations({
-      in: [key].flat(),
-      isReal: true
-    }).subscribe(data => {
-      let markers = [];
-      for (let marker of data) {
-        markers.push({
-          coordinates: [
-            marker.geojson.coordinates[1],
-            marker.geojson.coordinates[0]
-          ] as [number, number],
-          tooltip: `${marker.water_right}`
-        })
-      }
-      this.markers = markers;
-    });
-    */
   }
 
   private updateGraphs(forecast: ForecastResponse["accumulations"]): void {
