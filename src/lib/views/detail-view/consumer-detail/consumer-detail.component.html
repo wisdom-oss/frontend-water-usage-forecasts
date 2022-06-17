@@ -1,0 +1,52 @@
+<p class="title">{{name}}</p>
+<p class="subtitle">{{id}}</p>
+
+<div class="card block">
+  <div class="card-content p-0 is-clipped">
+    <map
+      #map
+      [layerSelectable]="false"
+      zoom="12"
+      height="200px"
+      [scrollWheelZoom]="false"
+      [markers]="marker ? [marker] : []"
+    ></map>
+  </div>
+</div>
+
+<div class="card block">
+  <div class="card-content">
+    <div>
+      <canvas
+        style="max-width: min(100%, 100vw)"
+        baseChart
+        type="bar"
+        [data]="chartData"
+        [options]="{
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
+          scales: {
+            y: {
+              title: {
+                display: true,
+                text: 'water-usage-forecasts.chart.consumption' | translate
+              }
+            },
+            x: {
+              title: {
+                display: true,
+                text: 'water-usage-forecasts.chart.year' | translate
+              }
+            }
+          }
+        }"
+      ></canvas>
+    </div>
+  </div>
+  <div class="card-footer is-justify-content-end">
+    <p class="pr-1">{{recordedAt}}</p>
+  </div>
+</div>

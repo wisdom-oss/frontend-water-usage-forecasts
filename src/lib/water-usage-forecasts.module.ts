@@ -13,13 +13,15 @@ import {
   ResultDataViewComponent
 } from "./views/result-data-view/result-data-view.component";
 import { DetailViewComponent } from './views/detail-view/detail-view.component';
+import { ConsumerDetailComponent } from './views/detail-view/consumer-detail/consumer-detail.component';
 
 @NgModule({
   declarations: [
     WaterUsageForecastsComponent,
     MapSelectViewComponent,
     ResultDataViewComponent,
-    DetailViewComponent
+    DetailViewComponent,
+    ConsumerDetailComponent
   ],
   imports: [
     WisdomModule,
