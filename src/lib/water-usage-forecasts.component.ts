@@ -1,5 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
+import {combineLatest, combineLatestWith} from "rxjs/operators";
+import {map, Observable, of} from "rxjs";
 
 // TODO: doc this
 
@@ -13,26 +15,33 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class WaterUsageForecastsComponent implements OnInit {
 
-  selectedView: "map-select" | "result-data" = "map-select";
+  selectedView: "map-select" | "result-data" | "detail" = "map-select";
 
   private keys?: string[];
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    // check for query parameters, upon change extract them and display correct
-    // view
-    this.route.queryParams.subscribe(({key}) => {
-      if (!key || !key.length) {
-        // missing or invalid parameters, display the map selection
-        this.selectedView = "map-select";
-        this.keys = undefined;
-        return;
-      }
+    this.route.queryParams
+      .pipe(combineLatestWith(this.route.firstChild?.url ?? of(null)))
+      .pipe(map(([qp, url]) => Object.assign({}, qp, {url})))
+      .subscribe(({key, url}) => {
+        if (url && url.length && url[0].path === "detail") {
+          this.selectedView = "detail";
+          this.keys = undefined;
+          return;
+        }
 
-      this.keys = [key].flat();
-      this.selectedView = "result-data";
-    });
+        if (!key || !key.length) {
+          // missing or invalid parameters, display the map selection
+          this.selectedView = "map-select";
+          this.keys = undefined;
+          return;
+        }
+
+        this.keys = [key].flat();
+        this.selectedView = "result-data";
+      });
   }
 
 }

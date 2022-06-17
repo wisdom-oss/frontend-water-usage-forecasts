@@ -10,6 +10,7 @@ import {WaterUsageForecastsService} from "../../water-usage-forecasts.service";
 import {ForecastResponse, ForecastUsage} from "../../forecast-response";
 import {WaterRightsService} from "../../water-rights.service";
 import {ConsumersService} from "../../consumers.service";
+import {combineLatestWith} from "rxjs/operators";
 
 @Component({
   selector: 'lib-result-data-view',
@@ -108,17 +109,14 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
         }
         this.selection = selection;
       });
-    combineLatest([
-      this.waterRightService.fetchWaterRightLocations({
-        in: [key].flat(),
-        isReal: true}
-      ),
-      this.consumersService.fetchConsumers({
-        in: [key].flat(),
-        // TODO: move this value elsewhere
-        usageAbove: 10000
-      })
-    ]).subscribe(data => {
+    this.waterRightService.fetchWaterRightLocations({
+      in: [key].flat(),
+      isReal: true}
+    ).pipe(combineLatestWith(this.consumersService.fetchConsumers({
+      in: [key].flat(),
+      // TODO: move this value elsewhere
+      usageAbove: 10000
+    }))).subscribe(data => {
       let markers = [];
 
       // iterate over locations of water rights
