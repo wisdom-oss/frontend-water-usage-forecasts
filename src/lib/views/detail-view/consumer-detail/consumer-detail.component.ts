@@ -51,8 +51,10 @@ export class ConsumerDetailComponent implements OnInit, AfterViewInit, OnDestroy
       if (!consumer) return;
       this.id = consumer;
       this.cService.fetchConsumers({id: [consumer]})
+        .pipe(takeWhile(() => this.alive))
         .subscribe(data => this.handleConsumerData(data ?? []));
       this.hService.fetchWaterUsageHistory(consumer)
+        .pipe(takeWhile(() => this.alive))
         .subscribe(data => {
           this.chartData = {
             datasets: [{
