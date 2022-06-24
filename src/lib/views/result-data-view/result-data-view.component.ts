@@ -4,11 +4,13 @@ import {ChartData, ChartEvent, LegendItem} from "chart.js/auto";
 import {stringToColor, MapComponent, Resolution, MapService} from "common";
 import {icon} from "leaflet";
 import {combineLatest, takeWhile} from "rxjs";
-
 import {combineLatestWith} from "rxjs/operators";
+
 import {
-  ForecastResponse, ForecastType, ForecastUsage,
-  WaterUsageForecastsService
+  ForecastResponse,
+  WaterUsageForecastsService,
+  ForecastType,
+  ForecastUsage
 } from "../../services/water-usage-forecasts.service";
 import {WaterRightsService} from "../../services/water-rights.service";
 import {ConsumersService} from "../../services/consumers.service";

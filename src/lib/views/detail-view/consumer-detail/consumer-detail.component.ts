@@ -1,11 +1,15 @@
 import {
-  AfterViewInit,
+  ViewChild,
   Component,
   OnDestroy,
   OnInit,
-  ViewChild
-} from '@angular/core';
+  AfterViewInit
+} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
+import {ChartData} from "chart.js/auto";
+import {MapComponent, Marker} from "common";
+import {takeWhile, BehaviorSubject} from "rxjs";
+
 import {
   ConsumerLocationsResponse,
   ConsumersService
@@ -14,10 +18,7 @@ import {
   HistoryResponse,
   WaterUsageHistoryService
 } from "../../../services/water-usage-history.service";
-import {Marker, MapComponent} from "common";
-import {BehaviorSubject, takeWhile} from "rxjs";
 import {consumerIcon} from "../../../map-icons";
-import {ChartData} from "chart.js/auto";
 
 @Component({
   selector: 'lib-consumer-detail',

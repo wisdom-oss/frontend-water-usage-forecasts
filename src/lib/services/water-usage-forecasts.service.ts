@@ -1,9 +1,8 @@
 import {HttpClient, HttpContext, HttpHeaders} from "@angular/common/http";
 import {Injectable} from "@angular/core";
+import {Router} from "@angular/router";
 import {USE_API_URL, USE_LOADER} from "common";
 import {Observable} from "rxjs";
-
-import {Router} from "@angular/router";
 
 const API_URL = "water-usage-forecasts";
 

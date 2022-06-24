@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
 import {HttpClient, HttpContext, HttpHeaders} from "@angular/common/http";
+import {Injectable} from "@angular/core";
 import {Router} from "@angular/router";
-import {map, Observable} from "rxjs";
 import {USE_API_URL, USE_LOADER} from "common";
+import {map, Observable} from "rxjs";
 
 const API_URL = "water-rights/";
 

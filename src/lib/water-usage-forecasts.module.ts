@@ -6,14 +6,16 @@ import {WisdomModule} from "common";
 import {NgChartsModule} from "ng2-charts";
 
 import {WaterUsageForecastsComponent} from "./water-usage-forecasts.component";
+import {DetailViewComponent} from "./views/detail-view/detail-view.component";
+import {
+  ConsumerDetailComponent
+} from "./views/detail-view/consumer-detail/consumer-detail.component";
 import {
   MapSelectViewComponent
 } from "./views/map-select-view/map-select-view.component";
 import {
   ResultDataViewComponent
 } from "./views/result-data-view/result-data-view.component";
-import { DetailViewComponent } from './views/detail-view/detail-view.component';
-import { ConsumerDetailComponent } from './views/detail-view/consumer-detail/consumer-detail.component';
 
 @NgModule({
   declarations: [

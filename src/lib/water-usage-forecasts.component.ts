@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
+import {map, of, Observable} from "rxjs";
 import {combineLatest, combineLatestWith} from "rxjs/operators";
-import {map, Observable, of} from "rxjs";
 
 // TODO: doc this
 
