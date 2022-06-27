@@ -16,6 +16,7 @@ import {
 import {
   ResultDataViewComponent
 } from "./views/result-data-view/result-data-view.component";
+import { WaterRightDetailComponent } from './views/detail-view/water-right-detail/water-right-detail.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {
     MapSelectViewComponent,
     ResultDataViewComponent,
     DetailViewComponent,
-    ConsumerDetailComponent
+    ConsumerDetailComponent,
+    WaterRightDetailComponent
   ],
   imports: [
     WisdomModule,

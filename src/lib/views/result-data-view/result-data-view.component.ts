@@ -126,7 +126,11 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
             <b>Name</b>: ${marker.name}<br>
             <b>Water Right No</b>: ${marker.waterRight}
           `,
-          icon: waterRightIcon
+          icon: waterRightIcon,
+          onClick: () => this.router.navigate(["./detail"], {
+            relativeTo: this.route,
+            queryParams: {waterRight: marker.waterRight}
+          })
         })
       }
 

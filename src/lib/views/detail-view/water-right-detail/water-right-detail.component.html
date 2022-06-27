@@ -1,0 +1,174 @@
+<p class="title">{{data.legalTitle}}</p>
+<p class="subtitle">
+  <span *ngIf="data.subject">{{data.subject}}<br></span>
+  <span>Wasserrecht No. {{data.no}}</span>
+</p>
+
+<div class="card block">
+  <div class="card-content p-0 is-clipped">
+    <map
+      #map
+      [layerSelectable]="false"
+      zoom="12"
+      height="300px"
+      [scrollWheelZoom]="false"
+      [markers]="markers"
+    ></map>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <p class="card-header-title">Locations</p>
+  </div>
+  <ng-template ngFor let-location [ngForOf]="data.locations">
+    <div class="card-content" id="{{location?.id}}">
+      <div class="level has-text-weight-bold">
+        <div class="level-left">
+          <span class="is-size-4">{{location?.name}}</span>
+        </div>
+        <div class="level-right">
+          <span *ngIf="!location?.real" class="is-large is-size-4 icon" title="virtual">
+            <ion-icon name="color-wand-outline"></ion-icon>
+          </span>
+          <span *ngIf="location?.active" class="is-large is-size-4 icon" title="active">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+          </span>
+          <span *ngIf="!location?.active" class="is-large is-size-4 icon" title="inactive">
+            <ion-icon name="close-circle-outline"></ion-icon>
+          </span>
+        </div>
+      </div>
+      <div *ngIf="location?.withdrawalRates" class="block">
+        <p class="has-text-weight-bold">withdrawal</p>
+        <div class="columns">
+          <ng-template ngFor let-rate [ngForOf]="location?.withdrawalRates">
+            <div class="column">
+              <div class="message is-primary has-text-centered has-text-weight-bold">
+                <div class="message-body">
+                  {{rate.amount}} {{rate.unit}}/{{rate.duration}}
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+      <div *ngIf="location?.fluidDischarge" class="block">
+        <p class="has-text-weight-bold">fluid discharge</p>
+        <div class="columns">
+          <ng-template ngFor let-rate [ngForOf]="location?.fluidDischarge">
+            <div class="column">
+              <div class="message is-primary has-text-centered has-text-weight-bold">
+                <div class="message-body">
+                  {{rate.amount}} {{rate.unit}}/{{rate.duration}}
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+      <div *ngIf="location?.irrigationArea" class="block">
+        <p class="has-text-weight-bold">irrigation area</p>
+        <div class="columns">
+          <div class="column">
+            <div class="message is-primary has-text-centered has-text-weight-bold">
+              <div class="message-body">
+                {{location?.irrigationArea?.amount}} {{location?.irrigationArea?.unit}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="location?.rainSupplement" class="block">
+        <p class="has-text-weight-bold">rain supplement</p>
+        <div class="columns">
+          <div class="column">
+            <div class="message is-primary has-text-centered has-text-weight-bold">
+              <div class="message-body">
+                {{location?.rainSupplement?.amount}} {{location?.rainSupplement?.unit}}/{{location?.rainSupplement?.duration}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="block">
+        <table class="table is-fullwidth">
+          <tbody>
+            <tr *ngIf="location?.id">
+              <td>id</td>
+              <td>{{location?.id}}</td>
+            </tr>
+            <tr *ngIf="location?.no">
+              <td>no</td>
+              <td>{{location?.no}}</td>
+            </tr>
+            <tr *ngIf="location?.basinNo">
+              <td>basinNo</td>
+              <td>{{location?.basinNo?.key}} {{location?.basinNo?.name}}</td>
+            </tr>
+            <tr *ngIf="location?.county">
+              <td>county</td>
+              <td>{{location?.county}}</td>
+            </tr>
+            <tr *ngIf="location?.euSurveyArea">
+              <td>euSurveyArea</td>
+              <td>{{location?.euSurveyArea?.key}} {{location?.euSurveyArea?.name}}</td>
+            </tr>
+            <tr *ngIf="location?.field">
+              <td>field</td>
+              <td>{{location?.field}}</td>
+            </tr>
+            <tr *ngIf="location?.groundwaterVolume">
+              <td>groundwaterVolume</td>
+              <td>{{location?.groundwaterVolume}}</td>
+            </tr>
+            <tr *ngIf="location?.legalScope">
+              <td>legalScope</td>
+              <td>{{location?.legalScope}}</td>
+            </tr>
+            <tr *ngIf="location?.localSubDistrict">
+              <td>localSubDistrict</td>
+              <td>{{location?.localSubDistrict}}</td>
+            </tr>
+            <tr *ngIf="location?.maintenanceAssociation">
+              <td>maintenanceAssociation</td>
+              <td>{{location?.maintenanceAssociation?.key}} {{location?.maintenanceAssociation?.name}}</td>
+            </tr>
+            <tr *ngIf="location?.municipalArea">
+              <td>municipalArea</td>
+              <td>{{location?.municipalArea?.key}} {{location?.municipalArea?.name}}</td>
+            </tr>
+            <tr *ngIf="location?.plot">
+              <td>plot</td>
+              <td>{{location?.plot}}</td>
+            </tr>
+            <tr *ngIf="location?.rivershed">
+              <td>rivershed</td>
+              <td>{{location?.rivershed}}</td>
+            </tr>
+            <tr *ngIf="location?.serialNo">
+              <td>serialNo</td>
+              <td>{{location?.serialNo}}</td>
+            </tr>
+            <tr *ngIf="location?.topMap1to25000">
+              <td>topMap1to25000</td>
+              <td>{{location?.topMap1to25000?.key}} {{location?.topMap1to25000?.name}}</td>
+            </tr>
+            <tr *ngIf="location?.waterBody">
+              <td>waterBody</td>
+              <td>{{location?.waterBody}}</td>
+            </tr>
+            <tr *ngIf="location?.floodArea">
+              <td>floodArea</td>
+              <td>{{location?.floodArea}}</td>
+            </tr>
+            <tr *ngIf="location?.waterProtectionArea">
+              <td>waterProtectionArea</td>
+              <td>{{location?.waterProtectionArea}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </ng-template>
+</div>

@@ -26,10 +26,15 @@ export class DetailViewComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.queryParams
       .pipe(takeWhile(() => this.alive))
-      .subscribe(({consumer}) => {
+      .subscribe(({consumer, waterRight}) => {
 
         if (consumer) {
           this.selectedDetail = DetailView.CONSUMER;
+          return;
+        }
+
+        if (waterRight) {
+          this.selectedDetail = DetailView.WATER_RIGHT;
           return;
         }
 
