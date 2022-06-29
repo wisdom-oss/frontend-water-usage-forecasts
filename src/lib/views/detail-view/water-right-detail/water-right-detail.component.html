@@ -57,6 +57,35 @@
   </div>
 </div>
 
+<div class="block">
+  <div class="field is-grouped is-grouped-multiline">
+    <div *ngIf="data?.id" class="control">
+      <div class="tags has-addons">
+        <span class="tag is-primary">Internal ID</span>
+        <span class="tag">{{data?.id}}</span>
+      </div>
+    </div>
+    <div *ngIf="data?.no" class="control">
+      <div class="tags has-addons">
+        <span class="tag is-primary">Water Right No.</span>
+        <span class="tag">{{data?.no}}</span>
+      </div>
+    </div>
+    <div *ngIf="data?.externalId" class="control">
+      <div class="tags has-addons">
+        <span class="tag is-primary">External ID</span>
+        <span class="tag">{{data?.externalId}}</span>
+      </div>
+    </div>
+    <div *ngIf="data?.fileReference" class="control">
+      <div class="tags has-addons">
+        <span class="tag is-primary">File Reference</span>
+        <span class="tag">{{data?.fileReference}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="card block">
   <div class="card-content p-0 is-clipped">
     <map
@@ -247,34 +276,5 @@
   </div>
   <div class="card-content">
     <p class="content">{{data?.annotation}}</p>
-  </div>
-</div>
-
-<div class="block">
-  <div class="field is-grouped is-grouped-multiline">
-    <div *ngIf="data?.id" class="control">
-      <div class="tags has-addons">
-        <span class="tag is-primary">Internal ID</span>
-        <span class="tag">{{data?.id}}</span>
-      </div>
-    </div>
-    <div *ngIf="data?.no" class="control">
-      <div class="tags has-addons">
-        <span class="tag is-primary">Water Right No.</span>
-        <span class="tag">{{data?.no}}</span>
-      </div>
-    </div>
-    <div *ngIf="data?.externalId" class="control">
-      <div class="tags has-addons">
-        <span class="tag is-primary">External ID</span>
-        <span class="tag">{{data?.externalId}}</span>
-      </div>
-    </div>
-    <div *ngIf="data?.fileReference" class="control">
-      <div class="tags has-addons">
-        <span class="tag is-primary">File Reference</span>
-        <span class="tag">{{data?.fileReference}}</span>
-      </div>
-    </div>
   </div>
 </div>
