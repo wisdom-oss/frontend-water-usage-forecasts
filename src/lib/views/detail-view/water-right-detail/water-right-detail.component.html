@@ -25,7 +25,7 @@
     </div>
     <div>
       <div class="tags is-justify-content-flex-end">
-        <div class="tag is-large" title="date of change">
+        <div *ngIf="data?.dateOfChange" class="tag is-large" title="date of change">
           <span class="icon-text">
             <span class="icon">
               <ion-icon name="pencil"></ion-icon>
