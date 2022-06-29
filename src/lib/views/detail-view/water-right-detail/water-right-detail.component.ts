@@ -81,4 +81,15 @@ export class WaterRightDetailComponent implements OnInit, OnDestroy, AfterViewIn
     this.alive = false;
   }
 
+  validToString(valid: this["data"]["valid"]): string | undefined {
+    // TODO: use translation service to get correct string
+    if (!valid) return undefined;
+    let from = valid.from.toISOString().slice(0, 10);
+    let until = valid.until.toISOString().slice(0, 10);
+    if (until !== "9999-12-31") {
+      return `${from} - ${until}`;
+    }
+    return `since ${from}`;
+  }
+
 }
