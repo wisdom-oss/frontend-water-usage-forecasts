@@ -135,7 +135,7 @@
               <span class="tag">{{location?.id}}</span>
             </div>
           </div>
-          <div class="control">
+          <div *ngIf="location?.no" class="control">
             <div class="tags has-addons">
               <span class="tag is-primary">Location No.</span>
               <span class="tag">{{location?.no}}</span>
