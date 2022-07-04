@@ -1,6 +1,21 @@
+<p class="title">Wasserrecht</p>
+
+<div class="card block">
+  <div class="card-content p-0 is-clipped">
+    <map
+      #map
+      [layerSelectable]="false"
+      zoom="12"
+      height="300px"
+      [scrollWheelZoom]="false"
+      [markers]="markers"
+    ></map>
+  </div>
+</div>
+
 <div class="columns">
   <div class="column">
-    <p class="title">{{data.legalTitle}}</p>
+    <p class="title is-4">{{data.legalTitle}}</p>
     <p class="subtitle">
       <span *ngIf="data.subject">{{data.subject}}<br></span>
       <span *ngIf="data?.grantingAuthority">Granting Authority: {{data?.grantingAuthority}}<br></span>
@@ -32,18 +47,18 @@
             </span>
             <span>{{data?.dateOfChange?.toISOString()?.slice(0, 10)}}</span>
           </span>
-          </div>
-          <div class="tag is-large" title="{{data?.state}}">
+        </div>
+        <div class="tag is-large" title="{{data?.state}}">
           <span class="icon">
             <ion-icon
               *ngIf="data?.state === 'aktiv'"
               class="is-large is-size-1"
-              name="play-outline"
+              name="checkmark-outline"
             ></ion-icon>
             <ion-icon
               *ngIf="data?.state === 'inaktiv'"
               class="is-large is-size-1"
-              name="pause-outline"
+              name="close-outline"
             ></ion-icon>
             <ion-icon
               *ngIf="data?.state === 'Wasserbuchblatt'"
@@ -83,19 +98,6 @@
         <span class="tag">{{data?.fileReference}}</span>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="card block">
-  <div class="card-content p-0 is-clipped">
-    <map
-      #map
-      [layerSelectable]="false"
-      zoom="12"
-      height="300px"
-      [scrollWheelZoom]="false"
-      [markers]="markers"
-    ></map>
   </div>
 </div>
 
