@@ -15,6 +15,7 @@ import {Marker, tupleSwap, MapComponent} from "common";
 import {Content, Layer, LeafletMouseEvent, Tooltip} from "leaflet";
 import * as L from "leaflet";
 import {waterRightIcon} from "../../../map-icons";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'lib-water-right-detail',
@@ -33,7 +34,8 @@ export class WaterRightDetailComponent implements OnInit, OnDestroy, AfterViewIn
 
   constructor(
     private route: ActivatedRoute,
-    private service: WaterRightsService
+    private service: WaterRightsService,
+    private translate: TranslateService
   ) { }
 
   ngAfterViewInit(): void {
@@ -82,14 +84,14 @@ export class WaterRightDetailComponent implements OnInit, OnDestroy, AfterViewIn
   }
 
   validToString(valid: this["data"]["valid"]): string | undefined {
-    // TODO: use translation service to get correct string
+    let since = this.translate.instant("water-usage-forecasts.water-right.since");
     if (!valid) return undefined;
     let from = valid.from.toISOString().slice(0, 10);
     let until = valid.until.toISOString().slice(0, 10);
     if (until !== "9999-12-31") {
       return `${from} - ${until}`;
     }
-    return `since ${from}`;
+    return `${since} ${from}`;
   }
 
 }
