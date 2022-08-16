@@ -29,7 +29,8 @@ export default {
     },
     "breadcrumbs": {
       "water-consumption-prognosis": "Water Consumption Prognosis",
-      "map-results": "Map Results"
+      "map-results": "Map Results",
+      "water-right": "Water Right"
     },
     "water-right": {
       "water-right": "Water Right",

@@ -1,7 +1,7 @@
 import {ViewChild, Component, OnInit, AfterViewInit} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
-import {tupleSwap, MapComponent, Marker} from "common";
+import {tupleSwap, MapComponent, Marker, BreadcrumbsService} from "common";
 import {LeafletMouseEvent} from "leaflet";
 import {BehaviorSubject} from "rxjs";
 
@@ -27,7 +27,8 @@ export class WaterRightDetailComponent implements OnInit, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
     private service: WaterRightsService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private breadcrumbs: BreadcrumbsService
   ) { }
 
   ngAfterViewInit(): void {
@@ -35,6 +36,11 @@ export class WaterRightDetailComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.breadcrumbs.set(2, {
+      text: "water-usage-forecasts.breadcrumbs.water-right",
+      link: "#"
+    });
+
     let waterRight = this.route.snapshot.params["waterRight"];
     this.service.fetchWaterRightDetails(waterRight)
       .subscribe(data => {
