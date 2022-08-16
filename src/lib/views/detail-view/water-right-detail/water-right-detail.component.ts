@@ -21,9 +21,7 @@ import {TranslateService} from "@ngx-translate/core";
   selector: 'lib-water-right-detail',
   templateUrl: './water-right-detail.component.html'
 })
-export class WaterRightDetailComponent implements OnInit, OnDestroy, AfterViewInit {
-
-  private alive = true;
+export class WaterRightDetailComponent implements OnInit, AfterViewInit {
 
   data: WaterRightDetailResponse = {};
   markers: Marker[] = [];
@@ -43,44 +41,36 @@ export class WaterRightDetailComponent implements OnInit, OnDestroy, AfterViewIn
   }
 
   ngOnInit(): void {
-    this.route.queryParams
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(({waterRight}) => {
-        if (!waterRight) return;
-        this.service.fetchWaterRightDetails(waterRight)
-          .subscribe(data => {
-            this.data = data;
+    let waterRight = this.route.snapshot.params["waterRight"];
+    this.service.fetchWaterRightDetails(waterRight)
+      .subscribe(data => {
+        this.data = data;
 
-            let bounds: [number[], number[]] = [[], []];
-            let markers: Marker[] = [];
-            for (let location of data.locations ?? []) {
-              if (!location?.location) continue;
-              if (!location.real) continue;
-              let coordinates = tupleSwap(location.location.coordinates);
-              bounds[0].push(coordinates[0]);
-              bounds[1].push(coordinates[1]);
-              markers.push({
-                coordinates,
-                tooltip: location.name,
-                onClick: (evt: LeafletMouseEvent) => {
-                  document.getElementById(`${location?.id}`)?.scrollIntoView({
-                    behavior: "smooth"
-                  })
-                },
-                icon: waterRightIcon
-              });
-            }
-            this.markers = markers;
-            this.bounds.next([
-              [Math.max(...bounds[0]), Math.max(...bounds[1])],
-              [Math.min(...bounds[0]), Math.min(...bounds[1])]
-            ]);
+        let bounds: [number[], number[]] = [[], []];
+        let markers: Marker[] = [];
+        for (let location of data.locations ?? []) {
+          if (!location?.location) continue;
+          if (!location.real) continue;
+          let coordinates = tupleSwap(location.location.coordinates);
+          bounds[0].push(coordinates[0]);
+          bounds[1].push(coordinates[1]);
+          markers.push({
+            coordinates,
+            tooltip: location.name,
+            onClick: (evt: LeafletMouseEvent) => {
+              document.getElementById(`${location?.id}`)?.scrollIntoView({
+                behavior: "smooth"
+              })
+            },
+            icon: waterRightIcon
           });
-      })
-  }
-
-  ngOnDestroy(): void {
-    this.alive = false;
+        }
+        this.markers = markers;
+        this.bounds.next([
+          [Math.max(...bounds[0]), Math.max(...bounds[1])],
+          [Math.min(...bounds[0]), Math.min(...bounds[1])]
+        ]);
+      });
   }
 
   validToString(valid: this["data"]["valid"]): string | undefined {

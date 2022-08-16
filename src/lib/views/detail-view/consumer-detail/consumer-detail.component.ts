@@ -24,9 +24,7 @@ import {consumerIcon} from "../../../map-icons";
   selector: 'lib-consumer-detail',
   templateUrl: './consumer-detail.component.html'
 })
-export class ConsumerDetailComponent implements OnInit, AfterViewInit, OnDestroy {
-
-  private alive = true;
+export class ConsumerDetailComponent implements OnInit, AfterViewInit {
 
   name: string = "";
   id: string = "";
@@ -47,27 +45,20 @@ export class ConsumerDetailComponent implements OnInit, AfterViewInit, OnDestroy
   ) { }
 
   ngOnInit(): void {
-    this.route.queryParams
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(({consumer}) => {
-      if (!consumer) return;
-      this.id = consumer;
-      this.cService.fetchConsumers({id: [consumer]})
-        .pipe(takeWhile(() => this.alive))
-        .subscribe(data => this.handleConsumerData(data ?? []));
-      this.hService.fetchWaterUsageHistory(consumer)
-        .pipe(takeWhile(() => this.alive))
-        .subscribe(data => {
-          this.chartData = {
-            datasets: [{
-              data: data.map(({usage}) => usage),
-              backgroundColor: "blue"
-            }],
-            labels: data.map(({year}) => year)
-          };
-          this.recordedAt = data[data.length - 1].recordedAt.toISOString().substring(0, 10);
-        });
-    });
+    this.id = this.route.snapshot.params["consumer"];
+    this.cService.fetchConsumers({id: [this.id]})
+      .subscribe(data => this.handleConsumerData(data ?? []));
+    this.hService.fetchWaterUsageHistory(this.id)
+      .subscribe(data => {
+        this.chartData = {
+          datasets: [{
+            data: data.map(({usage}) => usage),
+            backgroundColor: "blue"
+          }],
+          labels: data.map(({year}) => year)
+        };
+        this.recordedAt = data[data.length - 1].recordedAt.toISOString().substring(0, 10);
+      });
   }
 
   handleConsumerData(data: ConsumerLocationsResponse) {
@@ -91,10 +82,6 @@ export class ConsumerDetailComponent implements OnInit, AfterViewInit, OnDestroy
     this.coordinates.subscribe(coordinates => {
       if (coordinates[0] && coordinates[1]) this.mapComponent.map!.flyTo(coordinates);
     });
-  }
-
-  ngOnDestroy(): void {
-    this.alive = false;
   }
 
 }

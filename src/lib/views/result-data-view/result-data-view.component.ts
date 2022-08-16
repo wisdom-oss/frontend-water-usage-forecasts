@@ -132,10 +132,10 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
             <b>Water Right No</b>: ${marker.waterRight}
           `,
           icon: waterRightIcon,
-          onClick: () => this.router.navigate(["./detail"], {
-            relativeTo: this.route,
-            queryParams: {waterRight: marker.waterRight}
-          })
+          onClick: () => this.router.navigate(
+            ["detail", "water-right", marker.waterRight],
+            {relativeTo: this.route.parent}
+          )
         })
       }
 
@@ -148,10 +148,10 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
           ] as [number, number],
           tooltip: marker.name,
           icon: consumerIcon,
-          onClick: () => this.router.navigate(["./detail"], {
-            relativeTo: this.route,
-            queryParams: {consumer: marker.id}
-          })
+          onClick: () => this.router.navigate(
+            ["detail", "consumer", marker.id],
+            {relativeTo: this.route.parent}
+          )
         })
       }
 
