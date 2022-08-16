@@ -5,8 +5,6 @@ import {TranslateModule} from "@ngx-translate/core";
 import {WisdomModule} from "common";
 import {NgChartsModule} from "ng2-charts";
 
-import {WaterUsageForecastsComponent} from "./water-usage-forecasts.component";
-import {DetailViewComponent} from "./views/detail-view/detail-view.component";
 import {
   ConsumerDetailComponent
 } from "./views/detail-view/consumer-detail/consumer-detail.component";
@@ -20,10 +18,8 @@ import { WaterRightDetailComponent } from './views/detail-view/water-right-detai
 
 @NgModule({
   declarations: [
-    WaterUsageForecastsComponent,
     MapSelectViewComponent,
     ResultDataViewComponent,
-    DetailViewComponent,
     ConsumerDetailComponent,
     WaterRightDetailComponent
   ],
@@ -33,9 +29,6 @@ import { WaterRightDetailComponent } from './views/detail-view/water-right-detai
     CommonModule,
     RouterModule,
     TranslateModule
-  ],
-  exports: [
-    WaterUsageForecastsComponent
   ]
 })
 export class WaterUsageForecastsModule { }
