@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ChartData, ChartEvent, LegendItem} from "chart.js/auto";
-import {stringToColor, MapComponent, Resolution, MapService} from "common";
+import {stringToColor, MapComponent, Resolution, MapService, BreadcrumbsService, getResolvedUrl} from "common";
 import {icon} from "leaflet";
 import {combineLatest, takeWhile} from "rxjs";
 import {combineLatestWith} from "rxjs/operators";
@@ -28,7 +28,8 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
     private consumersService: ConsumersService,
     private route: ActivatedRoute,
     private router: Router,
-    private mapService: MapService
+    private mapService: MapService,
+    private breadcrumbs: BreadcrumbsService
   ) {}
 
   Object = Object;
@@ -89,7 +90,11 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         this.updateGraphs(data.accumulations);
         this.updateAreaComponents(data.partials);
-      });
+        this.breadcrumbs.set(1, {
+          text: "Kartenergebnisse",
+          link: "#"
+        });
+;      });
     this.mapService.fetchLayerData(null, [key].flat())
       .then(data => {
         let selection: this["selection"] = {

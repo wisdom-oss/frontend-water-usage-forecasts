@@ -7,7 +7,7 @@ import {
 } from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {ChartData} from "chart.js/auto";
-import {MapComponent, Marker} from "common";
+import {MapComponent, Marker, BreadcrumbsService, getResolvedUrl} from "common";
 import {takeWhile, BehaviorSubject} from "rxjs";
 
 import {
@@ -42,7 +42,8 @@ export class ConsumerDetailComponent implements OnInit, AfterViewInit, OnDestroy
   constructor(
     private route: ActivatedRoute,
     private cService: ConsumersService,
-    private hService: WaterUsageHistoryService
+    private hService: WaterUsageHistoryService,
+    private breadcrumbs: BreadcrumbsService
   ) { }
 
   ngOnInit(): void {
@@ -72,6 +73,10 @@ export class ConsumerDetailComponent implements OnInit, AfterViewInit, OnDestroy
   handleConsumerData(data: ConsumerLocationsResponse) {
     for (let {id, name, geojson} of data) {
       this.name = name;
+      this.breadcrumbs.set(2, {
+        text: name,
+        link: "#"
+      });
       let coordinates = [geojson.coordinates[1], geojson.coordinates[0]] as [number, number];
       this.marker = {
         coordinates,
