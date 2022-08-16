@@ -1,9 +1,13 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ChartData, ChartEvent, LegendItem} from "chart.js/auto";
-import {stringToColor, MapComponent, Resolution, MapService, BreadcrumbsService, getResolvedUrl} from "common";
-import {icon} from "leaflet";
-import {combineLatest, takeWhile} from "rxjs";
+import {
+  stringToColor,
+  MapComponent,
+  Resolution,
+  BreadcrumbsService,
+  MapService
+} from "common";
 import {combineLatestWith} from "rxjs/operators";
 
 import {
@@ -20,7 +24,7 @@ import {consumerIcon, waterRightIcon} from "../../map-icons";
   selector: 'lib-result-data-view',
   templateUrl: './result-data-view.component.html'
 })
-export class ResultDataViewComponent implements OnInit, OnDestroy {
+export class ResultDataViewComponent implements OnInit {
 
   constructor(
     private service: WaterUsageForecastsService,
@@ -53,20 +57,11 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
   markers: MapComponent["inputMarkers"] = [];
 
   key: string[] = [];
-  private subscribeQuery = true;
 
   ngOnInit(): void {
-    this.route.queryParams
-      .pipe(takeWhile(() => this.subscribeQuery))
-      .subscribe(({key, method}) => {
-        if (!key) return;
-        this.key = [key].flat();
-        this.fetchData(key, method ?? ForecastType.LINEAR);
-      })
-  }
-
-  ngOnDestroy(): void {
-    this.subscribeQuery = false;
+    let {key, method} = this.route.snapshot.queryParams;
+    this.key = [key].flat();
+    this.fetchData(key, method ?? ForecastType.LINEAR);
   }
 
   /** @internal just a re-export of the type */

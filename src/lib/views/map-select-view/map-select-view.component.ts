@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
-import {Resolution, BreadcrumbsService, getResolvedUrl} from "common";
 import {ActivatedRoute} from "@angular/router";
+import {Resolution, BreadcrumbsService} from "common";
 
 @Component({
   selector: 'lib-map-select-view',

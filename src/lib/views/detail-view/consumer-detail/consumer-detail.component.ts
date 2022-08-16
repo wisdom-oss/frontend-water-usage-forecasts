@@ -1,14 +1,8 @@
-import {
-  ViewChild,
-  Component,
-  OnDestroy,
-  OnInit,
-  AfterViewInit
-} from "@angular/core";
+import {ViewChild, Component, OnInit, AfterViewInit} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {ChartData} from "chart.js/auto";
-import {MapComponent, Marker, BreadcrumbsService, getResolvedUrl} from "common";
-import {takeWhile, BehaviorSubject} from "rxjs";
+import {MapComponent, Marker, BreadcrumbsService} from "common";
+import {BehaviorSubject} from "rxjs";
 
 import {
   ConsumerLocationsResponse,

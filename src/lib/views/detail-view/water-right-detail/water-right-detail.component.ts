@@ -1,21 +1,15 @@
-import {
-  AfterViewInit,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import {ViewChild, Component, OnInit, AfterViewInit} from "@angular/core";
+import {ActivatedRoute} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
+import {tupleSwap, MapComponent, Marker} from "common";
+import {LeafletMouseEvent} from "leaflet";
+import {BehaviorSubject} from "rxjs";
+
 import {
   WaterRightDetailResponse,
   WaterRightsService
 } from "../../../services/water-rights.service";
-import {ActivatedRoute} from "@angular/router";
-import {BehaviorSubject, takeWhile} from "rxjs";
-import {Marker, tupleSwap, MapComponent} from "common";
-import {Content, Layer, LeafletMouseEvent, Tooltip} from "leaflet";
-import * as L from "leaflet";
 import {waterRightIcon} from "../../../map-icons";
-import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'lib-water-right-detail',
