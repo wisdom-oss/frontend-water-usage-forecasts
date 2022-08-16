@@ -85,12 +85,7 @@ export class ResultDataViewComponent implements OnInit {
       .subscribe(data => {
         this.updateGraphs(data.accumulations);
         this.updateAreaComponents(data.partials);
-        this.breadcrumbs.set(1, {
-          text: "Kartenergebnisse",
-          link: "/water-usage-forecasts/results",
-          query: {key}
-        });
-;      });
+      });
     this.mapService.fetchLayerData(null, [key].flat())
       .then(data => {
         let selection: this["selection"] = {
@@ -105,6 +100,7 @@ export class ResultDataViewComponent implements OnInit {
           selection[res].push([shape.key, shape.name]);
         }
         this.selection = selection;
+        this.setBreadCrumbs(key);
       });
     this.waterRightService.fetchWaterRightLocations({
       in: [key].flat(),
@@ -214,6 +210,23 @@ export class ResultDataViewComponent implements OnInit {
       components.set(entry.municipal.key, entry.municipal.name);
     }
     this.areaComponents = Array.from(components);
+  }
+
+  private setBreadCrumbs(key: string | string[]) {
+    let selected: any = [];
+    for (let key of Object.keys(this.selection)) {
+      for (let entry of this.selection[key as Resolution]) {
+        selected.push(entry);
+      }
+    }
+    if (selected.length > 1) selected = "water-usage-forecasts.breadcrumbs.map-results"
+    else selected = selected[0][1];
+
+    this.breadcrumbs.set(1, {
+      text: selected,
+      link: "/water-usage-forecasts/results",
+      query: {key}
+    });
   }
 
   chartLegendFilter(item: LegendItem, data: ChartData): boolean {

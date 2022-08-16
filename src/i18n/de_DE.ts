@@ -27,6 +27,10 @@ export default {
       "reference": "Referenz",
       "prognosis": "Prognose"
     },
+    "breadcrumbs": {
+      "water-consumption-prognosis": "Wasserverbrauchprognose",
+      "map-results": "Kartenergebnisse"
+    },
     "water-right": {
       "water-right": "Wasserrecht",
       "valid": "Gültigkeit",

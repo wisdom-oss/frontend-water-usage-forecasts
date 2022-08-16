@@ -27,6 +27,10 @@ export default {
       "reference": "reference",
       "prognosis": "prognosis"
     },
+    "breadcrumbs": {
+      "water-consumption-prognosis": "Water Consumption Prognosis",
+      "map-results": "Map Results"
+    },
     "water-right": {
       "water-right": "Water Right",
       "valid": "validness",
