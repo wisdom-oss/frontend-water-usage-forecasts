@@ -23,7 +23,7 @@ export class MapSelectViewComponent implements OnInit {
   ngOnInit(): void {
     this.breadcrumbs.set(0, {
       text: "Wasserverbrauchsprognose",
-      link: "#"
+      link: "/water-usage-forecasts"
     })
   }
 

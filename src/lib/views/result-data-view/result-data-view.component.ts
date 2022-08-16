@@ -92,7 +92,8 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
         this.updateAreaComponents(data.partials);
         this.breadcrumbs.set(1, {
           text: "Kartenergebnisse",
-          link: "#"
+          link: "/water-usage-forecasts/results",
+          query: {key}
         });
 ;      });
     this.mapService.fetchLayerData(null, [key].flat())
