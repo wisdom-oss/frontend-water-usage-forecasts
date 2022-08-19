@@ -33,6 +33,11 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                         <span class="icon ion-ios-list"></span>Dependencies
                                     </a>
                                 </li>
+                                <li class="link">
+                                    <a href="properties.html" data-type="chapter-link">
+                                        <span class="icon ion-ios-apps"></span>Properties
+                                    </a>
+                                </li>
                     </ul>
                 </li>
                     <li class="chapter modules">
@@ -49,13 +54,16 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/WaterUsageForecastsModule.html" data-type="entity-link" >WaterUsageForecastsModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#components-links-module-WaterUsageForecastsModule-f3f0bb11616530e50c00ef457a09173ae2158fd3e5a693d3b6d44d56d42c1106f93451ec2c560d4f02a6e90e9a9d0cfcd15341b44099329845f1bef5eb10e5bc"' : 'data-target="#xs-components-links-module-WaterUsageForecastsModule-f3f0bb11616530e50c00ef457a09173ae2158fd3e5a693d3b6d44d56d42c1106f93451ec2c560d4f02a6e90e9a9d0cfcd15341b44099329845f1bef5eb10e5bc"' }>
+                                            'data-target="#components-links-module-WaterUsageForecastsModule-661c7511a395a840bfcf271f6a9efd54510d5c9126c458777be74f9ff13e1e5c209b5bd470b7e288f1ac52b14f1bf381a221cc332d2e635c3f31af828f361790"' : 'data-target="#xs-components-links-module-WaterUsageForecastsModule-661c7511a395a840bfcf271f6a9efd54510d5c9126c458777be74f9ff13e1e5c209b5bd470b7e288f1ac52b14f1bf381a221cc332d2e635c3f31af828f361790"' }>
                                             <span class="icon ion-md-cog"></span>
                                             <span>Components</span>
                                             <span class="icon ion-ios-arrow-down"></span>
                                         </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-WaterUsageForecastsModule-f3f0bb11616530e50c00ef457a09173ae2158fd3e5a693d3b6d44d56d42c1106f93451ec2c560d4f02a6e90e9a9d0cfcd15341b44099329845f1bef5eb10e5bc"' :
-                                            'id="xs-components-links-module-WaterUsageForecastsModule-f3f0bb11616530e50c00ef457a09173ae2158fd3e5a693d3b6d44d56d42c1106f93451ec2c560d4f02a6e90e9a9d0cfcd15341b44099329845f1bef5eb10e5bc"' }>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-WaterUsageForecastsModule-661c7511a395a840bfcf271f6a9efd54510d5c9126c458777be74f9ff13e1e5c209b5bd470b7e288f1ac52b14f1bf381a221cc332d2e635c3f31af828f361790"' :
+                                            'id="xs-components-links-module-WaterUsageForecastsModule-661c7511a395a840bfcf271f6a9efd54510d5c9126c458777be74f9ff13e1e5c209b5bd470b7e288f1ac52b14f1bf381a221cc332d2e635c3f31af828f361790"' }>
+                                            <li class="link">
+                                                <a href="components/ConsumerDetailComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ConsumerDetailComponent</a>
+                                            </li>
                                             <li class="link">
                                                 <a href="components/MapSelectViewComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >MapSelectViewComponent</a>
                                             </li>
@@ -63,7 +71,7 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                                 <a href="components/ResultDataViewComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ResultDataViewComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/WaterUsageForecastsComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >WaterUsageForecastsComponent</a>
+                                                <a href="components/WaterRightDetailComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >WaterRightDetailComponent</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -79,7 +87,16 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </div>
                             <ul class="links collapse " ${ isNormalMode ? 'id="injectables-links"' : 'id="xs-injectables-links"' }>
                                 <li class="link">
+                                    <a href="injectables/ConsumersService.html" data-type="entity-link" >ConsumersService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/WaterRightsService.html" data-type="entity-link" >WaterRightsService</a>
+                                </li>
+                                <li class="link">
                                     <a href="injectables/WaterUsageForecastsService.html" data-type="entity-link" >WaterUsageForecastsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/WaterUsageHistoryService.html" data-type="entity-link" >WaterUsageHistoryService</a>
                                 </li>
                             </ul>
                         </li>
@@ -112,6 +129,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         <ul class="links collapse " ${ isNormalMode ? 'id="miscellaneous-links"' : 'id="xs-miscellaneous-links"' }>
                             <li class="link">
                                 <a href="miscellaneous/enumerations.html" data-type="entity-link">Enums</a>
+                            </li>
+                            <li class="link">
+                                <a href="miscellaneous/typealiases.html" data-type="entity-link">Type aliases</a>
                             </li>
                             <li class="link">
                                 <a href="miscellaneous/variables.html" data-type="entity-link">Variables</a>

@@ -66,7 +66,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/lib/forecast-response.ts</code>
+            <code>src/lib/services/water-usage-forecasts.service.ts</code>
         </p>
 
 
@@ -178,7 +178,21 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface ForecastResponse {
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {HttpClient, HttpContext, HttpHeaders} from &quot;@angular/common/http&quot;;
+import {Injectable} from &quot;@angular/core&quot;;
+import {Router} from &quot;@angular/router&quot;;
+import {USE_API_URL, USE_LOADER} from &quot;common&quot;;
+import {Observable} from &quot;rxjs&quot;;
+
+const API_URL &#x3D; &quot;water-usage-forecasts&quot;;
+
+export enum ForecastType {
+  LOGARITHMIC &#x3D; &quot;logarithmic&quot;,
+  LINEAR &#x3D; &quot;linear&quot;,
+  POLYNOMIAL &#x3D; &quot;polynomial&quot;
+}
+
+export interface ForecastResponse {
   accumulations: {
     consumerGroup: ForecastEntry,
     municipal: ForecastEntry
@@ -214,9 +228,49 @@ export interface ForecastUsage {
   startYear: number,
   usages: number[]
 }
+
+/**
+ * Service to interact with server providing the data to display.
+ */
+@Injectable({
+  providedIn: &quot;root&quot;
+})
+export class WaterUsageForecastsService {
+
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {}
+
+  fetchForecastData(
+    key: string | string[],
+    forecastModel: ForecastType,
+    consumerGroup?:
+      &quot;businesses&quot; |
+      &quot;households_and_small_businesses&quot; |
+      &quot;farming_forestry_fishing_industry&quot; |
+      &quot;public_institutions&quot; |
+      &quot;all&quot;
+  ): Observable&lt;ForecastResponse&gt; {
+    let url &#x3D; this.router.parseUrl(&#x60;${API_URL}/${forecastModel}&#x60;);
+    if (consumerGroup) url.queryParams[&quot;consumerGroup&quot;] &#x3D; consumerGroup;
+    url.queryParams[&quot;key&quot;] &#x3D; key;
+    return this.http.get(url.toString(), {
+      headers: new HttpHeaders({
+        &quot;Content-Type&quot;: &quot;application/json&quot;
+      }),
+      responseType: &quot;json&quot;,
+      context: new HttpContext()
+        .set(USE_API_URL, true)
+        .set(USE_LOADER, &quot;water-usage-forecasts.display.loading&quot;)
+    }) as Observable&lt;ForecastResponse&gt;;
+  }
+
+}
 </code></pre>
     </div>
 </div>
+
 
 
 

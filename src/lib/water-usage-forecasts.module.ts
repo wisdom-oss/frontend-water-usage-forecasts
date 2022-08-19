@@ -9,12 +9,14 @@ import {
   ConsumerDetailComponent
 } from "./views/detail-view/consumer-detail/consumer-detail.component";
 import {
+  WaterRightDetailComponent
+} from "./views/detail-view/water-right-detail/water-right-detail.component";
+import {
   MapSelectViewComponent
 } from "./views/map-select-view/map-select-view.component";
 import {
   ResultDataViewComponent
 } from "./views/result-data-view/result-data-view.component";
-import { WaterRightDetailComponent } from './views/detail-view/water-right-detail/water-right-detail.component';
 
 @NgModule({
   declarations: [

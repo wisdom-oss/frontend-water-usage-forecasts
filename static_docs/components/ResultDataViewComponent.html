@@ -66,6 +66,13 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component displaying the Results from the water right forecasts.</p>
+
+    </p>
 
 
     <p class="comment">
@@ -73,7 +80,6 @@
     </p>
     <p class="comment">
                     <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
-                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
     </p>
 
 
@@ -142,19 +148,29 @@
                                 <a href="#didFinish" >didFinish</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
                                 <a href="#key" >key</a>
                             </li>
                             <li>
+                                <a href="#markers" >markers</a>
+                            </li>
+                            <li>
+                                <a href="#Object" >Object</a>
+                            </li>
+                            <li>
+                                <a href="#refProgSplit" >refProgSplit</a>
+                            </li>
+                            <li>
                                 <a href="#regressionMethod" >regressionMethod</a>
+                            </li>
+                            <li>
+                                <a href="#Resolution" >Resolution</a>
                             </li>
                             <li>
                                     <span class="modifier">Optional</span>
                                 <a href="#response" >response</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#subscribeQuery" >subscribeQuery</a>
+                                <a href="#selection" >selection</a>
                             </li>
                         </ul>
                     </td>
@@ -179,10 +195,11 @@
                                 <a href="#fetchData" >fetchData</a>
                             </li>
                             <li>
-                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                                <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
-                                <a href="#ngOnInit" >ngOnInit</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#setBreadCrumbs" >setBreadCrumbs</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -224,12 +241,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(service: <a href="../injectables/WaterUsageForecastsService.html" target="_self">WaterUsageForecastsService</a>, route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+<code>constructor(service: <a href="../injectables/WaterUsageForecastsService.html" target="_self">WaterUsageForecastsService</a>, waterRightService: <a href="../injectables/WaterRightsService.html" target="_self">WaterRightsService</a>, consumersService: <a href="../injectables/ConsumersService.html" target="_self">ConsumersService</a>, route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, mapService: MapService, breadcrumbs: BreadcrumbsService)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:28</a></div>
                             </td>
                         </tr>
 
@@ -259,6 +276,30 @@
                                                     
                                                 </tr>
                                                 <tr>
+                                                        <td>waterRightService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/WaterRightsService.html" target="_self" >WaterRightsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>consumersService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ConsumersService.html" target="_self" >ConsumersService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
                                                         <td>route</td>
                                                   
                                                         <td>
@@ -275,6 +316,30 @@
                                                   
                                                         <td>
                                                                         <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>mapService</td>
+                                                  
+                                                        <td>
+                                                                    <code>MapService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>breadcrumbs</td>
+                                                  
+                                                        <td>
+                                                                    <code>BreadcrumbsService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -320,8 +385,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="136"
-                            class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:136</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="243"
+                            class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:243</a></div>
                 </td>
             </tr>
 
@@ -401,8 +466,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="142"
-                            class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:142</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="249"
+                            class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:249</a></div>
                 </td>
             </tr>
 
@@ -496,8 +561,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="63"
-                            class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:63</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="93"
+                            class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:93</a></div>
                 </td>
             </tr>
 
@@ -561,24 +626,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="ngOnDestroy"></a>
+                    <a name="ngOnInit"></a>
                     <span class="name">
-                        <span ><b>ngOnDestroy</b></span>
-                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>ngOnDestroy()</code>
+<code>ngOnInit()</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="43"
-                            class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:43</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="73"
+                            class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:73</a></div>
                 </td>
             </tr>
 
@@ -598,24 +663,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="ngOnInit"></a>
+                    <a name="setBreadCrumbs"></a>
                     <span class="name">
-                        <span ><b>ngOnInit</b></span>
-                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                        <span class="modifier">Private</span>
+                        <span ><b>setBreadCrumbs</b></span>
+                        <a href="#setBreadCrumbs"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>ngOnInit()</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setBreadCrumbs(key: string | string[])</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="33"
-                            class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:33</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="225"
+                            class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:225</a></div>
                 </td>
             </tr>
 
@@ -624,8 +691,40 @@
                 <td class="col-md-4">
 
                     <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>key</td>
+                                    <td>
+                                            <code>string | string[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -653,8 +752,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="128"
-                            class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:128</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="217"
+                            class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:217</a></div>
                 </td>
             </tr>
 
@@ -720,8 +819,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="71"
-                            class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:71</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="164"
+                            class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:164</a></div>
                 </td>
             </tr>
 
@@ -791,7 +890,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:64</a></div>
                         </td>
                     </tr>
 
@@ -822,10 +921,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:63</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Consumer area data.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -853,10 +958,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:61</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Consumer group data.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -878,7 +989,106 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Whether the request is done, used for the loader.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="key"></a>
+                    <span class="name">
+                        <span ><b>key</b></span>
+                        <a href="#key"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:71</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Selected keys to display results.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="markers"></a>
+                    <span class="name">
+                        <span ><b>markers</b></span>
+                        <a href="#markers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:68</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Array of all markers placed on the map.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Object"></a>
+                    <span class="name">
+                        <span ><b>Object</b></span>
+                        <a href="#Object"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Object</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -889,23 +1099,27 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="key"></a>
+                    <a name="refProgSplit"></a>
                     <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>key</b></span>
-                        <a href="#key"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>refProgSplit</b></span>
+                        <a href="#refProgSplit"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>    <code>string | string[]</code>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:65</a></div>
                         </td>
                     </tr>
 
@@ -930,7 +1144,32 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Resolution"></a>
+                    <span class="name">
+                        <span ><b>Resolution</b></span>
+                        <a href="#Resolution"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Resolution</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:43</a></div>
                         </td>
                     </tr>
 
@@ -957,10 +1196,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:48</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The response from the forecast service.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -968,25 +1213,41 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="subscribeQuery"></a>
+                    <a name="selection"></a>
                     <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>subscribeQuery</b></span>
-                        <a href="#subscribeQuery"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>selection</b></span>
+                        <a href="#selection"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>true</code>
+                        <i>Type : </i>    <code>Record&lt;Resolution | []&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    state: [],
+    district: [],
+    administration: [],
+    municipal: []
+  }</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:53</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Selected elements, used to display in info box.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1012,7 +1273,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:59</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:89</a></div>
                                 </td>
                             </tr>
 
@@ -1023,7 +1284,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:49</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:79</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -1070,54 +1331,84 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, OnDestroy, OnInit} from &quot;@angular/core&quot;;
-
-import {ForecastType} from &quot;../../forecast-type&quot;;
-import {WaterUsageForecastsService} from &quot;../../water-usage-forecasts.service&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, OnInit} from &quot;@angular/core&quot;;
 import {ActivatedRoute, Router} from &quot;@angular/router&quot;;
-import {ForecastResponse, ForecastUsage} from &quot;../../forecast-response&quot;;
-import {takeWhile} from &quot;rxjs&quot;;
-import {prettyPrintNum, stringToColor} from &quot;common&quot;;
-import {ChartData, ChartEvent, LegendItem, Tick} from &quot;chart.js/auto&quot;;
+import {ChartData, ChartEvent, LegendItem} from &quot;chart.js/auto&quot;;
+import {
+  BreadcrumbsService,
+  MapComponent,
+  MapService,
+  Resolution,
+  stringToColor
+} from &quot;common&quot;;
+import {combineLatestWith} from &quot;rxjs/operators&quot;;
 
+import {
+  ForecastResponse,
+  ForecastType,
+  ForecastUsage,
+  WaterUsageForecastsService
+} from &quot;../../services/water-usage-forecasts.service&quot;;
+import {WaterRightsService} from &quot;../../services/water-rights.service&quot;;
+import {ConsumersService} from &quot;../../services/consumers.service&quot;;
+import {consumerIcon, waterRightIcon} from &quot;../../map-icons&quot;;
+
+/** Component displaying the Results from the water right forecasts. */
 @Component({
   selector: &#x27;lib-result-data-view&#x27;,
   templateUrl: &#x27;./result-data-view.component.html&#x27;
 })
-export class ResultDataViewComponent implements OnInit, OnDestroy {
+export class ResultDataViewComponent implements OnInit {
 
   constructor(
     private service: WaterUsageForecastsService,
+    private waterRightService: WaterRightsService,
+    private consumersService: ConsumersService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private mapService: MapService,
+    private breadcrumbs: BreadcrumbsService
   ) {}
 
+  /** @internal Re-export of {@link Object}. */
+  Object &#x3D; Object;
+  /** @internal Re-export of {@link Resolution}. */
+  Resolution &#x3D; Resolution;
+  /** @internal Re-export of {@link ForecastType}. */
+  regressionMethod &#x3D; ForecastType;
+
+  /** The response from the forecast service. */
   response?: Promise&lt;ForecastResponse&gt;;
+  /** Whether the request is done, used for the loader. */
   didFinish &#x3D; false;
 
+  /** Selected elements, used to display in info box. */
+  selection: Record&lt;Resolution, [string, string][]&gt; &#x3D; {
+    state: [],
+    district: [],
+    administration: [],
+    municipal: []
+  };
+
+  /** Consumer group data. */
   consumerGroupData: any &#x3D; null;
+  /** Consumer area data. */
   consumerAreaData: any &#x3D; null;
   areaComponents?: [string, string][];
+  refProgSplit: number &#x3D; 0;
 
-  private key!: string | string[];
-  private subscribeQuery &#x3D; true;
+  /** Array of all markers placed on the map. */
+  markers: MapComponent[&quot;inputMarkers&quot;] &#x3D; [];
+
+  /** Selected keys to display results. */
+  key: string[] &#x3D; [];
 
   ngOnInit(): void {
-    this.route.queryParams
-      .pipe(takeWhile(() &#x3D;&gt; this.subscribeQuery))
-      .subscribe(({key, method}) &#x3D;&gt; {
-        if (!key) return;
-        this.key &#x3D; key;
-        this.fetchData(key, method ?? ForecastType.LINEAR);
-      })
+    let {key, method} &#x3D; this.route.snapshot.queryParams;
+    this.key &#x3D; [key].flat();
+    this.fetchData(key, method ?? ForecastType.LINEAR);
   }
 
-  ngOnDestroy(): void {
-    this.subscribeQuery &#x3D; false;
-  }
-
-  /** @internal just a re-export of the type */
-  regressionMethod &#x3D; ForecastType;
   set method(m: ForecastType) {
      this.router.navigate([], {
        relativeTo: this.route,
@@ -1138,9 +1429,76 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
         this.updateGraphs(data.accumulations);
         this.updateAreaComponents(data.partials);
       });
+    this.mapService.fetchLayerData(null, [key].flat())
+      .then(data &#x3D;&gt; {
+        let selection: this[&quot;selection&quot;] &#x3D; {
+          state: [],
+          district: [],
+          administration: [],
+          municipal: []
+        };
+        for (let shape of data.shapes) {
+          let res &#x3D; Resolution.toEnum(shape.key.length);
+          if (!res) continue;
+          selection[res].push([shape.key, shape.name]);
+        }
+        this.selection &#x3D; selection;
+        this.setBreadCrumbs(key);
+      });
+    this.waterRightService.fetchWaterRightLocations({
+      in: [key].flat(),
+      isReal: true}
+    ).pipe(combineLatestWith(this.consumersService.fetchConsumers({
+      in: [key].flat(),
+      // TODO: move this value elsewhere
+      usageAbove: 10000
+    }))).subscribe(data &#x3D;&gt; {
+      let markers &#x3D; [];
+
+      // iterate over locations of water rights
+      for (let marker of data[0] ?? []) {
+        markers.push({
+          coordinates: [
+            marker.geojson.coordinates[1],
+            marker.geojson.coordinates[0]
+          ] as [number, number],
+          tooltip: &#x60;
+            &lt;b&gt;Name&lt;/b&gt;: ${marker.name}&lt;br&gt;
+            &lt;b&gt;Water Right No&lt;/b&gt;: ${marker.waterRight}
+          &#x60;,
+          icon: waterRightIcon,
+          onClick: () &#x3D;&gt; this.router.navigate(
+            [&quot;detail&quot;, &quot;water-right&quot;, marker.waterRight],
+            {relativeTo: this.route.parent}
+          )
+        })
+      }
+
+      // iterate over consumer locations
+      for (let marker of data[1] ?? []) {
+        markers.push({
+          coordinates: [
+            marker.geojson.coordinates[1],
+            marker.geojson.coordinates[0]
+          ] as [number, number],
+          tooltip: marker.name,
+          icon: consumerIcon,
+          onClick: () &#x3D;&gt; this.router.navigate(
+            [&quot;detail&quot;, &quot;consumer&quot;, marker.id],
+            {relativeTo: this.route.parent}
+          )
+        })
+      }
+
+      this.markers &#x3D; markers;
+    });
   }
 
   private updateGraphs(forecast: ForecastResponse[&quot;accumulations&quot;]): void {
+    for (let ref of Object.values(forecast.municipal.reference)) {
+      this.refProgSplit &#x3D; ref.endYear - ref.startYear + 1;
+      break;
+    }
     const colorMap &#x3D; {
       &quot;Agriculture, Forestry, Fisheries&quot;: &quot;green&quot;,
       &quot;Businesses&quot;: &quot;#bcd9e0&quot;,
@@ -1153,21 +1511,13 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
     function mapUsage(usage: ForecastUsage, type: &quot;forecast&quot; | &quot;reference&quot;) {
       minYear &#x3D; Math.min(usage.startYear, minYear);
       maxYear &#x3D; Math.max(usage.endYear, maxYear);
-      let borderColor &#x3D; &quot;&quot;;
-      switch (type) {
-        case &quot;forecast&quot;:
-          borderColor &#x3D; &quot;red&quot;;
-          break;
-        case &quot;reference&quot;:
-          borderColor &#x3D; &quot;blue&quot;;
-          break;
-      }
+
       return {
         label: usage.displayName,
         data: usage.usages.map((val, i) &#x3D;&gt; ({x: i + usage.startYear, y: val})),
-        borderWidth: 1.5,
+        borderWidth: 1,
         borderSkipped: &quot;middle&quot;,
-        borderColor,
+        borderColor: &quot;black&quot;,
         backgroundColor: stringToColor(usage.displayName, colorMap)
       }
     }
@@ -1205,6 +1555,24 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
     this.areaComponents &#x3D; Array.from(components);
   }
 
+  private setBreadCrumbs(key: string | string[]) {
+    let selected: any &#x3D; [];
+    for (let key of Object.keys(this.selection)) {
+      for (let entry of this.selection[key as Resolution]) {
+        selected.push([key, entry[1]]);
+      }
+    }
+    let text: string | [string, string];
+    if (selected.length &gt; 1) text &#x3D; &quot;water-usage-forecasts.breadcrumbs.map-results&quot;
+    else text &#x3D; [&quot;common.map.resolution.&quot; + selected[0][0], selected[0][1]];
+
+    this.breadcrumbs.set(1, {
+      text,
+      link: &quot;/water-usage-forecasts/results&quot;,
+      query: {key}
+    });
+  }
+
   chartLegendFilter(item: LegendItem, data: ChartData): boolean {
     //console.log([item, data]);
     if (item.datasetIndex &gt;&#x3D; data.datasets.length / 2) return false;
@@ -1226,42 +1594,48 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;columns block&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;breadcrumbs&gt;&lt;/breadcrumbs&gt;
+
+&lt;p class&#x3D;&quot;title&quot;&gt;{{&quot;water-usage-forecasts.result-data.results&quot; | translate}}&lt;/p&gt;
+
+&lt;div class&#x3D;&quot;card block&quot;&gt;
+  &lt;div class&#x3D;&quot;card-content p-0 is-clipped&quot;&gt;
+    &lt;map
+      height&#x3D;&quot;500px&quot;
+      [layers]&#x3D;&quot;{
+        shapes: [&#x27;&#x27;, Resolution.MUNICIPAL, key]
+      }&quot;
+      [scrollWheelZoom]&#x3D;&quot;false&quot;
+      [layerSelectable]&#x3D;&quot;false&quot;
+      [markers]&#x3D;&quot;markers&quot;
+    &gt;&lt;/map&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class&#x3D;&quot;columns block&quot;&gt;
   &lt;div class&#x3D;&quot;column&quot;&gt;
     &lt;div class&#x3D;&quot;card&quot;&gt;
       &lt;div class&#x3D;&quot;card-header&quot;&gt;
-        &lt;p class&#x3D;&quot;card-header-title&quot;&gt;Informationen&lt;/p&gt;
+        &lt;p class&#x3D;&quot;card-header-title&quot;&gt;
+          {{&quot;water-usage-forecasts.result-data.selection&quot; | translate}}
+        &lt;/p&gt;
       &lt;/div&gt;
       &lt;div class&#x3D;&quot;card-content&quot;&gt;
         &lt;div class&#x3D;&quot;content&quot;&gt;
-          &lt;p&gt;
-            &lt;strong&gt;Name:&lt;/strong&gt;
-            Eine Stadt
-          &lt;/p&gt;
-          &lt;p&gt;
-            &lt;strong&gt;Postleitzahl:&lt;/strong&gt;
-            12345
-          &lt;/p&gt;
-          &lt;p&gt;
-            &lt;strong&gt;Regionalschlüssel:&lt;/strong&gt;
-            12345
-          &lt;/p&gt;
-          &lt;p&gt;
-            &lt;strong&gt;OOWV Teilgebiet:&lt;/strong&gt;
-            Ein Teilgebeit
-          &lt;/p&gt;
-          &lt;p&gt;
-            &lt;strong&gt;OOWV Region:&lt;/strong&gt;
-            Eine Region
-          &lt;/p&gt;
-          &lt;p&gt;
-            &lt;strong&gt;Landkreis:&lt;/strong&gt;
-            Ein Landkreis
-          &lt;/p&gt;
-          &lt;p&gt;
-            &lt;strong&gt;Gemeinde:&lt;/strong&gt;
-            Eine Gemeinde
-          &lt;/p&gt;
+          &lt;ng-template ngFor let-sel [ngForOf]&#x3D;&quot;Object.entries(selection)&quot;&gt;
+            &lt;div *ngIf&#x3D;&quot;sel[1].length&quot;&gt;
+              &lt;ng-template ngFor let-shape [ngForOf]&#x3D;&quot;sel[1]&quot;&gt;
+                &lt;p&gt;
+                  &lt;strong&gt;
+                    {{&quot;common.map.resolution.&quot; + sel[0] | translate}}
+                  &lt;/strong&gt;
+                  &lt;span&gt;
+                    {{shape[1]}} ({{shape[0]}})
+                  &lt;/span&gt;
+                &lt;/p&gt;
+              &lt;/ng-template&gt;
+            &lt;/div&gt;
+          &lt;/ng-template&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -1339,47 +1713,81 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
 &lt;/div&gt;
 
 &lt;div class&#x3D;&quot;card block&quot;&gt;
-  &lt;div class&#x3D;&quot;card-content p-0 is-clipped&quot;&gt;
-    &lt;map height&#x3D;&quot;200px&quot;&gt;&lt;/map&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class&#x3D;&quot;card block&quot;&gt;
   &lt;div class&#x3D;&quot;card-header&quot;&gt;
     &lt;p class&#x3D;&quot;card-header-title&quot; translate&gt;
       water-usage-forecasts.result-data.consumer-groups
     &lt;/p&gt;
   &lt;/div&gt;
   &lt;div class&#x3D;&quot;card-content&quot;&gt;
-    &lt;bar-chart
-      [data]&#x3D;&quot;consumerGroupData&quot;
-      [options]&#x3D;&quot;{
-        scales: {
-          y: {
-            stacked: true,
-            title: {
-              display: true,
-              text: &#x27;water-usage-forecasts.chart.consumption&#x27;
+    &lt;div&gt;
+      &lt;canvas
+        style&#x3D;&quot;max-width: min(100%, 100vw)&quot;
+        baseChart
+        type&#x3D;&quot;bar&quot;
+        [data]&#x3D;&quot;consumerGroupData&quot;
+        [options]&#x3D;&quot;{
+          scales: {
+            y: {
+              stacked: true,
+              title: {
+                display: true,
+                text: &#x27;water-usage-forecasts.chart.consumption&#x27; | translate
+              }
+            },
+            x: {
+              stacked: true,
+              title: {
+                display: true,
+                text: &#x27;water-usage-forecasts.chart.year&#x27; | translate
+              }
             }
           },
-          x: {
-            stacked: true,
-            title: {
-              display: true,
-              text: &#x27;water-usage-forecasts.chart.year&#x27;
+          plugins: $any({
+            legend: {
+              onClick: chartLegendOnClick,
+              labels: {
+                filter: chartLegendFilter
+              }
+            },
+            annotation: {
+              drawTime: &#x27;beforeDraw&#x27;,
+              annotations: {
+                reference: {
+                  type: &#x27;box&#x27;,
+                  backgroundColor: &#x27;rgba(0, 196, 0, 0.5)&#x27;,
+                  borderWidth: 0,
+                  xMax: refProgSplit - 0.5,
+                  label: {
+                    drawTime: &#x27;afterDraw&#x27;,
+                    enabled: true,
+                    content: &#x27;water-usage-forecasts.chart.reference&#x27; | translate,
+                    position: {
+                      x: &#x27;center&#x27;,
+                      y: &#x27;start&#x27;
+                    }
+                  }
+                },
+                prognosis: {
+                  type: &#x27;box&#x27;,
+                  backgroundColor:&#x27;rgba(233, 4, 58, 0.5)&#x27;,
+                  borderWidth: 0,
+                  xMin: refProgSplit - 0.5,
+                  label: {
+                    drawTime: &#x27;afterDraw&#x27;,
+                    enabled: true,
+                    content: &#x27;water-usage-forecasts.chart.prognosis&#x27; | translate,
+                    position: {
+                      x: &#x27;center&#x27;,
+                      y: &#x27;start&#x27;
+                    }
+                  }
+                }
+              }
             }
-          }
-        },
-        plugins: {
-          legend: {
-            onClick: chartLegendOnClick,
-            labels: {
-              filter: chartLegendFilter
-            }
-          }
-        }
-      }&quot;
-    &gt;&lt;/bar-chart&gt;
+          })
+        }&quot;
+      &gt;&lt;/canvas&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
@@ -1390,35 +1798,75 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
     &lt;/p&gt;
   &lt;/div&gt;
   &lt;div class&#x3D;&quot;card-content&quot;&gt;
-    &lt;bar-chart
-      [data]&#x3D;&quot;consumerAreaData&quot;
-      [options]&#x3D;&quot;{
-        scales: {
-          y: {
-            stacked: true,
-            title: {
-              display: true,
-              text: &#x27;water-usage-forecasts.chart.consumption&#x27;
+    &lt;div&gt;
+      &lt;canvas
+        style&#x3D;&quot;max-width: min(100%, 100vw)&quot;
+        baseChart
+        type&#x3D;&quot;bar&quot;
+        [data]&#x3D;&quot;consumerAreaData&quot;
+        [options]&#x3D;&quot;{
+          scales: {
+            y: {
+              stacked: true,
+              title: {
+                display: true,
+                text: &#x27;water-usage-forecasts.chart.consumption&#x27; | translate
+              }
+            },
+            x: {
+              stacked: true,
+              title: {
+                display: true,
+                text: &#x27;water-usage-forecasts.chart.year&#x27; | translate
+              }
             }
           },
-          x: {
-            stacked: true,
-            title: {
-              display: true,
-              text: &#x27;water-usage-forecasts.chart.year&#x27;
+          plugins: $any({
+            legend: {
+              onClick: chartLegendOnClick,
+              labels: {
+                filter: chartLegendFilter
+              }
+            },
+            annotation: {
+              drawTime: &#x27;beforeDraw&#x27;,
+              annotations: {
+                reference: {
+                  type: &#x27;box&#x27;,
+                  backgroundColor: &#x27;rgba(0, 196, 0, 0.5)&#x27;,
+                  borderWidth: 0,
+                  xMax: refProgSplit - 0.5,
+                  label: {
+                    drawTime: &#x27;afterDraw&#x27;,
+                    enabled: true,
+                    content: &#x27;water-usage-forecasts.chart.reference&#x27; | translate,
+                    position: {
+                      x: &#x27;center&#x27;,
+                      y: &#x27;start&#x27;
+                    }
+                  }
+                },
+                prognosis: {
+                  type: &#x27;box&#x27;,
+                  backgroundColor:&#x27;rgba(233, 4, 58, 0.5)&#x27;,
+                  borderWidth: 0,
+                  xMin: refProgSplit - 0.5,
+                  label: {
+                    drawTime: &#x27;afterDraw&#x27;,
+                    enabled: true,
+                    content: &#x27;water-usage-forecasts.chart.prognosis&#x27; | translate,
+                    position: {
+                      x: &#x27;center&#x27;,
+                      y: &#x27;start&#x27;
+                    }
+                  }
+                }
+              }
             }
-          }
-        },
-        plugins: {
-          legend: {
-            onClick: chartLegendOnClick,
-            labels: {
-              filter: chartLegendFilter
-            }
-          }
-        }
-      }&quot;
-    &gt;&lt;/bar-chart&gt;
+          })
+        }&quot;
+      &gt;&lt;/canvas&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
@@ -1470,12 +1918,13 @@ export class ResultDataViewComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="columns block">  <div class="column">    <div class="card">      <div class="card-header">        <p class="card-header-title">Informationen</p>      </div>      <div class="card-content">        <div class="content">          <p>            <strong>Name:</strong>            Eine Stadt          </p>          <p>            <strong>Postleitzahl:</strong>            12345          </p>          <p>            <strong>Regionalschlüssel:</strong>            12345          </p>          <p>            <strong>OOWV Teilgebiet:</strong>            Ein Teilgebeit          </p>          <p>            <strong>OOWV Region:</strong>            Eine Region          </p>          <p>            <strong>Landkreis:</strong>            Ein Landkreis          </p>          <p>            <strong>Gemeinde:</strong>            Eine Gemeinde          </p>        </div>      </div>    </div>  </div>  <div class="column">    <div class="card">      <div class="card-header">        <p class="card-header-title">Parameter</p>      </div>      <div class="card-content">        <div class="block">          <p>Prognosemodell</p>          <div class="dropdown is-toggleable">            <div class="dropdown-trigger">              <button class="button">                <span>Regression</span>                <span class="icon">              <ion-icon name="caret-down"></ion-icon>            </span>              </button>            </div>            <div class="dropdown-menu">              <div class="dropdown-content">                <a class="dropdown-item">Regression</a>              </div>            </div>          </div>        </div>        <div class="block">          <p>Methode</p>          <div class="dropdown is-toggleable">            <div class="dropdown-trigger">              <button class="button">                <span>                  {{"water-usage-forecasts.parameter." + method | translate}}                </span>                <span class="icon">              <ion-icon name="caret-down"></ion-icon>            </span>              </button>            </div>            <div class="dropdown-menu">              <div class="dropdown-content">                <a                  class="dropdown-item"                  (click)="method = regressionMethod.LINEAR"                >                  {{"water-usage-forecasts.parameter.linear" | translate}}                </a>                <a                  class="dropdown-item"                  (click)="method = regressionMethod.LOGARITHMIC"                >                  {{"water-usage-forecasts.parameter.logarithmic" | translate}}                </a>                <a                  class="dropdown-item"                  (click)="method = regressionMethod.POLYNOMIAL"                >                  {{"water-usage-forecasts.parameter.polynomial" | translate}}                </a>              </div>            </div>          </div>        </div>        <!--        <div class="block">          <p>Zeitraum</p>        </div>        -->      </div>    </div>  </div></div><div class="card block">  <div class="card-content p-0 is-clipped">    <map height="200px"></map>  </div></div><div class="card block">  <div class="card-header">    <p class="card-header-title" translate>      water-usage-forecasts.result-data.consumer-groups    </p>  </div>  <div class="card-content">    <bar-chart      [data]="consumerGroupData"      [options]="{        scales: {          y: {            stacked: true,            title: {              display: true,              text: \'water-usage-forecasts.chart.consumption\'            }          },          x: {            stacked: true,            title: {              display: true,              text: \'water-usage-forecasts.chart.year\'            }          }        },        plugins: {          legend: {            onClick: chartLegendOnClick,            labels: {              filter: chartLegendFilter            }          }        }      }"    ></bar-chart>  </div></div><div class="card block">  <div class="card-header">    <p class="card-header-title" translate>      water-usage-forecasts.result-data.areas    </p>  </div>  <div class="card-content">    <bar-chart      [data]="consumerAreaData"      [options]="{        scales: {          y: {            stacked: true,            title: {              display: true,              text: \'water-usage-forecasts.chart.consumption\'            }          },          x: {            stacked: true,            title: {              display: true,              text: \'water-usage-forecasts.chart.year\'            }          }        },        plugins: {          legend: {            onClick: chartLegendOnClick,            labels: {              filter: chartLegendFilter            }          }        }      }"    ></bar-chart>  </div></div><div class="card block" *ngIf="areaComponents && areaComponents.length > 1">  <div class="card-header">    <p class="card-header-title" translate>      water-usage-forecasts.result-data.branches    </p>  </div>  <div class="card-content">    <div class="tags">      <a        [routerLink]="[\'./\']"        [queryParams]="{key: component[0]}"        class="tag is-primary is-medium"        *ngFor="let component of areaComponents"      >        {{component[1]}}      </a>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'MapSelectViewComponent', 'selector': 'lib-map-select-view'},{'name': 'ResultDataViewComponent', 'selector': 'lib-result-data-view'},{'name': 'WaterUsageForecastsComponent', 'selector': 'lib-water-usage-forecasts'}];
+        var COMPONENT_TEMPLATE = '<div><breadcrumbs></breadcrumbs><p class="title">{{"water-usage-forecasts.result-data.results" | translate}}</p><div class="card block">  <div class="card-content p-0 is-clipped">    <map      height="500px"      [layers]="{        shapes: [\'\', Resolution.MUNICIPAL, key]      }"      [scrollWheelZoom]="false"      [layerSelectable]="false"      [markers]="markers"    ></map>  </div></div><div class="columns block">  <div class="column">    <div class="card">      <div class="card-header">        <p class="card-header-title">          {{"water-usage-forecasts.result-data.selection" | translate}}        </p>      </div>      <div class="card-content">        <div class="content">          <ng-template ngFor let-sel [ngForOf]="Object.entries(selection)">            <div *ngIf="sel[1].length">              <ng-template ngFor let-shape [ngForOf]="sel[1]">                <p>                  <strong>                    {{"common.map.resolution." + sel[0] | translate}}                  </strong>                  <span>                    {{shape[1]}} ({{shape[0]}})                  </span>                </p>              </ng-template>            </div>          </ng-template>        </div>      </div>    </div>  </div>  <div class="column">    <div class="card">      <div class="card-header">        <p class="card-header-title">Parameter</p>      </div>      <div class="card-content">        <div class="block">          <p>Prognosemodell</p>          <div class="dropdown is-toggleable">            <div class="dropdown-trigger">              <button class="button">                <span>Regression</span>                <span class="icon">              <ion-icon name="caret-down"></ion-icon>            </span>              </button>            </div>            <div class="dropdown-menu">              <div class="dropdown-content">                <a class="dropdown-item">Regression</a>              </div>            </div>          </div>        </div>        <div class="block">          <p>Methode</p>          <div class="dropdown is-toggleable">            <div class="dropdown-trigger">              <button class="button">                <span>                  {{"water-usage-forecasts.parameter." + method | translate}}                </span>                <span class="icon">              <ion-icon name="caret-down"></ion-icon>            </span>              </button>            </div>            <div class="dropdown-menu">              <div class="dropdown-content">                <a                  class="dropdown-item"                  (click)="method = regressionMethod.LINEAR"                >                  {{"water-usage-forecasts.parameter.linear" | translate}}                </a>                <a                  class="dropdown-item"                  (click)="method = regressionMethod.LOGARITHMIC"                >                  {{"water-usage-forecasts.parameter.logarithmic" | translate}}                </a>                <a                  class="dropdown-item"                  (click)="method = regressionMethod.POLYNOMIAL"                >                  {{"water-usage-forecasts.parameter.polynomial" | translate}}                </a>              </div>            </div>          </div>        </div>        <!--        <div class="block">          <p>Zeitraum</p>        </div>        -->      </div>    </div>  </div></div><div class="card block">  <div class="card-header">    <p class="card-header-title" translate>      water-usage-forecasts.result-data.consumer-groups    </p>  </div>  <div class="card-content">    <div>      <canvas        style="max-width: min(100%, 100vw)"        baseChart        type="bar"        [data]="consumerGroupData"        [options]="{          scales: {            y: {              stacked: true,              title: {                display: true,                text: \'water-usage-forecasts.chart.consumption\' | translate              }            },            x: {              stacked: true,              title: {                display: true,                text: \'water-usage-forecasts.chart.year\' | translate              }            }          },          plugins: $any({            legend: {              onClick: chartLegendOnClick,              labels: {                filter: chartLegendFilter              }            },            annotation: {              drawTime: \'beforeDraw\',              annotations: {                reference: {                  type: \'box\',                  backgroundColor: \'rgba(0, 196, 0, 0.5)\',                  borderWidth: 0,                  xMax: refProgSplit - 0.5,                  label: {                    drawTime: \'afterDraw\',                    enabled: true,                    content: \'water-usage-forecasts.chart.reference\' | translate,                    position: {                      x: \'center\',                      y: \'start\'                    }                  }                },                prognosis: {                  type: \'box\',                  backgroundColor:\'rgba(233, 4, 58, 0.5)\',                  borderWidth: 0,                  xMin: refProgSplit - 0.5,                  label: {                    drawTime: \'afterDraw\',                    enabled: true,                    content: \'water-usage-forecasts.chart.prognosis\' | translate,                    position: {                      x: \'center\',                      y: \'start\'                    }                  }                }              }            }          })        }"      ></canvas>    </div>  </div></div><div class="card block">  <div class="card-header">    <p class="card-header-title" translate>      water-usage-forecasts.result-data.areas    </p>  </div>  <div class="card-content">    <div>      <canvas        style="max-width: min(100%, 100vw)"        baseChart        type="bar"        [data]="consumerAreaData"        [options]="{          scales: {            y: {              stacked: true,              title: {                display: true,                text: \'water-usage-forecasts.chart.consumption\' | translate              }            },            x: {              stacked: true,              title: {                display: true,                text: \'water-usage-forecasts.chart.year\' | translate              }            }          },          plugins: $any({            legend: {              onClick: chartLegendOnClick,              labels: {                filter: chartLegendFilter              }            },            annotation: {              drawTime: \'beforeDraw\',              annotations: {                reference: {                  type: \'box\',                  backgroundColor: \'rgba(0, 196, 0, 0.5)\',                  borderWidth: 0,                  xMax: refProgSplit - 0.5,                  label: {                    drawTime: \'afterDraw\',                    enabled: true,                    content: \'water-usage-forecasts.chart.reference\' | translate,                    position: {                      x: \'center\',                      y: \'start\'                    }                  }                },                prognosis: {                  type: \'box\',                  backgroundColor:\'rgba(233, 4, 58, 0.5)\',                  borderWidth: 0,                  xMin: refProgSplit - 0.5,                  label: {                    drawTime: \'afterDraw\',                    enabled: true,                    content: \'water-usage-forecasts.chart.prognosis\' | translate,                    position: {                      x: \'center\',                      y: \'start\'                    }                  }                }              }            }          })        }"      ></canvas>    </div>  </div></div><div class="card block" *ngIf="areaComponents && areaComponents.length > 1">  <div class="card-header">    <p class="card-header-title" translate>      water-usage-forecasts.result-data.branches    </p>  </div>  <div class="card-content">    <div class="tags">      <a        [routerLink]="[\'./\']"        [queryParams]="{key: component[0]}"        class="tag is-primary is-medium"        *ngFor="let component of areaComponents"      >        {{component[1]}}      </a>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'ConsumerDetailComponent', 'selector': 'lib-consumer-detail'},{'name': 'MapSelectViewComponent', 'selector': 'lib-map-select-view'},{'name': 'ResultDataViewComponent', 'selector': 'lib-result-data-view'},{'name': 'WaterRightDetailComponent', 'selector': 'lib-water-right-detail'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ResultDataViewComponent'};
 </script>
 <script src="../js/tree.js"></script>
+
 
 
 

@@ -1,17 +1,18 @@
 import {Route} from "@angular/router";
-import {
-  ResultDataViewComponent
-} from "./views/result-data-view/result-data-view.component";
-import {
-  MapSelectViewComponent
-} from "./views/map-select-view/map-select-view.component";
 import {QueryParameterGuard} from "common";
+
+import {
+  ConsumerDetailComponent
+} from "./views/detail-view/consumer-detail/consumer-detail.component";
 import {
   WaterRightDetailComponent
 } from "./views/detail-view/water-right-detail/water-right-detail.component";
 import {
-  ConsumerDetailComponent
-} from "./views/detail-view/consumer-detail/consumer-detail.component";
+  MapSelectViewComponent
+} from "./views/map-select-view/map-select-view.component";
+import {
+  ResultDataViewComponent
+} from "./views/result-data-view/result-data-view.component";
 
 export const route: Route = {
   path: "water-usage-forecasts",

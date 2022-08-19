@@ -41,7 +41,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li >WaterUsageForecastsService</li>
+  <li >WaterUsageHistoryService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -59,17 +59,10 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/lib/services/water-usage-forecasts.service.ts</code>
+            <code>src/lib/services/water-usage-history.service.ts</code>
         </p>
 
 
-            <p class="comment">
-                <h3>Description</h3>
-            </p>
-            <p class="comment">
-                <p>Service to interact with server providing the data to display.</p>
-
-            </p>
 
 
 
@@ -87,7 +80,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#fetchForecastData" >fetchForecastData</a>
+                                <a href="#fetchWaterUsageHistory" >fetchWaterUsageHistory</a>
                             </li>
                         </ul>
                     </td>
@@ -112,7 +105,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/lib/services/water-usage-forecasts.service.ts:58</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/lib/services/water-usage-history.service.ts:18</a></div>
                             </td>
                         </tr>
 
@@ -171,24 +164,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="fetchForecastData"></a>
+                    <a name="fetchWaterUsageHistory"></a>
                     <span class="name">
-                        <span ><b>fetchForecastData</b></span>
-                        <a href="#fetchForecastData"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>fetchWaterUsageHistory</b></span>
+                        <a href="#fetchWaterUsageHistory"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>fetchForecastData(key: string | string[], forecastModel: <a href="../undefineds/ForecastType.html" target="_self">ForecastType</a>, consumerGroup?: "businesses" | "households_and_small_businesses" | "farming_forestry_fishing_industry" | "public_institutions" | "all")</code>
+<code>fetchWaterUsageHistory(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="65"
-                            class="link-to-prism">src/lib/services/water-usage-forecasts.service.ts:65</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/lib/services/water-usage-history.service.ts:25</a></div>
                 </td>
             </tr>
 
@@ -209,37 +202,13 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>key</td>
+                                    <td>id</td>
                                     <td>
-                                            <code>string | string[]</code>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                     </td>
 
                                     <td>
                                         No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>forecastModel</td>
-                                    <td>
-                                                <code><a href="../miscellaneous/enumerations.html#ForecastType" target="_self" >ForecastType</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>consumerGroup</td>
-                                    <td>
-                                            <code>&quot;businesses&quot; | &quot;households_and_small_businesses&quot; | &quot;farming_forestry_fishing_industry&quot; | &quot;public_institutions&quot; | &quot;all&quot;</code>
-                                    </td>
-
-                                    <td>
-                                        Yes
                                     </td>
 
 
@@ -250,7 +219,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../interfaces/ForecastResponse.html" target="_self" >Observable&lt;ForecastResponse&gt;</a></code>
+                        <b>Returns : </b>        <code><a href="../miscellaneous/typealiases.html#HistoryResponse" target="_self" >Observable&lt;HistoryResponse&gt;</a></code>
 
                     </div>
                     <div class="io-description">
@@ -270,90 +239,51 @@
 import {Injectable} from &quot;@angular/core&quot;;
 import {Router} from &quot;@angular/router&quot;;
 import {USE_API_URL, USE_LOADER} from &quot;common&quot;;
-import {Observable} from &quot;rxjs&quot;;
+import {map, Observable} from &quot;rxjs&quot;;
 
-const API_URL &#x3D; &quot;water-usage-forecasts&quot;;
+const API_URL &#x3D; &quot;water-usage-history/&quot;;
 
-export enum ForecastType {
-  LOGARITHMIC &#x3D; &quot;logarithmic&quot;,
-  LINEAR &#x3D; &quot;linear&quot;,
-  POLYNOMIAL &#x3D; &quot;polynomial&quot;
-}
+export type HistoryResponse &#x3D; {
+  year: number,
+  usage: number,
+  recordedAt: Date
+}[];
 
-export interface ForecastResponse {
-  accumulations: {
-    consumerGroup: ForecastEntry,
-    municipal: ForecastEntry
-  },
-  partials: {
-    consumerGroup: {
-      key: string,
-      name: string
-    },
-    municipal: ForecastResponse[&quot;partials&quot;][0][&quot;consumerGroup&quot;],
-    referenceUsages: {
-      equation: string,
-      float: number,
-      model: &quot;logarithmic&quot; | &quot;linear&quot; | &quot;polynomial&quot;,
-      usages: {
-        amounts: number[],
-        end: number,
-        start: number
-      }
-    },
-    forecast: ForecastResponse[&quot;partials&quot;][0][&quot;referenceUsages&quot;]
-  }[]
-}
-
-export interface ForecastEntry {
-  forecast: Record&lt;string, ForecastUsage&gt;,
-  reference: Record&lt;string, ForecastUsage&gt;
-}
-
-export interface ForecastUsage {
-  displayName: string,
-  endYear: number,
-  startYear: number,
-  usages: number[]
-}
-
-/**
- * Service to interact with server providing the data to display.
- */
 @Injectable({
-  providedIn: &quot;root&quot;
+  providedIn: &#x27;root&#x27;
 })
-export class WaterUsageForecastsService {
+export class WaterUsageHistoryService {
 
   constructor(
     private http: HttpClient,
     private router: Router
-  ) {}
+  ) { }
 
-  fetchForecastData(
-    key: string | string[],
-    forecastModel: ForecastType,
-    consumerGroup?:
-      &quot;businesses&quot; |
-      &quot;households_and_small_businesses&quot; |
-      &quot;farming_forestry_fishing_industry&quot; |
-      &quot;public_institutions&quot; |
-      &quot;all&quot;
-  ): Observable&lt;ForecastResponse&gt; {
-    let url &#x3D; this.router.parseUrl(&#x60;${API_URL}/${forecastModel}&#x60;);
-    if (consumerGroup) url.queryParams[&quot;consumerGroup&quot;] &#x3D; consumerGroup;
-    url.queryParams[&quot;key&quot;] &#x3D; key;
-    return this.http.get(url.toString(), {
+  fetchWaterUsageHistory(id: string): Observable&lt;HistoryResponse&gt; {
+    let url &#x3D; this.router.parseUrl(API_URL);
+    url.queryParams[&quot;consumer&quot;] &#x3D; id;
+    return this.http.get&lt;{year: number, usage: number, recorded_at: string}[]&gt;(url.toString(), {
       headers: new HttpHeaders({
         &quot;Content-Type&quot;: &quot;application/json&quot;
       }),
       responseType: &quot;json&quot;,
       context: new HttpContext()
         .set(USE_API_URL, true)
-        .set(USE_LOADER, &quot;water-usage-forecasts.display.loading&quot;)
-    }) as Observable&lt;ForecastResponse&gt;;
+        .set(USE_LOADER, true)
+    }).pipe(map(
+      data &#x3D;&gt; data.map(
+        ({
+           year,
+           usage,
+           recorded_at
+        }) &#x3D;&gt; ({
+          year,
+          usage,
+          recordedAt: new Date(recorded_at)
+        })
+      )
+    ))
   }
-
 }
 </code></pre>
     </div>
@@ -398,7 +328,7 @@ export class WaterUsageForecastsService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'WaterUsageForecastsService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'WaterUsageHistoryService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

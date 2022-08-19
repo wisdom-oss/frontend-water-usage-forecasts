@@ -20,6 +20,7 @@ import {WaterRightsService} from "../../services/water-rights.service";
 import {ConsumersService} from "../../services/consumers.service";
 import {consumerIcon, waterRightIcon} from "../../map-icons";
 
+/** Component displaying the Results from the water right forecasts. */
 @Component({
   selector: 'lib-result-data-view',
   templateUrl: './result-data-view.component.html'
@@ -36,12 +37,19 @@ export class ResultDataViewComponent implements OnInit {
     private breadcrumbs: BreadcrumbsService
   ) {}
 
+  /** @internal Re-export of {@link Object}. */
   Object = Object;
+  /** @internal Re-export of {@link Resolution}. */
   Resolution = Resolution;
+  /** @internal Re-export of {@link ForecastType}. */
+  regressionMethod = ForecastType;
 
+  /** The response from the forecast service. */
   response?: Promise<ForecastResponse>;
+  /** Whether the request is done, used for the loader. */
   didFinish = false;
 
+  /** Selected elements, used to display in info box. */
   selection: Record<Resolution, [string, string][]> = {
     state: [],
     district: [],
@@ -49,13 +57,17 @@ export class ResultDataViewComponent implements OnInit {
     municipal: []
   };
 
+  /** Consumer group data. */
   consumerGroupData: any = null;
+  /** Consumer area data. */
   consumerAreaData: any = null;
   areaComponents?: [string, string][];
   refProgSplit: number = 0;
 
+  /** Array of all markers placed on the map. */
   markers: MapComponent["inputMarkers"] = [];
 
+  /** Selected keys to display results. */
   key: string[] = [];
 
   ngOnInit(): void {
@@ -64,8 +76,6 @@ export class ResultDataViewComponent implements OnInit {
     this.fetchData(key, method ?? ForecastType.LINEAR);
   }
 
-  /** @internal just a re-export of the type */
-  regressionMethod = ForecastType;
   set method(m: ForecastType) {
      this.router.navigate([], {
        relativeTo: this.route,
