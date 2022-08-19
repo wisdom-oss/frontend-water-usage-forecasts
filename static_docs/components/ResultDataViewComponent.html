@@ -1335,19 +1335,19 @@
 import {ActivatedRoute, Router} from &quot;@angular/router&quot;;
 import {ChartData, ChartEvent, LegendItem} from &quot;chart.js/auto&quot;;
 import {
-  BreadcrumbsService,
+  stringToColor,
   MapComponent,
-  MapService,
   Resolution,
-  stringToColor
+  BreadcrumbsService,
+  MapService
 } from &quot;common&quot;;
 import {combineLatestWith} from &quot;rxjs/operators&quot;;
 
 import {
   ForecastResponse,
+  WaterUsageForecastsService,
   ForecastType,
-  ForecastUsage,
-  WaterUsageForecastsService
+  ForecastUsage
 } from &quot;../../services/water-usage-forecasts.service&quot;;
 import {WaterRightsService} from &quot;../../services/water-rights.service&quot;;
 import {ConsumersService} from &quot;../../services/consumers.service&quot;;

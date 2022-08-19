@@ -54,13 +54,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/WaterUsageForecastsModule.html" data-type="entity-link" >WaterUsageForecastsModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#components-links-module-WaterUsageForecastsModule-661c7511a395a840bfcf271f6a9efd54510d5c9126c458777be74f9ff13e1e5c209b5bd470b7e288f1ac52b14f1bf381a221cc332d2e635c3f31af828f361790"' : 'data-target="#xs-components-links-module-WaterUsageForecastsModule-661c7511a395a840bfcf271f6a9efd54510d5c9126c458777be74f9ff13e1e5c209b5bd470b7e288f1ac52b14f1bf381a221cc332d2e635c3f31af828f361790"' }>
+                                            'data-target="#components-links-module-WaterUsageForecastsModule-077fcd67c5543d44b3b1f009c0bfcb7ac9034fbed367df5e7067d324ee7b99390e9dbbb31b32a40efc17bde633682d09ec9f2bfad58c57412aad1f9cc73878c4"' : 'data-target="#xs-components-links-module-WaterUsageForecastsModule-077fcd67c5543d44b3b1f009c0bfcb7ac9034fbed367df5e7067d324ee7b99390e9dbbb31b32a40efc17bde633682d09ec9f2bfad58c57412aad1f9cc73878c4"' }>
                                             <span class="icon ion-md-cog"></span>
                                             <span>Components</span>
                                             <span class="icon ion-ios-arrow-down"></span>
                                         </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-WaterUsageForecastsModule-661c7511a395a840bfcf271f6a9efd54510d5c9126c458777be74f9ff13e1e5c209b5bd470b7e288f1ac52b14f1bf381a221cc332d2e635c3f31af828f361790"' :
-                                            'id="xs-components-links-module-WaterUsageForecastsModule-661c7511a395a840bfcf271f6a9efd54510d5c9126c458777be74f9ff13e1e5c209b5bd470b7e288f1ac52b14f1bf381a221cc332d2e635c3f31af828f361790"' }>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-WaterUsageForecastsModule-077fcd67c5543d44b3b1f009c0bfcb7ac9034fbed367df5e7067d324ee7b99390e9dbbb31b32a40efc17bde633682d09ec9f2bfad58c57412aad1f9cc73878c4"' :
+                                            'id="xs-components-links-module-WaterUsageForecastsModule-077fcd67c5543d44b3b1f009c0bfcb7ac9034fbed367df5e7067d324ee7b99390e9dbbb31b32a40efc17bde633682d09ec9f2bfad58c57412aad1f9cc73878c4"' }>
                                             <li class="link">
                                                 <a href="components/ConsumerDetailComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ConsumerDetailComponent</a>
                                             </li>
