@@ -216,14 +216,15 @@ export class ResultDataViewComponent implements OnInit {
     let selected: any = [];
     for (let key of Object.keys(this.selection)) {
       for (let entry of this.selection[key as Resolution]) {
-        selected.push(entry);
+        selected.push([key, entry[1]]);
       }
     }
-    if (selected.length > 1) selected = "water-usage-forecasts.breadcrumbs.map-results"
-    else selected = selected[0][1];
+    let text: string | [string, string];
+    if (selected.length > 1) text = "water-usage-forecasts.breadcrumbs.map-results"
+    else text = ["common.map.resolution." + selected[0][0], selected[0][1]];
 
     this.breadcrumbs.set(1, {
-      text: selected,
+      text,
       link: "/water-usage-forecasts/results",
       query: {key}
     });

@@ -22,6 +22,7 @@ export class MapSelectViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.breadcrumbs.set(0, {
+      icon: "calendar",
       text: "water-usage-forecasts.breadcrumbs.water-consumption-prognosis",
       link: "/water-usage-forecasts"
     })
