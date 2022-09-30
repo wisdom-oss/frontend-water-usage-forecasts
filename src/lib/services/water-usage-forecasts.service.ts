@@ -4,17 +4,26 @@ import {Router} from "@angular/router";
 import {USE_API_URL, USE_LOADER} from "common";
 import {Observable} from "rxjs";
 
+/** Route of the API access. */
 const API_URL = "water-usage-forecasts";
 
+/** Possible forecast calculation methods. */
 export enum ForecastType {
   LOGARITHMIC = "logarithmic",
   LINEAR = "linear",
   POLYNOMIAL = "polynomial"
 }
 
+/** Interface for the data received from the server. */
 export interface ForecastResponse {
+  /**
+   * The results in accumulated form so that the client doesn't have to
+   * calculate it itself.
+   */
   accumulations: {
+    /** Accumulations by consumer group. */
     consumerGroup: ForecastEntry,
+    /** Accumulations by municipal. */
     municipal: ForecastEntry
   },
   partials: {

@@ -112,7 +112,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/lib/services/water-usage-forecasts.service.ts:58</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/lib/services/water-usage-forecasts.service.ts:67</a></div>
                             </td>
                         </tr>
 
@@ -180,15 +180,15 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>fetchForecastData(key: string | string[], forecastModel: <a href="../undefineds/ForecastType.html" target="_self">ForecastType</a>, consumerGroup?: "businesses" | "households_and_small_businesses" | "farming_forestry_fishing_industry" | "public_institutions" | "all")</code>
+<code>fetchForecastData(key: string | string[], forecastModel: <a href="../miscellaneouss/ForecastType.html" target="_self">ForecastType</a>, consumerGroup?: "businesses" | "households_and_small_businesses" | "farming_forestry_fishing_industry" | "public_institutions" | "all")</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="65"
-                            class="link-to-prism">src/lib/services/water-usage-forecasts.service.ts:65</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="74"
+                            class="link-to-prism">src/lib/services/water-usage-forecasts.service.ts:74</a></div>
                 </td>
             </tr>
 
@@ -272,17 +272,26 @@ import {Router} from &quot;@angular/router&quot;;
 import {USE_API_URL, USE_LOADER} from &quot;common&quot;;
 import {Observable} from &quot;rxjs&quot;;
 
+/** Route of the API access. */
 const API_URL &#x3D; &quot;water-usage-forecasts&quot;;
 
+/** Possible forecast calculation methods. */
 export enum ForecastType {
   LOGARITHMIC &#x3D; &quot;logarithmic&quot;,
   LINEAR &#x3D; &quot;linear&quot;,
   POLYNOMIAL &#x3D; &quot;polynomial&quot;
 }
 
+/** Interface for the data received from the server. */
 export interface ForecastResponse {
+  /**
+   * The results in accumulated form so that the client doesn&#x27;t have to
+   * calculate it itself.
+   */
   accumulations: {
+    /** Accumulations by consumer group. */
     consumerGroup: ForecastEntry,
+    /** Accumulations by municipal. */
     municipal: ForecastEntry
   },
   partials: {
