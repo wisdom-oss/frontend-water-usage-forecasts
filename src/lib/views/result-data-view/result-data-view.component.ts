@@ -309,6 +309,7 @@ export class ResultDataViewComponent implements OnInit {
    * @param data Chart data
    */
   chartLegendFilter(item: LegendItem, data: ChartData): boolean {
+    if (!item.datasetIndex) return false;
     if (item.datasetIndex >= data.datasets.length / 2) return false;
     item.lineWidth = 0;
     return true;
