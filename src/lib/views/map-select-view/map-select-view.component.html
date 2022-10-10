@@ -3,8 +3,8 @@
     <map
       height="70vh"
       [layers]="{
-        districts: ['Landkreise', Resolution.DISTRICT, ['03']],
-        municipal: ['Gemeinden', Resolution.MUNICIPAL, ['03']]
+        districts: ['common.map.resolution.district', Resolution.DISTRICT, ['03']],
+        municipal: ['common.map.resolution.municipal', Resolution.MUNICIPAL, ['03']]
       }"
       (selected)="mapSelection($event)"
     ></map>
