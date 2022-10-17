@@ -509,8 +509,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="324"
-                            class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:324</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="325"
+                            class="link-to-prism">src/lib/views/result-data-view/result-data-view.component.ts:325</a></div>
                 </td>
             </tr>
 
@@ -1785,6 +1785,7 @@ export class ResultDataViewComponent implements OnInit {
    * @param data Chart data
    */
   chartLegendFilter(item: LegendItem, data: ChartData): boolean {
+    if (!item.datasetIndex) return false;
     if (item.datasetIndex &gt;&#x3D; data.datasets.length / 2) return false;
     item.lineWidth &#x3D; 0;
     return true;

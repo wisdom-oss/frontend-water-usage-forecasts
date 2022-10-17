@@ -479,8 +479,8 @@ export class MapSelectViewComponent implements OnInit {
     &lt;map
       height&#x3D;&quot;70vh&quot;
       [layers]&#x3D;&quot;{
-        districts: [&#x27;Landkreise&#x27;, Resolution.DISTRICT, [&#x27;03&#x27;]],
-        municipal: [&#x27;Gemeinden&#x27;, Resolution.MUNICIPAL, [&#x27;03&#x27;]]
+        districts: [&#x27;common.map.resolution.district&#x27;, Resolution.DISTRICT, [&#x27;03&#x27;]],
+        municipal: [&#x27;common.map.resolution.municipal&#x27;, Resolution.MUNICIPAL, [&#x27;03&#x27;]]
       }&quot;
       (selected)&#x3D;&quot;mapSelection($event)&quot;
     &gt;&lt;/map&gt;
@@ -530,7 +530,7 @@ export class MapSelectViewComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="card block">  <div class="card-content p-0 is-clipped">    <map      height="70vh"      [layers]="{        districts: [\'Landkreise\', Resolution.DISTRICT, [\'03\']],        municipal: [\'Gemeinden\', Resolution.MUNICIPAL, [\'03\']]      }"      (selected)="mapSelection($event)"    ></map>  </div></div><div class="columns is-justify-content-flex-end">  <div class="column is-narrow">    <a      class="button is-primary"      [attr.disabled]="selectionReady ? null : true"      routerLink="results"      [queryParams]="{key: keys}"    >      <span class="icon">        <ion-icon name="stats-chart"></ion-icon>      </span>      <span translate>water-usage-forecasts.map-select.get-results</span>    </a>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="card block">  <div class="card-content p-0 is-clipped">    <map      height="70vh"      [layers]="{        districts: [\'common.map.resolution.district\', Resolution.DISTRICT, [\'03\']],        municipal: [\'common.map.resolution.municipal\', Resolution.MUNICIPAL, [\'03\']]      }"      (selected)="mapSelection($event)"    ></map>  </div></div><div class="columns is-justify-content-flex-end">  <div class="column is-narrow">    <a      class="button is-primary"      [attr.disabled]="selectionReady ? null : true"      routerLink="results"      [queryParams]="{key: keys}"    >      <span class="icon">        <ion-icon name="stats-chart"></ion-icon>      </span>      <span translate>water-usage-forecasts.map-select.get-results</span>    </a>  </div></div></div>'
     var COMPONENTS = [{'name': 'ConsumerDetailComponent', 'selector': 'lib-consumer-detail'},{'name': 'MapSelectViewComponent', 'selector': 'lib-map-select-view'},{'name': 'ResultDataViewComponent', 'selector': 'lib-result-data-view'},{'name': 'WaterRightDetailComponent', 'selector': 'lib-water-right-detail'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'MapSelectViewComponent'};
