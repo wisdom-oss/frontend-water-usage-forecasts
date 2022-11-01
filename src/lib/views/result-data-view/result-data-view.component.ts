@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ChartData, ChartEvent, LegendItem} from "chart.js/auto";
+import {ChartData, ChartEvent, LegendItem} from "chart.js";
 import {
   BreadcrumbsService,
   MapComponent,
