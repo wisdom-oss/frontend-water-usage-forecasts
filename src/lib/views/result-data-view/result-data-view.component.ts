@@ -110,7 +110,8 @@ export class ResultDataViewComponent implements OnInit {
         this.route.snapshot.queryParams,
         {method: m}
       )
-    }).catch(console.error);
+    // upon setting the new method, reinit the component
+    }).then(() => this.ngOnInit()).catch(console.error);
   }
 
   /** Get selected forecast calculation method. */
