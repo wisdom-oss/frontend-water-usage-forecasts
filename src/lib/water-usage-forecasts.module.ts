@@ -17,13 +17,15 @@ import {
 import {
   ResultDataViewComponent
 } from "./views/result-data-view/result-data-view.component";
+import { ResultDataComponent } from './views/result-data-view/result-data/result-data.component';
 
 @NgModule({
   declarations: [
     MapSelectViewComponent,
     ResultDataViewComponent,
     ConsumerDetailComponent,
-    WaterRightDetailComponent
+    WaterRightDetailComponent,
+    ResultDataComponent
   ],
   imports: [
     WisdomModule,
