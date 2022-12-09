@@ -1,20 +1,22 @@
 import {
-  Component,
-  Input,
   OnChanges,
+  SimpleChanges,
+  Component,
+  EventEmitter,
   OnInit,
-  SimpleChanges
-} from '@angular/core';
-import {
-  ForecastResponse,
-  ForecastType, ForecastUsage,
-  WaterUsageForecastsService
-} from "../../../services/water-usage-forecasts.service";
+  Input,
+  Output
+} from "@angular/core";
 import {ChartData, ChartEvent, LegendItem} from "chart.js";
-import {combineLatestWith} from "rxjs/operators";
-import {consumerIcon, waterRightIcon} from "../../../map-icons";
 import {stringToColor} from "common";
 import {firstValueFrom} from "rxjs";
+
+import {
+  ForecastResponse,
+  WaterUsageForecastsService,
+  ForecastType,
+  ForecastUsage
+} from "../../../services/water-usage-forecasts.service";
 
 @Component({
   selector: '[lib-result-data]',
@@ -38,12 +40,14 @@ export class ResultDataComponent implements OnInit, OnChanges {
     "Tourism": "#e02abf"
   };
 
+  /** Area components the results are based on. */
+  @Output()
+  areaComponents: EventEmitter<[string, string][]> = new EventEmitter();
+
   /** Consumer group data. */
   consumerGroupData: any = null;
   /** Consumer area data. */
   consumerAreaData: any = null;
-  /** Area components the results are based on. */
-  areaComponents?: [string, string][];
   /** The year difference between the end year and the start year. */
   refProgSplit: number = 0;
 
@@ -148,7 +152,7 @@ export class ResultDataComponent implements OnInit, OnChanges {
     for (let entry of forecast) {
       components.set(entry.municipal.key, entry.municipal.name);
     }
-    this.areaComponents = Array.from(components);
+    this.areaComponents.emit(Array.from(components));
   }
 
 

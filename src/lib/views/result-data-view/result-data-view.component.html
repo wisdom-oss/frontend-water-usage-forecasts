@@ -116,7 +116,8 @@
   </div>
 </div>
 
-<div lib-result-data class="block" [key]="key" [method]="method"></div>
+<div lib-result-data class="block" [key]="key" [method]="method"
+     (areaComponents)="areaComponents = $event"></div>
 
 <div class="card block" *ngIf="areaComponents && areaComponents.length > 1">
   <div class="card-header">

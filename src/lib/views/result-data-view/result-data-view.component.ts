@@ -1,20 +1,11 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ChartData, ChartEvent, LegendItem} from "chart.js";
-import {
-  BreadcrumbsService,
-  MapComponent,
-  MapService,
-  Resolution,
-  stringToColor
-} from "common";
+import {MapComponent, Resolution, BreadcrumbsService, MapService} from "common";
 import {combineLatestWith} from "rxjs/operators";
 
 import {
   ForecastResponse,
-  ForecastType,
-  ForecastUsage,
-  WaterUsageForecastsService
+  ForecastType
 } from "../../services/water-usage-forecasts.service";
 import {WaterRightsService} from "../../services/water-rights.service";
 import {ConsumersService} from "../../services/consumers.service";
@@ -29,7 +20,6 @@ export class ResultDataViewComponent implements OnInit {
 
   /**
    * Constructor.
-   * @param service Service for water usage forecasts
    * @param waterRightService Service for water rights data
    * @param consumersService Service for consumer data
    * @param route Current route
@@ -38,7 +28,6 @@ export class ResultDataViewComponent implements OnInit {
    * @param breadcrumbs Service to set breadcrumbs
    */
   constructor(
-    private service: WaterUsageForecastsService,
     private waterRightService: WaterRightsService,
     private consumersService: ConsumersService,
     private route: ActivatedRoute,
@@ -76,14 +65,8 @@ export class ResultDataViewComponent implements OnInit {
     municipal: []
   };
 
-  /** Consumer group data. */
-  consumerGroupData: any = null;
-  /** Consumer area data. */
-  consumerAreaData: any = null;
   /** Area components the results are based on. */
   areaComponents?: [string, string][];
-  /** The year difference between the end year and the start year. */
-  refProgSplit: number = 0;
 
   /** Array of all markers placed on the map. */
   markers: MapComponent["inputMarkers"] = [];
@@ -129,11 +112,6 @@ export class ResultDataViewComponent implements OnInit {
    */
   private fetchData(key: string | string[], method: ForecastType): void {
     // TODO: split this into multiple subroutines
-    this.service.fetchForecastData(key, method)
-      .subscribe(data => {
-        this.updateGraphs(data.accumulations);
-        this.updateAreaComponents(data.partials);
-      });
     this.mapService.fetchLayerData(null, [key].flat())
       .then(data => {
         let selection: this["selection"] = {
@@ -201,81 +179,6 @@ export class ResultDataViewComponent implements OnInit {
   }
 
   /**
-   * Update the graphs on the component with the received forecast data.
-   * @param forecast Data received from service
-   * @private
-   */
-  private updateGraphs(forecast: ForecastResponse["accumulations"]): void {
-    for (let ref of Object.values(forecast.municipal.reference)) {
-      this.refProgSplit = ref.endYear - ref.startYear + 1;
-      break;
-    }
-    // TODO: make color map as @Input
-    const colorMap = {
-      "Agriculture, Forestry, Fisheries": "green",
-      "Businesses": "#bcd9e0",
-      "Household": "#ba4c43",
-      "Public Institution": "#5443ba",
-      "Small Businesses": "#a9c940",
-      "Tourism": "#e02abf"
-    };
-    let [minYear, maxYear] = [Infinity, -Infinity];
-
-    function mapUsage(usage: ForecastUsage, type: "forecast" | "reference") {
-      minYear = Math.min(usage.startYear, minYear);
-      maxYear = Math.max(usage.endYear, maxYear);
-
-      return {
-        label: usage.displayName,
-        data: usage.usages.map((val, i) => ({x: i + usage.startYear, y: val})),
-        borderWidth: 1,
-        borderSkipped: "middle",
-        borderColor: "black",
-        backgroundColor: stringToColor(usage.displayName, colorMap)
-      };
-    }
-
-    this.consumerGroupData = {
-      datasets: [
-        Object
-          .values(forecast.consumerGroup.reference)
-          .map(el => mapUsage(el, "reference")),
-        Object
-          .values(forecast.consumerGroup.forecast)
-          .map(el => mapUsage(el, "forecast"))
-      ].flat()
-    };
-    this.consumerAreaData = {
-      datasets: [
-        Object
-          .values(forecast.municipal.reference)
-          .map(el => mapUsage(el, "reference")),
-        Object
-          .values(forecast.municipal.forecast)
-          .map(el => mapUsage(el, "forecast"))
-      ].flat()
-    };
-    let labels: number[] = [];
-    for (let y = minYear; y <= maxYear; y++) labels.push(y);
-    this.consumerGroupData.labels = labels;
-    this.consumerAreaData.labels = labels;
-  }
-
-  /**
-   * Update area component graphs.
-   * @param forecast Forecast data subset that is relevant for the area
-   *                 component
-   * @private
-   */
-  private updateAreaComponents(forecast: ForecastResponse["partials"]): void {
-    let components = new Map();
-    for (let entry of forecast) {
-      components.set(entry.municipal.key, entry.municipal.name);
-    }
-    this.areaComponents = Array.from(components);
-  }
-
-  /**
    * Set breadcrumbs.
    *
    * This will set a generic breadcrumb text if more than one area was selected.
@@ -300,35 +203,4 @@ export class ResultDataViewComponent implements OnInit {
       query: {key}
     });
   }
-
-  /**
-   * Show only the first half of chart legends.
-   *
-   * This is used because two different datasets should work as one.
-   * @param item Legend item
-   * @param data Chart data
-   */
-  chartLegendFilter(item: LegendItem, data: ChartData): boolean {
-    if (!item.datasetIndex) return false;
-    if (item.datasetIndex >= data.datasets.length / 2) return false;
-    item.lineWidth = 0;
-    return true;
-  }
-
-  /**
-   * Function to toggle both datasets when one is clicked as the second part is
-   * filtered out {@link chartLegendFilter}.
-   * @param event Click event on the legend
-   * @param item Legend item
-   * @param legend The legend itself
-   */
-  chartLegendOnClick(event: ChartEvent, item: LegendItem, legend: any) {
-    let chart = legend.chart;
-    chart.getDatasetMeta(item.datasetIndex).hidden =
-      !chart.getDatasetMeta(item.datasetIndex).hidden;
-    chart.getDatasetMeta(item.datasetIndex + legend.legendItems.length).hidden =
-      !chart.getDatasetMeta(item.datasetIndex + legend.legendItems.length).hidden;
-    chart.update();
-  }
-
 }
