@@ -60,7 +60,7 @@ export class ResultDataComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['method']) this.fetchData(this.key, this.method);
+    if (changes['method'] || changes['key']) this.fetchData(this.key, this.method);
   }
 
   /**

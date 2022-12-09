@@ -71,8 +71,6 @@ export class ResultDataViewComponent implements OnInit {
   /** Array of all markers placed on the map. */
   markers: MapComponent["inputMarkers"] = [];
 
-  /** Selected keys to display results. */
-  key: string[] = [];
 
   /**
    * Set the forecast calculation method.
@@ -94,11 +92,25 @@ export class ResultDataViewComponent implements OnInit {
     return this.route.snapshot.queryParams["method"] ?? ForecastType.LINEAR;
   }
 
+  set key(k: string | string[]) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: Object.assign(
+        {},
+        this.route.snapshot.queryParams,
+        {key: k}
+      )
+    }).catch(console.error);
+  }
+
+  /** Get selected forecast calculation method. */
+  get key(): string[] {
+    return this.route.snapshot.queryParams["key"];
+  }
+
   /** Snapshot current route and used query keys to fetch data. */
   ngOnInit(): void {
-    let {key, method} = this.route.snapshot.queryParams;
-    this.key = [key].flat();
-    this.fetchData(key, method ?? ForecastType.LINEAR);
+    this.fetchData(this.key, this.method);
   }
 
   /**
