@@ -74,13 +74,6 @@ export class ResultDataViewComponent implements OnInit {
   /** Selected keys to display results. */
   key: string[] = [];
 
-  /** Snapshot current route and used query keys to fetch data. */
-  ngOnInit(): void {
-    let {key, method} = this.route.snapshot.queryParams;
-    this.key = [key].flat();
-    this.fetchData(key, method ?? ForecastType.LINEAR);
-  }
-
   /**
    * Set the forecast calculation method.
    * @param m Method for forecasting water usages
@@ -99,6 +92,13 @@ export class ResultDataViewComponent implements OnInit {
   /** Get selected forecast calculation method. */
   get method() {
     return this.route.snapshot.queryParams["method"] ?? ForecastType.LINEAR;
+  }
+
+  /** Snapshot current route and used query keys to fetch data. */
+  ngOnInit(): void {
+    let {key, method} = this.route.snapshot.queryParams;
+    this.key = [key].flat();
+    this.fetchData(key, method ?? ForecastType.LINEAR);
   }
 
   /**
