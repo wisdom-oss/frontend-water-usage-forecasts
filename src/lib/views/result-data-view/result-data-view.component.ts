@@ -77,14 +77,7 @@ export class ResultDataViewComponent implements OnInit {
    * @param m Method for forecasting water usages
    */
   set method(m: ForecastType) {
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: Object.assign(
-        {},
-        this.route.snapshot.queryParams,
-        {method: m}
-      )
-    }).catch(console.error);
+    this.updateQueryParam("method", m);
   }
 
   /** Get selected forecast calculation method. */
@@ -92,25 +85,39 @@ export class ResultDataViewComponent implements OnInit {
     return this.route.snapshot.queryParams["method"] ?? ForecastType.LINEAR;
   }
 
+  /**
+   * Set the area key.
+   * @param k Key for the area.
+   */
   set key(k: string | string[]) {
+    this.updateQueryParam("key", k);
+  }
+
+  /** Get selected area keys. */
+  get key(): string[] {
+    return this.route.snapshot.queryParams["key"];
+  }
+
+  /** Call {@link this#fetchData}. */
+  ngOnInit(): void {
+    this.fetchData(this.key, this.method);
+  }
+
+  /**
+   * Update a query parameter by requesting a router navigate.
+   * @param name name of the parameter to update
+   * @param value value of the parameter to update
+   * @private
+   */
+  private updateQueryParam(name: string, value: any) {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: Object.assign(
         {},
         this.route.snapshot.queryParams,
-        {key: k}
+        Object.fromEntries([[name, value]])
       )
     }).catch(console.error);
-  }
-
-  /** Get selected forecast calculation method. */
-  get key(): string[] {
-    return this.route.snapshot.queryParams["key"];
-  }
-
-  /** Snapshot current route and used query keys to fetch data. */
-  ngOnInit(): void {
-    this.fetchData(this.key, this.method);
   }
 
   /**
