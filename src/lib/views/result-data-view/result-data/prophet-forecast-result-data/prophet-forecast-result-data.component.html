@@ -1,1 +1,16 @@
-<p>prophet-forecast-result-data works!</p>
+<div *ngFor="let data of data" class="card block">
+  <div class="card-header">
+    <p class="card-header-title">
+      Ich bin ein Titel
+    </p>
+  </div>
+  <div class="card-content">
+    <div>
+      <canvas
+        baseChart
+        type="bar"
+        [data]="data"
+      ></canvas>
+    </div>
+  </div>
+</div>

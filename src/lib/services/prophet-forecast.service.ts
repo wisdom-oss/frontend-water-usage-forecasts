@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {USE_API_URL, USE_LOADER} from "common";
 
-const API_URL = "prophet-forecasts";
+const API_URL = "prophet-forecast/";
 
 /** Possible forecast calculation methods. */
 export enum ForecastType {

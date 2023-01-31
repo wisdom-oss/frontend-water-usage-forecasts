@@ -18,7 +18,7 @@ import {stringToColor} from "common";
   selector: 'lib-water-usage-forecasts-result-data',
   templateUrl: './water-usage-forecasts-result-data.component.html'
 })
-export class WaterUsageForecastsResultDataComponent implements OnInit, OnChanges {
+export class WaterUsageForecastsResultDataComponent implements OnChanges {
 
   @Input("key")
   key!: string | string[];
@@ -48,10 +48,6 @@ export class WaterUsageForecastsResultDataComponent implements OnInit, OnChanges
   refProgSplit: number = 0;
 
   constructor(private service: WaterUsageForecastsService) {}
-
-  ngOnInit(): void {
-    this.fetchData(this.key, this.method);
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['method'] || changes['key']) this.fetchData(this.key, this.method);

@@ -142,6 +142,9 @@ export class ResultDataViewComponent implements OnInit {
     key: string | string[],
     method: RegressionMethod
   ): void {
+    // FIXME: when required services are up again
+    return;
+
     // TODO: split this into multiple subroutines
     this.mapService.fetchLayerData(null, [key].flat())
       .then(data => {

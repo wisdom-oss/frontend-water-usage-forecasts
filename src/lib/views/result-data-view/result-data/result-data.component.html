@@ -6,5 +6,7 @@
 </ng-container>
 
 <ng-container *ngIf="service == ForecastService.PROPHET">
-  <lib-prophet-forecast-result-data></lib-prophet-forecast-result-data>
+  <lib-prophet-forecast-result-data
+    [key]="key"
+  ></lib-prophet-forecast-result-data>
 </ng-container>
