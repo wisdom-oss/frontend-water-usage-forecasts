@@ -1,15 +1,21 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {MapComponent, Resolution, BreadcrumbsService, MapService} from "common";
+import {BreadcrumbsService, MapComponent, MapService, Resolution} from "common";
 import {combineLatestWith} from "rxjs/operators";
 
 import {
+  ForecastType as ProphetForecastType
+} from "../../services/prophet-forecast.service";
+import {
   ForecastResponse,
-  ForecastType
+  ForecastType as WaterUsageForecastType
 } from "../../services/water-usage-forecasts.service";
 import {WaterRightsService} from "../../services/water-rights.service";
 import {ConsumersService} from "../../services/consumers.service";
 import {consumerIcon, waterRightIcon} from "../../map-icons";
+
+export type RegressionMethod = WaterUsageForecastType | ProphetForecastType;
+export const RegressionMethod = {...WaterUsageForecastType, ...ProphetForecastType};
 
 /** Component displaying the Results from the water right forecasts. */
 @Component({
@@ -47,10 +53,13 @@ export class ResultDataViewComponent implements OnInit {
    */
   Resolution = Resolution;
   /**
-   * Re-export of {@link ForecastType}.
+   * Merged regression methods for {@link WaterRightsService} and
+   * {@link ProphetForecastService}.
+   *
+   * Fully includes {@link ForecastType}.
    * @internal
    */
-  regressionMethod = ForecastType;
+  regressionMethod = RegressionMethod;
 
   /** The response from the forecast service. */
   response?: Promise<ForecastResponse>;
@@ -76,13 +85,13 @@ export class ResultDataViewComponent implements OnInit {
    * Set the forecast calculation method.
    * @param m Method for forecasting water usages
    */
-  set method(m: ForecastType) {
+  set method(m: RegressionMethod) {
     this.updateQueryParam("method", m);
   }
 
   /** Get selected forecast calculation method. */
   get method() {
-    return this.route.snapshot.queryParams["method"] ?? ForecastType.LINEAR;
+    return this.route.snapshot.queryParams["method"] ?? RegressionMethod.LINEAR;
   }
 
   /**
@@ -129,7 +138,10 @@ export class ResultDataViewComponent implements OnInit {
    * @param method Forecast calculation method
    * @private
    */
-  private fetchData(key: string | string[], method: ForecastType): void {
+  private fetchData(
+    key: string | string[],
+    method: RegressionMethod
+  ): void {
     // TODO: split this into multiple subroutines
     this.mapService.fetchLayerData(null, [key].flat())
       .then(data => {

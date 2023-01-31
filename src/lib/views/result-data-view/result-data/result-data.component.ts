@@ -1,21 +1,25 @@
 import {
-  OnChanges,
-  SimpleChanges,
   Component,
   EventEmitter,
-  OnInit,
   Input,
-  Output
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
 } from "@angular/core";
 import {ChartData, ChartEvent, LegendItem} from "chart.js";
 import {stringToColor} from "common";
 import {firstValueFrom} from "rxjs";
 
 import {
+  ForecastType as ProphetForecastType,
+  ProphetForecastService
+} from "../../../services/prophet-forecast.service";
+import {
   ForecastResponse,
-  WaterUsageForecastsService,
-  ForecastType,
-  ForecastUsage
+  ForecastType as WaterUsageForecastType,
+  ForecastUsage,
+  WaterUsageForecastsService
 } from "../../../services/water-usage-forecasts.service";
 
 @Component({
@@ -25,10 +29,10 @@ import {
 export class ResultDataComponent implements OnInit, OnChanges {
 
   @Input("key")
-  key!: Parameters<WaterUsageForecastsService["fetchForecastData"]>[0];
+  key!: string | string[];
 
   @Input("method")
-  method!: Parameters<WaterUsageForecastsService["fetchForecastData"]>[1];
+  method!: WaterUsageForecastType | ProphetForecastType;
 
   @Input("colors")
   colorMap = {
@@ -45,14 +49,15 @@ export class ResultDataComponent implements OnInit, OnChanges {
   areaComponents: EventEmitter<[string, string][]> = new EventEmitter();
 
   /** Consumer group data. */
-  consumerGroupData: any = null;
+  consumerGroupData: ChartData | null = null;
   /** Consumer area data. */
-  consumerAreaData: any = null;
+  consumerAreaData: ChartData | null = null;
   /** The year difference between the end year and the start year. */
   refProgSplit: number = 0;
 
   constructor(
-    private service: WaterUsageForecastsService
+    private waterUsageForecastsService: WaterUsageForecastsService,
+    private prophetForecastService: ProphetForecastService
   ) {}
 
   ngOnInit(): void {
@@ -72,12 +77,24 @@ export class ResultDataComponent implements OnInit, OnChanges {
    * @param method Forecast calculation method
    * @private
    */
-  private fetchData(key: string | string[], method: ForecastType): void {
-    firstValueFrom(this.service.fetchForecastData(key, method))
-      .then(data => {
-        this.updateGraphs(data.accumulations);
-        this.updateAreaComponents(data.partials);
-      });
+  private fetchData(
+    key: string | string[],
+    method: WaterUsageForecastType | ProphetForecastType
+  ): void {
+    switch (method) {
+      case WaterUsageForecastType.LINEAR:
+      case WaterUsageForecastType.LOGARITHMIC:
+      case WaterUsageForecastType.POLYNOMIAL:
+        firstValueFrom(this.waterUsageForecastsService.fetchForecastData(key, method))
+          .then(data => {
+            this.updateGraphs(data.accumulations);
+            this.updateAreaComponents(data.partials);
+          });
+        break;
+      case ProphetForecastType.PROPHET:
+        console.log([key, method]);
+        break;
+    }
   }
 
   /**
@@ -179,8 +196,8 @@ export class ResultDataComponent implements OnInit, OnChanges {
    */
   chartLegendOnClick(event: ChartEvent, item: LegendItem, legend: any) {
     let chart = legend.chart;
-    chart.getDatasetMeta(item.datasetIndex).hidden =
-      !chart.getDatasetMeta(item.datasetIndex).hidden;
+    chart.getDatasetMeta(item.datasetIndex!).hidden =
+      !chart.getDatasetMeta(item.datasetIndex!).hidden;
     chart.getDatasetMeta(item.datasetIndex + legend.legendItems.length).hidden =
       !chart.getDatasetMeta(item.datasetIndex + legend.legendItems.length).hidden;
     chart.update();
