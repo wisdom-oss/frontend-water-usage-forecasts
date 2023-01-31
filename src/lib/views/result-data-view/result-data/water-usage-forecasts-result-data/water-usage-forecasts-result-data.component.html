@@ -1,0 +1,157 @@
+<div class="card block">
+  <div class="card-header">
+    <p class="card-header-title" translate>
+      water-usage-forecasts.result-data.consumer-groups
+    </p>
+  </div>
+  <div class="card-content">
+    <div>
+      <canvas
+        style="max-width: min(100%, 100vw)"
+        baseChart
+        type="bar"
+        [data]="consumerGroupData"
+        [options]="{
+          scales: {
+            y: {
+              stacked: true,
+              title: {
+                display: true,
+                text: 'water-usage-forecasts.chart.consumption' | translate
+              }
+            },
+            x: {
+              stacked: true,
+              title: {
+                display: true,
+                text: 'water-usage-forecasts.chart.year' | translate
+              }
+            }
+          },
+          plugins: $any({
+            legend: {
+              onClick: chartLegendOnClick,
+              labels: {
+                filter: chartLegendFilter
+              }
+            },
+            annotation: {
+              drawTime: 'beforeDraw',
+              annotations: {
+                reference: {
+                  type: 'box',
+                  backgroundColor: 'rgba(0, 196, 0, 0.5)',
+                  borderWidth: 0,
+                  xMax: refProgSplit - 0.5,
+                  label: {
+                    drawTime: 'afterDraw',
+                    enabled: true,
+                    content: 'water-usage-forecasts.chart.reference' | translate,
+                    position: {
+                      x: 'center',
+                      y: 'start'
+                    }
+                  }
+                },
+                prognosis: {
+                  type: 'box',
+                  backgroundColor:'rgba(233, 4, 58, 0.5)',
+                  borderWidth: 0,
+                  xMin: refProgSplit - 0.5,
+                  label: {
+                    drawTime: 'afterDraw',
+                    enabled: true,
+                    content: 'water-usage-forecasts.chart.prognosis' | translate,
+                    position: {
+                      x: 'center',
+                      y: 'start'
+                    }
+                  }
+                }
+              }
+            }
+          })
+        }"
+      ></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="card block">
+  <div class="card-header">
+    <p class="card-header-title" translate>
+      water-usage-forecasts.result-data.areas
+    </p>
+  </div>
+  <div class="card-content">
+    <div>
+      <canvas
+        style="max-width: min(100%, 100vw)"
+        baseChart
+        type="bar"
+        [data]="consumerAreaData"
+        [options]="{
+          scales: {
+            y: {
+              stacked: true,
+              title: {
+                display: true,
+                text: 'water-usage-forecasts.chart.consumption' | translate
+              }
+            },
+            x: {
+              stacked: true,
+              title: {
+                display: true,
+                text: 'water-usage-forecasts.chart.year' | translate
+              }
+            }
+          },
+          plugins: $any({
+            legend: {
+              onClick: chartLegendOnClick,
+              labels: {
+                filter: chartLegendFilter
+              }
+            },
+            annotation: {
+              drawTime: 'beforeDraw',
+              annotations: {
+                reference: {
+                  type: 'box',
+                  backgroundColor: 'rgba(0, 196, 0, 0.5)',
+                  borderWidth: 0,
+                  xMax: refProgSplit - 0.5,
+                  label: {
+                    drawTime: 'afterDraw',
+                    enabled: true,
+                    content: 'water-usage-forecasts.chart.reference' | translate,
+                    position: {
+                      x: 'center',
+                      y: 'start'
+                    }
+                  }
+                },
+                prognosis: {
+                  type: 'box',
+                  backgroundColor:'rgba(233, 4, 58, 0.5)',
+                  borderWidth: 0,
+                  xMin: refProgSplit - 0.5,
+                  label: {
+                    drawTime: 'afterDraw',
+                    enabled: true,
+                    content: 'water-usage-forecasts.chart.prognosis' | translate,
+                    position: {
+                      x: 'center',
+                      y: 'start'
+                    }
+                  }
+                }
+              }
+            }
+          })
+        }"
+      ></canvas>
+    </div>
+  </div>
+</div>
