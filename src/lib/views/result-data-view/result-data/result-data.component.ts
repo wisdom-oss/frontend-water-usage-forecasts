@@ -37,6 +37,9 @@ export class ResultDataComponent {
     this._method = method;
   };
 
+  @Input()
+  mapKeyNames: Record<string, string> = {}
+
   get method() {
     return this._method;
   }

@@ -24,10 +24,13 @@ import {
 })
 export class ProphetForecastResultDataComponent implements OnChanges {
 
-  @Input("key")
+  @Input()
   key!: string | string[];
 
-  data: any[] = [];
+  @Input()
+  mapKeyNames: Record<string, string> = {}
+
+  data: [string, any][] = [];
 
   constructor(private service: ProphetForecastService) {}
 
@@ -59,13 +62,13 @@ export class ProphetForecastResultDataComponent implements OnChanges {
   }
 
   private fetchData(key: string | string[]): void {
-    let res: Promise<ForecastResponse>[] = [];
+    let res: Promise<[string, ForecastResponse]>[] = [];
     for (let currentKey of [key].flat()) {
-      res.push(firstValueFrom(this.service.fetchForecastData(currentKey)))
+      res.push(firstValueFrom(this.service.fetchForecastData(currentKey)).then(res => [currentKey, res]))
     }
     Promise.all(res).then(res => {
       this.data = [];
-      for (let entry of res) {
+      for (let [key, entry] of res) {
         let labels = [];
 
         let lowMigrationPrognosisData = {
@@ -152,10 +155,10 @@ export class ProphetForecastResultDataComponent implements OnChanges {
             stack: "highMigrationPrognosis"
           },
         ];
-        this.data.push({
+        this.data.push([key, {
           labels,
           datasets: chartDatasets
-        });
+        }]);
       }
     });
   }

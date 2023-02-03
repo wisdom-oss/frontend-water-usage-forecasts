@@ -8,5 +8,6 @@
 <ng-container *ngIf="service == ForecastService.PROPHET">
   <lib-prophet-forecast-result-data
     [key]="key"
+    [mapKeyNames]="mapKeyNames"
   ></lib-prophet-forecast-result-data>
 </ng-container>

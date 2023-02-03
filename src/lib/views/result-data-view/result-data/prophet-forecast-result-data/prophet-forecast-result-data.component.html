@@ -1,7 +1,7 @@
 <div *ngFor="let data of data" class="card block">
   <div class="card-header">
     <p class="card-header-title">
-      Ich bin ein Titel
+      {{mapKeyNames[data[0]]}}
     </p>
   </div>
   <div class="card-content">
@@ -9,7 +9,7 @@
       <canvas
         baseChart
         type="bar"
-        [data]="data"
+        [data]="data[1]"
         [options]="{
           plugins: {
             legend: {

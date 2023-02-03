@@ -80,6 +80,10 @@ export class ResultDataViewComponent implements OnInit {
   /** Array of all markers placed on the map. */
   markers: MapComponent["inputMarkers"] = [];
 
+  /** The names of displayed shapes mapped by their keys. */
+  mapKeyNames: Record<string, string> = {};
+
+  console = console;
 
   /**
    * Set the forecast calculation method.
