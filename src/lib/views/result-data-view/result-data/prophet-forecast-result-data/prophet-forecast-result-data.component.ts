@@ -10,6 +10,13 @@ import {
   ProphetForecastService
 } from "../../../../services/prophet-forecast.service";
 import {firstValueFrom} from "rxjs";
+import {
+  ActiveElement,
+  Chart,
+  ChartEvent,
+  LegendElement,
+  LegendItem
+} from "chart.js";
 
 @Component({
   selector: 'lib-prophet-forecast-result-data',
@@ -20,13 +27,36 @@ export class ProphetForecastResultDataComponent implements OnChanges {
   @Input("key")
   key!: string | string[];
 
+  data: any[] = [];
+
   constructor(private service: ProphetForecastService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['key']) this.fetchData(this.key);
   }
 
-  data: any[] = [];
+  chartOnClick(
+    event: ChartEvent,
+    legendItem: LegendItem,
+    legend: LegendElement<"bar">
+  ): void {
+    let datasetIndex = legendItem.datasetIndex!;
+    let chart = legend.chart;
+    if (chart.getDatasetMeta(datasetIndex).visible) {
+      chart.hide(datasetIndex + 1);
+      chart.hide(datasetIndex);
+      chart.hide(datasetIndex - 1);
+    }
+    else {
+      chart.show(datasetIndex + 1);
+      chart.show(datasetIndex);
+      chart.show(datasetIndex - 1);
+    }
+  }
+
+  chartLabelFilter(item: LegendItem): boolean {
+    return !!item.text?.length;
+  }
 
   private fetchData(key: string | string[]): void {
     let res: Promise<ForecastResponse>[] = [];
@@ -74,55 +104,49 @@ export class ProphetForecastResultDataComponent implements OnChanges {
 
         let chartDatasets = [
           {
-            label: "lowMigrationPrognosis.lower",
             data: lowMigrationPrognosisData.lower,
             backgroundColor: "#A37A00",
             stack: "lowMigrationPrognosis"
           },
           {
-            label: "lowMigrationPrognosis.forecast",
+            label: "lowMigrationPrognosis",
             data: lowMigrationPrognosisData.forecast,
             backgroundColor: "#FFBF00",
             stack: "lowMigrationPrognosis"
           },
           {
-            label: "lowMigrationPrognosis.upper",
             data: lowMigrationPrognosisData.upper,
             backgroundColor: "#FFD65C",
             stack: "lowMigrationPrognosis"
           },
           {
-            label: "mediumMigrationPrognosis.lower",
             data: mediumMigrationPrognosisData.lower,
             backgroundColor: "#0A758F",
             stack: "mediumMigrationPrognosis"
           },
           {
-            label: "mediumMigrationPrognosis.forecast",
+            label: "mediumMigrationPrognosis",
             data: mediumMigrationPrognosisData.forecast,
             backgroundColor: "#10BBE5",
             stack: "mediumMigrationPrognosis"
           },
           {
-            label: "mediumMigrationPrognosis.upper",
             data: mediumMigrationPrognosisData.upper,
             backgroundColor: "#5DD6F4",
             stack: "mediumMigrationPrognosis"
           },
           {
-            label: "highMigrationPrognosis.lower",
             data: highMigrationPrognosisData.lower,
             backgroundColor: "#B00058",
             stack: "highMigrationPrognosis"
           },
           {
-            label: "highMigrationPrognosis.forecast",
+            label: "highMigrationPrognosis",
             data: highMigrationPrognosisData.forecast,
             backgroundColor: "#FF0D86",
             stack: "highMigrationPrognosis"
           },
           {
-            label: "highMigrationPrognosis.upper",
             data: highMigrationPrognosisData.upper,
             backgroundColor: "#FF69B4",
             stack: "highMigrationPrognosis"

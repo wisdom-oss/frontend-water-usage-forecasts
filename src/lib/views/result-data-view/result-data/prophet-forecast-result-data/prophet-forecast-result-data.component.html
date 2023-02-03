@@ -10,6 +10,16 @@
         baseChart
         type="bar"
         [data]="data"
+        [options]="{
+          plugins: {
+            legend: {
+              onClick: chartOnClick,
+              labels: {
+                filter: chartLabelFilter
+              }
+            }
+          }
+        }"
       ></canvas>
     </div>
   </div>
