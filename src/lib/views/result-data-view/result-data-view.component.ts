@@ -47,11 +47,7 @@ export class ResultDataViewComponent implements OnInit {
    * @internal
    */
   Object = Object;
-  /**
-   * Re-export of {@link Resolution}.
-   * @internal
-   */
-  Resolution = Resolution;
+
   /**
    * Merged regression methods for {@link WaterRightsService} and
    * {@link ProphetForecastService}.
@@ -73,6 +69,8 @@ export class ResultDataViewComponent implements OnInit {
     administration: [],
     municipal: []
   };
+  /** Resolution for the map selection. */
+  mapResolution: Resolution | null = null;
 
   /** Area components the results are based on. */
   areaComponents?: [string, string][];
@@ -91,6 +89,18 @@ export class ResultDataViewComponent implements OnInit {
    */
   set method(m: RegressionMethod) {
     this.updateQueryParam("method", m);
+
+    // update map resolution based on used method
+    switch (m) {
+      case ProphetForecastType.PROPHET:
+        this.mapResolution = null;
+        break;
+      case WaterUsageForecastType.LINEAR:
+      case WaterUsageForecastType.LOGARITHMIC:
+      case WaterUsageForecastType.POLYNOMIAL:
+        this.mapResolution = Resolution.MUNICIPAL;
+        break;
+    }
   }
 
   /** Get selected forecast calculation method. */
