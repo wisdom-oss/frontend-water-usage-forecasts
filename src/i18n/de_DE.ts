@@ -6,7 +6,8 @@ export default {
     "parameter": {
       "linear": "linear",
       "logarithmic": "logarithmisch",
-      "polynomial": "polynomiell"
+      "polynomial": "polynomiell",
+      "prophet": "[insert prophet related text here]"
     },
     "map-select": {
       "get-results": "Berechne Prognose"
@@ -23,6 +24,7 @@ export default {
     },
     "chart": {
       "consumption": "Verbrauch [m³]",
+      "consumption-per-person": "Verbrauch [m³] pro Kopf",
       "year": "Jahr",
       "reference": "Referenz",
       "prognosis": "Prognose"

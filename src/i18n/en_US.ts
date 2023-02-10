@@ -6,7 +6,8 @@ export default {
     "parameter": {
       "linear": "linear",
       "logarithmic": "logarithmic",
-      "polynomial": "polynomial"
+      "polynomial": "polynomial",
+      "prophet": "[insert prophet related text here]"
     },
     "map-select": {
       "get-results": "Get Results"
@@ -23,6 +24,7 @@ export default {
     },
     "chart": {
       "consumption": "consumption [m³]",
+      "consumption-per-person": "consumption [m³] per person",
       "year": "year",
       "reference": "reference",
       "prognosis": "prognosis"
