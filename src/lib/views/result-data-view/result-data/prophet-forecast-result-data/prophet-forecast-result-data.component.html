@@ -11,6 +11,20 @@
         type="bar"
         [data]="data[1]"
         [options]="{
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'water-usage-forecasts.chart.year' | translate
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'water-usage-forecasts.chart.consumption-per-person' | translate
+              }
+            }
+          },
           plugins: {
             legend: {
               onClick: chartOnClick,
