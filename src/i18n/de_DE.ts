@@ -29,6 +29,11 @@ export default {
       "reference": "Referenz",
       "prognosis": "Prognose"
     },
+    "prophet": {
+      "low-migration-prognosis": "niedriges Wanderungssaldo",
+      "medium-migration-prognosis": "mittleres Wanderungssaldo",
+      "high-migration-prognosis": "hohes Wanderungssaldo"
+    },
     "breadcrumbs": {
       "water-consumption-prognosis": "Wasserverbrauchprognose",
       "map-results": "Kartenergebnisse",

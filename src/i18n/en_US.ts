@@ -17,7 +17,7 @@ export default {
       "selection": "Selection",
       "consumer-groups": "Consumer Groups",
       "areas": "Areas",
-      "branches": "Branches"
+      "branches": "Branches",
     },
     "display": {
       "loading": "Calculating Prognosis..."
@@ -28,6 +28,11 @@ export default {
       "year": "year",
       "reference": "reference",
       "prognosis": "prognosis"
+    },
+    "prophet": {
+      "low-migration-prognosis": "low migration prognosis",
+      "medium-migration-prognosis": "medium migration prognosis",
+      "high-migration-prognosis": "high migration prognosis"
     },
     "breadcrumbs": {
       "water-consumption-prognosis": "Water Consumption Prognosis",

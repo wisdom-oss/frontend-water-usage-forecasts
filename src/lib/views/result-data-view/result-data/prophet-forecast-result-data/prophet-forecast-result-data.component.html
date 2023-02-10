@@ -1,16 +1,70 @@
-<div *ngFor="let data of data" class="card block">
+<div *ngFor="let data of data; index as i" class="card block">
   <div class="card-header">
     <p class="card-header-title">
       {{mapKeyNames[data[0]]}}
     </p>
   </div>
   <div class="card-content">
+    <div class="columns is-centered">
+      <div class="column is-narrow" (change)="onLabelChange($event, i)">
+        <input
+          [id]="data[0] + 'lowMigrationPrognosis'"
+          type="radio"
+          [name]="data[0] + 'selection'"
+          [attr.data-prognosis-variant]="PrognosisVariant.LOW"
+        >
+        <label [for]="data[0] + 'lowMigrationPrognosis'">
+          <span
+            class="tag"
+            style="background-color: #FFBF00"
+          >
+            {{'water-usage-forecasts.prophet.low-migration-prognosis' | translate}}
+          </span>
+        </label>
+        <input
+          [id]="data[0] + 'mediumMigrationPrognosis'"
+          type="radio"
+          [name]="data[0] + 'selection'"
+          checked="checked"
+          [attr.data-prognosis-variant]="PrognosisVariant.MEDIUM"
+        >
+        <label [for]="data[0] + 'mediumMigrationPrognosis'">
+          <span
+            class="tag"
+            style="background-color: #10BBE5"
+          >
+            {{'water-usage-forecasts.prophet.medium-migration-prognosis' | translate}}
+          </span>
+        </label>
+        <input
+          [id]="data[0] + 'highMigrationPrognosis'"
+          type="radio"
+          [name]="data[0] + 'selection'"
+          [attr.data-prognosis-variant]="PrognosisVariant.HIGH"
+        >
+        <label [for]="data[0] + 'highMigrationPrognosis'">
+          <span
+            class="tag"
+            style="background-color: #FF0D86"
+          >
+            {{'water-usage-forecasts.prophet.high-migration-prognosis' | translate}}
+          </span>
+        </label>
+      </div>
+    </div>
     <div>
       <canvas
+        #chart
         baseChart
-        type="bar"
         [data]="data[1]"
         [options]="{
+          transitions: {
+            hide: {
+              animation: {
+                duration: 0
+              }
+            }
+          },
           scales: {
             x: {
               title: {
@@ -27,10 +81,7 @@
           },
           plugins: {
             legend: {
-              onClick: chartOnClick,
-              labels: {
-                filter: chartLabelFilter
-              }
+              display: false
             }
           }
         }"

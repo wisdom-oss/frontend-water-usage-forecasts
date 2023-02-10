@@ -1,0 +1,16 @@
+input[type=radio] {
+  opacity: 0
+}
+
+input[type="radio"] + label span.tag {
+  color: black;
+  text-decoration-thickness: 0.2em;
+  text-decoration-color: black;
+  text-decoration-line: line-through;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+input[type="radio"]:checked + label span.tag {
+  text-decoration-line: unset;
+}

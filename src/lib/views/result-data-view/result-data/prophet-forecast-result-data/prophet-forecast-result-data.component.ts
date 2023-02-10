@@ -1,9 +1,9 @@
 import {
-  Component,
+  Component, ElementRef,
   Input,
   OnChanges,
-  OnInit,
-  SimpleChanges
+  OnInit, QueryList,
+  SimpleChanges, ViewChildren
 } from '@angular/core';
 import {
   ForecastResponse,
@@ -17,10 +17,18 @@ import {
   LegendElement,
   LegendItem
 } from "chart.js";
+import {BaseChartDirective} from "ng2-charts";
+
+enum PrognosisVariant {
+  LOW,
+  MEDIUM,
+  HIGH
+}
 
 @Component({
   selector: 'lib-prophet-forecast-result-data',
-  templateUrl: './prophet-forecast-result-data.component.html'
+  templateUrl: './prophet-forecast-result-data.component.html',
+  styleUrls: ["./prophet-forecast-result-data.component.css"]
 })
 export class ProphetForecastResultDataComponent implements OnChanges {
 
@@ -28,7 +36,12 @@ export class ProphetForecastResultDataComponent implements OnChanges {
   key!: string | string[];
 
   @Input()
-  mapKeyNames: Record<string, string> = {}
+  mapKeyNames: Record<string, string> = {};
+
+  @ViewChildren(BaseChartDirective)
+  chartElements!: QueryList<BaseChartDirective>;
+
+  readonly PrognosisVariant = PrognosisVariant;
 
   data: [string, any][] = [];
 
@@ -38,27 +51,30 @@ export class ProphetForecastResultDataComponent implements OnChanges {
     if (changes['key']) this.fetchData(this.key);
   }
 
-  chartOnClick(
-    event: ChartEvent,
-    legendItem: LegendItem,
-    legend: LegendElement<"bar">
-  ): void {
-    let datasetIndex = legendItem.datasetIndex!;
-    let chart = legend.chart;
-    if (chart.getDatasetMeta(datasetIndex).visible) {
-      chart.hide(datasetIndex + 1);
-      chart.hide(datasetIndex);
-      chart.hide(datasetIndex - 1);
+  chartLabelUpdate(chart: Chart, variant: PrognosisVariant) {
+    let settingsArray = (() => {
+      switch (variant) {
+        case PrognosisVariant.LOW:
+          return [true, true, false, false, false, false];
+        case PrognosisVariant.MEDIUM:
+          return [false, false, true, true, false, false];
+        case PrognosisVariant.HIGH:
+          return [false, false, false, false, true, true];
+      }
+    })();
+    // doing it in two runs makes the transition look a bit smoother
+    for (let [i, show] of settingsArray.entries()) {
+      if (show) chart.show(i);
     }
-    else {
-      chart.show(datasetIndex + 1);
-      chart.show(datasetIndex);
-      chart.show(datasetIndex - 1);
+    for (let [i, show] of settingsArray.entries()) {
+      if (!show) chart.hide(i);
     }
   }
 
-  chartLabelFilter(item: LegendItem): boolean {
-    return !!item.text?.length;
+  onLabelChange(event: Event, index: number) {
+    let variant = +(event.target as any).dataset.prognosisVariant as PrognosisVariant;
+    let chart = this.chartElements.get(index)!.chart!;
+    this.chartLabelUpdate(chart, variant);
   }
 
   private fetchData(key: string | string[]): void {
@@ -72,92 +88,84 @@ export class ProphetForecastResultDataComponent implements OnChanges {
         let labels = [];
 
         let lowMigrationPrognosisData = {
-          lower: [] as number[],
-          forecast: [] as number[],
-          upper: [] as number[]
+          bounds: [] as [number, number][],
+          forecast: [] as number[]
         };
         for (let el of entry.lowMigrationPrognosis) {
           labels.push(el.ds.split("-")[0]);
-          lowMigrationPrognosisData.lower.push(el.lower);
+          lowMigrationPrognosisData.bounds.push([el.lower, el.upper]);
           lowMigrationPrognosisData.forecast.push(el.forecast);
-          lowMigrationPrognosisData.upper.push(el.upper);
         }
 
         let mediumMigrationPrognosisData = {
-          lower: [] as number[],
-          forecast: [] as number[],
-          upper: [] as number[]
+          bounds: [] as [number, number][],
+          forecast: [] as number[]
         };
         for (let el of entry.mediumMigrationPrognosis) {
-          mediumMigrationPrognosisData.lower.push(el.lower);
+          mediumMigrationPrognosisData.bounds.push([el.lower, el.upper]);
           mediumMigrationPrognosisData.forecast.push(el.forecast);
-          mediumMigrationPrognosisData.upper.push(el.upper);
         }
 
         let highMigrationPrognosisData = {
-          lower: [] as number[],
-          forecast: [] as number[],
-          upper: [] as number[]
+          bounds: [] as [number, number][],
+          forecast: [] as number[]
         };
         for (let el of entry.highMigrationPrognosis) {
-          highMigrationPrognosisData.lower.push(el.lower);
+          highMigrationPrognosisData.bounds.push([el.lower, el.upper]);
           highMigrationPrognosisData.forecast.push(el.forecast);
-          highMigrationPrognosisData.upper.push(el.upper);
         }
 
-        let chartDatasets = [
+        let chartDataset = [
           {
-            data: lowMigrationPrognosisData.lower,
-            backgroundColor: "#A37A00",
-            stack: "lowMigrationPrognosis"
-          },
-          {
-            label: "lowMigrationPrognosis",
+            type: "scatter",
             data: lowMigrationPrognosisData.forecast,
+            borderColor: "#A37A00",
+            borderWidth: 2,
+            pointStyle: "line",
+            grouped: false,
+            hidden: true
+          },
+          {
+            type: "bar",
+            data: lowMigrationPrognosisData.bounds,
             backgroundColor: "#FFBF00",
-            stack: "lowMigrationPrognosis"
+            grouped: false,
+            hidden: true
           },
           {
-            data: lowMigrationPrognosisData.upper,
-            backgroundColor: "#FFD65C",
-            stack: "lowMigrationPrognosis"
-          },
-          {
-            data: mediumMigrationPrognosisData.lower,
-            backgroundColor: "#0A758F",
-            stack: "mediumMigrationPrognosis"
-          },
-          {
-            label: "mediumMigrationPrognosis",
+            type: "scatter",
             data: mediumMigrationPrognosisData.forecast,
+            borderColor: "#0A758F",
+            borderWidth: 2,
+            pointStyle: "line",
+            grouped: false
+          },
+          {
+            type: "bar",
+            data: mediumMigrationPrognosisData.bounds,
             backgroundColor: "#10BBE5",
-            stack: "mediumMigrationPrognosis"
+            grouped: false
           },
           {
-            data: mediumMigrationPrognosisData.upper,
-            backgroundColor: "#5DD6F4",
-            stack: "mediumMigrationPrognosis"
-          },
-          {
-            data: highMigrationPrognosisData.lower,
-            backgroundColor: "#B00058",
-            stack: "highMigrationPrognosis"
-          },
-          {
-            label: "highMigrationPrognosis",
+            type: "scatter",
             data: highMigrationPrognosisData.forecast,
-            backgroundColor: "#FF0D86",
-            stack: "highMigrationPrognosis"
+            borderColor: "#B00058",
+            borderWidth: 2,
+            pointStyle: "line",
+            grouped: false,
+            hidden: true
           },
           {
-            data: highMigrationPrognosisData.upper,
-            backgroundColor: "#FF69B4",
-            stack: "highMigrationPrognosis"
+            type: "bar",
+            data: highMigrationPrognosisData.bounds,
+            backgroundColor: "#FF0D86",
+            grouped: false,
+            hidden: true
           },
         ];
         this.data.push([key, {
           labels,
-          datasets: chartDatasets
+          datasets: chartDataset
         }]);
       }
     });
