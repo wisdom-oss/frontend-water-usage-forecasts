@@ -1,7 +1,7 @@
 import {HttpClient, HttpContext, HttpHeaders} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Router} from "@angular/router";
-import {USE_API_URL, USE_LOADER} from "common";
+import {USE_API_URL, USE_LOADER, USE_ERROR_HANDLER} from "common";
 import {Observable} from "rxjs";
 
 /** The base URL for the consumers API endpoint. */
@@ -86,6 +86,7 @@ export class ConsumersService {
       context: new HttpContext()
         .set(USE_API_URL, true)
         .set(USE_LOADER, true)
+        .set(USE_ERROR_HANDLER, USE_ERROR_HANDLER.handler.TOAST)
     }) as Observable<ConsumerLocationsResponse>;
   }
 }

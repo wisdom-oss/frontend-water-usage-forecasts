@@ -1,7 +1,7 @@
 import {HttpClient, HttpContext, HttpHeaders} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Router} from "@angular/router";
-import {USE_API_URL, USE_LOADER} from "common";
+import {USE_API_URL, USE_LOADER, USE_ERROR_HANDLER} from "common";
 import {map, Observable} from "rxjs";
 
 const API_URL = "water-rights/";
@@ -137,6 +137,7 @@ export class WaterRightsService {
       context: new HttpContext()
         .set(USE_API_URL, true)
         .set(USE_LOADER, true)
+        .set(USE_ERROR_HANDLER, USE_ERROR_HANDLER.handler.TOAST)
     }).pipe(map((
       res: any[]) => res.map(
         el => Object.assign({}, el, {waterRight: el.water_right})
