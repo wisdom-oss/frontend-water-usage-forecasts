@@ -138,11 +138,7 @@ export class WaterRightsService {
         .set(USE_API_URL, true)
         .set(USE_LOADER, true)
         .set(USE_ERROR_HANDLER, USE_ERROR_HANDLER.handler.TOAST)
-    }).pipe(map((
-      res: any[]) => res.map(
-        el => Object.assign({}, el, {waterRight: el.water_right})
-      )
-    ));
+    });
   }
 
   fetchWaterRightDetails(no: number): Observable<WaterRightDetailResponse> {
