@@ -188,8 +188,9 @@ export class ResultDataViewComponent implements OnInit {
       for (let marker of data[0] ?? []) {
         markers.push({
           coordinates: [
-            marker.geojson.coordinates[1],
-            marker.geojson.coordinates[0]
+            // markers used here a calculated via location
+            marker.geojson!.coordinates[1],
+            marker.geojson!.coordinates[0]
           ] as [number, number],
           tooltip: `
             <b>Name</b>: ${marker.name}<br>

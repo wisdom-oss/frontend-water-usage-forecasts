@@ -7,12 +7,12 @@ import {map, Observable} from "rxjs";
 const API_URL = "water-rights/";
 
 export type WaterRightLocationResponse = {
-  name: string,
-  id: number,
+  name?: string,
+  id?: number,
   waterRight: number,
-  active: boolean,
-  real: boolean,
-  geojson: {
+  active?: boolean,
+  real?: boolean,
+  geojson?: {
     type: "Point",
     coordinates: [number, number]
   }
@@ -124,7 +124,7 @@ export class WaterRightsService {
     in: string[],
     isActive: boolean,
     isReal: boolean
-  }>): Observable<WaterRightLocationResponse | null> {
+  }> = {}): Observable<WaterRightLocationResponse | null> {
     let url = this.router.parseUrl(API_URL);
     if (params.in) url.queryParams["in"] = params.in;
     if (params.isActive) url.queryParams["is_active"] = params.isActive;
