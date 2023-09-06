@@ -4,7 +4,7 @@ import {Router} from "@angular/router";
 import {USE_API_URL, USE_LOADER} from "common";
 import {map, Observable} from "rxjs";
 
-const API_URL = "water-usage-history/";
+const API_URL = "usages/";
 
 export type HistoryResponse = {
   year: number,
@@ -23,9 +23,9 @@ export class WaterUsageHistoryService {
   ) { }
 
   fetchWaterUsageHistory(id: string): Observable<HistoryResponse> {
-    let url = this.router.parseUrl(API_URL);
-    url.queryParams["consumer"] = id;
-    return this.http.get<{year: number, usage: number, recorded_at: string}[]>(url.toString(), {
+    let url = this.router.parseUrl(API_URL + "by-consumer/" + id);
+    console.log(url.toString())
+    return this.http.get<{date: number, amount: number, recordedAt: number}[]>(url.toString(), {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
       }),
@@ -36,13 +36,13 @@ export class WaterUsageHistoryService {
     }).pipe(map(
       data => data.map(
         ({
-           year,
-           usage,
-           recorded_at
+           date,
+           amount,
+           recordedAt
         }) => ({
-          year,
-          usage,
-          recordedAt: new Date(recorded_at)
+          year: new Date(date*1000).getFullYear(),
+          usage: amount,
+          recordedAt: new Date(recordedAt*1000)
         })
       )
     ))
