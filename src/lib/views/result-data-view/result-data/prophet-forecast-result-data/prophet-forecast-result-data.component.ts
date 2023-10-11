@@ -1,23 +1,27 @@
 import {
-  Component, ElementRef,
-  Input,
   OnChanges,
-  OnInit, QueryList,
-  SimpleChanges, ViewChildren
-} from '@angular/core';
+  SimpleChanges,
+  ViewChildren,
+  Component,
+  OnInit,
+  Input,
+  QueryList,
+  ElementRef
+} from "@angular/core";
+import {
+  Chart,
+  ActiveElement,
+  LegendElement,
+  ChartEvent,
+  LegendItem
+} from "chart.js";
+import {BaseChartDirective} from "ng2-charts";
+import {firstValueFrom} from "rxjs";
+
 import {
   ForecastResponse,
   ProphetForecastService
 } from "../../../../services/prophet-forecast.service";
-import {firstValueFrom} from "rxjs";
-import {
-  ActiveElement,
-  Chart,
-  ChartEvent,
-  LegendElement,
-  LegendItem
-} from "chart.js";
-import {BaseChartDirective} from "ng2-charts";
 
 enum PrognosisVariant {
   LOW,

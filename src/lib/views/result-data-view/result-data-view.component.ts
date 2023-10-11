@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {BreadcrumbsService, MapComponent, MapService, Resolution} from "common";
+import {MapComponent, Resolution, BreadcrumbsService, MapService} from "common";
 import {combineLatestWith} from "rxjs/operators";
 
 import {

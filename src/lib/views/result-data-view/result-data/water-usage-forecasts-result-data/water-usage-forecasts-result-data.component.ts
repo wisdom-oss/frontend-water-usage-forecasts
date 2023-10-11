@@ -1,18 +1,22 @@
 import {
+  OnChanges,
+  SimpleChanges,
   Component,
   EventEmitter,
-  Input, OnChanges, OnInit,
-  Output,
-  SimpleChanges
-} from '@angular/core';
+  OnInit,
+  Input,
+  Output
+} from "@angular/core";
+import {ChartData, ChartEvent, LegendItem} from "chart.js";
+import {stringToColor} from "common";
+import {firstValueFrom} from "rxjs";
+
 import {
   ForecastResponse,
-  ForecastType, ForecastUsage,
-  WaterUsageForecastsService
+  WaterUsageForecastsService,
+  ForecastType,
+  ForecastUsage
 } from "../../../../services/water-usage-forecasts.service";
-import {ChartData, ChartEvent, LegendItem} from "chart.js";
-import {firstValueFrom} from "rxjs";
-import {stringToColor} from "common";
 
 @Component({
   selector: 'lib-water-usage-forecasts-result-data',

@@ -17,9 +17,17 @@ import {
 import {
   ResultDataViewComponent
 } from "./views/result-data-view/result-data-view.component";
-import { ResultDataComponent } from './views/result-data-view/result-data/result-data.component';
-import { WaterUsageForecastsResultDataComponent } from './views/result-data-view/result-data/water-usage-forecasts-result-data/water-usage-forecasts-result-data.component';
-import { ProphetForecastResultDataComponent } from './views/result-data-view/result-data/prophet-forecast-result-data/prophet-forecast-result-data.component';
+import {
+  ResultDataComponent
+} from "./views/result-data-view/result-data/result-data.component";
+import {
+  ProphetForecastResultDataComponent
+}
+  from "./views/result-data-view/result-data/prophet-forecast-result-data/prophet-forecast-result-data.component";
+import {
+  WaterUsageForecastsResultDataComponent
+}
+  from "./views/result-data-view/result-data/water-usage-forecasts-result-data/water-usage-forecasts-result-data.component";
 
 @NgModule({
   declarations: [

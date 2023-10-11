@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
 import {HttpClient, HttpContext, HttpHeaders} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Injectable} from "@angular/core";
 import {Router} from "@angular/router";
 import {USE_API_URL, USE_LOADER} from "common";
+import {Observable} from "rxjs";
 
 const API_URL = "prophet-forecast/";
 
