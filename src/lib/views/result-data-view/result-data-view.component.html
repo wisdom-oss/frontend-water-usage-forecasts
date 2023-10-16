@@ -27,7 +27,7 @@
       </div>
       <div class="card-content">
         <div class="content">
-          <ng-template ngFor let-sel [ngForOf]="Object.entries(selection)">
+          <ng-template ngFor let-sel [ngForOf]="selectionEntries">
             <div *ngIf="sel[1].length">
               <ng-template ngFor let-shape [ngForOf]="sel[1]">
                 <p>

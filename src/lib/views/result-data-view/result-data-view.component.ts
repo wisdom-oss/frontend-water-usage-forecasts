@@ -1,4 +1,10 @@
-import {Component, OnInit} from "@angular/core";
+import {
+  Component,
+  DoCheck,
+  KeyValueDiffer,
+  KeyValueDiffers,
+  OnInit
+} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MapComponent, Resolution, BreadcrumbsService, MapService} from "common";
 import {combineLatestWith} from "rxjs/operators";
@@ -22,7 +28,7 @@ export const RegressionMethod = {...WaterUsageForecastType, ...ProphetForecastTy
   selector: 'lib-result-data-view',
   templateUrl: './result-data-view.component.html'
 })
-export class ResultDataViewComponent implements OnInit {
+export class ResultDataViewComponent implements OnInit, DoCheck {
 
   /**
    * Constructor.
@@ -39,7 +45,8 @@ export class ResultDataViewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private mapService: MapService,
-    private breadcrumbs: BreadcrumbsService
+    private breadcrumbs: BreadcrumbsService,
+    private keyValueDiffers: KeyValueDiffers
   ) {}
 
   /**
@@ -69,6 +76,19 @@ export class ResultDataViewComponent implements OnInit {
     administration: [],
     municipal: []
   };
+
+  /** Differ to detect if {@link selection} changes. */
+  private selectionDiffer!: KeyValueDiffer<string, any>;
+
+  /**
+   * Object entries of {@link selection}.
+   * Will only be updated when {@link selection} has an update.
+   *
+   * This reduces unnecessary updates in the gui and allowing selecting
+   * something of the selection.
+   */
+  selectionEntries = Object.entries(this.selection);
+
   /** Resolution for the map selection. */
   mapResolution: Resolution | null = null;
 
@@ -123,7 +143,15 @@ export class ResultDataViewComponent implements OnInit {
 
   /** Call {@link this#fetchData}. */
   ngOnInit(): void {
+    this.selectionDiffer = this.keyValueDiffers.find(this.selection).create();
     this.fetchData(this.key, this.method);
+  }
+
+  /** Update {@link selectionEntries} if {@link selection} changed. */
+  ngDoCheck(): void {
+    if (this.selectionDiffer.diff(this.selection)) {
+      this.selectionEntries = Object.entries(this.selection);
+    }
   }
 
   /**
