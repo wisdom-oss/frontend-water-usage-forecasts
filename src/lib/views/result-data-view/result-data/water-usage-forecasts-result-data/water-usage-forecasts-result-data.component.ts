@@ -1,11 +1,10 @@
 import {
-  OnChanges,
-  SimpleChanges,
   Component,
   EventEmitter,
-  OnInit,
   Input,
-  Output
+  OnChanges,
+  Output,
+  SimpleChanges
 } from "@angular/core";
 import {ChartData, ChartEvent, LegendItem} from "chart.js";
 import {stringToColor} from "common";
@@ -13,9 +12,9 @@ import {firstValueFrom} from "rxjs";
 
 import {
   ForecastResponse,
-  WaterUsageForecastsService,
   ForecastType,
-  ForecastUsage
+  ForecastUsage,
+  WaterUsageForecastsService
 } from "../../../../services/water-usage-forecasts.service";
 
 @Component({

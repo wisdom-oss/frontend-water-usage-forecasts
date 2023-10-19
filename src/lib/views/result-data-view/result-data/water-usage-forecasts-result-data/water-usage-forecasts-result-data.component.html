@@ -5,13 +5,14 @@
     </p>
   </div>
   <div class="card-content">
-    <div>
+    <div style="height: 70vh">
       <canvas
-        style="max-width: min(100%, 100vw)"
         baseChart
         type="bar"
         [data]="consumerGroupData"
         [options]="{
+          maintainAspectRatio: false,
+          resizeDelay: 50,
           scales: {
             y: {
               stacked: true,
@@ -36,7 +37,9 @@
               }
             },
             annotation: {
-              drawTime: 'beforeDraw',
+              common: {
+                drawTime: 'beforeDraw',
+              },
               annotations: {
                 reference: {
                   type: 'box',
@@ -45,7 +48,7 @@
                   xMax: refProgSplit - 0.5,
                   label: {
                     drawTime: 'afterDraw',
-                    enabled: true,
+                    display: true,
                     content: 'water-usage-forecasts.chart.reference' | translate,
                     position: {
                       x: 'center',
@@ -60,7 +63,7 @@
                   xMin: refProgSplit - 0.5,
                   label: {
                     drawTime: 'afterDraw',
-                    enabled: true,
+                    display: true,
                     content: 'water-usage-forecasts.chart.prognosis' | translate,
                     position: {
                       x: 'center',
@@ -84,13 +87,14 @@
     </p>
   </div>
   <div class="card-content">
-    <div>
+    <div style="height: 70vh">
       <canvas
-        style="max-width: min(100%, 100vw)"
         baseChart
         type="bar"
         [data]="consumerAreaData"
         [options]="{
+          maintainAspectRatio: false,
+          resizeDelay: 50,
           scales: {
             y: {
               stacked: true,
@@ -115,7 +119,9 @@
               }
             },
             annotation: {
-              drawTime: 'beforeDraw',
+              common: {
+                drawTime: 'beforeDraw',
+              },
               annotations: {
                 reference: {
                   type: 'box',
@@ -124,7 +130,7 @@
                   xMax: refProgSplit - 0.5,
                   label: {
                     drawTime: 'afterDraw',
-                    enabled: true,
+                    display: true,
                     content: 'water-usage-forecasts.chart.reference' | translate,
                     position: {
                       x: 'center',
@@ -139,7 +145,7 @@
                   xMin: refProgSplit - 0.5,
                   label: {
                     drawTime: 'afterDraw',
-                    enabled: true,
+                    display: true,
                     content: 'water-usage-forecasts.chart.prognosis' | translate,
                     position: {
                       x: 'center',
