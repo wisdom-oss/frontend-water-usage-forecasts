@@ -1,10 +1,10 @@
 import {
+  OnChanges,
+  SimpleChanges,
   Component,
   EventEmitter,
   Input,
-  OnChanges,
-  Output,
-  SimpleChanges
+  Output
 } from "@angular/core";
 import {ChartData, ChartEvent, LegendItem} from "chart.js";
 import {stringToColor} from "common";
@@ -12,9 +12,9 @@ import {firstValueFrom} from "rxjs";
 
 import {
   ForecastResponse,
+  WaterUsageForecastsService,
   ForecastType,
-  ForecastUsage,
-  WaterUsageForecastsService
+  ForecastUsage
 } from "../../../../services/water-usage-forecasts.service";
 
 @Component({
@@ -138,7 +138,7 @@ export class WaterUsageForecastsResultDataComponent implements OnChanges {
    * @param data Chart data
    */
   chartLegendFilter(item: LegendItem, data: ChartData): boolean {
-    if (!item.datasetIndex) return false;
+    if (item.datasetIndex === undefined) return false;
     if (item.datasetIndex >= data.datasets.length / 2) return false;
     item.lineWidth = 0;
     return true;
@@ -153,10 +153,21 @@ export class WaterUsageForecastsResultDataComponent implements OnChanges {
    */
   chartLegendOnClick(event: ChartEvent, item: LegendItem, legend: any) {
     let chart = legend.chart;
-    chart.getDatasetMeta(item.datasetIndex!).hidden =
-      !chart.getDatasetMeta(item.datasetIndex!).hidden;
-    chart.getDatasetMeta(item.datasetIndex + legend.legendItems.length).hidden =
-      !chart.getDatasetMeta(item.datasetIndex + legend.legendItems.length).hidden;
+
+    let ptEvent = event.native as PointerEvent;
+    if (ptEvent.shiftKey || ptEvent.ctrlKey) {
+      for (let i in chart.data.datasets) {
+        chart.getDatasetMeta(i).hidden = true;
+      }
+    }
+
+    let toggle = (index: number) => {
+      chart.getDatasetMeta(index).hidden = !chart.getDatasetMeta(index).hidden;
+    }
+
+    toggle(item.datasetIndex!);
+    toggle(item.datasetIndex + legend.legendItems.length);
+
     chart.update();
   }
 }
