@@ -41,7 +41,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >WaterUsageHistoryService</li>
+  <li class="breadcrumb-item" >ProphetForecastService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -65,7 +65,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/lib/services/water-usage-history.service.ts</code>
+            <code>src/lib/services/prophet-forecast.service.ts</code>
         </p>
 
 
@@ -86,7 +86,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#fetchWaterUsageHistory" >fetchWaterUsageHistory</a>
+                                <a href="#fetchForecastData" >fetchForecastData</a>
                             </li>
                         </ul>
                     </td>
@@ -111,7 +111,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/lib/services/water-usage-history.service.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/lib/services/prophet-forecast.service.ts:30</a></div>
                             </td>
                         </tr>
 
@@ -170,24 +170,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="fetchWaterUsageHistory"></a>
+                    <a name="fetchForecastData"></a>
                     <span class="name">
-                        <span ><b>fetchWaterUsageHistory</b></span>
-                        <a href="#fetchWaterUsageHistory"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>fetchForecastData</b></span>
+                        <a href="#fetchForecastData"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>fetchWaterUsageHistory(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>fetchForecastData(key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="25"
-                            class="link-to-prism">src/lib/services/water-usage-history.service.ts:25</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="37"
+                            class="link-to-prism">src/lib/services/prophet-forecast.service.ts:37</a></div>
                 </td>
             </tr>
 
@@ -208,7 +208,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>id</td>
+                                    <td>key</td>
                                     <td>
                                                 <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                     </td>
@@ -225,7 +225,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../miscellaneous/typealiases.html#HistoryResponse" target="_self" >Observable&lt;HistoryResponse&gt;</a></code>
+                        <b>Returns : </b>    <code>Observable&lt;ForecastResponse&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -245,50 +245,50 @@
 import {Injectable} from &quot;@angular/core&quot;;
 import {Router} from &quot;@angular/router&quot;;
 import {USE_API_URL, USE_LOADER} from &quot;common&quot;;
-import {map, Observable} from &quot;rxjs&quot;;
+import {Observable} from &quot;rxjs&quot;;
 
-const API_URL &#x3D; &quot;usages/&quot;;
+const API_URL &#x3D; &quot;prophet-forecast/&quot;;
 
-export type HistoryResponse &#x3D; {
-  year: number,
-  usage: number,
-  recordedAt: Date
-}[];
+/** Possible forecast calculation methods. */
+export enum ForecastType {
+  PROPHET &#x3D; &quot;prophet&quot;
+}
+
+export interface Datapoint {
+  ds: string,
+  lower: number,
+  forecast: number,
+  upper: number
+}
+
+export interface ForecastResponse {
+  lowMigrationPrognosis: Datapoint[],
+  mediumMigrationPrognosis: Datapoint[],
+  highMigrationPrognosis: Datapoint[]
+}
 
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
-export class WaterUsageHistoryService {
+export class ProphetForecastService {
 
   constructor(
     private http: HttpClient,
     private router: Router
-  ) { }
+  ) {}
 
-  fetchWaterUsageHistory(id: string): Observable&lt;HistoryResponse&gt; {
-    let url &#x3D; this.router.parseUrl(API_URL + &quot;by-consumer/&quot; + id);
-    console.log(url.toString())
-    return this.http.get&lt;{date: number, amount: number, recordedAt: number}[]&gt;(url.toString(), {
+  fetchForecastData(key: string): Observable&lt;ForecastResponse&gt; {
+    let url &#x3D; this.router.parseUrl(API_URL);
+    url.queryParams[&quot;key&quot;] &#x3D; key;
+    return this.http.get(url.toString(), {
       headers: new HttpHeaders({
         &quot;Content-Type&quot;: &quot;application/json&quot;
       }),
       responseType: &quot;json&quot;,
       context: new HttpContext()
         .set(USE_API_URL, true)
-        .set(USE_LOADER, true)
-    }).pipe(map(
-      data &#x3D;&gt; data.map(
-        ({
-           date,
-           amount,
-           recordedAt
-        }) &#x3D;&gt; ({
-          year: new Date(date*1000).getFullYear(),
-          usage: amount,
-          recordedAt: new Date(recordedAt*1000)
-        })
-      )
-    ))
+        .set(USE_LOADER, &quot;water-usage-forecasts.display.loading&quot;)
+    }) as Observable&lt;ForecastResponse&gt;;
   }
 }
 </code></pre>
@@ -334,7 +334,7 @@ export class WaterUsageHistoryService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'WaterUsageHistoryService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ProphetForecastService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

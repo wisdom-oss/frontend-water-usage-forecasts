@@ -48,7 +48,7 @@
   <li class="breadcrumb-item">Interfaces</li>
   <li class="breadcrumb-item"
   >
-  ForecastEntry</li>
+  Datapoint</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -72,7 +72,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/lib/services/water-usage-forecasts.service.ts</code>
+            <code>src/lib/services/prophet-forecast.service.ts</code>
         </p>
 
 
@@ -91,15 +91,27 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
+                                        <a href="#ds" 
+>
+                                            ds
+                                        </a>
+                                </li>
+                                <li>
                                         <a href="#forecast" 
 >
                                             forecast
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#reference" 
+                                        <a href="#lower" 
 >
-                                            reference
+                                            lower
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#upper" 
+>
+                                            upper
                                         </a>
                                 </li>
                             </ul>
@@ -117,9 +129,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="forecast"></a>
-                                        <span class="name "><b>forecast</b>
-                                            <a href="#forecast">
+                                        <a name="ds"></a>
+                                        <span class="name "><b>ds</b>
+                                            <a href="#ds">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -127,7 +139,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>forecast:         <code><a href="../interfaces/ForecastUsage.html" target="_self" >Record&lt;string | ForecastUsage&gt;</a></code>
+                                        <code>ds:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -135,7 +147,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="../interfaces/ForecastUsage.html" target="_self" >Record&lt;string | ForecastUsage&gt;</a></code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                                         </td>
                                     </tr>
@@ -150,9 +162,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="reference"></a>
-                                        <span class="name "><b>reference</b>
-                                            <a href="#reference">
+                                        <a name="forecast"></a>
+                                        <span class="name "><b>forecast</b>
+                                            <a href="#forecast">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -160,7 +172,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>reference:         <code><a href="../interfaces/ForecastUsage.html" target="_self" >Record&lt;string | ForecastUsage&gt;</a></code>
+                                        <code>forecast:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -168,7 +180,73 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="../interfaces/ForecastUsage.html" target="_self" >Record&lt;string | ForecastUsage&gt;</a></code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="lower"></a>
+                                        <span class="name "><b>lower</b>
+                                            <a href="#lower">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>lower:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="upper"></a>
+                                        <span class="name "><b>upper</b>
+                                            <a href="#upper">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>upper:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                                         </td>
                                     </tr>
@@ -190,85 +268,38 @@ import {Router} from &quot;@angular/router&quot;;
 import {USE_API_URL, USE_LOADER} from &quot;common&quot;;
 import {Observable} from &quot;rxjs&quot;;
 
-/** Route of the API access. */
-const API_URL &#x3D; &quot;water-usage-forecasts&quot;;
+const API_URL &#x3D; &quot;prophet-forecast/&quot;;
 
 /** Possible forecast calculation methods. */
 export enum ForecastType {
-  LOGARITHMIC &#x3D; &quot;logarithmic&quot;,
-  LINEAR &#x3D; &quot;linear&quot;,
-  POLYNOMIAL &#x3D; &quot;polynomial&quot;
+  PROPHET &#x3D; &quot;prophet&quot;
 }
 
-/** Interface for the data received from the server. */
+export interface Datapoint {
+  ds: string,
+  lower: number,
+  forecast: number,
+  upper: number
+}
+
 export interface ForecastResponse {
-  /**
-   * The results in accumulated form so that the client doesn&#x27;t have to
-   * calculate it itself.
-   */
-  accumulations: {
-    /** Accumulations by consumer group. */
-    consumerGroup: ForecastEntry,
-    /** Accumulations by municipal. */
-    municipal: ForecastEntry
-  },
-  partials: {
-    consumerGroup: {
-      key: string,
-      name: string
-    },
-    municipal: ForecastResponse[&quot;partials&quot;][0][&quot;consumerGroup&quot;],
-    referenceUsages: {
-      equation: string,
-      float: number,
-      model: &quot;logarithmic&quot; | &quot;linear&quot; | &quot;polynomial&quot;,
-      usages: {
-        amounts: number[],
-        end: number,
-        start: number
-      }
-    },
-    forecast: ForecastResponse[&quot;partials&quot;][0][&quot;referenceUsages&quot;]
-  }[]
+  lowMigrationPrognosis: Datapoint[],
+  mediumMigrationPrognosis: Datapoint[],
+  highMigrationPrognosis: Datapoint[]
 }
 
-export interface ForecastEntry {
-  forecast: Record&lt;string, ForecastUsage&gt;,
-  reference: Record&lt;string, ForecastUsage&gt;
-}
-
-export interface ForecastUsage {
-  displayName: string,
-  endYear: number,
-  startYear: number,
-  usages: number[]
-}
-
-/**
- * Service to interact with server providing the data to display.
- */
 @Injectable({
-  providedIn: &quot;root&quot;
+  providedIn: &#x27;root&#x27;
 })
-export class WaterUsageForecastsService {
+export class ProphetForecastService {
 
   constructor(
     private http: HttpClient,
     private router: Router
   ) {}
 
-  fetchForecastData(
-    key: string | string[],
-    forecastModel: ForecastType,
-    consumerGroup?:
-      &quot;businesses&quot; |
-      &quot;households_and_small_businesses&quot; |
-      &quot;farming_forestry_fishing_industry&quot; |
-      &quot;public_institutions&quot; |
-      &quot;all&quot;
-  ): Observable&lt;ForecastResponse&gt; {
-    let url &#x3D; this.router.parseUrl(&#x60;${API_URL}/${forecastModel}&#x60;);
-    if (consumerGroup) url.queryParams[&quot;consumerGroup&quot;] &#x3D; consumerGroup;
+  fetchForecastData(key: string): Observable&lt;ForecastResponse&gt; {
+    let url &#x3D; this.router.parseUrl(API_URL);
     url.queryParams[&quot;key&quot;] &#x3D; key;
     return this.http.get(url.toString(), {
       headers: new HttpHeaders({
@@ -280,7 +311,6 @@ export class WaterUsageForecastsService {
         .set(USE_LOADER, &quot;water-usage-forecasts.display.loading&quot;)
     }) as Observable&lt;ForecastResponse&gt;;
   }
-
 }
 </code></pre>
     </div>
@@ -319,7 +349,7 @@ export class WaterUsageForecastsService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'ForecastEntry.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'Datapoint.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

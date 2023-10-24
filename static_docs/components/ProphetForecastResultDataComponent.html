@@ -1,0 +1,1129 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>water-usage-forecasts documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/stripe.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">water-usage-forecasts documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ProphetForecastResultDataComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/lib/views/result-data-view/result-data/prophet-forecast-result-data/prophet-forecast-result-data.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnChanges</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>lib-prophet-forecast-result-data</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./prophet-forecast-result-data.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./prophet-forecast-result-data.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#chartElements" >chartElements</a>
+                            </li>
+                            <li>
+                                <a href="#data" >data</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#PrognosisVariant" >PrognosisVariant</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#chartLabelUpdate" >chartLabelUpdate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#fetchData" >fetchData</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#onLabelChange" >onLabelChange</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#key" >key</a>
+                            </li>
+                            <li>
+                                <a href="#mapKeyNames" >mapKeyNames</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(service: <a href="../injectables/ProphetForecastService.html" target="_self">ProphetForecastService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/lib/views/result-data-view/result-data/prophet-forecast-result-data/prophet-forecast-result-data.component.ts:50</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>service</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ProphetForecastService.html" target="_self" >ProphetForecastService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="key"></a>
+                        <b>key</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | string[]</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/lib/views/result-data-view/result-data/prophet-forecast-result-data/prophet-forecast-result-data.component.ts:40</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="mapKeyNames"></a>
+                        <b>mapKeyNames</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Record&lt;string | string&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{}</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/lib/views/result-data-view/result-data/prophet-forecast-result-data/prophet-forecast-result-data.component.ts:43</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="chartLabelUpdate"></a>
+                    <span class="name">
+                        <span ><b>chartLabelUpdate</b></span>
+                        <a href="#chartLabelUpdate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>chartLabelUpdate(chart: Chart, variant: <a href="../undefineds/PrognosisVariant.html" target="_self">PrognosisVariant</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="58"
+                            class="link-to-prism">src/lib/views/result-data-view/result-data/prophet-forecast-result-data/prophet-forecast-result-data.component.ts:58</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>chart</td>
+                                    <td>
+                                            <code>Chart</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>variant</td>
+                                    <td>
+                                                <code><a href="../miscellaneous/enumerations.html#PrognosisVariant" target="_self" >PrognosisVariant</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchData"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>fetchData</b></span>
+                        <a href="#fetchData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>fetchData(key: string | string[])</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="84"
+                            class="link-to-prism">src/lib/views/result-data-view/result-data/prophet-forecast-result-data/prophet-forecast-result-data.component.ts:84</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>key</td>
+                                    <td>
+                                            <code>string | string[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges(changes: SimpleChanges)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="54"
+                            class="link-to-prism">src/lib/views/result-data-view/result-data/prophet-forecast-result-data/prophet-forecast-result-data.component.ts:54</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>changes</td>
+                                    <td>
+                                            <code>SimpleChanges</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onLabelChange"></a>
+                    <span class="name">
+                        <span ><b>onLabelChange</b></span>
+                        <a href="#onLabelChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onLabelChange(event: Event, index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="78"
+                            class="link-to-prism">src/lib/views/result-data-view/result-data/prophet-forecast-result-data/prophet-forecast-result-data.component.ts:78</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>event</td>
+                                    <td>
+                                            <code>Event</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>index</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="chartElements"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>chartElements</b></span>
+                        <a href="#chartElements"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>QueryList&lt;BaseChartDirective&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChildren(BaseChartDirective)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/lib/views/result-data-view/result-data/prophet-forecast-result-data/prophet-forecast-result-data.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="data"></a>
+                    <span class="name">
+                        <span ><b>data</b></span>
+                        <a href="#data"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/lib/views/result-data-view/result-data/prophet-forecast-result-data/prophet-forecast-result-data.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="PrognosisVariant"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>PrognosisVariant</b></span>
+                        <a href="#PrognosisVariant"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>PrognosisVariant</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/lib/views/result-data-view/result-data/prophet-forecast-result-data/prophet-forecast-result-data.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  OnChanges,
+  SimpleChanges,
+  ViewChildren,
+  Component,
+  OnInit,
+  Input,
+  QueryList,
+  ElementRef
+} from &quot;@angular/core&quot;;
+import {
+  Chart,
+  ActiveElement,
+  LegendElement,
+  ChartEvent,
+  LegendItem
+} from &quot;chart.js&quot;;
+import {BaseChartDirective} from &quot;ng2-charts&quot;;
+import {firstValueFrom} from &quot;rxjs&quot;;
+
+import {
+  ForecastResponse,
+  ProphetForecastService
+} from &quot;../../../../services/prophet-forecast.service&quot;;
+
+enum PrognosisVariant {
+  LOW,
+  MEDIUM,
+  HIGH
+}
+
+@Component({
+  selector: &#x27;lib-prophet-forecast-result-data&#x27;,
+  templateUrl: &#x27;./prophet-forecast-result-data.component.html&#x27;,
+  styleUrls: [&quot;./prophet-forecast-result-data.component.css&quot;]
+})
+export class ProphetForecastResultDataComponent implements OnChanges {
+
+  @Input()
+  key!: string | string[];
+
+  @Input()
+  mapKeyNames: Record&lt;string, string&gt; &#x3D; {};
+
+  @ViewChildren(BaseChartDirective)
+  chartElements!: QueryList&lt;BaseChartDirective&gt;;
+
+  readonly PrognosisVariant &#x3D; PrognosisVariant;
+
+  data: [string, any][] &#x3D; [];
+
+  constructor(private service: ProphetForecastService) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes[&#x27;key&#x27;]) this.fetchData(this.key);
+  }
+
+  chartLabelUpdate(chart: Chart, variant: PrognosisVariant) {
+    let settingsArray &#x3D; (() &#x3D;&gt; {
+      switch (variant) {
+        case PrognosisVariant.LOW:
+          return [true, true, false, false, false, false];
+        case PrognosisVariant.MEDIUM:
+          return [false, false, true, true, false, false];
+        case PrognosisVariant.HIGH:
+          return [false, false, false, false, true, true];
+      }
+    })();
+    // doing it in two runs makes the transition look a bit smoother
+    for (let [i, show] of settingsArray.entries()) {
+      if (show) chart.show(i);
+    }
+    for (let [i, show] of settingsArray.entries()) {
+      if (!show) chart.hide(i);
+    }
+  }
+
+  onLabelChange(event: Event, index: number) {
+    let variant &#x3D; +(event.target as any).dataset.prognosisVariant as PrognosisVariant;
+    let chart &#x3D; this.chartElements.get(index)!.chart!;
+    this.chartLabelUpdate(chart, variant);
+  }
+
+  private fetchData(key: string | string[]): void {
+    let res: Promise&lt;[string, ForecastResponse]&gt;[] &#x3D; [];
+    for (let currentKey of [key].flat()) {
+      res.push(firstValueFrom(this.service.fetchForecastData(currentKey)).then(res &#x3D;&gt; [currentKey, res]))
+    }
+    Promise.all(res).then(res &#x3D;&gt; {
+      this.data &#x3D; [];
+      for (let [key, entry] of res) {
+        let labels &#x3D; [];
+
+        let lowMigrationPrognosisData &#x3D; {
+          bounds: [] as [number, number][],
+          forecast: [] as number[]
+        };
+        for (let el of entry.lowMigrationPrognosis) {
+          labels.push(el.ds.split(&quot;-&quot;)[0]);
+          lowMigrationPrognosisData.bounds.push([el.lower, el.upper]);
+          lowMigrationPrognosisData.forecast.push(el.forecast);
+        }
+
+        let mediumMigrationPrognosisData &#x3D; {
+          bounds: [] as [number, number][],
+          forecast: [] as number[]
+        };
+        for (let el of entry.mediumMigrationPrognosis) {
+          mediumMigrationPrognosisData.bounds.push([el.lower, el.upper]);
+          mediumMigrationPrognosisData.forecast.push(el.forecast);
+        }
+
+        let highMigrationPrognosisData &#x3D; {
+          bounds: [] as [number, number][],
+          forecast: [] as number[]
+        };
+        for (let el of entry.highMigrationPrognosis) {
+          highMigrationPrognosisData.bounds.push([el.lower, el.upper]);
+          highMigrationPrognosisData.forecast.push(el.forecast);
+        }
+
+        let chartDataset &#x3D; [
+          {
+            type: &quot;scatter&quot;,
+            data: lowMigrationPrognosisData.forecast,
+            borderColor: &quot;#A37A00&quot;,
+            borderWidth: 2,
+            pointStyle: &quot;line&quot;,
+            grouped: false,
+            hidden: true
+          },
+          {
+            type: &quot;bar&quot;,
+            data: lowMigrationPrognosisData.bounds,
+            backgroundColor: &quot;#FFBF00&quot;,
+            grouped: false,
+            hidden: true
+          },
+          {
+            type: &quot;scatter&quot;,
+            data: mediumMigrationPrognosisData.forecast,
+            borderColor: &quot;#0A758F&quot;,
+            borderWidth: 2,
+            pointStyle: &quot;line&quot;,
+            grouped: false
+          },
+          {
+            type: &quot;bar&quot;,
+            data: mediumMigrationPrognosisData.bounds,
+            backgroundColor: &quot;#10BBE5&quot;,
+            grouped: false
+          },
+          {
+            type: &quot;scatter&quot;,
+            data: highMigrationPrognosisData.forecast,
+            borderColor: &quot;#B00058&quot;,
+            borderWidth: 2,
+            pointStyle: &quot;line&quot;,
+            grouped: false,
+            hidden: true
+          },
+          {
+            type: &quot;bar&quot;,
+            data: highMigrationPrognosisData.bounds,
+            backgroundColor: &quot;#FF0D86&quot;,
+            grouped: false,
+            hidden: true
+          },
+        ];
+        this.data.push([key, {
+          labels,
+          datasets: chartDataset
+        }]);
+      }
+    });
+  }
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div *ngFor&#x3D;&quot;let data of data; index as i&quot; class&#x3D;&quot;card block&quot;&gt;
+  &lt;div class&#x3D;&quot;card-header&quot;&gt;
+    &lt;p class&#x3D;&quot;card-header-title&quot;&gt;
+      {{mapKeyNames[data[0]]}}
+    &lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;card-content&quot;&gt;
+    &lt;div class&#x3D;&quot;columns is-centered&quot;&gt;
+      &lt;div class&#x3D;&quot;column is-narrow&quot; (change)&#x3D;&quot;onLabelChange($event, i)&quot;&gt;
+        &lt;input
+          [id]&#x3D;&quot;data[0] + &#x27;lowMigrationPrognosis&#x27;&quot;
+          type&#x3D;&quot;radio&quot;
+          [name]&#x3D;&quot;data[0] + &#x27;selection&#x27;&quot;
+          [attr.data-prognosis-variant]&#x3D;&quot;PrognosisVariant.LOW&quot;
+        &gt;
+        &lt;label [for]&#x3D;&quot;data[0] + &#x27;lowMigrationPrognosis&#x27;&quot;&gt;
+          &lt;span
+            class&#x3D;&quot;tag&quot;
+            style&#x3D;&quot;background-color: #FFBF00&quot;
+          &gt;
+            {{&#x27;water-usage-forecasts.prophet.low-migration-prognosis&#x27; | translate}}
+          &lt;/span&gt;
+        &lt;/label&gt;
+        &lt;input
+          [id]&#x3D;&quot;data[0] + &#x27;mediumMigrationPrognosis&#x27;&quot;
+          type&#x3D;&quot;radio&quot;
+          [name]&#x3D;&quot;data[0] + &#x27;selection&#x27;&quot;
+          checked&#x3D;&quot;checked&quot;
+          [attr.data-prognosis-variant]&#x3D;&quot;PrognosisVariant.MEDIUM&quot;
+        &gt;
+        &lt;label [for]&#x3D;&quot;data[0] + &#x27;mediumMigrationPrognosis&#x27;&quot;&gt;
+          &lt;span
+            class&#x3D;&quot;tag&quot;
+            style&#x3D;&quot;background-color: #10BBE5&quot;
+          &gt;
+            {{&#x27;water-usage-forecasts.prophet.medium-migration-prognosis&#x27; | translate}}
+          &lt;/span&gt;
+        &lt;/label&gt;
+        &lt;input
+          [id]&#x3D;&quot;data[0] + &#x27;highMigrationPrognosis&#x27;&quot;
+          type&#x3D;&quot;radio&quot;
+          [name]&#x3D;&quot;data[0] + &#x27;selection&#x27;&quot;
+          [attr.data-prognosis-variant]&#x3D;&quot;PrognosisVariant.HIGH&quot;
+        &gt;
+        &lt;label [for]&#x3D;&quot;data[0] + &#x27;highMigrationPrognosis&#x27;&quot;&gt;
+          &lt;span
+            class&#x3D;&quot;tag&quot;
+            style&#x3D;&quot;background-color: #FF0D86&quot;
+          &gt;
+            {{&#x27;water-usage-forecasts.prophet.high-migration-prognosis&#x27; | translate}}
+          &lt;/span&gt;
+        &lt;/label&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;canvas
+        #chart
+        baseChart
+        [data]&#x3D;&quot;data[1]&quot;
+        [options]&#x3D;&quot;{
+          transitions: {
+            hide: {
+              animation: {
+                duration: 0
+              }
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: &#x27;water-usage-forecasts.chart.year&#x27; | translate
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: &#x27;water-usage-forecasts.chart.consumption-per-person&#x27; | translate
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }&quot;
+      &gt;&lt;/canvas&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./prophet-forecast-result-data.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">input[type&#x3D;radio] {
+  opacity: 0
+}
+
+input[type&#x3D;&quot;radio&quot;] + label span.tag {
+  color: black;
+  text-decoration-thickness: 0.2em;
+  text-decoration-color: black;
+  text-decoration-line: line-through;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+input[type&#x3D;&quot;radio&quot;]:checked + label span.tag {
+  text-decoration-line: unset;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div *ngFor="let data of data; index as i" class="card block">  <div class="card-header">    <p class="card-header-title">      {{mapKeyNames[data[0]]}}    </p>  </div>  <div class="card-content">    <div class="columns is-centered">      <div class="column is-narrow" (change)="onLabelChange($event, i)">        <input          [id]="data[0] + \'lowMigrationPrognosis\'"          type="radio"          [name]="data[0] + \'selection\'"          [attr.data-prognosis-variant]="PrognosisVariant.LOW"        >        <label [for]="data[0] + \'lowMigrationPrognosis\'">          <span            class="tag"            style="background-color: #FFBF00"          >            {{\'water-usage-forecasts.prophet.low-migration-prognosis\' | translate}}          </span>        </label>        <input          [id]="data[0] + \'mediumMigrationPrognosis\'"          type="radio"          [name]="data[0] + \'selection\'"          checked="checked"          [attr.data-prognosis-variant]="PrognosisVariant.MEDIUM"        >        <label [for]="data[0] + \'mediumMigrationPrognosis\'">          <span            class="tag"            style="background-color: #10BBE5"          >            {{\'water-usage-forecasts.prophet.medium-migration-prognosis\' | translate}}          </span>        </label>        <input          [id]="data[0] + \'highMigrationPrognosis\'"          type="radio"          [name]="data[0] + \'selection\'"          [attr.data-prognosis-variant]="PrognosisVariant.HIGH"        >        <label [for]="data[0] + \'highMigrationPrognosis\'">          <span            class="tag"            style="background-color: #FF0D86"          >            {{\'water-usage-forecasts.prophet.high-migration-prognosis\' | translate}}          </span>        </label>      </div>    </div>    <div>      <canvas        #chart        baseChart        [data]="data[1]"        [options]="{          transitions: {            hide: {              animation: {                duration: 0              }            }          },          scales: {            x: {              title: {                display: true,                text: \'water-usage-forecasts.chart.year\' | translate              }            },            y: {              title: {                display: true,                text: \'water-usage-forecasts.chart.consumption-per-person\' | translate              }            }          },          plugins: {            legend: {              display: false            }          }        }"      ></canvas>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'ConsumerDetailComponent', 'selector': 'lib-consumer-detail'},{'name': 'MapSelectViewComponent', 'selector': 'lib-map-select-view'},{'name': 'ProphetForecastResultDataComponent', 'selector': 'lib-prophet-forecast-result-data'},{'name': 'ResultDataComponent', 'selector': '[lib-result-data]'},{'name': 'ResultDataViewComponent', 'selector': 'lib-result-data-view'},{'name': 'WaterRightDetailComponent', 'selector': 'lib-water-right-detail'},{'name': 'WaterUsageForecastsResultDataComponent', 'selector': 'lib-water-usage-forecasts-result-data'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ProphetForecastResultDataComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ProphetForecastResultDataComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

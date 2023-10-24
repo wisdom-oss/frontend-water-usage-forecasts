@@ -14,7 +14,7 @@
     </head>
     <body>
 
-        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
             <a href="../" class="navbar-brand">water-usage-forecasts documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
@@ -36,29 +36,33 @@
 
 
 <ol class="breadcrumb">
-  <li>Components</li>
-  <li
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
   >
   WaterRightDetailComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
-        <li class="active">
-            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
-        <li >
-            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
-        <li >
-            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
     <h3>File</h3>
 </p>
 <p class="comment">
@@ -72,15 +76,16 @@
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
-                    <code><a href="https://angular.io/api/core/AfterViewInit" target="_blank" >AfterViewInit</a></code>
+                <code>OnInit</code>
+                <code>AfterViewInit</code>
     </p>
 
 
-<section>
+<section data-compodoc="block-metadata">
     <h3>Metadata</h3>
     <table class="table table-sm table-hover metadata">
         <tbody>
+
 
 
 
@@ -96,6 +101,8 @@
                 <td class="col-md-3">selector</td>
                 <td class="col-md-9"><code>lib-water-right-detail</code></td>
             </tr>
+
+
 
 
 
@@ -116,7 +123,7 @@
     </table>
 </section>
 
-    <section>
+    <section data-compodoc="block-index">
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
@@ -135,6 +142,7 @@
                                 <a href="#data" >data</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
                                 <a href="#map" >map</a>
                             </li>
                             <li>
@@ -173,13 +181,13 @@
     </table>
 </section>
 
-    <section>
+    <section data-compodoc="block-constructor">
     <h3 id="constructor">Constructor</h3>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, service: <a href="../injectables/WaterRightsService.html" target="_self">WaterRightsService</a>, translate: TranslateService, breadcrumbs: BreadcrumbsService)</code>
+<code>constructor(route: ActivatedRoute, service: <a href="../injectables/WaterRightsService.html" target="_self">WaterRightsService</a>, translate: TranslateService, breadcrumbs: BreadcrumbsService)</code>
                     </td>
                 </tr>
                         <tr>
@@ -205,7 +213,7 @@
                                                         <td>route</td>
                                                   
                                                         <td>
-                                                                        <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
+                                                                    <code>ActivatedRoute</code>
                                                         </td>
                                                   
                                                     <td>
@@ -262,7 +270,7 @@
 
 
 
-    <section>
+    <section data-compodoc="block-methods">
     
     <h3 id="methods">
         Methods
@@ -407,7 +415,7 @@
         </tbody>
     </table>
 </section>
-    <section>
+    <section data-compodoc="block-properties">
     
     <h3 id="inputs">
         Properties
@@ -480,6 +488,7 @@
                 <td class="col-md-4">
                     <a name="map"></a>
                     <span class="name">
+                            <span class="modifier"></span>
                         <span ><b>map</b></span>
                         <a href="#map"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -545,7 +554,7 @@
 </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
+    <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {ViewChild, Component, OnInit, AfterViewInit} from &quot;@angular/core&quot;;
 import {ActivatedRoute} from &quot;@angular/router&quot;;
 import {TranslateService} from &quot;@ngx-translate/core&quot;;
@@ -636,7 +645,7 @@ export class WaterRightDetailComponent implements OnInit, AfterViewInit {
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="c-templateData">
+    <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;breadcrumbs&gt;&lt;/breadcrumbs&gt;
 
 &lt;p class&#x3D;&quot;title&quot;&gt;
@@ -677,7 +686,7 @@ export class WaterRightDetailComponent implements OnInit, AfterViewInit {
         &lt;br&gt;
       &lt;/span&gt;
       &lt;span *ngIf&#x3D;&quot;data?.address&quot;&gt;
-        {{&quot;water-usage-forecasts.water-right.address&quot;}}:
+        {{&quot;water-usage-forecasts.water-right.address&quot; | translate}}:
         {{data?.address}}
         &lt;br&gt;
       &lt;/span&gt;
@@ -990,7 +999,7 @@ export class WaterRightDetailComponent implements OnInit, AfterViewInit {
     </div>
 
 
-    <div class="tab-pane fade " id="c-tree">
+    <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>
         <div class="tree-legend">
             <div class="title">
@@ -1015,8 +1024,8 @@ export class WaterRightDetailComponent implements OnInit, AfterViewInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><breadcrumbs></breadcrumbs><p class="title">  {{"water-usage-forecasts.water-right.water-right" | translate}}</p><div class="card block">  <div class="card-content p-0 is-clipped">    <map      #map      [layerSelectable]="false"      zoom="12"      height="300px"      [scrollWheelZoom]="false"      [markers]="markers"    ></map>  </div></div><div class="columns">  <div class="column">    <p class="title is-4">{{data.legalTitle}}</p>    <p class="subtitle">      <span *ngIf="data.subject">{{data.subject}}<br></span>      <span *ngIf="data?.grantingAuthority">        {{"water-usage-forecasts.water-right.granting-authority" | translate}}:        {{data?.grantingAuthority}}        <br>      </span>      <span *ngIf="data?.registeringAuthority">        {{"water-usage-forecasts.water-right.registering-authority" | translate}}:        {{data?.registeringAuthority}}        <br>      </span>      <span *ngIf="data?.waterAuthority">        {{"water-usage-forecasts.water-right.water-authority" | translate}}:        {{data?.waterAuthority}}        <br>      </span>      <span *ngIf="data?.address">        {{"water-usage-forecasts.water-right.address"}}:        {{data?.address}}        <br>      </span>      <span *ngIf="data?.bailee">        {{"water-usage-forecasts.water-right.bailee" | translate}}:        {{data?.bailee}}        <br>      </span>    </p>  </div>  <div *ngIf="data?.state || data?.dateOfChange || data?.valid" class="column is-narrow">    <div *ngIf="data?.valid" class="is-flex is-flex-direction-column">      <div class="pb-2">        <div          class="tag is-large"          [title]="\'water-usage-forecasts.water-right.valid\' | translate"        >          <span class="icon-text">            <span class="icon">              <ion-icon name="time-outline"></ion-icon>            </span>            <span>{{validToString(data?.valid)}}</span>          </span>        </div>      </div>    </div>    <div>      <div class="tags is-justify-content-flex-end">        <div          *ngIf="data?.dateOfChange"          class="tag is-large"          [title]="\'water-usage-forecasts.water-right.date-of-change\' | translate"        >          <span class="icon-text">            <span class="icon">              <ion-icon name="pencil"></ion-icon>            </span>            <span>{{data?.dateOfChange?.toISOString()?.slice(0, 10)}}</span>          </span>        </div>        <div          class="tag is-large"          [title]="\'water-usage-forecasts.water-right.state-\' + data?.state | translate"        >          <span class="icon">            <ion-icon              *ngIf="data?.state === \'aktiv\'"              class="is-large is-size-1"              name="checkmark-outline"            ></ion-icon>            <ion-icon              *ngIf="data?.state === \'inaktiv\'"              class="is-large is-size-1"              name="close-outline"            ></ion-icon>            <ion-icon              *ngIf="data?.state === \'Wasserbuchblatt\'"              class="is-large is-size-1"              name="document-text-outline"            ></ion-icon>          </span>        </div>      </div>    </div>  </div></div><div class="block">  <div class="field is-grouped is-grouped-multiline">    <div *ngIf="data?.id" class="control">      <div class="tags has-addons">        <span class="tag is-primary">          {{"water-usage-forecasts.water-right.internal-id" | translate}}        </span>        <span class="tag">{{data?.id}}</span>      </div>    </div>    <div *ngIf="data?.no" class="control">      <div class="tags has-addons">        <span class="tag is-primary">          {{"water-usage-forecasts.water-right.water-right-no" | translate}}        </span>        <span class="tag">{{data?.no}}</span>      </div>    </div>    <div *ngIf="data?.externalId" class="control">      <div class="tags has-addons">        <span class="tag is-primary">          {{"water-usage-forecasts.water-right.external-id" | translate}}        </span>        <span class="tag">{{data?.externalId}}</span>      </div>    </div>    <div *ngIf="data?.fileReference" class="control">      <div class="tags has-addons">        <span class="tag is-primary">          {{"water-usage-forecasts.water-right.file-reference" | translate}}        </span>        <span class="tag">{{data?.fileReference}}</span>      </div>    </div>  </div></div><div *ngIf="data?.locations?.length" class="card block">  <div class="card-header">    <p class="card-header-title">      {{"water-usage-forecasts.water-right.locations" | translate}}    </p>  </div>  <ng-template ngFor let-location [ngForOf]="data.locations">    <div class="card-content" id="{{location?.id}}">      <div class="level has-text-weight-bold">        <div class="level-left">          <span class="is-size-4">{{location?.name}}</span>        </div>        <div class="level-right">          <span            *ngIf="!location?.real"            class="is-large is-size-4 icon"            [title]="\'water-usage-forecasts.water-right.virtual\' | translate"          >            <ion-icon name="color-wand-outline"></ion-icon>          </span>          <span            *ngIf="location?.active"            class="is-large is-size-4 icon"            [title]="\'water-usage-forecasts.water-right.active\' | translate"          >            <ion-icon name="checkmark-circle-outline"></ion-icon>          </span>          <span            *ngIf="!location?.active"            class="is-large is-size-4 icon"            [title]="\'water-usage-forecasts.water-right.inactive\' | translate"          >            <ion-icon name="close-circle-outline"></ion-icon>          </span>        </div>      </div>      <div *ngIf="location?.legalScope" class="block" style="margin-top: -27px">        <p class="subtitle">{{location?.legalScope}}</p>      </div>      <div class="block">        <div class="field is-grouped is-grouped-multiline" style="margin-top: -15px">          <div class="control">            <div class="tags has-addons">              <span class="tag is-primary">                {{"water-usage-forecasts.water-right.internal-id" | translate}}              </span>              <span class="tag">{{location?.id}}</span>            </div>          </div>          <div *ngIf="location?.no" class="control">            <div class="tags has-addons">              <span class="tag is-primary">                {{"water-usage-forecasts.water-right.location-no" | translate}}              </span>              <span class="tag">{{location?.no}}</span>            </div>          </div>        </div>      </div>      <div *ngIf="location?.withdrawalRates" class="block">        <p class="has-text-weight-bold">          {{"water-usage-forecasts.water-right.withdrawal" | translate}}        </p>        <div class="columns">          <ng-template ngFor let-rate [ngForOf]="location?.withdrawalRates">            <div class="column">              <div                class="message is-primary has-text-centered has-text-weight-bold">                <div class="message-body">                  {{rate.amount}} {{rate.unit}}/{{rate.duration}}                </div>              </div>            </div>          </ng-template>        </div>      </div>      <div *ngIf="location?.fluidDischarge" class="block">        <p class="has-text-weight-bold">          {{"water-usage-forecasts.water-right.fluid-discharge" | translate}}        </p>        <div class="columns">          <ng-template ngFor let-rate [ngForOf]="location?.fluidDischarge">            <div class="column">              <div                class="message is-primary has-text-centered has-text-weight-bold">                <div class="message-body">                  {{rate.amount}} {{rate.unit}}/{{rate.duration}}                </div>              </div>            </div>          </ng-template>        </div>      </div>      <div *ngIf="location?.irrigationArea" class="block">        <p class="has-text-weight-bold">          {{"water-usage-forecasts.water-right.irrigation-area" | translate}}        </p>        <div class="columns">          <div class="column">            <div              class="message is-primary has-text-centered has-text-weight-bold">              <div class="message-body">                {{location?.irrigationArea?.amount}} {{location?.irrigationArea?.unit}}              </div>            </div>          </div>        </div>      </div>      <div *ngIf="location?.rainSupplement" class="block">        <p class="has-text-weight-bold">          {{"water-usage-forecasts.water-right.rain-supplement" | translate}}        </p>        <div class="columns">          <div class="column">            <div              class="message is-primary has-text-centered has-text-weight-bold">              <div class="message-body">                {{location?.rainSupplement?.amount}} {{location?.rainSupplement?.unit}}                /{{location?.rainSupplement?.duration}}              </div>            </div>          </div>        </div>      </div>      <div class="block">        <table class="table is-fullwidth">          <tbody>          <tr *ngIf="location?.basinNo">            <td>{{"water-usage-forecasts.water-right.basin-no" | translate}}</td>            <td>{{location?.basinNo?.key}} {{location?.basinNo?.name}}</td>          </tr>          <tr *ngIf="location?.county">            <td>{{"water-usage-forecasts.water-right.county" | translate}}</td>            <td>{{location?.county}}</td>          </tr>          <tr *ngIf="location?.euSurveyArea">            <td>{{"water-usage-forecasts.water-right.eu-survey-area" | translate}}</td>            <td>{{location?.euSurveyArea?.key}} {{location?.euSurveyArea?.name}}</td>          </tr>          <tr *ngIf="location?.field">            <td>{{"water-usage-forecasts.water-right.field" | translate}}</td>            <td>{{location?.field}}</td>          </tr>          <tr *ngIf="location?.groundwaterVolume">            <td>{{"water-usage-forecasts.water-right.groundwater-volume" | translate}}</td>            <td>{{location?.groundwaterVolume}}</td>          </tr>          <tr *ngIf="location?.localSubDistrict">            <td>{{"water-usage-forecasts.water-right.local-sub-district" | translate}}</td>            <td>{{location?.localSubDistrict}}</td>          </tr>          <tr *ngIf="location?.maintenanceAssociation">            <td>{{"water-usage-forecasts.water-right.maintenance-association" | translate}}</td>            <td>{{location?.maintenanceAssociation?.key}} {{location?.maintenanceAssociation?.name}}</td>          </tr>          <tr *ngIf="location?.municipalArea">            <td>{{"water-usage-forecasts.water-right.municipal-area" | translate}}</td>            <td>{{location?.municipalArea?.key}} {{location?.municipalArea?.name}}</td>          </tr>          <tr *ngIf="location?.plot">            <td>{{"water-usage-forecasts.water-right.plot" | translate}}</td>            <td>{{location?.plot}}</td>          </tr>          <tr *ngIf="location?.rivershed">            <td>{{"water-usage-forecasts.water-right.rivershed" | translate}}</td>            <td>{{location?.rivershed}}</td>          </tr>          <tr *ngIf="location?.serialNo">            <td>{{"water-usage-forecasts.water-right.serial-no" | translate}}</td>            <td>{{location?.serialNo}}</td>          </tr>          <tr *ngIf="location?.topMap1to25000">            <td>{{"water-usage-forecasts.water-right.top-map-1:25000" | translate}}</td>            <td>{{location?.topMap1to25000?.key}} {{location?.topMap1to25000?.name}}</td>          </tr>          <tr *ngIf="location?.waterBody">            <td>{{"water-usage-forecasts.water-right.water-body" | translate}}</td>            <td>{{location?.waterBody}}</td>          </tr>          <tr *ngIf="location?.floodArea">            <td>{{"water-usage-forecasts.water-right.flood-area" | translate}}</td>            <td>{{location?.floodArea}}</td>          </tr>          <tr *ngIf="location?.waterProtectionArea">            <td>{{"water-usage-forecasts.water-right.water-protection-area" | translate}}</td>            <td>{{location?.waterProtectionArea}}</td>          </tr>          </tbody>        </table>      </div>    </div>  </ng-template></div><div *ngIf="data?.annotation?.length" class="card block">  <div class="card-header">    <div class="card-header-title">      {{"water-usage-forecasts.water-right.annotation" | translate}}    </div>  </div>  <div class="card-content">    <p class="content">{{data?.annotation}}</p>  </div></div></div>'
-    var COMPONENTS = [{'name': 'ConsumerDetailComponent', 'selector': 'lib-consumer-detail'},{'name': 'MapSelectViewComponent', 'selector': 'lib-map-select-view'},{'name': 'ResultDataViewComponent', 'selector': 'lib-result-data-view'},{'name': 'WaterRightDetailComponent', 'selector': 'lib-water-right-detail'}];
+        var COMPONENT_TEMPLATE = '<div><breadcrumbs></breadcrumbs><p class="title">  {{"water-usage-forecasts.water-right.water-right" | translate}}</p><div class="card block">  <div class="card-content p-0 is-clipped">    <map      #map      [layerSelectable]="false"      zoom="12"      height="300px"      [scrollWheelZoom]="false"      [markers]="markers"    ></map>  </div></div><div class="columns">  <div class="column">    <p class="title is-4">{{data.legalTitle}}</p>    <p class="subtitle">      <span *ngIf="data.subject">{{data.subject}}<br></span>      <span *ngIf="data?.grantingAuthority">        {{"water-usage-forecasts.water-right.granting-authority" | translate}}:        {{data?.grantingAuthority}}        <br>      </span>      <span *ngIf="data?.registeringAuthority">        {{"water-usage-forecasts.water-right.registering-authority" | translate}}:        {{data?.registeringAuthority}}        <br>      </span>      <span *ngIf="data?.waterAuthority">        {{"water-usage-forecasts.water-right.water-authority" | translate}}:        {{data?.waterAuthority}}        <br>      </span>      <span *ngIf="data?.address">        {{"water-usage-forecasts.water-right.address" | translate}}:        {{data?.address}}        <br>      </span>      <span *ngIf="data?.bailee">        {{"water-usage-forecasts.water-right.bailee" | translate}}:        {{data?.bailee}}        <br>      </span>    </p>  </div>  <div *ngIf="data?.state || data?.dateOfChange || data?.valid" class="column is-narrow">    <div *ngIf="data?.valid" class="is-flex is-flex-direction-column">      <div class="pb-2">        <div          class="tag is-large"          [title]="\'water-usage-forecasts.water-right.valid\' | translate"        >          <span class="icon-text">            <span class="icon">              <ion-icon name="time-outline"></ion-icon>            </span>            <span>{{validToString(data?.valid)}}</span>          </span>        </div>      </div>    </div>    <div>      <div class="tags is-justify-content-flex-end">        <div          *ngIf="data?.dateOfChange"          class="tag is-large"          [title]="\'water-usage-forecasts.water-right.date-of-change\' | translate"        >          <span class="icon-text">            <span class="icon">              <ion-icon name="pencil"></ion-icon>            </span>            <span>{{data?.dateOfChange?.toISOString()?.slice(0, 10)}}</span>          </span>        </div>        <div          class="tag is-large"          [title]="\'water-usage-forecasts.water-right.state-\' + data?.state | translate"        >          <span class="icon">            <ion-icon              *ngIf="data?.state === \'aktiv\'"              class="is-large is-size-1"              name="checkmark-outline"            ></ion-icon>            <ion-icon              *ngIf="data?.state === \'inaktiv\'"              class="is-large is-size-1"              name="close-outline"            ></ion-icon>            <ion-icon              *ngIf="data?.state === \'Wasserbuchblatt\'"              class="is-large is-size-1"              name="document-text-outline"            ></ion-icon>          </span>        </div>      </div>    </div>  </div></div><div class="block">  <div class="field is-grouped is-grouped-multiline">    <div *ngIf="data?.id" class="control">      <div class="tags has-addons">        <span class="tag is-primary">          {{"water-usage-forecasts.water-right.internal-id" | translate}}        </span>        <span class="tag">{{data?.id}}</span>      </div>    </div>    <div *ngIf="data?.no" class="control">      <div class="tags has-addons">        <span class="tag is-primary">          {{"water-usage-forecasts.water-right.water-right-no" | translate}}        </span>        <span class="tag">{{data?.no}}</span>      </div>    </div>    <div *ngIf="data?.externalId" class="control">      <div class="tags has-addons">        <span class="tag is-primary">          {{"water-usage-forecasts.water-right.external-id" | translate}}        </span>        <span class="tag">{{data?.externalId}}</span>      </div>    </div>    <div *ngIf="data?.fileReference" class="control">      <div class="tags has-addons">        <span class="tag is-primary">          {{"water-usage-forecasts.water-right.file-reference" | translate}}        </span>        <span class="tag">{{data?.fileReference}}</span>      </div>    </div>  </div></div><div *ngIf="data?.locations?.length" class="card block">  <div class="card-header">    <p class="card-header-title">      {{"water-usage-forecasts.water-right.locations" | translate}}    </p>  </div>  <ng-template ngFor let-location [ngForOf]="data.locations">    <div class="card-content" id="{{location?.id}}">      <div class="level has-text-weight-bold">        <div class="level-left">          <span class="is-size-4">{{location?.name}}</span>        </div>        <div class="level-right">          <span            *ngIf="!location?.real"            class="is-large is-size-4 icon"            [title]="\'water-usage-forecasts.water-right.virtual\' | translate"          >            <ion-icon name="color-wand-outline"></ion-icon>          </span>          <span            *ngIf="location?.active"            class="is-large is-size-4 icon"            [title]="\'water-usage-forecasts.water-right.active\' | translate"          >            <ion-icon name="checkmark-circle-outline"></ion-icon>          </span>          <span            *ngIf="!location?.active"            class="is-large is-size-4 icon"            [title]="\'water-usage-forecasts.water-right.inactive\' | translate"          >            <ion-icon name="close-circle-outline"></ion-icon>          </span>        </div>      </div>      <div *ngIf="location?.legalScope" class="block" style="margin-top: -27px">        <p class="subtitle">{{location?.legalScope}}</p>      </div>      <div class="block">        <div class="field is-grouped is-grouped-multiline" style="margin-top: -15px">          <div class="control">            <div class="tags has-addons">              <span class="tag is-primary">                {{"water-usage-forecasts.water-right.internal-id" | translate}}              </span>              <span class="tag">{{location?.id}}</span>            </div>          </div>          <div *ngIf="location?.no" class="control">            <div class="tags has-addons">              <span class="tag is-primary">                {{"water-usage-forecasts.water-right.location-no" | translate}}              </span>              <span class="tag">{{location?.no}}</span>            </div>          </div>        </div>      </div>      <div *ngIf="location?.withdrawalRates" class="block">        <p class="has-text-weight-bold">          {{"water-usage-forecasts.water-right.withdrawal" | translate}}        </p>        <div class="columns">          <ng-template ngFor let-rate [ngForOf]="location?.withdrawalRates">            <div class="column">              <div                class="message is-primary has-text-centered has-text-weight-bold">                <div class="message-body">                  {{rate.amount}} {{rate.unit}}/{{rate.duration}}                </div>              </div>            </div>          </ng-template>        </div>      </div>      <div *ngIf="location?.fluidDischarge" class="block">        <p class="has-text-weight-bold">          {{"water-usage-forecasts.water-right.fluid-discharge" | translate}}        </p>        <div class="columns">          <ng-template ngFor let-rate [ngForOf]="location?.fluidDischarge">            <div class="column">              <div                class="message is-primary has-text-centered has-text-weight-bold">                <div class="message-body">                  {{rate.amount}} {{rate.unit}}/{{rate.duration}}                </div>              </div>            </div>          </ng-template>        </div>      </div>      <div *ngIf="location?.irrigationArea" class="block">        <p class="has-text-weight-bold">          {{"water-usage-forecasts.water-right.irrigation-area" | translate}}        </p>        <div class="columns">          <div class="column">            <div              class="message is-primary has-text-centered has-text-weight-bold">              <div class="message-body">                {{location?.irrigationArea?.amount}} {{location?.irrigationArea?.unit}}              </div>            </div>          </div>        </div>      </div>      <div *ngIf="location?.rainSupplement" class="block">        <p class="has-text-weight-bold">          {{"water-usage-forecasts.water-right.rain-supplement" | translate}}        </p>        <div class="columns">          <div class="column">            <div              class="message is-primary has-text-centered has-text-weight-bold">              <div class="message-body">                {{location?.rainSupplement?.amount}} {{location?.rainSupplement?.unit}}                /{{location?.rainSupplement?.duration}}              </div>            </div>          </div>        </div>      </div>      <div class="block">        <table class="table is-fullwidth">          <tbody>          <tr *ngIf="location?.basinNo">            <td>{{"water-usage-forecasts.water-right.basin-no" | translate}}</td>            <td>{{location?.basinNo?.key}} {{location?.basinNo?.name}}</td>          </tr>          <tr *ngIf="location?.county">            <td>{{"water-usage-forecasts.water-right.county" | translate}}</td>            <td>{{location?.county}}</td>          </tr>          <tr *ngIf="location?.euSurveyArea">            <td>{{"water-usage-forecasts.water-right.eu-survey-area" | translate}}</td>            <td>{{location?.euSurveyArea?.key}} {{location?.euSurveyArea?.name}}</td>          </tr>          <tr *ngIf="location?.field">            <td>{{"water-usage-forecasts.water-right.field" | translate}}</td>            <td>{{location?.field}}</td>          </tr>          <tr *ngIf="location?.groundwaterVolume">            <td>{{"water-usage-forecasts.water-right.groundwater-volume" | translate}}</td>            <td>{{location?.groundwaterVolume}}</td>          </tr>          <tr *ngIf="location?.localSubDistrict">            <td>{{"water-usage-forecasts.water-right.local-sub-district" | translate}}</td>            <td>{{location?.localSubDistrict}}</td>          </tr>          <tr *ngIf="location?.maintenanceAssociation">            <td>{{"water-usage-forecasts.water-right.maintenance-association" | translate}}</td>            <td>{{location?.maintenanceAssociation?.key}} {{location?.maintenanceAssociation?.name}}</td>          </tr>          <tr *ngIf="location?.municipalArea">            <td>{{"water-usage-forecasts.water-right.municipal-area" | translate}}</td>            <td>{{location?.municipalArea?.key}} {{location?.municipalArea?.name}}</td>          </tr>          <tr *ngIf="location?.plot">            <td>{{"water-usage-forecasts.water-right.plot" | translate}}</td>            <td>{{location?.plot}}</td>          </tr>          <tr *ngIf="location?.rivershed">            <td>{{"water-usage-forecasts.water-right.rivershed" | translate}}</td>            <td>{{location?.rivershed}}</td>          </tr>          <tr *ngIf="location?.serialNo">            <td>{{"water-usage-forecasts.water-right.serial-no" | translate}}</td>            <td>{{location?.serialNo}}</td>          </tr>          <tr *ngIf="location?.topMap1to25000">            <td>{{"water-usage-forecasts.water-right.top-map-1:25000" | translate}}</td>            <td>{{location?.topMap1to25000?.key}} {{location?.topMap1to25000?.name}}</td>          </tr>          <tr *ngIf="location?.waterBody">            <td>{{"water-usage-forecasts.water-right.water-body" | translate}}</td>            <td>{{location?.waterBody}}</td>          </tr>          <tr *ngIf="location?.floodArea">            <td>{{"water-usage-forecasts.water-right.flood-area" | translate}}</td>            <td>{{location?.floodArea}}</td>          </tr>          <tr *ngIf="location?.waterProtectionArea">            <td>{{"water-usage-forecasts.water-right.water-protection-area" | translate}}</td>            <td>{{location?.waterProtectionArea}}</td>          </tr>          </tbody>        </table>      </div>    </div>  </ng-template></div><div *ngIf="data?.annotation?.length" class="card block">  <div class="card-header">    <div class="card-header-title">      {{"water-usage-forecasts.water-right.annotation" | translate}}    </div>  </div>  <div class="card-content">    <p class="content">{{data?.annotation}}</p>  </div></div></div>'
+    var COMPONENTS = [{'name': 'ConsumerDetailComponent', 'selector': 'lib-consumer-detail'},{'name': 'MapSelectViewComponent', 'selector': 'lib-map-select-view'},{'name': 'ProphetForecastResultDataComponent', 'selector': 'lib-prophet-forecast-result-data'},{'name': 'ResultDataComponent', 'selector': '[lib-result-data]'},{'name': 'ResultDataViewComponent', 'selector': 'lib-result-data-view'},{'name': 'WaterRightDetailComponent', 'selector': 'lib-water-right-detail'},{'name': 'WaterUsageForecastsResultDataComponent', 'selector': 'lib-water-usage-forecasts-result-data'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'WaterRightDetailComponent'};
 </script>

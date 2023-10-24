@@ -14,7 +14,7 @@
     </head>
     <body>
 
-        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
             <a href="./" class="navbar-brand">water-usage-forecasts documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
@@ -51,7 +51,7 @@
 
 
 <ol class="breadcrumb">
-    <li>Documentation coverage</li>
+    <li class="breadcrumb-item">Documentation coverage</li>
 </ol>
 
 <div>
@@ -104,13 +104,37 @@
                 <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
-        <tr class="low">
+        <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
                 <a href="./injectables/ConsumersService.html">src/lib/services/consumers.service.ts</a>
             </td>
             <td>injectable</td>
             <td>ConsumersService</td>
+            <td align="right" data-sort="100">
+                <span class="coverage-percent">100 %</span>
+                <span class="coverage-count">(3/3)</span>
+            </td>
+        </tr>
+        <tr class="very-good">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./miscellaneous/variables.html#API_URL">src/lib/services/consumers.service.ts</a>
+            </td>
+            <td>variable</td>
+            <td>API_URL</td>
+            <td align="right" data-sort="100">
+                <span class="coverage-percent">100 %</span>
+                <span class="coverage-count">(1/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/ProphetForecastService.html">src/lib/services/prophet-forecast.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>ProphetForecastService</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/3)</span>
@@ -119,7 +143,31 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#API_URL">src/lib/services/consumers.service.ts</a>
+                <a href="./interfaces/Datapoint.html">src/lib/services/prophet-forecast.service.ts</a>
+            </td>
+            <td>interface</td>
+            <td>Datapoint</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./interfaces/ForecastResponse.html">src/lib/services/prophet-forecast.service.ts</a>
+            </td>
+            <td>interface</td>
+            <td>ForecastResponse</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/4)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./miscellaneous/variables.html#API_URL">src/lib/services/prophet-forecast.service.ts</a>
             </td>
             <td>variable</td>
             <td>API_URL</td>
@@ -279,9 +327,57 @@
             </td>
             <td>component</td>
             <td>ResultDataViewComponent</td>
-            <td align="right" data-sort="100">
-                <span class="coverage-percent">100 %</span>
-                <span class="coverage-count">(21/21)</span>
+            <td align="right" data-sort="94">
+                <span class="coverage-percent">94 %</span>
+                <span class="coverage-count">(18/19)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./miscellaneous/variables.html#RegressionMethod">src/lib/views/result-data-view/result-data-view.component.ts</a>
+            </td>
+            <td>variable</td>
+            <td>RegressionMethod</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/ProphetForecastResultDataComponent.html">src/lib/views/result-data-view/result-data/prophet-forecast-result-data/prophet-forecast-result-data.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>ProphetForecastResultDataComponent</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/11)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/ResultDataComponent.html">src/lib/views/result-data-view/result-data/result-data.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>ResultDataComponent</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/7)</span>
+            </td>
+        </tr>
+        <tr class="good">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/WaterUsageForecastsResultDataComponent.html">src/lib/views/result-data-view/result-data/water-usage-forecasts-result-data/water-usage-forecasts-result-data.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>WaterUsageForecastsResultDataComponent</td>
+            <td align="right" data-sort="53">
+                <span class="coverage-percent">53 %</span>
+                <span class="coverage-count">(8/15)</span>
             </td>
         </tr>
         <tr class="very-good">

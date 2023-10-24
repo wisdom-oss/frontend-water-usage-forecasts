@@ -14,7 +14,7 @@
     </head>
     <body>
 
-        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
             <a href="../" class="navbar-brand">water-usage-forecasts documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
@@ -50,11 +50,11 @@
 
 
 <ol class="breadcrumb">
-  <li>Miscellaneous</li>
-  <li>Variables</li>
+  <li class="breadcrumb-item">Miscellaneous</li>
+  <li class="breadcrumb-item">Variables</li>
 </ol>
 
-<section>
+<section data-compodoc="block-index">
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
@@ -65,16 +65,22 @@
                             <a href="#API_URL" title="src/lib/services/consumers.service.ts" ><b>API_URL</b>&nbsp;&nbsp;&nbsp;(src/.../consumers.service.ts)</a>
                         </li>
                         <li>
-                            <a href="#API_URL" title="src/lib/services/water-rights.service.ts" ><b>API_URL</b>&nbsp;&nbsp;&nbsp;(src/.../water-rights.service.ts)</a>
+                            <a href="#API_URL" title="src/lib/services/prophet-forecast.service.ts" ><b>API_URL</b>&nbsp;&nbsp;&nbsp;(src/.../prophet-forecast.service.ts)</a>
                         </li>
                         <li>
-                            <a href="#API_URL" title="src/lib/services/water-usage-history.service.ts" ><b>API_URL</b>&nbsp;&nbsp;&nbsp;(src/.../water-usage-history.service.ts)</a>
+                            <a href="#API_URL" title="src/lib/services/water-rights.service.ts" ><b>API_URL</b>&nbsp;&nbsp;&nbsp;(src/.../water-rights.service.ts)</a>
                         </li>
                         <li>
                             <a href="#API_URL" title="src/lib/services/water-usage-forecasts.service.ts" ><b>API_URL</b>&nbsp;&nbsp;&nbsp;(src/.../water-usage-forecasts.service.ts)</a>
                         </li>
                         <li>
+                            <a href="#API_URL" title="src/lib/services/water-usage-history.service.ts" ><b>API_URL</b>&nbsp;&nbsp;&nbsp;(src/.../water-usage-history.service.ts)</a>
+                        </li>
+                        <li>
                             <a href="#consumerIcon" title="src/lib/map-icons.ts" ><b>consumerIcon</b>&nbsp;&nbsp;&nbsp;(src/.../map-icons.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#RegressionMethod" title="src/lib/views/result-data-view/result-data-view.component.ts" ><b>RegressionMethod</b>&nbsp;&nbsp;&nbsp;(src/.../result-data-view.component.ts)</a>
                         </li>
                         <li>
                             <a href="#route" title="src/lib/routing.ts" ><b>route</b>&nbsp;&nbsp;&nbsp;(src/.../routing.ts)</a>
@@ -93,7 +99,7 @@
 </section>
 
     <h3>src/lib/services/consumers.service.ts</h3>
-    <section>
+    <section data-compodoc="block-properties">
     <h3></h3>    <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -117,12 +123,47 @@
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The base URL for the consumers API endpoint.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/lib/services/prophet-forecast.service.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="API_URL"></a>
+                    <span class="name">
+                        <span ><b>API_URL</b></span>
+                        <a href="#API_URL"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;prophet-forecast/&quot;</code>
+                    </td>
+                </tr>
+
 
         </tbody>
     </table>
 </section>
     <h3>src/lib/services/water-rights.service.ts</h3>
-    <section>
+    <section data-compodoc="block-properties">
     <h3></h3>    <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -150,37 +191,8 @@
         </tbody>
     </table>
 </section>
-    <h3>src/lib/services/water-usage-history.service.ts</h3>
-    <section>
-    <h3></h3>    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="API_URL"></a>
-                    <span class="name">
-                        <span ><b>API_URL</b></span>
-                        <a href="#API_URL"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>&quot;water-usage-history/&quot;</code>
-                    </td>
-                </tr>
-
-
-        </tbody>
-    </table>
-</section>
     <h3>src/lib/services/water-usage-forecasts.service.ts</h3>
-    <section>
+    <section data-compodoc="block-properties">
     <h3></h3>    <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -214,8 +226,37 @@
         </tbody>
     </table>
 </section>
+    <h3>src/lib/services/water-usage-history.service.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="API_URL"></a>
+                    <span class="name">
+                        <span ><b>API_URL</b></span>
+                        <a href="#API_URL"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;usages/&quot;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
     <h3>src/lib/map-icons.ts</h3>
-    <section>
+    <section data-compodoc="block-properties">
     <h3></h3>    <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -263,8 +304,37 @@
         </tbody>
     </table>
 </section>
+    <h3>src/lib/views/result-data-view/result-data-view.component.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RegressionMethod"></a>
+                    <span class="name">
+                        <span ><b>RegressionMethod</b></span>
+                        <a href="#RegressionMethod"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{...WaterUsageForecastType, ...ProphetForecastType}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
     <h3>src/lib/routing.ts</h3>
-    <section>
+    <section data-compodoc="block-properties">
     <h3></h3>    <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -278,7 +348,7 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://angular.io/api/router/Route" target="_blank" >Route</a></code>
+                        <i>Type : </i>    <code>Route</code>
 
                     </td>
                 </tr>
@@ -332,7 +402,7 @@
     </table>
 </section>
     <h3>src/public-api.ts</h3>
-    <section>
+    <section data-compodoc="block-properties">
     <h3></h3>    <table class="table table-sm table-bordered">
         <tbody>
             <tr>

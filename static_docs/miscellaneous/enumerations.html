@@ -14,7 +14,7 @@
     </head>
     <body>
 
-        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
             <a href="../" class="navbar-brand">water-usage-forecasts documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
@@ -50,11 +50,11 @@
 
 
 <ol class="breadcrumb">
-  <li>Miscellaneous</li>
-  <li>Enumerations</li>
+  <li class="breadcrumb-item">Miscellaneous</li>
+  <li class="breadcrumb-item">Enumerations</li>
 </ol>
 
-<section>
+<section data-compodoc="block-index">
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
@@ -62,7 +62,16 @@
                 <td class="col-md-4">
                     <ul class="index-list">
                         <li>
+                            <a href="#ForecastService" title="src/lib/views/result-data-view/result-data/result-data.component.ts" ><b>ForecastService</b>&nbsp;&nbsp;&nbsp;(src/.../result-data.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ForecastType" title="src/lib/services/prophet-forecast.service.ts" ><b>ForecastType</b>&nbsp;&nbsp;&nbsp;(src/.../prophet-forecast.service.ts)</a>
+                        </li>
+                        <li>
                             <a href="#ForecastType" title="src/lib/services/water-usage-forecasts.service.ts" ><b>ForecastType</b>&nbsp;&nbsp;&nbsp;(src/.../water-usage-forecasts.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#PrognosisVariant" title="src/lib/views/result-data-view/result-data/prophet-forecast-result-data/prophet-forecast-result-data.component.ts" ><b>PrognosisVariant</b>&nbsp;&nbsp;&nbsp;(src/.../prophet-forecast-result-data.component.ts)</a>
                         </li>
                     </ul>
                 </td>
@@ -71,8 +80,60 @@
     </table>
 </section>
 
+    <h3>src/lib/views/result-data-view/result-data/result-data.component.ts</h3>
+    <section data-compodoc="block-enums">
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ForecastService"></a>
+                        <span class="name "><b>ForecastService</b><a href="#ForecastService"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;WATER_USAGE
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;PROPHET
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <h3>src/lib/services/prophet-forecast.service.ts</h3>
+    <section data-compodoc="block-enums">
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ForecastType"></a>
+                        <span class="name "><b>ForecastType</b><a href="#ForecastType"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Possible forecast calculation methods.</p>
+</div>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;PROPHET
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>prophet</code>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
     <h3>src/lib/services/water-usage-forecasts.service.ts</h3>
-    <section>
+    <section data-compodoc="block-enums">
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -115,6 +176,34 @@
                         <tr>
                             <td class="col-md-4">
                                 <i>Value : </i><code>polynomial</code>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <h3>src/lib/views/result-data-view/result-data/prophet-forecast-result-data/prophet-forecast-result-data.component.ts</h3>
+    <section data-compodoc="block-enums">
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="PrognosisVariant"></a>
+                        <span class="name "><b>PrognosisVariant</b><a href="#PrognosisVariant"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;LOW
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;MEDIUM
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;HIGH
                             </td>
                         </tr>
             </tbody>
