@@ -64,6 +64,21 @@ export class ResultDataViewComponent implements OnInit, DoCheck {
    */
   regressionMethod = RegressionMethod;
 
+  // TODO: check, this is from mockup
+  get regressionMethods() {
+    return Object.values(this.regressionMethod);
+  }
+
+  // TODO: check, this is from mockup
+  consumerGroups = [
+    "Agriculture, Forestry, Fisheries",
+    "Businesses",
+    "Household",
+    "Public Institution",
+    "Small Businesses",
+    "Tourism"
+  ];
+
   /** The response from the forecast service. */
   response?: Promise<ForecastResponse>;
   /** Whether the request is done, used for the loader. */
@@ -100,6 +115,8 @@ export class ResultDataViewComponent implements OnInit, DoCheck {
 
   /** The names of displayed shapes mapped by their keys. */
   mapKeyNames: Record<string, string> = {};
+
+  consumerGroupsPrognosisModelsExpanded = false;
 
   console = console;
 

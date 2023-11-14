@@ -17,107 +17,28 @@
   </div>
 </div>
 
-<div class="columns block">
-  <div class="column">
-    <div class="card">
-      <div class="card-header">
-        <p class="card-header-title">
-          {{"water-usage-forecasts.result-data.selection" | translate}}
-        </p>
-      </div>
-      <div class="card-content">
-        <div class="content">
-          <ng-template ngFor let-sel [ngForOf]="selectionEntries">
-            <div *ngIf="sel[1].length">
-              <ng-template ngFor let-shape [ngForOf]="sel[1]">
-                <p>
-                  <strong>
-                    {{"common.map.resolution." + sel[0] | translate}}
-                  </strong>
-                  <span>
-                    {{shape[1]}} ({{shape[0]}})
-                  </span>
-                </p>
-              </ng-template>
-            </div>
+<div class="card block">
+  <div class="card-header">
+    <p class="card-header-title">
+      {{"water-usage-forecasts.result-data.selection" | translate}}
+    </p>
+  </div>
+  <div class="card-content">
+    <div class="content">
+      <ng-template ngFor let-sel [ngForOf]="selectionEntries">
+        <div *ngIf="sel[1].length">
+          <ng-template ngFor let-shape [ngForOf]="sel[1]">
+            <p>
+              <strong>
+                {{"common.map.resolution." + sel[0] | translate}}
+              </strong>
+              <span>
+                {{shape[1]}} ({{shape[0]}})
+              </span>
+            </p>
           </ng-template>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="column">
-    <div class="card">
-      <div class="card-header">
-        <p class="card-header-title">Parameter</p>
-      </div>
-      <div class="card-content">
-        <div class="block">
-          <p>Prognosemodell</p>
-          <div class="dropdown is-toggleable">
-            <div class="dropdown-trigger">
-              <button class="button">
-                <span>Regression</span>
-                <span class="icon">
-              <ion-icon name="caret-down"></ion-icon>
-            </span>
-              </button>
-            </div>
-            <div class="dropdown-menu">
-              <div class="dropdown-content">
-                <a class="dropdown-item">Regression</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="block">
-          <p>Methode</p>
-          <div class="dropdown is-toggleable">
-            <div class="dropdown-trigger">
-              <button class="button">
-                <span>
-                  {{"water-usage-forecasts.parameter." + method | translate}}
-                </span>
-                <span class="icon">
-              <ion-icon name="caret-down"></ion-icon>
-            </span>
-              </button>
-            </div>
-            <div class="dropdown-menu">
-              <div class="dropdown-content">
-                <a
-                  class="dropdown-item"
-                  (click)="method = regressionMethod.LINEAR"
-                >
-                  {{"water-usage-forecasts.parameter.linear" | translate}}
-                </a>
-                <a
-                  class="dropdown-item"
-                  (click)="method = regressionMethod.LOGARITHMIC"
-                >
-                  {{"water-usage-forecasts.parameter.logarithmic" | translate}}
-                </a>
-                <a
-                  class="dropdown-item"
-                  (click)="method = regressionMethod.POLYNOMIAL"
-                >
-                  {{"water-usage-forecasts.parameter.polynomial" | translate}}
-                </a>
-                <a
-                class="dropdown-item"
-                (click)="method = regressionMethod.PROPHET">
-                  {{"prophet"}}
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--
-        <div class="block">
-          <p>Zeitraum</p>
-
-        </div>
-        -->
-      </div>
+      </ng-template>
     </div>
   </div>
 </div>
@@ -147,5 +68,64 @@
         {{component[1]}}
       </a>
     </div>
+  </div>
+</div>
+
+<div class="card block">
+  <div
+    class="card-header"
+    (click)="consumerGroupsPrognosisModelsExpanded = !consumerGroupsPrognosisModelsExpanded"
+  >
+    <a class="card-header-title">
+      <div class="columns is-flex-grow-1">
+        <div class="column">
+          <p>Verbrauchergruppen und Prognosemodelle</p>
+        </div>
+        <div class="column is-narrow">
+          <p class="icon">
+            <ion-icon
+              name="chevron-down"
+              *ngIf="!consumerGroupsPrognosisModelsExpanded"
+            ></ion-icon>
+            <ion-icon
+              name="chevron-up"
+              *ngIf="consumerGroupsPrognosisModelsExpanded"
+            ></ion-icon>
+          </p>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="card-content" *ngIf="consumerGroupsPrognosisModelsExpanded">
+    <div *ngFor="let selectionEntry of selectionEntries">
+      <div *ngFor="let selected of selectionEntry[1]">
+        <h3 class="subtitle">{{selected[1]}} ({{selected[0]}})</h3>
+        <div
+          class="field is-horizontal"
+          *ngFor="let consumerGroup of consumerGroups"
+        >
+          <div class="field-label is-normal is-flex-grow-2">
+            <label class="label">{{consumerGroup}}</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <div class="select is-fullwidth">
+                  <select>
+                    <option *ngFor="let method of regressionMethods">
+                      {{"water-usage-forecasts.parameter." + method | translate}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+      </div>
+    </div>
+    <a class="button is-primary is-fullwidth">
+      <span>Berechnen</span>
+    </a>
   </div>
 </div>
