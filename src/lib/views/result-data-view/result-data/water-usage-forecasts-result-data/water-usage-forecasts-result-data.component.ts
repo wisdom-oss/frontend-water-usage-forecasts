@@ -31,12 +31,12 @@ export class WaterUsageForecastsResultDataComponent implements OnChanges {
 
   @Input("colors")
   colorMap = {
-    "Agriculture, Forestry, Fisheries": "green",
-    "Businesses": "#bcd9e0",
-    "Household": "#ba4c43",
-    "Public Institution": "#5443ba",
-    "Small Businesses": "#a9c940",
-    "Tourism": "#e02abf"
+    "Agriculture, Forestry, Fisheries": "#FFEB3B",
+    "Businesses": "#333333",
+    "Household": "#007FFF",
+    "Public Institution": "#F8F8F8",
+    "Small Businesses": "#9C27B0",
+    "Tourism": "#4FC3F7"
   };
 
   /** Area components the results are based on. */
