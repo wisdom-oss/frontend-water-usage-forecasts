@@ -130,7 +130,7 @@
   </div>
 </div>
 
-<div class="card">
+<div class="card block">
   <div class="card-header">
     <div class="card-header-title">
       Verbrauchergruppen im Detail
@@ -139,52 +139,15 @@
   <div class="card-content">
     <div class="tabs is-centered is-fullwidth">
       <ul>
-        <li [class]="detailConsumerGroup == consumerGroups[0] ? 'is-active' : null">
-          <a (click)="detailConsumerGroup = consumerGroups[0]">
+        <li
+          *ngFor="let group of consumerGroups"
+          [class]="detailConsumerGroup == group ? 'is-active' : null"
+        >
+          <a (click)="detailConsumerGroup = group">
             <span class="icon is-small">
-              <ion-icon name="sunny"></ion-icon>
+              <ion-icon [name]="group[1]"></ion-icon>
             </span>
-            <span>{{consumerGroups[0]}}</span>
-          </a>
-        </li>
-        <li [class]="detailConsumerGroup == consumerGroups[1] ? 'is-active' : null">
-          <a (click)="detailConsumerGroup = consumerGroups[1]">
-            <span class="icon is-small">
-              <ion-icon name="business"></ion-icon>
-            </span>
-            <span>{{consumerGroups[1]}}</span>
-          </a>
-        </li>
-        <li [class]="detailConsumerGroup == consumerGroups[2] ? 'is-active' : null">
-          <a (click)="detailConsumerGroup = consumerGroups[2]">
-            <span class="icon is-small">
-              <ion-icon name="home"></ion-icon>
-            </span>
-            <span>{{consumerGroups[2]}}</span>
-          </a>
-        </li>
-        <li [class]="detailConsumerGroup == consumerGroups[3] ? 'is-active' : null">
-          <a (click)="detailConsumerGroup = consumerGroups[3]">
-            <span class="icon is-small">
-              <ion-icon name="library"></ion-icon>
-            </span>
-            <span>{{consumerGroups[3]}}</span>
-          </a>
-        </li>
-        <li [class]="detailConsumerGroup == consumerGroups[4] ? 'is-active' : null">
-          <a (click)="detailConsumerGroup = consumerGroups[4]">
-            <span class="icon is-small">
-              <ion-icon name="storefront"></ion-icon>
-            </span>
-            <span>{{consumerGroups[4]}}</span>
-          </a>
-        </li>
-        <li [class]="detailConsumerGroup == consumerGroups[5] ? 'is-active' : null">
-          <a (click)="detailConsumerGroup = consumerGroups[5]">
-            <span class="icon is-small">
-              <ion-icon name="ticket"></ion-icon>
-            </span>
-            <span>{{consumerGroups[5]}}</span>
+            <span>{{group[0]}}</span>
           </a>
         </li>
       </ul>
@@ -245,3 +208,78 @@
   </div>
 </div>
 
+<div class="card block">
+  <div class="card-header">
+    <p class="card-header-title">
+      Ereignislog
+    </p>
+  </div>
+  <div class="card-content">
+    <div class="tabs is-toggle is-fullwidth is-primary">
+      <ul>
+        <li
+          *ngFor="let group of consumerGroups"
+          [class.is-active]="eventSelection[group[0]]"
+        >
+          <a (click)="eventSelection[group[0]] = !eventSelection[group[0]]">
+            <span class="icon is-small">
+              <ion-icon [name]="group[1]"></ion-icon>
+            </span>
+            <span>{{group[0]}}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <table class="table is-striped is-fullwidth">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Ereignisname</th>
+            <th>Landkreis</th>
+            <th>Gemeinde</th>
+            <th>Zeitrahmen</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr *ngIf="eventSelection[consumerGroups[0][0]]">
+          <td class="has-text-centered">
+            <ion-icon [name]="consumerGroups[0][1]"></ion-icon>
+          </td>
+          <td>Frühlingsfest der Farben</td>
+          <td>Oberbayern</td>
+          <td>Rosenheim</td>
+          <td>15. - 17. April 2024</td>
+        </tr>
+        <tr *ngIf="eventSelection[consumerGroups[3][0]]">
+          <td class="has-text-centered">
+            <ion-icon [name]="consumerGroups[3][1]"></ion-icon>
+          </td>
+          <td>Marburger Literaturtage</td>
+          <td>Marburg-Biedenkopf</td>
+          <td>Marburg</td>
+          <td>6. - 10. Juni 2024</td>
+        </tr>
+        <tr *ngIf="eventSelection[consumerGroups[5][0]]">
+          <td class="has-text-centered">
+            <ion-icon [name]="consumerGroups[5][1]"></ion-icon>
+          </td>
+          <td>Rheinischer Karneval</td>
+          <td>Düsseldorf</td>
+          <td>Neuss</td>
+          <td>20. - 25. Februar 2024</td>
+        </tr>
+        <tr *ngIf="eventSelection[consumerGroups[5][0]]">
+          <td class="has-text-centered">
+            <ion-icon [name]="consumerGroups[5][1]"></ion-icon>
+          </td>
+          <td>Weinwoche Würzburg</td>
+          <td>Unterfranken</td>
+          <td>Würzburg</td>
+          <td>1. - 7. August 2024</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

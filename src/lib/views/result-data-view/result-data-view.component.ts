@@ -70,16 +70,22 @@ export class ResultDataViewComponent implements OnInit, DoCheck {
   }
 
   // TODO: check, this is from mockup
-  consumerGroups = [
-    "Agriculture, Forestry, Fisheries",
-    "Businesses",
-    "Household",
-    "Public Institution",
-    "Small Businesses",
-    "Tourism"
+  consumerGroups: [string, string][] = [
+    ["Agriculture, Forestry, Fisheries", "sunny"],
+    ["Businesses", "business"],
+    ["Household", "home"],
+    ["Public Institution", "library"],
+    ["Small Businesses", "storefront"],
+    ["Tourism", "ticket"]
   ];
 
+  // TODO: check, this is from mockup
   detailConsumerGroup = this.consumerGroups[0];
+
+  // TODO: check, this is from mockup
+  eventSelection = Object.fromEntries(
+    this.consumerGroups.map(([key, icon]) => [key, true])
+  );
 
   /** The response from the forecast service. */
   response?: Promise<ForecastResponse>;
