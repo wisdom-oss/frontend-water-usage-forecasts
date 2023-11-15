@@ -129,3 +129,119 @@
     </a>
   </div>
 </div>
+
+<div class="card">
+  <div class="card-header">
+    <div class="card-header-title">
+      Verbrauchergruppen im Detail
+    </div>
+  </div>
+  <div class="card-content">
+    <div class="tabs is-centered is-fullwidth">
+      <ul>
+        <li [class]="detailConsumerGroup == consumerGroups[0] ? 'is-active' : null">
+          <a (click)="detailConsumerGroup = consumerGroups[0]">
+            <span class="icon is-small">
+              <ion-icon name="sunny"></ion-icon>
+            </span>
+            <span>{{consumerGroups[0]}}</span>
+          </a>
+        </li>
+        <li [class]="detailConsumerGroup == consumerGroups[1] ? 'is-active' : null">
+          <a (click)="detailConsumerGroup = consumerGroups[1]">
+            <span class="icon is-small">
+              <ion-icon name="business"></ion-icon>
+            </span>
+            <span>{{consumerGroups[1]}}</span>
+          </a>
+        </li>
+        <li [class]="detailConsumerGroup == consumerGroups[2] ? 'is-active' : null">
+          <a (click)="detailConsumerGroup = consumerGroups[2]">
+            <span class="icon is-small">
+              <ion-icon name="home"></ion-icon>
+            </span>
+            <span>{{consumerGroups[2]}}</span>
+          </a>
+        </li>
+        <li [class]="detailConsumerGroup == consumerGroups[3] ? 'is-active' : null">
+          <a (click)="detailConsumerGroup = consumerGroups[3]">
+            <span class="icon is-small">
+              <ion-icon name="library"></ion-icon>
+            </span>
+            <span>{{consumerGroups[3]}}</span>
+          </a>
+        </li>
+        <li [class]="detailConsumerGroup == consumerGroups[4] ? 'is-active' : null">
+          <a (click)="detailConsumerGroup = consumerGroups[4]">
+            <span class="icon is-small">
+              <ion-icon name="storefront"></ion-icon>
+            </span>
+            <span>{{consumerGroups[4]}}</span>
+          </a>
+        </li>
+        <li [class]="detailConsumerGroup == consumerGroups[5] ? 'is-active' : null">
+          <a (click)="detailConsumerGroup = consumerGroups[5]">
+            <span class="icon is-small">
+              <ion-icon name="ticket"></ion-icon>
+            </span>
+            <span>{{consumerGroups[5]}}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <div style="height: 70vh">
+          <canvas
+            style="max-width: min(100%, 100vw)"
+            baseChart
+            type="bar"
+            [data]="{
+              labels: ['2019', '2020', '2021', '2022', '2023'],
+              datasets: [{
+                label: 'platzhalter',
+                data: [100.00, 110.57, 120.58, 137.73, 153.16],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+              }]
+            }"
+            [options]="{
+              maintainAspectRatio: false,
+              resizeDelay: 50
+            }"
+          ></canvas>
+        </div>
+      </div>
+      <div class="column">
+        <div class="p-2">
+          <p class="subtitle mb-1">Einsparpotenzialen</p>
+          <div class="content">
+            <ul>
+              <li>Lorem ipsum dolor sit amet</li>
+              <li>Consectetur adipiscing elit</li>
+              <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</li>
+              <li>Ut enim ad minim veniam</li>
+              <li>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+              <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-2">
+          <p class="subtitle mb-1">Effizienzpotenzialen</p>
+          <div class="content">
+            <ul>
+              <li>Lorem ipsum dolor sit amet</li>
+              <li>Consectetur adipiscing elit</li>
+              <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</li>
+              <li>Ut enim ad minim veniam</li>
+              <li>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+              <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

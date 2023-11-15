@@ -79,6 +79,8 @@ export class ResultDataViewComponent implements OnInit, DoCheck {
     "Tourism"
   ];
 
+  detailConsumerGroup = this.consumerGroups[0];
+
   /** The response from the forecast service. */
   response?: Promise<ForecastResponse>;
   /** Whether the request is done, used for the loader. */
