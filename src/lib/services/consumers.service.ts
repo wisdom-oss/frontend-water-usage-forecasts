@@ -7,30 +7,23 @@ import {Observable} from "rxjs";
 /** The base URL for the consumers API endpoint. */
 const API_URL = "consumers/";
 
-/**
- * The shape of the response returned by the
- * {@link ConsumersService#fetchConsumers} method.
- * @typedef {Object} ConsumerLocationsResponse
- * @property {number} id - The ID of the consumer.
- * @property {string} name - The name of the consumer.
- * @property {Object} geojson - The GeoJSON object representing the location of
- *   the consumer.
- * @property {Object} geojson.crs - The coordinate reference system (CRS) of
- *   the GeoJSON object.
- * @property {string} geojson.crs.type - The type of CRS.
- * @property {Object} geojson.crs.properties - The properties of the CRS.
- * @property {string} geojson.crs.properties.name - The name of the CRS.
- * @property {string} geojson.type - The type of GeoJSON object.
- * @property {Array} geojson.coordinates - The coordinates of the GeoJSON
- *   object.
- * @property {number} geojson.coordinates[0] - The longitude of the
- *   coordinates.
- * @property {number} geojson.coordinates[1] - The latitude of the coordinates.
- */
+/** Represents a consumer with various properties. */
 export type ConsumerLocationsResponse = {
-  id: number,
-  name: string,
-  geojson: {
+  /**
+   * The UUID of the consumer which identifies the consumer in the database and related HTTP requests.
+   * @pattern ^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$
+   */
+  id: string;
+
+  /** The name of the consumer. */
+  name: string;
+
+  /**
+   * The consumer's location expressed as GeoJSON (Point Geometry).
+   * Refer to GeoJSON schema for Point Geometry at https://geojson.org/schema/Point.json
+   * and the complete schema at https://geojson.org/schema/GeoJSON.json
+   */
+  location: {
     crs: {
       type: "name",
       properties: {
@@ -39,7 +32,28 @@ export type ConsumerLocationsResponse = {
     },
     type: "Point",
     coordinates: [number, number]
-  }
+  } & object;
+
+  /**
+   * The consumer's default usage type.
+   * This value is used as default value when creating new usage records for the consumer.
+   */
+  usageType: string;
+
+  /** Description of the consumer. */
+  description: string;
+
+  /** Address of the consumer. */
+  address: string;
+
+  /**
+   * Additional properties which may be used to store additional information about the consumer.
+   * The properties are stored as JSON object in the database.
+   * The key is a string and the value may be any valid JSON value.
+   */
+  additionalProperties: {
+    [key: string]: any;
+  };
 }[];
 
 /** Service for receiving consumers data. */

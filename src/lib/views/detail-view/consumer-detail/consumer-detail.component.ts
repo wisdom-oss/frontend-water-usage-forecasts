@@ -56,13 +56,13 @@ export class ConsumerDetailComponent implements OnInit, AfterViewInit {
   }
 
   handleConsumerData(data: ConsumerLocationsResponse) {
-    for (let {id, name, geojson} of data) {
+    for (let {id, name, location} of data) {
       this.name = name;
       this.breadcrumbs.set(2, {
         text: name,
         link: "#"
       });
-      let coordinates = [geojson.coordinates[1], geojson.coordinates[0]] as [number, number];
+      let coordinates = [location.coordinates[1], location.coordinates[0]] as [number, number];
       this.marker = {
         coordinates,
         tooltip: name,

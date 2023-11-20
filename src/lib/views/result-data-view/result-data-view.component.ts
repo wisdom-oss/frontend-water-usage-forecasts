@@ -261,8 +261,8 @@ export class ResultDataViewComponent implements OnInit, DoCheck {
       for (let marker of data[1] ?? []) {
         markers.push({
           coordinates: [
-            marker.geojson.coordinates[1],
-            marker.geojson.coordinates[0]
+            marker.location.coordinates[1],
+            marker.location.coordinates[0]
           ] as [number, number],
           tooltip: marker.name,
           icon: consumerIcon,
