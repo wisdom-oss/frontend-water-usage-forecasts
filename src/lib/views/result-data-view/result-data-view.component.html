@@ -133,6 +133,59 @@
 <div class="card block">
   <div class="card-header">
     <div class="card-header-title">
+      <p>Verbrauch und Wasserrechte</p>
+    </div>
+  </div>
+  <div class="card-content">
+    <div style="height: 70vh">
+      <canvas
+        style="max-width: min(100%, 100vw)"
+        baseChart
+        type="bar"
+        [data]="{
+          labels: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022],
+          datasets: [{
+              label: 'Wasserverbrauch',
+              data: [142.56, 82.10, 108.71, 127.02, 233.26, 252.82, 287.00, 322.86, 329.92, 321.15, 378.05, 336.83, 413.99],
+              type: 'bar',
+              backgroundColor: '#007FFF'
+          }, {
+              label: 'Wasserrecht',
+              data: [300, 300, 300, 300, 300, 300, 300, 450, 450, 450, 450, 450, 450],
+              type: 'line',
+              borderColor: '#ED5A23',
+              backgroundColor: '#ED5A23',
+              fill: false
+          }]
+        }"
+        [options]="{
+          maintainAspectRatio: false,
+          resizeDelay: 50,
+          scales: {
+            y: {
+              stacked: true,
+              title: {
+                display: true,
+                text: 'water-usage-forecasts.chart.consumption' | translate
+              }
+            },
+            x: {
+              stacked: true,
+              title: {
+                display: true,
+                text: 'water-usage-forecasts.chart.year' | translate
+              }
+            }
+          }
+        }"
+      ></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="card block">
+  <div class="card-header">
+    <div class="card-header-title">
       Verbrauchergruppen im Detail
     </div>
   </div>
