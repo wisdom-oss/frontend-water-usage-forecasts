@@ -263,6 +263,76 @@
 
 <div class="card block">
   <div class="card-header">
+    <div class="card-header-title">
+      <p>Vergleich der Prognosen</p>
+    </div>
+  </div>
+  <div class="card-content">
+    <div style="height: 70vh">
+      <canvas
+        style="max-width: min(100%, 100vw)"
+        baseChart
+        type="scatter"
+        [data]="{
+          datasets: [
+            {
+              label: 'Historischer Wasserverbrauch',
+              data: comparisonValues.historicalConsumption,
+              borderColor: '#007FFF',
+              backgroundColor: '#007FFF'
+            },
+            {
+              label: 'Szenario 1',
+              data: comparisonValues.scenario1,
+              borderColor: '#ED5A23',
+              backgroundColor: '#ED5A23'
+            },
+            {
+              label: 'Szenario 2',
+              data: comparisonValues.scenario2,
+              borderColor: '#37ED23',
+              backgroundColor: '#37ED23'
+            },
+            {
+              label: 'Szenario 3',
+              data: comparisonValues.scenario3,
+              borderColor: '#ED23EA',
+              backgroundColor: '#ED23EA',
+            },
+            {
+              label: 'Szenario 4',
+              data: comparisonValues.scenario4,
+              borderColor: '#ED2323FF',
+              backgroundColor: '#ED2323FF',
+            }
+          ]
+        }"
+        [options]="{
+          maintainAspectRatio: false,
+          resizeDelay: 50,
+          scales: {
+            y: {
+              title: {
+                display: true,
+                text: 'water-usage-forecasts.chart.consumption' | translate
+              }
+            },
+            x: {
+              type: 'category',
+              title: {
+                display: true,
+                text: 'water-usage-forecasts.chart.year' | translate
+              }
+            }
+          }
+        }"
+      ></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="card block">
+  <div class="card-header">
     <p class="card-header-title">
       Ereignislog
     </p>
