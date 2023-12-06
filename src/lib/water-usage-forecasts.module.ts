@@ -28,6 +28,7 @@ import {
   WaterUsageForecastsResultDataComponent
 }
   from "./views/result-data-view/result-data/water-usage-forecasts-result-data/water-usage-forecasts-result-data.component";
+import { MockupComponent } from './views/result-data-view/mockup/mockup.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {
     WaterRightDetailComponent,
     ResultDataComponent,
     WaterUsageForecastsResultDataComponent,
-    ProphetForecastResultDataComponent
+    ProphetForecastResultDataComponent,
+    MockupComponent
   ],
   imports: [
     WisdomModule,
