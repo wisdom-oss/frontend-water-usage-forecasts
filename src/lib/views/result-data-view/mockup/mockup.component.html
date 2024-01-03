@@ -26,7 +26,6 @@
   <div class="card-content" *ngIf="consumerGroupsPrognosisModelsExpanded">
     <div *ngFor="let selectionEntry of resultDataViewComponent.selectionEntries">
       <div *ngFor="let selected of selectionEntry[1]">
-        <h3 class="subtitle">{{selected[1]}} ({{selected[0]}})</h3>
         <div
           class="field is-horizontal"
           *ngFor="let consumerGroup of consumerGroups"
@@ -144,43 +143,35 @@
             <span class="icon is-small">
               <ion-icon name="cut"></ion-icon>
             </span>
-            <span>Einsparpotentiale</span>
+            <span>Einspar- und Effizienzpotentiale</span>
           </a>
         </li>
         <li [class.is-active]="detailHouseholdsSelection == 1">
           <a class="icon-text" (click)="detailHouseholdsSelection = 1">
-            <span class="icon is-small">
-              <ion-icon name="options"></ion-icon>
-            </span>
-            <span>Effizienzpotentiale</span>
-          </a>
-        </li>
-        <li [class.is-active]="detailHouseholdsSelection == 2">
-          <a class="icon-text" (click)="detailHouseholdsSelection = 2">
             <span class="icon is-small">
               <ion-icon name="analytics-sharp"></ion-icon>
             </span>
             <span>Bevölkerungsprognosen</span>
           </a>
         </li>
-        <li [class.is-active]="detailHouseholdsSelection == 3">
-          <a class="icon-text" (click)="detailHouseholdsSelection = 3">
+        <li [class.is-active]="detailHouseholdsSelection == 2">
+          <a class="icon-text" (click)="detailHouseholdsSelection = 2">
             <span class="icon is-small">
               <ion-icon name="person"></ion-icon>
             </span>
             <span>Bevölkerungszahlen</span>
           </a>
         </li>
-        <li [class.is-active]="detailHouseholdsSelection == 4">
-          <a class="icon-text" (click)="detailHouseholdsSelection = 4">
+        <li [class.is-active]="detailHouseholdsSelection == 3">
+          <a class="icon-text" (click)="detailHouseholdsSelection = 3">
             <span class="icon is-small">
               <ion-icon name="pie-chart"></ion-icon>
             </span>
             <span>Pro Kopf Bedarf</span>
           </a>
         </li>
-        <li [class.is-active]="detailHouseholdsSelection == 5">
-          <a class="icon-text" (click)="detailHouseholdsSelection = 5">
+        <li [class.is-active]="detailHouseholdsSelection == 4">
+          <a class="icon-text" (click)="detailHouseholdsSelection = 4">
             <span class="icon is-small">
               <ion-icon name="document-text"></ion-icon>
             </span>
@@ -192,53 +183,40 @@
     <div *ngIf="detailHouseholdsSelection == 0">
       <div class="content" style="height: 50vh">
         <ul>
-          <li>Lorem ipsum dolor sit amet</li>
-          <li>Consectetur adipiscing elit</li>
-          <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</li>
-          <li>Ut enim ad minim veniam</li>
-          <li>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-          <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</li>
+          <li>Initiativen zur Regenwassernutzung werden durchgeführt.</li>
+          <li>Prämie von 150 Euro für den Wechsel von alten Haushaltsgeräten mit hohem Wasserbedarf.</li>
+          <li>Pilotprojekt 50 L Wasserhaus.</li>
         </ul>
       </div>
     </div>
     <div *ngIf="detailHouseholdsSelection == 1">
-      <div class="content" style="height: 50vh">
-        <ul>
-          <li>Lorem ipsum dolor sit amet</li>
-          <li>Consectetur adipiscing elit</li>
-          <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</li>
-          <li>Ut enim ad minim veniam</li>
-          <li>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-          <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</li>
-        </ul>
-      </div>
-    </div>
-    <div *ngIf="detailHouseholdsSelection == 2">
       <div style="height: 50vh">
         <canvas
           style="max-width: min(100%, 100vw)"
           baseChart
           type="line"
           [data]="{
-            labels: ['Year-5', 'Year-4', 'Year-3', 'Year-2', 'Year-1', 'Year 0', 'Year+1', 'Year+2', 'Year+3', 'Year+4'],
+            labels: [1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047],
             datasets: [
               {
                 label: 'Gewerblicher Datenanbieter',
-                data: [82.18, 82.67, 83.02, 83.16, 83.28, 83.5, 83.7, 83.9, 84.1, 84.3],
+                data: [121424,121263,121762,121723,124476,123272,126024,121458,127168,121869,123291,125648,125632,123008,126028,126144,126646,127118,127624,128839,129469,130141,130853,128490,128253,132496,131028,129377,131401,129913,128735,134390,134328,134260,135235,134394,132496,133251,130969,134401,134735,134692,133558,136297,132743,134170,134001,134409],
                 borderColor: 'rgba(255, 99, 132, 1)',
                 borderWidth: 2,
                 fill: false,
               },
               {
                 label: 'Projektion des Bundes',
-                data: [82.18, 82.67, 83.02, 83.16, 83.28, 83.5, 84.0, 84.5, 85.0, 85.5],
+                data: [115352, 115279, 115581, 115554, 118192, 117045, 118655, 115326, 119802, 115706, 117067, 119300, 119277, 117334, 119685, 119790, 120270, 120716, 121200, 122352, 122954, 123131, 123264, 122061, 121840, 126375, 125484, 122920, 126336, 122425, 121302, 127664, 127146, 126534, 127963, 127666, 124863, 125816, 123415, 127665, 127989, 127951, 126873, 135475, 125112, 127458, 127302, 127987]
+,
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 2,
                 fill: false,
               },
               {
                 label: 'Projektion des Landes',
-                data: [82.18, 82.67, 83.02, 83.16, 83.28, 83.5, 84.3, 85.1, 85.9, 86.7],
+                data: [113493, 117041, 115695, 114733, 118849, 116456, 118643, 113895, 121809, 113123, 116051, 119107, 117021, 114165, 118070, 117889, 117650, 118309, 117090, 122312, 123837, 123119, 122906, 124061, 121981, 128476, 124781, 120854, 129313, 122445, 119147, 132286, 129228, 129661, 128393, 125419, 125479, 127170, 124330, 124491, 128449, 127611, 124752, 132889, 128768, 127271, 128651, 130491, 130977]
+,
                 borderColor: 'rgba(255, 206, 86, 1)',
                 borderWidth: 2,
                 fill: false,
@@ -260,18 +238,19 @@
         ></canvas>
       </div>
     </div>
-    <div *ngIf="detailHouseholdsSelection == 3">
+    <div *ngIf="detailHouseholdsSelection == 2">
       <div style="height: 50vh">
         <canvas
           style="max-width: min(100%, 100vw)"
           baseChart
           type="line"
           [data]="{
-            labels: ['Year-5', 'Year-4', 'Year-3', 'Year-2', 'Year-1', 'Year 0'],
-            datasets: [
+                        labels: [1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024]
+,
+                        datasets: [
               {
                 label: 'Landesdatenbank',
-                data: [82.18, 82.67, 83.02, 83.16, 83.28, 83.50],
+                data: [115750, 115907, 116412, 116646, 118747, 117487, 120249, 113771, 120753, 115990, 115890, 120583, 121604, 118545, 120446, 119361, 117908, 118859, 119072, 121151, 124102, 124058, 124121, 124205, 122108, 123341, 127911, 124523, 122470, 128206, 122000, 120429, 130517, 127828, 130826, 129559, 126849, 126647, 126718, 125375, 126289, 128309, 129397, 125940, 134215, 130161, 128547, 130423, 132076, 131624],
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 2,
                 fill: false,
@@ -293,7 +272,7 @@
         ></canvas>
       </div>
     </div>
-    <div *ngIf="detailHouseholdsSelection == 4">
+    <div *ngIf="detailHouseholdsSelection == 3">
       <div style="height: 50vh">
         <canvas
           style="max-width: min(100%, 100vw)"
@@ -338,15 +317,12 @@
         ></canvas>
       </div>
     </div>
-    <div *ngIf="detailHouseholdsSelection == 5">
+    <div *ngIf="detailHouseholdsSelection == 4">
       <div class="content" style="height: 50vh">
         <ul>
-          <li>Lorem ipsum dolor sit amet</li>
-          <li>Consectetur adipiscing elit</li>
-          <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</li>
-          <li>Ut enim ad minim veniam</li>
-          <li>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-          <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</li>
+          <li>Im Ammerland verzeichnet man aktuell eine steigende Anzahl von Swimmingpools, was auf eine zunehmende Präferenz für private Schwimmmöglichkeiten hinweisen könnte. Die quantitative Zunahme könnte durch eine gestiegene Investitionsbereitschaft in private Poolanlagen oder einen Trend zu mehr Home-Entertainment und Freizeitmöglichkeiten im eigenen Garten erklärt werden.</li>
+          <li>Die aktuelle Wohnsituation im Ammerland zeigt einen steigenden Trend zu Einfamilienhäusern, wobei sie einen Anteil von 65% am Gesamtwohnbestand ausmachen. Gleichzeitig ist ein moderates Wachstum von Mehrfamilienhäusern zu verzeichnen, die nun 35% der Wohnungen im Ammerland ausmachen.</li>
+          <li>Die durchschnittliche Anzahl der Personen pro Haushalt im Ammerland liegt derzeit bei 2,4, wobei eine tendenzielle Verringerung im Vergleich zu früheren Jahren zu beobachten ist. Dies könnte auf einen Wandel in den Lebensstilen und eine verstärkte Tendenz zu kleinräumigeren Haushalten hinweisen.</li>
         </ul>
       </div>
     </div>
@@ -1007,7 +983,7 @@
       <canvas
         style="max-width: min(100%, 100vw)"
         baseChart
-        type="scatter"
+        type="line"
         [data]="{
           datasets: [
             {
@@ -1017,25 +993,25 @@
               backgroundColor: '#007FFF'
             },
             {
-              label: 'Szenario 1',
+              label: 'Prognose 2015',
               data: comparisonValues.scenario1,
               borderColor: '#ED5A23',
               backgroundColor: '#ED5A23'
             },
             {
-              label: 'Szenario 2',
+              label: 'Prognose 2022',
               data: comparisonValues.scenario2,
               borderColor: '#37ED23',
               backgroundColor: '#37ED23'
             },
             {
-              label: 'Szenario 3',
+              label: 'Prognose 2022a',
               data: comparisonValues.scenario3,
               borderColor: '#ED23EA',
               backgroundColor: '#ED23EA',
             },
             {
-              label: 'Szenario 4',
+              label: 'Prognose 2008',
               data: comparisonValues.scenario4,
               borderColor: '#ED2323FF',
               backgroundColor: '#ED2323FF',
