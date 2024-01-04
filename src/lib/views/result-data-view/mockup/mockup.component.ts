@@ -13,11 +13,17 @@ enum AgricultureClass {
 }
 
 enum ManufacturingClass {
+  logistic = "52.29 Erbringung von sonstigen Dienstleistungen für den Verkehr",
   FoodAndFeedProduction = "Herstellung von Nahrungs- und Futtermitteln",
   BeverageProduction = "Getränkeherstellung",
   ChemicalProductsManufacturing = "Herstellung von chemischen Erzeugnissen",
   PaperAndCardboardManufacturing = "Herstellung von Papier, Pappe und Waren daraus",
-  EnergySupply = "Energieversorgung"
+  EnergySupply = "Energieversorgung",
+  Bathhouses = "96.04 Saunas, Solarien, Bäder u. Ä.",
+  milk = "10.51 Milchverarbeitung (ohne Herstellung von Speiseeis)",
+  nursingHome = "87.30.0 Altenheime; Alten- und Behindertenwohnheime",
+  gas = "28.29.0 Herstellung von sonstigen nicht wirtschaftszweigspezifischen Maschinen"
+
 }
 
 interface LargeCustomer<C> {
@@ -153,46 +159,40 @@ export class MockupComponent implements OnInit {
 
   manufacturingCustomers: LargeCustomer<ManufacturingClass>[] = [
     {
-      name: "FoodPro GmbH",
-      district: "München",
-      municipality: "München",
-      class: ManufacturingClass.FoodAndFeedProduction
+      name: "Logistik GmbH & Co. KG",
+      district: "Ammerland",
+      municipality: "Rastede",
+      class: ManufacturingClass.logistic
     },
     {
-      name: "Getränke König AG",
-      district: "Leipzig",
-      municipality: "Leipzig",
-      class: ManufacturingClass.BeverageProduction
+      name: "Hallenbad Rastede",
+      district: "Ammerland",
+      municipality: "Rastede",
+      class: ManufacturingClass.Bathhouses
     },
     {
-      name: "ChemTech Ltd.",
-      district: "Dortmund",
+      name: "Heizungsbau",
+      district: "Ammerland",
       municipality: "Dortmund",
-      class: ManufacturingClass.ChemicalProductsManufacturing
+      class: ManufacturingClass.gas
     },
     {
-      name: "PapierWelt KG",
-      district: "Stuttgart",
-      municipality: "Stuttgart",
-      class: ManufacturingClass.PaperAndCardboardManufacturing
+      name: "Altenwohnanlage Rastede",
+      district: "Ammerland",
+      municipality: "Rastede",
+      class: ManufacturingClass.nursingHome
     },
     {
-      name: "EnergieNetz AG",
-      district: "Hamburg",
-      municipality: "Hamburg",
-      class: ManufacturingClass.EnergySupply
+      name: "Swembad Wiefelstede",
+      district: "Ammerland",
+      municipality: "Wiefelstede",
+      class: ManufacturingClass.Bathhouses
     },
     {
-      name: "BeveragePlus GmbH",
-      district: "Frankfurt",
-      municipality: "Frankfurt",
-      class: ManufacturingClass.BeverageProduction
-    },
-    {
-      name: "EcoPaper GmbH",
-      district: "Berlin",
-      municipality: "Berlin",
-      class: ManufacturingClass.PaperAndCardboardManufacturing
+      name: "Molkerei eG",
+      district: "Ammerland",
+      municipality: "Rastede",
+      class: ManufacturingClass.milk
     }
   ];
 

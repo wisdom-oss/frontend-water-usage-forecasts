@@ -206,7 +206,7 @@
                 fill: false,
               },
               {
-                label: 'Projektion des Bundes',
+                label: 'Projektion Genesis Online',
                 data: [115352, 115279, 115581, 115554, 118192, 117045, 118655, 115326, 119802, 115706, 117067, 119300, 119277, 117334, 119685, 119790, 120270, 120716, 121200, 122352, 122954, 123131, 123264, 122061, 121840, 126375, 125484, 122920, 126336, 122425, 121302, 127664, 127146, 126534, 127963, 127666, 124863, 125816, 123415, 127665, 127989, 127951, 126873, 135475, 125112, 127458, 127302, 127987]
 ,
                 borderColor: 'rgba(54, 162, 235, 1)',
@@ -214,7 +214,7 @@
                 fill: false,
               },
               {
-                label: 'Projektion des Landes',
+                label: 'Projektion der Landesdatenbank',
                 data: [113493, 117041, 115695, 114733, 118849, 116456, 118643, 113895, 121809, 113123, 116051, 119107, 117021, 114165, 118070, 117889, 117650, 118309, 117090, 122312, 123837, 123119, 122906, 124061, 121981, 128476, 124781, 120854, 129313, 122445, 119147, 132286, 129228, 129661, 128393, 125419, 125479, 127170, 124330, 124491, 128449, 127611, 124752, 132889, 128768, 127271, 128651, 130491, 130977]
 ,
                 borderColor: 'rgba(255, 206, 86, 1)',
@@ -230,7 +230,7 @@
               y: {
                 title: {
                   display: true,
-                  text: 'Bevölkerung (Millionen)'
+                  text: 'Bevölkerung'
                 }
               }
             }
@@ -573,7 +573,7 @@
             <th>Name</th>
             <th>Landkreis</th>
             <th>Gemeinde</th>
-            <th>Klasse</th>
+            <th>Klassifikation der Wirtschaftszweige 2008 (WZ 2008)</th>
           </tr>
           </thead>
           <tbody>
@@ -1073,6 +1073,7 @@
           <th>Landkreis</th>
           <th>Gemeinde</th>
           <th>Zeitrahmen</th>
+          <th>Bemerkung</th>
         </tr>
         </thead>
         <tbody>
@@ -1080,37 +1081,31 @@
           <td class="has-text-centered">
             <ion-icon [name]="consumerGroups[0][1]"></ion-icon>
           </td>
-          <td>Frühlingsfest der Farben</td>
-          <td>Oberbayern</td>
-          <td>Rosenheim</td>
-          <td>15. - 17. April 2024</td>
+          <td>COVID-19-Pandemie</td>
+          <td>Ammerland</td>
+          <td>-</td>
+          <td>2020 - 2023</td>
+          <td>Hoher Anteil von Home-Office mit Auswirkung auf private Verbräuche</td>
         </tr>
         <tr *ngIf="eventSelection[consumerGroups[3][0]]">
           <td class="has-text-centered">
             <ion-icon [name]="consumerGroups[3][1]"></ion-icon>
           </td>
-          <td>Marburger Literaturtage</td>
-          <td>Marburg-Biedenkopf</td>
-          <td>Marburg</td>
-          <td>6. - 10. Juni 2024</td>
+          <td>Flüchtlingskrise in Deutschland</td>
+          <td>Ammerland</td>
+          <td>-</td>
+          <td>2015 - 2016</td>
+          <td>Errichtung von Flüchtlingsunterkünften. Keine genauen Zahlen oder Informationen bekannt</td>
         </tr>
         <tr *ngIf="eventSelection[consumerGroups[5][0]]">
           <td class="has-text-centered">
             <ion-icon [name]="consumerGroups[5][1]"></ion-icon>
           </td>
-          <td>Rheinischer Karneval</td>
-          <td>Düsseldorf</td>
-          <td>Neuss</td>
-          <td>20. - 25. Februar 2024</td>
-        </tr>
-        <tr *ngIf="eventSelection[consumerGroups[5][0]]">
-          <td class="has-text-centered">
-            <ion-icon [name]="consumerGroups[5][1]"></ion-icon>
-          </td>
-          <td>Weinwoche Würzburg</td>
-          <td>Unterfranken</td>
-          <td>Würzburg</td>
-          <td>1. - 7. August 2024</td>
+          <td>Baugebietes Grote Placken</td>
+          <td>Ammerland</td>
+          <td>Wiefelstede</td>
+          <td>Ab 2023</td>
+          <td>Das Baugebiet Grote Placken wird ab 2023 mit neuen Wohneinheiten ausgestattet. Es sind 100 Bauplätze und rund 170 Wohneinheiten geplant.</td>
         </tr>
         </tbody>
       </table>
