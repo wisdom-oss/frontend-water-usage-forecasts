@@ -12,7 +12,7 @@ export type WaterRightLocationResponse = {
   waterRight: number,
   active?: boolean,
   real?: boolean,
-  geojson?: {
+  location?: {
     type: "Point",
     coordinates: [number, number]
   }
