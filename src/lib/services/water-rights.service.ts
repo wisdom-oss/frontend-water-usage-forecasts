@@ -81,12 +81,12 @@ export type WaterRightDetailResponse = Partial<{
     withdrawalRates: {
       amount: number,
       unit: string,
-      duration: string
+      interval: string
     }[],
     fluidDischarge: {
       amount: number,
       unit: string,
-      duration: string
+      interval: string
     }[],
     irrigationArea: {
       amount: number,
@@ -95,7 +95,7 @@ export type WaterRightDetailResponse = Partial<{
     rainSupplement: {
       amount: number,
       unit: string,
-      duration: string,
+      interval: string,
     }
   }[]>
 }>;

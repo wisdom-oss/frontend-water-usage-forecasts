@@ -219,11 +219,12 @@ export class MockupComponent implements OnInit {
   renderWithdrawalRates(rates?: {
     amount: number,
     unit: string,
-    duration: string
+    interval: string
   }[]) {
     let output = [];
-    for (let {amount, unit, duration} of rates ?? []) {
-      output.push(`${amount} ${unit}/${duration}`);
+    for (let {amount, unit, interval} of rates ?? []) {
+
+      output.push(`${amount} ${unit}/${interval}`);
     }
     return output.join(", ");
   }
