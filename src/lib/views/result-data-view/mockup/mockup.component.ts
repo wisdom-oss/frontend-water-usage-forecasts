@@ -243,7 +243,7 @@ export class MockupComponent implements OnInit {
           .waterRightsService
           .fetchWaterRightDetails(wr)
           .subscribe(data => {
-            if (data.locations?.some(location => location?.withdrawalRates.length)) {
+            if (data.locations?.some(location => location?.withdrawalRates?.length)) {
               this.waterRights.push(data);
             }
           });

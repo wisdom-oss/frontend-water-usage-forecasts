@@ -216,11 +216,12 @@ export class ResultDataViewComponent implements OnInit, DoCheck {
 
       // iterate over locations of water rights
       for (let marker of data[0] ?? []) {
+        if (!marker.location) continue;
         markers.push({
           coordinates: [
             // markers used here a calculated via location
-            marker.location!.coordinates[1],
-            marker.location!.coordinates[0]
+            marker.location.coordinates[1],
+            marker.location.coordinates[0]
           ] as [number, number],
           tooltip: `
             <b>Name</b>: ${marker.name}<br>

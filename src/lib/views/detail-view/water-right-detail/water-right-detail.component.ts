@@ -32,7 +32,10 @@ export class WaterRightDetailComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngAfterViewInit(): void {
-    this.bounds.subscribe(bounds => this.map.map?.flyToBounds(bounds));
+    this.bounds.subscribe(bounds => {
+      if (!bounds[0][0] || !bounds[0][1] || !bounds[1][0] || !bounds[1][1]) return;
+      this.map.map?.flyToBounds(bounds)
+    });
   }
 
   ngOnInit(): void {
