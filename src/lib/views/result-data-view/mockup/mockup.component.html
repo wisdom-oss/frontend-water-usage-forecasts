@@ -1,0 +1,1114 @@
+<div class="card block">
+  <div
+    class="card-header"
+    (click)="consumerGroupsPrognosisModelsExpanded = !consumerGroupsPrognosisModelsExpanded"
+  >
+    <a class="card-header-title">
+      <div class="columns is-flex-grow-1">
+        <div class="column">
+          <p>Verbrauchergruppen und Prognosemodelle</p>
+        </div>
+        <div class="column is-narrow">
+          <p class="icon">
+            <ion-icon
+              name="chevron-down"
+              *ngIf="!consumerGroupsPrognosisModelsExpanded"
+            ></ion-icon>
+            <ion-icon
+              name="chevron-up"
+              *ngIf="consumerGroupsPrognosisModelsExpanded"
+            ></ion-icon>
+          </p>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="card-content" *ngIf="consumerGroupsPrognosisModelsExpanded">
+    <div *ngFor="let selectionEntry of resultDataViewComponent.selectionEntries">
+      <div *ngFor="let selected of selectionEntry[1]">
+        <div
+          class="field is-horizontal"
+          *ngFor="let consumerGroup of consumerGroups"
+        >
+          <div class="field-label is-normal is-flex-grow-2">
+            <label class="label">{{consumerGroup[0]}}</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <div class="select is-fullwidth">
+                  <select>
+                    <option *ngFor="let method of resultDataViewComponent.regressionMethods">
+                      {{"water-usage-forecasts.parameter." + method | translate}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+      </div>
+    </div>
+    <a class="button is-primary is-fullwidth">
+      <span>Berechnen</span>
+    </a>
+  </div>
+</div>
+
+<div class="card block">
+  <div class="card-header">
+    <div class="card-header-title">
+      <p>Verbrauch und Wasserrechte</p>
+    </div>
+  </div>
+  <div class="card-content">
+    <div style="height: 70vh">
+      <canvas
+        style="max-width: min(100%, 100vw)"
+        baseChart
+        type="bar"
+        [data]="{
+          labels: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022],
+          datasets: [{
+              label: 'Wasserverbrauch',
+              data: [142.56, 82.10, 108.71, 127.02, 233.26, 252.82, 287.00, 322.86, 329.92, 321.15, 378.05, 336.83, 413.99],
+              type: 'bar',
+              backgroundColor: '#007FFF'
+          }, {
+              label: 'Wasserrecht',
+              data: [300, 300, 300, 300, 300, 300, 300, 450, 450, 450, 450, 450, 450],
+              type: 'line',
+              borderColor: '#ED5A23',
+              backgroundColor: '#ED5A23',
+              fill: false
+          }]
+        }"
+        [options]="{
+          maintainAspectRatio: false,
+          resizeDelay: 50,
+          scales: {
+            y: {
+              stacked: true,
+              title: {
+                display: true,
+                text: 'water-usage-forecasts.chart.consumption' | translate
+              }
+            },
+            x: {
+              stacked: true,
+              title: {
+                display: true,
+                text: 'water-usage-forecasts.chart.year' | translate
+              }
+            }
+          }
+        }"
+      ></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- Haushalte -->
+<div class="card block">
+  <a
+    class="card-header"
+    (click)="detailHouseholdsSelection = !(detailHouseholdsSelection! + 1) ? 0 : undefined"
+  >
+    <div class="card-header-title">
+      <div class="columns is-flex-grow-1">
+        <div class="column">
+          <p>Detailansicht Haushalte</p>
+        </div>
+        <div class="column is-narrow">
+          <p class="icon">
+            <ion-icon
+              name="chevron-down"
+              *ngIf="!(detailHouseholdsSelection! + 1)"
+            ></ion-icon>
+            <ion-icon
+              name="chevron-up"
+              *ngIf="!!(detailHouseholdsSelection! + 1)"
+            ></ion-icon>
+          </p>
+        </div>
+      </div>
+    </div>
+  </a>
+  <div class="card-content" *ngIf="detailHouseholdsSelection! + 1">
+    <div class="tabs is-centered is-fullwidth">
+      <ul>
+        <li [class.is-active]="detailHouseholdsSelection == 0">
+          <a class="icon-text" (click)="detailHouseholdsSelection = 0">
+            <span class="icon is-small">
+              <ion-icon name="cut"></ion-icon>
+            </span>
+            <span>Einspar- und Effizienzpotentiale</span>
+          </a>
+        </li>
+        <li [class.is-active]="detailHouseholdsSelection == 1">
+          <a class="icon-text" (click)="detailHouseholdsSelection = 1">
+            <span class="icon is-small">
+              <ion-icon name="analytics-sharp"></ion-icon>
+            </span>
+            <span>Bevölkerungsprognosen</span>
+          </a>
+        </li>
+        <li [class.is-active]="detailHouseholdsSelection == 2">
+          <a class="icon-text" (click)="detailHouseholdsSelection = 2">
+            <span class="icon is-small">
+              <ion-icon name="person"></ion-icon>
+            </span>
+            <span>Bevölkerungszahlen</span>
+          </a>
+        </li>
+        <li [class.is-active]="detailHouseholdsSelection == 3">
+          <a class="icon-text" (click)="detailHouseholdsSelection = 3">
+            <span class="icon is-small">
+              <ion-icon name="pie-chart"></ion-icon>
+            </span>
+            <span>Pro Kopf Bedarf</span>
+          </a>
+        </li>
+        <li [class.is-active]="detailHouseholdsSelection == 4">
+          <a class="icon-text" (click)="detailHouseholdsSelection = 4">
+            <span class="icon is-small">
+              <ion-icon name="document-text"></ion-icon>
+            </span>
+            <span>Sozio-Ökonomische Informationen</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="detailHouseholdsSelection == 0">
+      <div class="content" style="height: 50vh">
+        <ul>
+          <li>Initiativen zur Regenwassernutzung werden durchgeführt.</li>
+          <li>Prämie von 150 Euro für den Wechsel von alten Haushaltsgeräten mit hohem Wasserbedarf.</li>
+          <li>Pilotprojekt 50 L Wasserhaus.</li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="detailHouseholdsSelection == 1">
+      <div style="height: 50vh">
+        <canvas
+          style="max-width: min(100%, 100vw)"
+          baseChart
+          type="line"
+          [data]="{
+            labels: [1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047],
+            datasets: [
+              {
+                label: 'Gewerblicher Datenanbieter',
+                data: [121424,121263,121762,121723,124476,123272,126024,121458,127168,121869,123291,125648,125632,123008,126028,126144,126646,127118,127624,128839,129469,130141,130853,128490,128253,132496,131028,129377,131401,129913,128735,134390,134328,134260,135235,134394,132496,133251,130969,134401,134735,134692,133558,136297,132743,134170,134001,134409],
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 2,
+                fill: false,
+              },
+              {
+                label: 'Projektion Genesis Online',
+                data: [115352, 115279, 115581, 115554, 118192, 117045, 118655, 115326, 119802, 115706, 117067, 119300, 119277, 117334, 119685, 119790, 120270, 120716, 121200, 122352, 122954, 123131, 123264, 122061, 121840, 126375, 125484, 122920, 126336, 122425, 121302, 127664, 127146, 126534, 127963, 127666, 124863, 125816, 123415, 127665, 127989, 127951, 126873, 135475, 125112, 127458, 127302, 127987]
+,
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 2,
+                fill: false,
+              },
+              {
+                label: 'Projektion der Landesdatenbank',
+                data: [113493, 117041, 115695, 114733, 118849, 116456, 118643, 113895, 121809, 113123, 116051, 119107, 117021, 114165, 118070, 117889, 117650, 118309, 117090, 122312, 123837, 123119, 122906, 124061, 121981, 128476, 124781, 120854, 129313, 122445, 119147, 132286, 129228, 129661, 128393, 125419, 125479, 127170, 124330, 124491, 128449, 127611, 124752, 132889, 128768, 127271, 128651, 130491, 130977]
+,
+                borderColor: 'rgba(255, 206, 86, 1)',
+                borderWidth: 2,
+                fill: false,
+              },
+            ],
+          }"
+          [options]="{
+            maintainAspectRatio: false,
+            resizeDelay: 50,
+            scales: {
+              y: {
+                title: {
+                  display: true,
+                  text: 'Bevölkerung'
+                }
+              }
+            }
+          }"
+        ></canvas>
+      </div>
+    </div>
+    <div *ngIf="detailHouseholdsSelection == 2">
+      <div style="height: 50vh">
+        <canvas
+          style="max-width: min(100%, 100vw)"
+          baseChart
+          type="line"
+          [data]="{
+                        labels: [1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024]
+,
+                        datasets: [
+              {
+                label: 'Landesdatenbank',
+                data: [115750, 115907, 116412, 116646, 118747, 117487, 120249, 113771, 120753, 115990, 115890, 120583, 121604, 118545, 120446, 119361, 117908, 118859, 119072, 121151, 124102, 124058, 124121, 124205, 122108, 123341, 127911, 124523, 122470, 128206, 122000, 120429, 130517, 127828, 130826, 129559, 126849, 126647, 126718, 125375, 126289, 128309, 129397, 125940, 134215, 130161, 128547, 130423, 132076, 131624],
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                fill: false,
+              }
+            ],
+          }"
+          [options]="{
+            maintainAspectRatio: false,
+            resizeDelay: 50,
+            scales: {
+              y: {
+                title: {
+                  display: true,
+                  text: 'Bevölkerung (Millionen)'
+                }
+              }
+            }
+          }"
+        ></canvas>
+      </div>
+    </div>
+    <div *ngIf="detailHouseholdsSelection == 3">
+      <div style="height: 50vh">
+        <canvas
+          style="max-width: min(100%, 100vw)"
+          baseChart
+          type="pie"
+          [data]="{
+            labels: [
+              'Körperpflege (Baden, Duschen)',
+              'Toilettenspülung',
+              'Wäschewaschen',
+              'Geschirrspülen',
+              'Raumreinigung, Autopflege, Garten',
+              'Essen, Trinken',
+              'Kleingewerbeanteil',
+            ],
+            datasets: [{
+              data: [36, 27, 12, 6, 6, 4, 9],
+              backgroundColor: [
+                '#FF6384',
+                '#36A2EB',
+                '#FFCE56',
+                '#4BC0C0',
+                '#9966FF',
+                '#FF9900',
+                '#00cc99',
+              ],
+              hoverBackgroundColor: [
+                '#FF6384',
+                '#36A2EB',
+                '#FFCE56',
+                '#4BC0C0',
+                '#9966FF',
+                '#FF9900',
+                '#00cc99',
+              ],
+            }],
+          }"
+          [options]="{
+            maintainAspectRatio: false,
+            resizeDelay: 50
+          }"
+        ></canvas>
+      </div>
+    </div>
+    <div *ngIf="detailHouseholdsSelection == 4">
+      <div class="content" style="height: 50vh">
+        <ul>
+          <li>Im Ammerland verzeichnet man aktuell eine steigende Anzahl von Swimmingpools, was auf eine zunehmende Präferenz für private Schwimmmöglichkeiten hinweisen könnte. Die quantitative Zunahme könnte durch eine gestiegene Investitionsbereitschaft in private Poolanlagen oder einen Trend zu mehr Home-Entertainment und Freizeitmöglichkeiten im eigenen Garten erklärt werden.</li>
+          <li>Die aktuelle Wohnsituation im Ammerland zeigt einen steigenden Trend zu Einfamilienhäusern, wobei sie einen Anteil von 65% am Gesamtwohnbestand ausmachen. Gleichzeitig ist ein moderates Wachstum von Mehrfamilienhäusern zu verzeichnen, die nun 35% der Wohnungen im Ammerland ausmachen.</li>
+          <li>Die durchschnittliche Anzahl der Personen pro Haushalt im Ammerland liegt derzeit bei 2,4, wobei eine tendenzielle Verringerung im Vergleich zu früheren Jahren zu beobachten ist. Dies könnte auf einen Wandel in den Lebensstilen und eine verstärkte Tendenz zu kleinräumigeren Haushalten hinweisen.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Touristik -->
+<div class="card block">
+  <a
+    class="card-header"
+    (click)="detailTourismSelection = !(detailTourismSelection! + 1) ? 0 : undefined"
+  >
+    <div class="card-header-title">
+      <div class="columns is-flex-grow-1">
+        <div class="column">
+          <p>Detailansicht Touristik</p>
+        </div>
+        <div class="column is-narrow">
+          <p class="icon">
+            <ion-icon
+              name="chevron-down"
+              *ngIf="!(detailTourismSelection! + 1)"
+            ></ion-icon>
+            <ion-icon
+              name="chevron-up"
+              *ngIf="!!(detailTourismSelection! + 1)"
+            ></ion-icon>
+          </p>
+        </div>
+      </div>
+    </div>
+  </a>
+  <div class="card-content" *ngIf="detailTourismSelection! + 1">
+    <div class="tabs is-centered is-fullwidth">
+      <ul>
+        <li [class.is-active]="detailTourismSelection == 0">
+          <a class="icon-text" (click)="detailTourismSelection = 0">
+            <span class="icon is-small">
+              <ion-icon name="cut"></ion-icon>
+            </span>
+            <span>Einsparpotentiale</span>
+          </a>
+        </li>
+        <li [class.is-active]="detailTourismSelection == 1">
+          <a class="icon-text" (click)="detailTourismSelection = 1">
+            <span class="icon is-small">
+              <ion-icon name="options"></ion-icon>
+            </span>
+            <span>Effizienzpotentiale</span>
+          </a>
+        </li>
+        <li [class.is-active]="detailTourismSelection == 2">
+          <a class="icon-text" (click)="detailTourismSelection = 2">
+            <span class="icon is-small">
+              <ion-icon name="stats-chart"></ion-icon>
+            </span>
+            <span>Statistiken</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="detailTourismSelection == 0">
+      <div class="content" style="height: 25vh">
+        <ul>
+          <li>Lorem ipsum dolor sit amet</li>
+          <li>Consectetur adipiscing elit</li>
+          <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</li>
+          <li>Ut enim ad minim veniam</li>
+          <li>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+          <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="detailTourismSelection == 1">
+      <div class="content" style="height: 25vh">
+        <ul>
+          <li>Lorem ipsum dolor sit amet</li>
+          <li>Consectetur adipiscing elit</li>
+          <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</li>
+          <li>Ut enim ad minim veniam</li>
+          <li>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+          <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="detailTourismSelection == 2">
+      <div class="content" style="height: 25vh">
+        <ul>
+          <li>Lorem ipsum dolor sit amet</li>
+          <li>Consectetur adipiscing elit</li>
+          <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</li>
+          <li>Ut enim ad minim veniam</li>
+          <li>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+          <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Landwirtschaft -->
+<div class="card block">
+  <a
+    class="card-header"
+    (click)="detailAgricultureSelection = !(detailAgricultureSelection! + 1) ? 0 : undefined"
+  >
+    <div class="card-header-title">
+      <div class="columns is-flex-grow-1">
+        <div class="column">
+          <p>Detailansicht Landwirtschaft</p>
+        </div>
+        <div class="column is-narrow">
+          <p class="icon">
+            <ion-icon
+              name="chevron-down"
+              *ngIf="!(detailAgricultureSelection! + 1)"
+            ></ion-icon>
+            <ion-icon
+              name="chevron-up"
+              *ngIf="!!(detailAgricultureSelection! + 1)"
+            ></ion-icon>
+          </p>
+        </div>
+      </div>
+    </div>
+  </a>
+  <div class="card-content" *ngIf="detailAgricultureSelection! + 1">
+    <div class="tabs is-centered is-fullwidth">
+      <ul>
+        <li [class.is-active]="detailAgricultureSelection == 0">
+          <a class="icon-text" (click)="detailAgricultureSelection = 0">
+            <span class="icon is-small">
+              <ion-icon name="cut"></ion-icon>
+            </span>
+            <span>Einsparpotentiale</span>
+          </a>
+        </li>
+        <li [class.is-active]="detailAgricultureSelection == 1">
+          <a class="icon-text" (click)="detailAgricultureSelection = 1">
+            <span class="icon is-small">
+              <ion-icon name="options"></ion-icon>
+            </span>
+            <span>Effizienzpotentiale</span>
+          </a>
+        </li>
+        <li [class.is-active]="detailAgricultureSelection == 2">
+          <a class="icon-text" (click)="detailAgricultureSelection = 2">
+            <span class="icon is-small">
+              <ion-icon name="paw"></ion-icon>
+            </span>
+            <span>Großvieheinheiten</span>
+          </a>
+        </li>
+        <li [class.is-active]="detailAgricultureSelection == 3">
+          <a class="icon-text" (click)="detailAgricultureSelection = 3">
+            <span class="icon is-small">
+              <ion-icon name="key"></ion-icon>
+            </span>
+            <span>Wasserrechte</span>
+          </a>
+        </li>
+        <li [class.is-active]="detailAgricultureSelection == 4">
+          <a class="icon-text" (click)="detailAgricultureSelection = 4">
+            <span class="icon is-small">
+              <ion-icon name="business"></ion-icon>
+            </span>
+            <span>Großkunden</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="detailAgricultureSelection == 0">
+      <div class="content" style="height: 25vh">
+        <ul>
+          <li>Lorem ipsum dolor sit amet</li>
+          <li>Consectetur adipiscing elit</li>
+          <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</li>
+          <li>Ut enim ad minim veniam</li>
+          <li>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+          <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="detailAgricultureSelection == 1">
+      <div class="content" style="height: 25vh">
+        <ul>
+          <li>Lorem ipsum dolor sit amet</li>
+          <li>Consectetur adipiscing elit</li>
+          <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</li>
+          <li>Ut enim ad minim veniam</li>
+          <li>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+          <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="detailAgricultureSelection == 2">
+      <div class="content" style="height: 25vh">
+        <ul>
+          <li>Lorem ipsum dolor sit amet</li>
+          <li>Consectetur adipiscing elit</li>
+          <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</li>
+          <li>Ut enim ad minim veniam</li>
+          <li>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+          <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="detailAgricultureSelection == 3">
+      <div style="min-height: 25vh">
+        <table class="table is-fullwidth">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Landkreis</th>
+              <th>Gemeinde</th>
+              <th>Entnahmemenge</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let waterRight of waterRights.slice(0, 7)">
+            <td>{{waterRight.subject ?? waterRight.bailee}}</td>
+            <td>{{waterRight.waterAuthority}}</td>
+            <td>{{waterRight.locations?.[0]?.localSubDistrict}}</td>
+            <td>
+              <p *ngFor="let location of waterRight.locations">
+                {{location?.name}}: {{renderWithdrawalRates(location?.withdrawalRates)}}
+              </p>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <nav class="pagination">
+          <ul class="pagination-list is-justify-content-center">
+            <li><a class="pagination-link is-current">1</a></li>
+            <li><a class="pagination-link">2</a></li>
+            <li><a class="pagination-link">3</a></li>
+            <li><span class="pagination-ellipsis">&hellip;</span></li>
+            <li><a class="pagination-link">45</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div *ngIf="detailAgricultureSelection == 4">
+      <div style="min-height: 25vh">
+        <table class="table is-fullwidth">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Landkreis</th>
+            <th>Gemeinde</th>
+            <th>Klassifikation der Wirtschaftszweige 2008 (WZ 2008)</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let consumer of agricultureCustomers">
+              <td>{{consumer.name}}</td>
+              <td>{{consumer.district}}</td>
+              <td>{{consumer.municipality}}</td>
+              <td>{{consumer.class}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <nav class="pagination">
+          <ul class="pagination-list is-justify-content-center">
+            <li><a class="pagination-link is-current">1</a></li>
+            <li><a class="pagination-link">2</a></li>
+            <li><a class="pagination-link">3</a></li>
+            <li><span class="pagination-ellipsis">&hellip;</span></li>
+            <li><a class="pagination-link">45</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Industrie -->
+<div class="card block">
+  <a
+    class="card-header"
+    (click)="detailIndustrySelection = !(detailIndustrySelection! + 1) ? 0 : undefined"
+  >
+    <div class="card-header-title">
+      <div class="columns is-flex-grow-1">
+        <div class="column">
+          <p>Detailansicht Industrie</p>
+        </div>
+        <div class="column is-narrow">
+          <p class="icon">
+            <ion-icon
+              name="chevron-down"
+              *ngIf="!(detailIndustrySelection! + 1)"
+            ></ion-icon>
+            <ion-icon
+              name="chevron-up"
+              *ngIf="!!(detailIndustrySelection! + 1)"
+            ></ion-icon>
+          </p>
+        </div>
+      </div>
+    </div>
+  </a>
+  <div class="card-content" *ngIf="detailIndustrySelection! + 1">
+    <div class="tabs is-centered is-fullwidth">
+      <ul>
+        <li [class.is-active]="detailIndustrySelection == 0">
+          <a class="icon-text" (click)="detailIndustrySelection = 0">
+            <span class="icon is-small">
+              <ion-icon name="cut"></ion-icon>
+            </span>
+            <span>Einsparpotentiale</span>
+          </a>
+        </li>
+        <li [class.is-active]="detailIndustrySelection == 1">
+          <a class="icon-text" (click)="detailIndustrySelection = 1">
+            <span class="icon is-small">
+              <ion-icon name="options"></ion-icon>
+            </span>
+            <span>Effizienzpotentiale</span>
+          </a>
+        </li>
+        <li [class.is-active]="detailIndustrySelection == 2">
+          <a class="icon-text" (click)="detailIndustrySelection = 2">
+            <span class="icon is-small">
+              <ion-icon name="bar-chart"></ion-icon>
+            </span>
+            <span>Entwicklungspotenziale</span>
+          </a>
+        </li>
+        <li [class.is-active]="detailIndustrySelection == 3">
+          <a class="icon-text" (click)="detailIndustrySelection = 3">
+            <span class="icon is-small">
+              <ion-icon name="pie-chart"></ion-icon>
+            </span>
+            <span>Branchenanteile</span>
+          </a>
+        </li>
+        <li [class.is-active]="detailIndustrySelection == 4">
+          <a class="icon-text" (click)="detailIndustrySelection = 4">
+            <span class="icon is-small">
+              <ion-icon name="key"></ion-icon>
+            </span>
+            <span>Wasserrechte</span>
+          </a>
+        </li>
+        <li [class.is-active]="detailIndustrySelection == 5">
+          <a class="icon-text" (click)="detailIndustrySelection = 5">
+            <span class="icon is-small">
+              <ion-icon name="business"></ion-icon>
+            </span>
+            <span>Großkunden</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="detailIndustrySelection == 0">
+      <div class="content" style="height: 25vh">
+        <ul>
+          <li>Lorem ipsum dolor sit amet</li>
+          <li>Consectetur adipiscing elit</li>
+          <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</li>
+          <li>Ut enim ad minim veniam</li>
+          <li>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+          <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="detailIndustrySelection == 1">
+      <div class="content" style="height: 25vh">
+        <ul>
+          <li>Lorem ipsum dolor sit amet</li>
+          <li>Consectetur adipiscing elit</li>
+          <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</li>
+          <li>Ut enim ad minim veniam</li>
+          <li>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+          <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="detailIndustrySelection == 2">
+      <div class="content" style="height: 25vh">
+        <ul>
+          <li>Lorem ipsum dolor sit amet</li>
+          <li>Consectetur adipiscing elit</li>
+          <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</li>
+          <li>Ut enim ad minim veniam</li>
+          <li>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+          <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="detailIndustrySelection == 3">
+      <div style="height: 50vh">
+        <canvas
+          style="max-width: min(100%, 100vw)"
+          baseChart
+          type="pie"
+          [data]="{
+            labels: [
+              'Herstellung von Nahrungs- und Futtermitteln',
+              'Getränkeherstellung',
+              'Herstellung von chemischen Erzeugnissen',
+              'Herstellung von Papier, Pappe und Waren daraus',
+              'Energieversorgung'
+            ],
+            datasets: [{
+                label: 'Branchenanteile',
+                data: [41.26, 8.74, 2.91, 37.86, 9.22],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)'
+                ],
+                borderWidth: 1
+            }],
+          }"
+          [options]="{
+            maintainAspectRatio: false,
+            resizeDelay: 50
+          }"
+        ></canvas>
+      </div>
+    </div>
+    <div *ngIf="detailIndustrySelection == 4">
+      <div style="min-height: 25vh">
+        <table class="table is-fullwidth">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Landkreis</th>
+            <th>Gemeinde</th>
+            <th>Entnahmemenge</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let waterRight of waterRights.slice(0, 7)">
+            <td>{{waterRight.subject ?? waterRight.bailee}}</td>
+            <td>{{waterRight.waterAuthority}}</td>
+            <td>{{waterRight.locations?.[0]?.localSubDistrict}}</td>
+            <td>
+              <p *ngFor="let location of waterRight.locations">
+                {{location?.name}}: {{renderWithdrawalRates(location?.withdrawalRates)}}
+              </p>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <nav class="pagination">
+          <ul class="pagination-list is-justify-content-center">
+            <li><a class="pagination-link is-current">1</a></li>
+            <li><a class="pagination-link">2</a></li>
+            <li><a class="pagination-link">3</a></li>
+            <li><span class="pagination-ellipsis">&hellip;</span></li>
+            <li><a class="pagination-link">45</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div *ngIf="detailIndustrySelection == 5">
+      <div style="min-height: 25vh">
+        <table class="table is-fullwidth">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Landkreis</th>
+            <th>Gemeinde</th>
+            <th>Klasse</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let consumer of manufacturingCustomers">
+            <td>{{consumer.name}}</td>
+            <td>{{consumer.district}}</td>
+            <td>{{consumer.municipality}}</td>
+            <td>{{consumer.class}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <nav class="pagination">
+          <ul class="pagination-list is-justify-content-center">
+            <li><a class="pagination-link is-current">1</a></li>
+            <li><a class="pagination-link">2</a></li>
+            <li><a class="pagination-link">3</a></li>
+            <li><span class="pagination-ellipsis">&hellip;</span></li>
+            <li><a class="pagination-link">45</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Öffentliche Einrichtungen -->
+<div class="card block">
+  <a
+    class="card-header"
+    (click)="detailPublicInstitutionSelection = !(detailPublicInstitutionSelection! + 1) ? 0 : undefined"
+  >
+    <div class="card-header-title">
+      <div class="columns is-flex-grow-1">
+        <div class="column">
+          <p>Detailansicht Öffentliche Einrichtungen</p>
+        </div>
+        <div class="column is-narrow">
+          <p class="icon">
+            <ion-icon
+              name="chevron-down"
+              *ngIf="!(detailPublicInstitutionSelection! + 1)"
+            ></ion-icon>
+            <ion-icon
+              name="chevron-up"
+              *ngIf="!!(detailPublicInstitutionSelection! + 1)"
+            ></ion-icon>
+          </p>
+        </div>
+      </div>
+    </div>
+  </a>
+  <div class="card-content" *ngIf="detailPublicInstitutionSelection! + 1">
+    <div class="tabs is-centered is-fullwidth">
+      <ul>
+        <li [class.is-active]="detailPublicInstitutionSelection == 0">
+          <a class="icon-text" (click)="detailPublicInstitutionSelection = 0">
+            <span class="icon is-small">
+              <ion-icon name="cut"></ion-icon>
+            </span>
+            <span>Einsparpotentiale</span>
+          </a>
+        </li>
+        <li [class.is-active]="detailPublicInstitutionSelection == 1">
+          <a class="icon-text" (click)="detailPublicInstitutionSelection = 1">
+            <span class="icon is-small">
+              <ion-icon name="options"></ion-icon>
+            </span>
+            <span>Effizienzpotentiale</span>
+          </a>
+        </li>
+        <li [class.is-active]="detailPublicInstitutionSelection == 2">
+          <a class="icon-text" (click)="detailPublicInstitutionSelection = 2">
+            <span class="icon is-small">
+              <ion-icon name="flask"></ion-icon>
+            </span>
+            <span>Forschungseinrichtungen</span>
+          </a>
+        </li>
+        <li [class.is-active]="detailPublicInstitutionSelection == 3">
+          <a class="icon-text" (click)="detailPublicInstitutionSelection = 3">
+            <span class="icon is-small">
+              <ion-icon name="medkit"></ion-icon>
+            </span>
+            <span>Kliniken</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="detailPublicInstitutionSelection == 0">
+      <div class="content" style="height: 25vh">
+        <ul>
+          <li>Lorem ipsum dolor sit amet</li>
+          <li>Consectetur adipiscing elit</li>
+          <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</li>
+          <li>Ut enim ad minim veniam</li>
+          <li>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+          <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="detailPublicInstitutionSelection == 1">
+      <div class="content" style="height: 25vh">
+        <ul>
+          <li>Lorem ipsum dolor sit amet</li>
+          <li>Consectetur adipiscing elit</li>
+          <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</li>
+          <li>Ut enim ad minim veniam</li>
+          <li>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+          <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="detailPublicInstitutionSelection == 2">
+      <div style="min-height: 25vh">
+        <table class="table is-fullwidth">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Landkreis</th>
+            <th>Gemeinde</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let institution of researchInstitutions">
+            <td>{{institution.name}}</td>
+            <td>{{institution.district}}</td>
+            <td>{{institution.municipality}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <nav class="pagination">
+          <ul class="pagination-list is-justify-content-center">
+            <li><a class="pagination-link is-current">1</a></li>
+            <li><a class="pagination-link">2</a></li>
+            <li><a class="pagination-link">3</a></li>
+            <li><span class="pagination-ellipsis">&hellip;</span></li>
+            <li><a class="pagination-link">45</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div *ngIf="detailPublicInstitutionSelection == 3">
+      <div style="min-height: 25vh">
+        <table class="table is-fullwidth">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Wasserbedarf (L) pro Tag</th>
+            <th>Anzahl der Betten</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let clinic of clinics">
+            <td>{{clinic.name}}</td>
+            <td>{{clinic.waterConsumptionPerDay}}</td>
+            <td>{{clinic.numberOfBeds}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <nav class="pagination">
+          <ul class="pagination-list is-justify-content-center">
+            <li><a class="pagination-link is-current">1</a></li>
+            <li><a class="pagination-link">2</a></li>
+            <li><a class="pagination-link">3</a></li>
+            <li><span class="pagination-ellipsis">&hellip;</span></li>
+            <li><a class="pagination-link">45</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card block">
+  <div class="card-header">
+    <div class="card-header-title">
+      <p>Vergleich der Prognosen</p>
+    </div>
+  </div>
+  <div class="card-content">
+    <div style="height: 70vh">
+      <canvas
+        style="max-width: min(100%, 100vw)"
+        baseChart
+        type="line"
+        [data]="{
+          datasets: [
+            {
+              label: 'Historischer Wasserverbrauch',
+              data: comparisonValues.historicalConsumption,
+              borderColor: '#007FFF',
+              backgroundColor: '#007FFF'
+            },
+            {
+              label: 'Prognose 2015',
+              data: comparisonValues.scenario1,
+              borderColor: '#ED5A23',
+              backgroundColor: '#ED5A23'
+            },
+            {
+              label: 'Prognose 2022',
+              data: comparisonValues.scenario2,
+              borderColor: '#37ED23',
+              backgroundColor: '#37ED23'
+            },
+            {
+              label: 'Prognose 2022a',
+              data: comparisonValues.scenario3,
+              borderColor: '#ED23EA',
+              backgroundColor: '#ED23EA',
+            },
+            {
+              label: 'Prognose 2008',
+              data: comparisonValues.scenario4,
+              borderColor: '#ED2323FF',
+              backgroundColor: '#ED2323FF',
+            }
+          ]
+        }"
+        [options]="{
+          maintainAspectRatio: false,
+          resizeDelay: 50,
+          scales: {
+            y: {
+              title: {
+                display: true,
+                text: 'water-usage-forecasts.chart.consumption' | translate
+              }
+            },
+            x: {
+              type: 'category',
+              title: {
+                display: true,
+                text: 'water-usage-forecasts.chart.year' | translate
+              }
+            }
+          }
+        }"
+      ></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="card block">
+  <div class="card-header">
+    <p class="card-header-title">
+      Ereignislog
+    </p>
+  </div>
+  <div class="card-content">
+    <div class="tabs is-toggle is-fullwidth is-primary">
+      <ul>
+        <li
+          *ngFor="let group of consumerGroups"
+          [class.is-active]="eventSelection[group[0]]"
+        >
+          <a (click)="eventSelection[group[0]] = !eventSelection[group[0]]">
+            <span class="icon is-small">
+              <ion-icon [name]="group[1]"></ion-icon>
+            </span>
+            <span>{{group[0]}}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <table class="table is-striped is-fullwidth">
+        <thead>
+        <tr>
+          <th></th>
+          <th>Ereignisname</th>
+          <th>Landkreis</th>
+          <th>Gemeinde</th>
+          <th>Zeitrahmen</th>
+          <th>Bemerkung</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngIf="eventSelection[consumerGroups[0][0]]">
+          <td class="has-text-centered">
+            <ion-icon [name]="consumerGroups[0][1]"></ion-icon>
+          </td>
+          <td>COVID-19-Pandemie</td>
+          <td>Ammerland</td>
+          <td>-</td>
+          <td>2020 - 2023</td>
+          <td>Hoher Anteil von Home-Office mit Auswirkung auf private Verbräuche</td>
+        </tr>
+        <tr *ngIf="eventSelection[consumerGroups[3][0]]">
+          <td class="has-text-centered">
+            <ion-icon [name]="consumerGroups[3][1]"></ion-icon>
+          </td>
+          <td>Flüchtlingskrise in Deutschland</td>
+          <td>Ammerland</td>
+          <td>-</td>
+          <td>2015 - 2016</td>
+          <td>Errichtung von Flüchtlingsunterkünften. Keine genauen Zahlen oder Informationen bekannt</td>
+        </tr>
+        <tr *ngIf="eventSelection[consumerGroups[5][0]]">
+          <td class="has-text-centered">
+            <ion-icon [name]="consumerGroups[5][1]"></ion-icon>
+          </td>
+          <td>Baugebietes Grote Placken</td>
+          <td>Ammerland</td>
+          <td>Wiefelstede</td>
+          <td>Ab 2023</td>
+          <td>Das Baugebiet Grote Placken wird ab 2023 mit neuen Wohneinheiten ausgestattet. Es sind 100 Bauplätze und rund 170 Wohneinheiten geplant.</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
