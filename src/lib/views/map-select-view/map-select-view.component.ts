@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from "@angular/c
 import {ActivatedRoute} from "@angular/router";
 import {Resolution, BreadcrumbsService, LayoutService, ResizeDirective, LayerConfig} from "common";
 import { Subscription, combineLatest } from "rxjs";
+import { SelectToggleControlComponent } from "./select-toggle-control/select-toggle-control.component";
 
 @Component({
   selector: 'lib-map-select-view',
@@ -10,8 +11,20 @@ import { Subscription, combineLatest } from "rxjs";
 export class MapSelectViewComponent implements OnInit, AfterViewInit, OnDestroy {
 
   LAYERS: LayerConfig.Input = [[
-    "view_nds_districts",
-    "view_nds_municipals"
+    {
+      layer: "view_nds_districts", 
+      showNames: true,
+      control: [
+        [SelectToggleControlComponent, "topright"]
+      ]
+    },
+    {
+      layer: "view_nds_municipals",
+      showNames: true, 
+      control: [
+        [SelectToggleControlComponent, "topright", {show: false}]
+      ]
+    }
   ]];
   height = "500px";
 

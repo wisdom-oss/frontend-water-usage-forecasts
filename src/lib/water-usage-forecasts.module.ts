@@ -29,6 +29,7 @@ import {
 }
   from "./views/result-data-view/result-data/water-usage-forecasts-result-data/water-usage-forecasts-result-data.component";
 import { MockupComponent } from './views/result-data-view/mockup/mockup.component';
+import { SelectToggleControlComponent } from './views/map-select-view/select-toggle-control/select-toggle-control.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { MockupComponent } from './views/result-data-view/mockup/mockup.componen
     ResultDataComponent,
     WaterUsageForecastsResultDataComponent,
     ProphetForecastResultDataComponent,
-    MockupComponent
+    MockupComponent,
+    SelectToggleControlComponent
   ],
   imports: [
     WisdomModule,
