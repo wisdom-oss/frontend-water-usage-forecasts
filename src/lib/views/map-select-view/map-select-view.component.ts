@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
-import {Resolution, BreadcrumbsService, LayoutService, ResizeDirective, LayerConfig} from "common";
-import { Subscription, combineLatest } from "rxjs";
+import {Resolution, BreadcrumbsService, LayoutService, ResizeDirective, LayerConfig, LayerId, LayerContent, Map2Component, ShapeKey} from "common";
+import { BehaviorSubject, Subscription, combineLatest, map } from "rxjs";
 import { SelectToggleControlComponent } from "./select-toggle-control/select-toggle-control.component";
 
 @Component({
@@ -14,13 +14,15 @@ export class MapSelectViewComponent implements OnInit, AfterViewInit, OnDestroy 
     {
       layer: "view_nds_districts", 
       showNames: true,
+      select: true,
       control: [
         [SelectToggleControlComponent, "topright"]
       ]
     },
     {
       layer: "view_nds_municipals",
-      showNames: true, 
+      showNames: true,
+      select: true, 
       control: [
         [SelectToggleControlComponent, "topright", {show: false}]
       ]
@@ -28,14 +30,12 @@ export class MapSelectViewComponent implements OnInit, AfterViewInit, OnDestroy 
   ]];
   height = "500px";
 
-  // imported resolution from the map component
-  Resolution = Resolution;
-
-  keys?: string[];
-
-  selectionReady = false;
-
   subscriptions: Subscription[] = [];
+
+  @ViewChild(Map2Component) map?: Map2Component;
+  private selectionSubject = new BehaviorSubject<ShapeKey[]>([]);
+  selection = this.selectionSubject.asObservable();
+  selectionReady = this.selection.pipe(map(list => !!list.length));
 
   @ViewChild(ResizeDirective) buttonRow?: ResizeDirective;
 
@@ -55,17 +55,23 @@ export class MapSelectViewComponent implements OnInit, AfterViewInit, OnDestroy 
 
   ngAfterViewInit(): void {
     this.fitMap();
+    
+    let map = this.map!;
+    this.subscriptions.push(combineLatest(
+      [map.selectedLayers, map.visibleLayers]
+    ).subscribe(([selectedLayers, visibleLayers]) => {
+      let selection = [];
+      for (let layerId of visibleLayers) {
+        for (let content of selectedLayers[layerId] ?? []) {
+          selection.push(content.key);
+        }
+      }
+      this.selectionSubject.next(selection);
+    }));
   }
 
   ngOnDestroy(): void {
     for (let sub of this.subscriptions) sub.unsubscribe();
-  }
-
-  mapSelection(
-    selection: {keys: string[]}
-  ) {
-    this.keys = selection.keys;
-    this.selectionReady = !!selection.keys.length;
   }
 
   private fitMap() {
