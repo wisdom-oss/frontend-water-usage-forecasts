@@ -15,17 +15,13 @@ export class MapSelectViewComponent implements OnInit, AfterViewInit, OnDestroy 
       layer: "view_nds_districts", 
       showNames: true,
       select: true,
-      control: [
-        [SelectToggleControlComponent, "topright"]
-      ]
+      control: [SelectToggleControlComponent, "topright"]
     },
     {
       layer: "view_nds_municipals",
       showNames: true,
       select: true, 
-      control: [
-        [SelectToggleControlComponent, "topright", {show: false}]
-      ]
+      control: [SelectToggleControlComponent, "topright", {show: false}]
     }
   ]];
   height = "500px";
