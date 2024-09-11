@@ -187,22 +187,22 @@ export class ResultDataViewComponent implements OnInit, DoCheck {
     method: RegressionMethod
   ): void {
     // TODO: split this into multiple subroutines
-    this.mapService.fetchLayerData(null, [key].flat())
-      .then(data => {
-        let selection: this["selection"] = {
-          state: [],
-          district: [],
-          administration: [],
-          municipal: []
-        };
-        for (let shape of data.shapes) {
-          let res = Resolution.toEnum(shape.key.length);
-          if (!res) continue;
-          selection[res].push([shape.key, shape.name]);
-        }
-        this.selection = selection;
-        this.setBreadCrumbs(key);
-      });
+    // this.mapService.fetchLayerData(null, [key].flat())
+    //   .then(data => {
+    //     let selection: this["selection"] = {
+    //       state: [],
+    //       district: [],
+    //       administration: [],
+    //       municipal: []
+    //     };
+    //     for (let shape of data.shapes) {
+    //       let res = Resolution.toEnum(shape.key.length);
+    //       if (!res) continue;
+    //       selection[res].push([shape.key, shape.name]);
+    //     }
+    //     this.selection = selection;
+    //     this.setBreadCrumbs(key);
+    //   });
     this.waterRightService.fetchWaterRightLocations({
         in: [key].flat(),
         isReal: true

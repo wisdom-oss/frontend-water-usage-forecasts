@@ -70,6 +70,10 @@ export class MapSelectViewComponent implements OnInit, AfterViewInit, OnDestroy 
     for (let sub of this.subscriptions) sub.unsubscribe();
   }
 
+  get keys(): {key: string[]} {
+    return {key: this.selectionSubject.value}
+  }
+
   private fitMap() {
     this.subscriptions.push(combineLatest([
       this.layoutService.layout,
