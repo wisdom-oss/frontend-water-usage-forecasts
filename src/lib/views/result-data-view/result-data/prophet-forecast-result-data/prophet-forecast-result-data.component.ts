@@ -21,7 +21,7 @@ import {firstValueFrom} from "rxjs";
 import {
   ForecastResponse,
   ProphetForecastService
-} from "../../../../services/prophet-forecast.service";
+} from "../../../../services/old/prophet-forecast.service";
 
 enum PrognosisVariant {
   LOW,

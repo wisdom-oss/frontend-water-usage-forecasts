@@ -3,7 +3,7 @@ import type {ResultDataViewComponent} from "../result-data-view.component";
 import {
   WaterRightDetailResponse,
   WaterRightsService
-} from "../../../services/water-rights.service";
+} from "../../../services/old/water-rights.service";
 
 enum AgricultureClass {
   AnnualCropFarming = "Anbau einjähriger Pflanzen",

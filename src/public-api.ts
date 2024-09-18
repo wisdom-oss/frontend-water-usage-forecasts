@@ -16,12 +16,12 @@ export const wisdomInterface: WisdomInterface = {
   }
 }
 
-export * from "./lib/services/consumers.service";
-export * from "./lib/services/prophet-forecast.service";
-export * from "./lib/services/water-rights.service";
-export * from "./lib/services/water-usage-forecasts.service";
-export * from "./lib/services/water-usage-history.service"
+export * from "./lib/services/old/consumers.service";
+export * from "./lib/services/old/prophet-forecast.service";
+export * from "./lib/services/old/water-rights.service";
+export * from "./lib/services/old/water-usage-forecasts.service";
+export * from "./lib/services/old/water-usage-history.service"
 
-export {ForecastResponse, ForecastType} from "./lib/services/water-usage-forecasts.service";
+export {ForecastResponse, ForecastType} from "./lib/services/old/water-usage-forecasts.service";
 
 export * from "./lib/water-usage-forecasts.module";

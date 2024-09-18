@@ -8,7 +8,7 @@ import {BehaviorSubject} from "rxjs";
 import {
   WaterRightDetailResponse,
   WaterRightsService
-} from "../../../services/water-rights.service";
+} from "../../../services/old/water-rights.service";
 import {waterRightIcon} from "../../../map-icons";
 
 @Component({

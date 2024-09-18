@@ -11,13 +11,13 @@ import {combineLatestWith} from "rxjs/operators";
 
 import {
   ForecastType as ProphetForecastType
-} from "../../services/prophet-forecast.service";
+} from "../../services/old/prophet-forecast.service";
 import {
   ForecastResponse,
   ForecastType as WaterUsageForecastType
-} from "../../services/water-usage-forecasts.service";
-import {WaterRightsService} from "../../services/water-rights.service";
-import {ConsumersService} from "../../services/consumers.service";
+} from "../../services/old/water-usage-forecasts.service";
+import {WaterRightsService} from "../../services/old/water-rights.service";
+import {ConsumersService} from "../../services/old/consumers.service";
 import {consumerIcon, waterRightIcon} from "../../map-icons";
 
 export type RegressionMethod = WaterUsageForecastType | ProphetForecastType;
