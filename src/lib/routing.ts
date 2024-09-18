@@ -12,7 +12,7 @@ import {
 } from "./views/map-select-view/map-select-view.component";
 import {
   ResultDataViewComponent
-} from "./views/result-data-view/result-data-view.component";
+} from "./views/old/result-data-view/result-data-view.component";
 
 export const route: Route = {
   path: "water-usage-forecasts",

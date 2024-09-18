@@ -15,7 +15,7 @@ import {
   WaterUsageForecastsService,
   ForecastType,
   ForecastUsage
-} from "../../../../services/old/water-usage-forecasts.service";
+} from "../../../../../services/old/water-usage-forecasts.service";
 
 @Component({
   selector: 'lib-water-usage-forecasts-result-data',
