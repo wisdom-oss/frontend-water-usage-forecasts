@@ -9,7 +9,7 @@ export interface AvailableAlgorithm {
   identifier: string,
   description: string,
   parameters: Record<string, {
-    defaultValue: any,
+    default: any,
     description: string,
   }>
 }
@@ -56,11 +56,22 @@ export class UsageForecastService {
 
   constructor(private http: HttpClient) {}
 
-  fetchAvailableAlgorithms(): Promise<AvailableAlgorithm[]> {
-    return firstValueFrom(this.http.get(`${API_URL}/`, {
-      context: new HttpContext()
-        .set(USE_API_URL, true)
-    })) as Promise<AvailableAlgorithm[]>;
+  async fetchAvailableAlgorithms(): Promise<AvailableAlgorithm[]> {
+    let algorithms = await firstValueFrom(this.http.get<AvailableAlgorithm[]>(
+      `${API_URL}/`, 
+      {
+        context: new HttpContext()
+          .set(USE_API_URL, true)
+      }
+    ));
+
+    // ensure that "parameters" is set
+    for (let algo of algorithms as any[]) {
+      algo.parameters = algo.parameter;
+      delete algo.parameter;
+    }
+    
+    return algorithms;
   }
 
   fetchForecast(
@@ -69,13 +80,15 @@ export class UsageForecastService {
     consumerGroup?: null | ConsumerGroup | ConsumerGroup[],
     parameters?: null | Record<string, any>
   ): Promise<ProphetResult | NumPyResult> {
-    let params = new HttpParams();
-    for (let paramKey of [key].flat()) params.append("key", paramKey);
+    let params = new HttpParams(); // remember, params operations are always copy
+    for (let paramKey of [key].flat()) params = params.append("key", paramKey);
     for (let consumerGroupKey of [consumerGroup ?? []].flat()) {
-      params.append("consumerGroup", consumerGroupKey);
+      params = params.append("consumerGroup", consumerGroupKey);
     }
 
-    let context = new HttpContext().set(USE_API_URL, true);
+    let context = new HttpContext()
+      .set(USE_API_URL, true)
+      .set(USE_LOADER, "Calculating Forecast...");
     
     if (parameters && Object.values(parameters).length) {
       let formData = new FormData();
@@ -90,6 +103,7 @@ export class UsageForecastService {
       )) as Promise<ProphetResult | NumPyResult>;
     }
 
+    console.log(params);
     return firstValueFrom(this.http.get(
       `${API_URL}/${scriptIdentifier}`,
       { params, context }

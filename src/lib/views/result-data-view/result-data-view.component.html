@@ -1,0 +1,77 @@
+<div class="columns" style="height: 100%;">
+  <div class="column">
+    <canvas 
+      baseChart 
+      type="bar"
+      [datasets]="datasets"
+    ></canvas>
+  </div>
+  <div 
+    class="column is-one-quarter" 
+    style="min-width: 20em;"
+  >
+    <div class="message">
+      <div class="message-header">
+        <p>Configure Forecast</p>
+      </div>
+      <div 
+        class="message-body is-flex is-flex-direction-column"
+        style="height: 70vh; max-height: 70vh; overflow-y: auto;"
+      >
+        <div class="field">
+          <label class="label">Algorithm</label>
+          <p class="control has-icons-left">
+            <span class="select" style="width: 100%;">
+              <select [(ngModel)]="algorithm" style="width: 100%;">
+                <option 
+                  *ngFor="let algo of algorithms"
+                  [ngValue]="algo"
+                >
+                  {{algo.identifier.split("-").join(" ") | titlecase}}
+                </option>
+              </select>
+            </span>
+            <span class="icon is-left" style="color: inherit;">
+              <ion-icon name="color-wand-outline"></ion-icon>
+            </span>
+          </p>
+          <p class="help">{{algorithm?.description}}</p>
+        </div>
+        <div *ngIf="algorithm && !(algorithm.parameters | empty)">
+          <p class="title is-5 mb-2 mt-2">Parameters</p>
+          <div 
+            class="field" 
+            *ngFor="let param of algorithm.parameters | keyvalue"
+          >
+            <div class="control">
+              <label class="label">
+                {{param.key.split("_").join(" ") | titlecase}}
+              </label>
+              <input 
+                class="input" 
+                type="text" 
+                [placeholder]="param.value.default"
+                [(ngModel)]="parameters[param.key]"
+              >
+              <span class="help">
+                {{param.value.description}}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div 
+          class="is-flex-grow-1" 
+          style="min-height: 1.5em;"
+        ></div>
+        <div class="control">
+          <button 
+            class="button is-primary is-fullwidth is-justify-content-center"
+            (click)="fetchForecast()"
+          >
+            Calculate Forecast
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
