@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
+import { Subscription, combineLatest, firstValueFrom } from 'rxjs';
 import { AvailableAlgorithm, ConsumerGroup, NumPyResult, ProphetResult, UsageForecastService } from '../../services/usage-forecast.service';
-import { LoaderInjector, ManualPromise } from 'common';
+import { LayoutService, LoaderInjector, ManualPromise, ResizeDirective } from 'common';
 import { ChartDataset } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'lib-result-data-view',
   templateUrl: './result-data-view.component.html'
 })
-export class ResultDataViewComponent implements OnInit {
-  console = console;
-
+export class ResultDataViewComponent implements OnInit, AfterViewInit {
   datasets: ChartDataset<"bar", {x: string, y: number}[]>[] = [{
     label: 'Sales 2023',
     data: [{x: 'Sales', y: 20}, {x: 'Revenue', y: 10}],
@@ -19,6 +18,8 @@ export class ResultDataViewComponent implements OnInit {
     borderColor: 'rgba(255, 99, 132, 1)',
     borderWidth: 1
   }];
+  
+  @ViewChild(BaseChartDirective) chartCanvas?: BaseChartDirective;
 
   algorithms: AvailableAlgorithm[] = [];
   algorithm?: AvailableAlgorithm;
@@ -26,12 +27,17 @@ export class ResultDataViewComponent implements OnInit {
 
   private keys: string[] = [];
   private consumerGroups: ConsumerGroup[] = [];
-  
+
+  private subscriptions: Subscription[] = [];
+
+  columnsHeight = "80vh";
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private service: UsageForecastService,
     private loader: LoaderInjector,
+    private layoutService: LayoutService,
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -51,6 +57,10 @@ export class ResultDataViewComponent implements OnInit {
     await this.fetchForecast();
 
     loading.resolve();
+  }
+
+  ngAfterViewInit(): void {
+    this.fitColumns();
   }
 
   async fetchForecast() {
@@ -90,5 +100,15 @@ export class ResultDataViewComponent implements OnInit {
 
       return datasets;
     }, {}));
+  }
+
+  private fitColumns() {
+    this.subscriptions.push(this.layoutService.layout.subscribe(({main}) => {
+      if (!main) return;
+      let pads = 2 * 0.75 * this.layoutService.rem;
+      this.columnsHeight = (main.height - pads) + "px";
+      this.chartCanvas?.chart?.resize(100, 100);
+      this.chartCanvas?.chart?.resize();
+    }));
   }
 }
