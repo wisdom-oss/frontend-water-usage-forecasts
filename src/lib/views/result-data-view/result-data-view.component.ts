@@ -3,8 +3,25 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, combineLatest, firstValueFrom } from 'rxjs';
 import { AvailableAlgorithm, ConsumerGroup, NumPyResult, ProphetResult, UsageForecastService } from '../../services/usage-forecast.service';
 import { LayoutService, LoaderInjector, ManualPromise, ResizeDirective } from 'common';
-import { ChartDataset } from 'chart.js';
+import { ChartDataset, ChartOptions } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+
+type RgbaColor = [number, number, number, number];
+const HISTORIC_DATA_COLOR: RgbaColor = [62, 120, 178, 0.4] as RgbaColor;
+const FORECAST_DATA_COLOR: RgbaColor = [238, 66, 102, 0.4] as RgbaColor;
+const HIGHLIGHT_DATA_COLOR: RgbaColor = [74, 82, 90, 0.4] as RgbaColor;
+
+const HISTORIC_RGBA: string = rgbaToString(HISTORIC_DATA_COLOR);
+const FORECAST_RGBA: string = rgbaToString(FORECAST_DATA_COLOR);
+const HIGHLIGHT_RGBA: string = rgbaToString(HIGHLIGHT_DATA_COLOR);
+
+const HISTORIC_HOVER_RGBA: string = rgbaToString(HISTORIC_DATA_COLOR.with(3, 1.0) as RgbaColor);
+const FORECAST_HOVER_RGBA: string = rgbaToString(FORECAST_DATA_COLOR.with(3, 1.0) as RgbaColor);
+const HIGHLIGHT_HOVER_RGBA: string = rgbaToString(HIGHLIGHT_DATA_COLOR.with(3, 1.0) as RgbaColor);
+
+function rgbaToString(color: RgbaColor): string {
+  return `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${color[3]})`;
+}
 
 @Component({
   selector: 'lib-result-data-view',
@@ -18,6 +35,34 @@ export class ResultDataViewComponent implements OnInit, AfterViewInit {
     borderColor: 'rgba(255, 99, 132, 1)',
     borderWidth: 1
   }];
+
+  options: ChartOptions<"bar"> = {
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        stacked: true,
+        title: {
+          display: true,
+          text: "Year"
+        },
+        grid: {
+          display: false,
+        }
+      },
+      y: {
+        stacked: true,
+        title: {
+          display: true,
+          text: "Water Usage [m³]"
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        display: false,
+      }
+    }
+  }
   
   @ViewChild(BaseChartDirective) chartCanvas?: BaseChartDirective;
 
@@ -86,8 +131,23 @@ export class ResultDataViewComponent implements OnInit, AfterViewInit {
     console.log(forecast.meta);
 
     this.datasets = Object.values(forecast.data.reduce((datasets: Record<string, this["datasets"][0]>, current) => {
+      function isForecast(ctx: any): boolean {
+        let realUntil = forecast.meta['real-data-until'][current.label];
+        let x = +((ctx.raw as {x: string, y: number}).x);
+        return x > realUntil;
+      }
+      
       if (!datasets[current.label]) {
         datasets[current.label] = {
+          backgroundColor(ctx) {
+            if (isForecast(ctx)) return FORECAST_RGBA;
+            return HISTORIC_RGBA;
+          },
+          hoverBackgroundColor(ctx, options) {
+            if (isForecast(ctx)) return FORECAST_HOVER_RGBA;
+            return HISTORIC_HOVER_RGBA;
+            
+          },
           label: current.label,
           data: []
         };

@@ -26,7 +26,7 @@ export type ConsumerGroup = "businesses"
 export interface ProphetResult {
   meta: {
     rScores: Record<string, number>,
-    realDataUntil: Record<any, number>,
+    "real-data-until": Record<any, number>,
   },
   data: {
     label: string,
@@ -39,7 +39,7 @@ export interface ProphetResult {
 export interface NumPyResult {
   meta: {
     rScores: Record<string, number>,
-    realDataUntil: Record<any, number>,
+    "real-data-until": Record<any, number>,
     curves: Record<any, string>,
   },
   data: {
