@@ -9,7 +9,7 @@ import { BaseChartDirective } from 'ng2-charts';
 type RgbaColor = [number, number, number, number];
 const HISTORIC_DATA_COLOR: RgbaColor = [62, 120, 178, 0.4] as RgbaColor;
 const FORECAST_DATA_COLOR: RgbaColor = [238, 66, 102, 0.4] as RgbaColor;
-const HIGHLIGHT_DATA_COLOR: RgbaColor = [74, 82, 90, 0.4] as RgbaColor;
+const HIGHLIGHT_DATA_COLOR: RgbaColor = [255, 69, 0, 0.8] as RgbaColor;
 
 const HISTORIC_RGBA: string = rgbaToString(HISTORIC_DATA_COLOR);
 const FORECAST_RGBA: string = rgbaToString(FORECAST_DATA_COLOR);
@@ -38,6 +38,14 @@ export class ResultDataViewComponent implements OnInit, AfterViewInit {
 
   options: ChartOptions<"bar"> = {
     maintainAspectRatio: false,
+    onClick: (event, elements, chart) => {
+      for (let {datasetIndex} of elements) {
+        let isHighlighted = this.highlights.has(datasetIndex);
+        if (isHighlighted) this.highlights.delete(datasetIndex);
+        else this.highlights.add(datasetIndex);
+        this.chartCanvas?.chart?.update();
+      }
+    },
     scales: {
       x: {
         stacked: true,
@@ -69,6 +77,7 @@ export class ResultDataViewComponent implements OnInit, AfterViewInit {
   algorithms: AvailableAlgorithm[] = [];
   algorithm?: AvailableAlgorithm;
   parameters: Record<string, any> = {};
+  highlights: Set<number> = new Set();
 
   private keys: string[] = [];
   private consumerGroups: ConsumerGroup[] = [];
@@ -139,11 +148,13 @@ export class ResultDataViewComponent implements OnInit, AfterViewInit {
       
       if (!datasets[current.label]) {
         datasets[current.label] = {
-          backgroundColor(ctx) {
+          backgroundColor: ctx => {
+            if (this.highlights.has(ctx.datasetIndex)) return HIGHLIGHT_RGBA;
             if (isForecast(ctx)) return FORECAST_RGBA;
             return HISTORIC_RGBA;
           },
-          hoverBackgroundColor(ctx, options) {
+          hoverBackgroundColor: ctx => {
+            if (this.highlights.has(ctx.datasetIndex)) return HIGHLIGHT_HOVER_RGBA;
             if (isForecast(ctx)) return FORECAST_HOVER_RGBA;
             return HISTORIC_HOVER_RGBA;
             
