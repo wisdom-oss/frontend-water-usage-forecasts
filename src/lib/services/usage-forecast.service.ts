@@ -8,10 +8,20 @@ const API_URL = "water-usage-forecasts";
 export interface AvailableAlgorithm {
   identifier: string,
   description: string,
-  parameters: Record<string, {
-    default: any,
-    description: string,
-  }>
+  parameters: Record<string, Parameter>
+}
+
+export type Parameter = {
+  type: "str",
+  default: string,
+  description: string,
+  enums?: string[]
+} | {
+  type: "int" | "float",
+  default: number,
+  description: string,
+  max?: number,
+  min?: number,
 }
 
 export type ConsumerGroup = "businesses" 
@@ -26,7 +36,7 @@ export type ConsumerGroup = "businesses"
 export interface ProphetResult {
   meta: {
     rScores: Record<string, number>,
-    "real-data-until": Record<any, number>,
+    "realDataUntil": Record<any, number>,
   },
   data: {
     label: string,
@@ -39,7 +49,7 @@ export interface ProphetResult {
 export interface NumPyResult {
   meta: {
     rScores: Record<string, number>,
-    "real-data-until": Record<any, number>,
+    realDataUntil: Record<any, number>,
     curves: Record<any, string>,
   },
   data: {

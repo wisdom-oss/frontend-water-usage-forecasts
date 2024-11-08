@@ -58,12 +58,41 @@
               <label class="label">
                 {{param.key.split("_").join(" ") | titlecase}}
               </label>
-              <input 
+              <input
+                *ngIf="param.value.type == 'str' && !param.value.enums"
                 class="input" 
                 type="text" 
                 [placeholder]="param.value.default"
                 [(ngModel)]="parameters[param.key]"
               >
+              <span 
+                *ngIf="param.value.type == 'str' && param.value.enums" 
+                class="select" 
+                style="width: 100%;"
+              >
+                <select 
+                  [(ngModel)]="parameters[param.key]" 
+                  style="width: 100%;"
+                >
+                  <option 
+                    *ngFor="let enum of param.value.enums"
+                    [ngValue]="enum"
+                    [selected]="enum == param.value.default"
+                  >
+                    {{enum}}
+                  </option>
+                </select>
+              </span>
+              <input
+                *ngIf="['int', 'float'].includes(param.value.type)"
+                class="input" 
+                type="number" 
+                [placeholder]="param.value.default"
+                [(ngModel)]="parameters[param.key]"
+              >
+              <span *ngIf="!['str', 'int', 'float'].includes(param.value.type)">
+                {{param.value.default}}
+              </span>
               <span class="help">
                 {{param.value.description}}
               </span>

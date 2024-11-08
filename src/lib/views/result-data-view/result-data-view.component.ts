@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, combineLatest, firstValueFrom } from 'rxjs';
 import { AvailableAlgorithm, ConsumerGroup, NumPyResult, ProphetResult, UsageForecastService } from '../../services/usage-forecast.service';
+import { Identified, GeoDataService } from "../../services/geo-data.service";
 import { LayoutService, LoaderInjector, ManualPromise, ResizeDirective } from 'common';
 import { ChartDataset, ChartOptions } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
@@ -80,6 +81,7 @@ export class ResultDataViewComponent implements OnInit, AfterViewInit {
   highlights: Set<number> = new Set();
 
   private keys: string[] = [];
+  private names: Record<string, string> = {};
   private consumerGroups: ConsumerGroup[] = [];
 
   private subscriptions: Subscription[] = [];
@@ -92,6 +94,7 @@ export class ResultDataViewComponent implements OnInit, AfterViewInit {
     private service: UsageForecastService,
     private loader: LoaderInjector,
     private layoutService: LayoutService,
+    private geoDataService: GeoDataService,
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -104,11 +107,11 @@ export class ResultDataViewComponent implements OnInit, AfterViewInit {
     this.keys = queryParamMap.getAll("key"); // ensured by QueryParamterGuard
     this.consumerGroups = queryParamMap.getAll("consumer-group") as ConsumerGroup[];
     this.parameters = JSON.parse(queryParamMap.get("params") || "{}");
-    
+
     let algorithmIdentifier = queryParamMap.get("algorithm") || this.algorithms[0]!.identifier;
     this.algorithm = this.algorithms.find(algo => algo.identifier == algorithmIdentifier);
     if (!this.algorithm) throw new Error("unknown algorithm");
-    await this.fetchForecast();
+    this.fetchForecast();
 
     loading.resolve();
   }
@@ -137,15 +140,21 @@ export class ResultDataViewComponent implements OnInit, AfterViewInit {
       this.consumerGroups, 
       this.parameters
     );
-    console.log(forecast.meta);
+
+    let labels = new Set<string>();
+    for (let date of forecast.data) labels.add(date.label);
+    let identities = await this.geoDataService.identify(labels);
+    for (let [key, entry] of Object.entries(identities["view_nds_municipals"])) {
+      this.names[key] = entry.name;
+    }
 
     this.datasets = Object.values(forecast.data.reduce((datasets: Record<string, this["datasets"][0]>, current) => {
       function isForecast(ctx: any): boolean {
-        let realUntil = forecast.meta['real-data-until'][current.label];
+        let realUntil = forecast.meta.realDataUntil[current.label];
         let x = +((ctx.raw as {x: string, y: number}).x);
         return x > realUntil;
       }
-      
+
       if (!datasets[current.label]) {
         datasets[current.label] = {
           backgroundColor: ctx => {
@@ -159,7 +168,7 @@ export class ResultDataViewComponent implements OnInit, AfterViewInit {
             return HISTORIC_HOVER_RGBA;
             
           },
-          label: current.label,
+          label: this.names[current.label] ?? current.label,
           data: []
         };
       }
