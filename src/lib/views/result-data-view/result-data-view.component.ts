@@ -1,283 +1,194 @@
-import {
-  Component,
-  DoCheck,
-  KeyValueDiffer,
-  KeyValueDiffers,
-  OnInit
-} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {MapComponent, Resolution, BreadcrumbsService, MapService} from "common";
-import {combineLatestWith} from "rxjs/operators";
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription, combineLatest, firstValueFrom } from 'rxjs';
+import { AvailableAlgorithm, ConsumerGroup, NumPyResult, ProphetResult, UsageForecastService } from '../../services/usage-forecast.service';
+import { Identified, GeoDataService } from "../../services/geo-data.service";
+import { LayoutService, LoaderInjector, ManualPromise, ResizeDirective } from 'common';
+import { ChartDataset, ChartOptions } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 
-import {
-  ForecastType as ProphetForecastType
-} from "../../services/prophet-forecast.service";
-import {
-  ForecastResponse,
-  ForecastType as WaterUsageForecastType
-} from "../../services/water-usage-forecasts.service";
-import {WaterRightsService} from "../../services/water-rights.service";
-import {ConsumersService} from "../../services/consumers.service";
-import {consumerIcon, waterRightIcon} from "../../map-icons";
+type RgbaColor = [number, number, number, number];
+const HISTORIC_DATA_COLOR: RgbaColor = [62, 120, 178, 0.4] as RgbaColor;
+const FORECAST_DATA_COLOR: RgbaColor = [238, 66, 102, 0.4] as RgbaColor;
+const HIGHLIGHT_DATA_COLOR: RgbaColor = [255, 69, 0, 0.8] as RgbaColor;
 
-export type RegressionMethod = WaterUsageForecastType | ProphetForecastType;
-export const RegressionMethod = {...WaterUsageForecastType, ...ProphetForecastType};
+const HISTORIC_RGBA: string = rgbaToString(HISTORIC_DATA_COLOR);
+const FORECAST_RGBA: string = rgbaToString(FORECAST_DATA_COLOR);
+const HIGHLIGHT_RGBA: string = rgbaToString(HIGHLIGHT_DATA_COLOR);
 
-/** Component displaying the Results from the water right forecasts. */
+const HISTORIC_HOVER_RGBA: string = rgbaToString(HISTORIC_DATA_COLOR.with(3, 1.0) as RgbaColor);
+const FORECAST_HOVER_RGBA: string = rgbaToString(FORECAST_DATA_COLOR.with(3, 1.0) as RgbaColor);
+const HIGHLIGHT_HOVER_RGBA: string = rgbaToString(HIGHLIGHT_DATA_COLOR.with(3, 1.0) as RgbaColor);
+
+function rgbaToString(color: RgbaColor): string {
+  return `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${color[3]})`;
+}
+
 @Component({
   selector: 'lib-result-data-view',
   templateUrl: './result-data-view.component.html'
 })
-export class ResultDataViewComponent implements OnInit, DoCheck {
+export class ResultDataViewComponent implements OnInit, AfterViewInit {
+  datasets: ChartDataset<"bar", {x: string, y: number}[]>[] = [{
+    label: 'Sales 2023',
+    data: [{x: 'Sales', y: 20}, {x: 'Revenue', y: 10}],
+    backgroundColor: 'rgba(255, 99, 132, 0.2)',  // Red
+    borderColor: 'rgba(255, 99, 132, 1)',
+    borderWidth: 1
+  }];
 
-  /**
-   * Constructor.
-   * @param waterRightService Service for water rights data
-   * @param consumersService Service for consumer data
-   * @param route Current route
-   * @param router Router
-   * @param mapService Service for map interactions
-   * @param breadcrumbs Service to set breadcrumbs
-   */
+  options: ChartOptions<"bar"> = {
+    maintainAspectRatio: false,
+    onClick: (event, elements, chart) => {
+      for (let {datasetIndex} of elements) {
+        let isHighlighted = this.highlights.has(datasetIndex);
+        if (isHighlighted) this.highlights.delete(datasetIndex);
+        else this.highlights.add(datasetIndex);
+        this.chartCanvas?.chart?.update();
+      }
+    },
+    scales: {
+      x: {
+        stacked: true,
+        title: {
+          display: true,
+          text: "Year"
+        },
+        grid: {
+          display: false,
+        }
+      },
+      y: {
+        stacked: true,
+        title: {
+          display: true,
+          text: "Water Usage [m³]"
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        display: false,
+      }
+    }
+  }
+  
+  @ViewChild(BaseChartDirective) chartCanvas?: BaseChartDirective;
+
+  algorithms: AvailableAlgorithm[] = [];
+  algorithm?: AvailableAlgorithm;
+  parameters: Record<string, any> = {};
+  highlights: Set<number> = new Set();
+
+  private keys: string[] = [];
+  private names: Record<string, string> = {};
+  private consumerGroups: ConsumerGroup[] = [];
+
+  private subscriptions: Subscription[] = [];
+
+  columnsHeight = "80vh";
+
   constructor(
-    private waterRightService: WaterRightsService,
-    private consumersService: ConsumersService,
     private route: ActivatedRoute,
     private router: Router,
-    private mapService: MapService,
-    private breadcrumbs: BreadcrumbsService,
-    private keyValueDiffers: KeyValueDiffers
+    private service: UsageForecastService,
+    private loader: LoaderInjector,
+    private layoutService: LayoutService,
+    private geoDataService: GeoDataService,
   ) {}
 
-  /**
-   * Re-export of {@link Object}.
-   * @internal
-   */
-  Object = Object;
+  async ngOnInit(): Promise<void> {
+    let loading = new ManualPromise();
+    this.loader.addLoader(loading);
+    
+    this.algorithms = await this.service.fetchAvailableAlgorithms();
+    
+    let queryParamMap = await firstValueFrom(this.route.queryParamMap);
+    this.keys = queryParamMap.getAll("key"); // ensured by QueryParamterGuard
+    this.consumerGroups = queryParamMap.getAll("consumer-group") as ConsumerGroup[];
+    this.parameters = JSON.parse(queryParamMap.get("params") || "{}");
 
-  /**
-   * Merged regression methods for {@link WaterRightsService} and
-   * {@link ProphetForecastService}.
-   *
-   * Fully includes {@link ForecastType}.
-   * @internal
-   */
-  regressionMethod = RegressionMethod;
+    let algorithmIdentifier = queryParamMap.get("algorithm") || this.algorithms[0]!.identifier;
+    this.algorithm = this.algorithms.find(algo => algo.identifier == algorithmIdentifier);
+    if (!this.algorithm) throw new Error("unknown algorithm");
+    this.fetchForecast();
 
-  get regressionMethods() {
-    return Object.values(this.regressionMethod);
+    loading.resolve();
   }
 
-  /** The response from the forecast service. */
-  response?: Promise<ForecastResponse>;
-  /** Whether the request is done, used for the loader. */
-  didFinish = false;
+  ngAfterViewInit(): void {
+    this.fitColumns();
+  }
 
-  /** Selected elements, used to display in info box. */
-  selection: Record<Resolution, [string, string][]> = {
-    state: [],
-    district: [],
-    administration: [],
-    municipal: []
-  };
+  async fetchForecast() {
+    if (!this.algorithm) return;
 
-  /** Differ to detect if {@link selection} changes. */
-  private selectionDiffer!: KeyValueDiffer<string, any>;
-
-  /**
-   * Object entries of {@link selection}.
-   * Will only be updated when {@link selection} has an update.
-   *
-   * This reduces unnecessary updates in the gui and allowing selecting
-   * something of the selection.
-   */
-  selectionEntries = Object.entries(this.selection);
-
-  /** Resolution for the map selection. */
-  mapResolution: Resolution | null = null;
-
-  /** Area components the results are based on. */
-  areaComponents?: [string, string][];
-
-  /** Array of all markers placed on the map. */
-  markers: MapComponent["inputMarkers"] = [];
-
-  /** The names of displayed shapes mapped by their keys. */
-  mapKeyNames: Record<string, string> = {};
-
-  /**
-   * Set the forecast calculation method.
-   * @param m Method for forecasting water usages
-   */
-  set method(m: RegressionMethod) {
-    this.updateQueryParam("method", m);
-
-    // update map resolution based on used method
-    switch (m) {
-      case ProphetForecastType.PROPHET:
-        this.mapResolution = null;
-        break;
-      case WaterUsageForecastType.LINEAR:
-      case WaterUsageForecastType.LOGARITHMIC:
-      case WaterUsageForecastType.POLYNOMIAL:
-        this.mapResolution = Resolution.MUNICIPAL;
-        break;
+    let queryParams: Record<string, string | string[] | null> = {
+      key: this.keys,
+      algorithm: this.algorithm.identifier,
+      consumerGroups: this.consumerGroups,
+      params: null
+    };
+    if (Object.values(this.parameters).length) {
+      queryParams["params"] = JSON.stringify(this.parameters);
     }
-  }
+    this.router.navigate([], {queryParams});
 
-  /** Get selected forecast calculation method. */
-  get method() {
-    return this.route.snapshot.queryParams["method"] ?? RegressionMethod.LINEAR;
-  }
+    let forecast = await this.service.fetchForecast(
+      this.algorithm.identifier, 
+      this.keys, 
+      this.consumerGroups, 
+      this.parameters
+    );
 
-  /**
-   * Set the area key.
-   * @param k Key for the area.
-   */
-  set key(k: string | string[]) {
-    this.updateQueryParam("key", k);
-  }
-
-  /** Get selected area keys. */
-  get key(): string[] {
-    return this.route.snapshot.queryParams["key"];
-  }
-
-  /** Call {@link this#fetchData}. */
-  ngOnInit(): void {
-    this.selectionDiffer = this.keyValueDiffers.find(this.selection).create();
-    this.fetchData(this.key, this.method);
-  }
-
-  /** Update {@link selectionEntries} if {@link selection} changed. */
-  ngDoCheck(): void {
-    if (this.selectionDiffer.diff(this.selection)) {
-      this.selectionEntries = Object.entries(this.selection);
+    let labels = new Set<string>();
+    for (let date of forecast.data) labels.add(date.label);
+    let identities = await this.geoDataService.identify(labels);
+    for (let [key, entry] of Object.entries(identities["view_nds_municipals"])) {
+      this.names[key] = entry.name;
     }
-  }
 
-  /**
-   * Update a query parameter by requesting a router navigate.
-   * @param name name of the parameter to update
-   * @param value value of the parameter to update
-   * @private
-   */
-  private updateQueryParam(name: string, value: any) {
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: Object.assign(
-        {},
-        this.route.snapshot.queryParams,
-        Object.fromEntries([[name, value]])
-      )
-    }).catch(console.error);
-  }
+    this.datasets = Object.values(forecast.data.reduce((datasets: Record<string, this["datasets"][0]>, current) => {
+      function isForecast(ctx: any): boolean {
+        let realUntil = forecast.meta.realDataUntil[current.label];
+        let x = +((ctx.raw as {x: string, y: number}).x);
+        return x > realUntil;
+      }
 
-  /**
-   * Fetch data from the service to display.
-   *
-   * When the data is received this will automatically update all displayed
-   * data.
-   * @param key Key(s) to fetch data for
-   * @param method Forecast calculation method
-   * @private
-   */
-  private fetchData(
-    key: string | string[],
-    method: RegressionMethod
-  ): void {
-    // TODO: split this into multiple subroutines
-    this.mapService.fetchLayerData(null, [key].flat())
-      .then(data => {
-        let selection: this["selection"] = {
-          state: [],
-          district: [],
-          administration: [],
-          municipal: []
+      if (!datasets[current.label]) {
+        datasets[current.label] = {
+          backgroundColor: ctx => {
+            if (this.highlights.has(ctx.datasetIndex)) return HIGHLIGHT_RGBA;
+            if (isForecast(ctx)) return FORECAST_RGBA;
+            return HISTORIC_RGBA;
+          },
+          hoverBackgroundColor: ctx => {
+            if (this.highlights.has(ctx.datasetIndex)) return HIGHLIGHT_HOVER_RGBA;
+            if (isForecast(ctx)) return FORECAST_HOVER_RGBA;
+            return HISTORIC_HOVER_RGBA;
+            
+          },
+          label: this.names[current.label] ?? current.label,
+          data: []
         };
-        for (let shape of data.shapes) {
-          let res = Resolution.toEnum(shape.key.length);
-          if (!res) continue;
-          selection[res].push([shape.key, shape.name]);
-        }
-        this.selection = selection;
-        this.setBreadCrumbs(key);
+      }
+
+      datasets[current.label].data.push({
+        x: "" + current.x,
+        y: current.y
       });
-    this.waterRightService.fetchWaterRightLocations({
-        in: [key].flat(),
-        isReal: true
-      }
-    ).pipe(combineLatestWith(this.consumersService.fetchConsumers({
-      in: [key].flat(),
-      // TODO: move this value elsewhere
-      usageAbove: 10000
-    }))).subscribe(data => {
-      let markers = [];
 
-      // iterate over locations of water rights
-      for (let marker of data[0] ?? []) {
-        if (!marker.location) continue;
-        markers.push({
-          coordinates: [
-            // markers used here a calculated via location
-            marker.location.coordinates[1],
-            marker.location.coordinates[0]
-          ] as [number, number],
-          tooltip: `
-            <b>Name</b>: ${marker.name}<br>
-            <b>Water Right No</b>: ${marker.waterRight}
-          `,
-          icon: waterRightIcon,
-          onClick: () => this.router.navigate(
-            ["detail", "water-right", marker.waterRight],
-            {relativeTo: this.route.parent}
-          )
-        });
-      }
-
-      // iterate over consumer locations
-      for (let marker of data[1] ?? []) {
-        markers.push({
-          coordinates: [
-            marker.location.coordinates[1],
-            marker.location.coordinates[0]
-          ] as [number, number],
-          tooltip: marker.name,
-          icon: consumerIcon,
-          onClick: () => this.router.navigate(
-            ["detail", "consumer", marker.id],
-            {relativeTo: this.route.parent}
-          )
-        });
-      }
-
-      this.markers = markers;
-    });
+      return datasets;
+    }, {}));
   }
 
-  /**
-   * Set breadcrumbs.
-   *
-   * This will set a generic breadcrumb text if more than one area was selected.
-   * If only one area was selected the name of the selection will be set.
-   * @param key Selected keys to create correct link
-   * @private
-   */
-  private setBreadCrumbs(key: string | string[]) {
-    let selected: any = [];
-    for (let key of Object.keys(this.selection)) {
-      for (let entry of this.selection[key as Resolution]) {
-        selected.push([key, entry[1]]);
-      }
-    }
-    let text: string | [string, string];
-    if (selected.length > 1) text = "water-usage-forecasts.breadcrumbs.map-results";
-    else text = ["common.map.resolution." + selected[0][0], selected[0][1]];
-
-    this.breadcrumbs.set(1, {
-      text,
-      link: "/water-usage-forecasts/results",
-      query: {key}
-    });
+  private fitColumns() {
+    this.subscriptions.push(this.layoutService.layout.subscribe(({main}) => {
+      if (!main) return;
+      let pads = 2 * 0.75 * this.layoutService.rem;
+      this.columnsHeight = (main.height - pads) + "px";
+      this.chartCanvas?.chart?.resize(100, 100);
+      this.chartCanvas?.chart?.resize();
+    }));
   }
 }

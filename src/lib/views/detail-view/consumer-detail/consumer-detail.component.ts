@@ -7,11 +7,11 @@ import {BehaviorSubject} from "rxjs";
 import {
   ConsumerLocationsResponse,
   ConsumersService
-} from "../../../services/consumers.service";
+} from "../../../services/old/consumers.service";
 import {
   HistoryResponse,
   WaterUsageHistoryService
-} from "../../../services/water-usage-history.service";
+} from "../../../services/old/water-usage-history.service";
 import {consumerIcon} from "../../../map-icons";
 
 @Component({

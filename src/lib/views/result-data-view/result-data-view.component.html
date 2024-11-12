@@ -1,174 +1,117 @@
-<breadcrumbs></breadcrumbs>
-
-<p class="title">{{"water-usage-forecasts.result-data.results" | translate}}</p>
-
-<div class="card block">
-  <div class="card-content p-0 is-clipped">
-    <map
-      height="500px"
-      [layers]="{
-        shapes: ['', mapResolution, key]
-      }"
-      [scrollWheelZoom]="false"
-      [layerSelectable]="false"
-      [markers]="markers"
-      (keyNames)="mapKeyNames = $event"
-    ></map>
-  </div>
-</div>
-
-<div class="card block">
-  <div class="card-header">
-    <p class="card-header-title">
-      <!-- {{"water-usage-forecasts.result-data.selection" | translate}} -->
-      Basisinformationen
-    </p>
-  </div>
-  <!-- Identifying characteristics of the region (e.g., Local Administrative Unit ) -->
-  <div class="card-content columns">
-    <div class="column">
-      <div class="content">
-        <ng-template ngFor let-sel [ngForOf]="selectionEntries">
-          <div *ngIf="sel[1].length">
-            <ng-template ngFor let-shape [ngForOf]="sel[1]">
-              <p>
-                <strong>
-                  {{"common.map.resolution." + sel[0] | translate}}
-                </strong>
-                <span>
-                {{shape[1]}}
-              </span>
-              </p>
-              <p>
-                <strong>
-                  Amtlicher Regionalschlüssel
-                </strong>
-                <span>
-                {{shape[0]}}
-              </span>
-              </p>
-              <p>
-                <strong>
-                  Amtlicher Gemeindeschlüssel
-                </strong>
-                <span>
-                03451000
-              </span>
-              </p>
-
-              <p>
-                <strong>
-                  Postleitzahlen
-                </strong>
-                <span>
-                26160 - 26689
-              </span>
-              </p>
-              <p>
-                <strong>
-                  NUTS 3 Region
-                </strong>
-                <span>
-                NUTS2003:DE946
-              </span>
-              </p>
-
-            </ng-template>
-          </div>
-        </ng-template>
-      </div>
-    </div>
-
-    <!-- Informative features of the region (e.g., population size) -->
-    <div class="column">
-      <div class="content">
-        <ng-template ngFor let-sel [ngForOf]="selectionEntries">
-          <div *ngIf="sel[1].length">
-            <ng-template ngFor let-shape [ngForOf]="sel[1]">
-              <p>
-                <strong>
-                  Gemeinden
-                </strong>
-                <span>
-                Apen, Bad Zwischenahn, Edewecht, Rastede, Wiefelstede, Westerstede
-              </span>
-              </p>
-              <p>
-                <strong>
-                  Bevölkerung
-                </strong>
-                <span>
-                128.253 (31. Dez. 2022)
-              </span>
-              </p>
-              <p>
-                <strong>
-                  Fläche
-                </strong>
-                <span>
-                730,64 km²
-              </span>
-              </p>
-              <p>
-                <strong>
-                  Bevölkerungsdichte
-                </strong>
-                <span>
-                  176 Einwohner je km²
-              </span>
-              </p>
-
-              <p>
-                <strong>
-                  Trinkwasser
-                </strong>
-                <span>
-                Oldenburgisch Ostfriesischer Wasserverband
-              </span>
-              </p>
-              <p>
-                <strong>
-                  Wasserwerke
-                </strong>
-                <span>
-                Westerstede, Nethen
-              </span>
-              </p>
-
-            </ng-template>
-          </div>
-        </ng-template>
+<div 
+  class="columns" 
+  [style.height]="columnsHeight"
+  [style.minHeight]="columnsHeight"
+  [style.maxHeight]="columnsHeight"
+>
+  <div class="column">
+    <div class="card" style="height: 100%;">
+      <div class="card-content" style="height: 100%;">
+        <canvas 
+        baseChart 
+        type="bar"
+        [datasets]="datasets"
+        [options]="options"
+        style="height: 100%; width: 100%;"
+      ></canvas>
       </div>
     </div>
   </div>
-</div>
-
-<div
-  lib-result-data
-  class="block"
-  [key]="key"
-  [method]="method"
-  [mapKeyNames]="mapKeyNames"
-></div>
-
-<div class="card block" *ngIf="areaComponents && areaComponents.length > 1">
-  <div class="card-header">
-    <p class="card-header-title" translate>
-      water-usage-forecasts.result-data.branches
-    </p>
-  </div>
-  <div class="card-content">
-    <div class="tags">
-      <a
-        [routerLink]="['./']"
-        [queryParams]="{key: component[0]}"
-        class="tag is-primary is-medium"
-        *ngFor="let component of areaComponents"
+  <div 
+    class="column is-one-quarter" 
+    style="min-width: 20em;"
+  >
+    <div class="message is-flex is-flex-direction-column" style="height: 100%">
+      <div class="message-header">
+        <p>Configure Forecast</p>
+      </div>
+      <div 
+        class="message-body is-flex-grow-1 is-flex is-flex-direction-column"
+        style="overflow-y: auto;"
       >
-        {{component[1]}}
-      </a>
+        <div class="field">
+          <label class="label">Algorithm</label>
+          <p class="control has-icons-left">
+            <span class="select" style="width: 100%;">
+              <select [(ngModel)]="algorithm" style="width: 100%;">
+                <option 
+                  *ngFor="let algo of algorithms"
+                  [ngValue]="algo"
+                >
+                  {{algo.identifier.split("-").join(" ") | titlecase}}
+                </option>
+              </select>
+            </span>
+            <span class="icon is-left" style="color: inherit;">
+              <ion-icon name="color-wand-outline"></ion-icon>
+            </span>
+          </p>
+          <p class="help">{{algorithm?.description}}</p>
+        </div>
+        <div *ngIf="algorithm && !(algorithm.parameters | empty)">
+          <p class="title is-5 mb-2 mt-2">Parameters</p>
+          <div 
+            class="field" 
+            *ngFor="let param of algorithm.parameters | keyvalue"
+          >
+            <div class="control">
+              <label class="label">
+                {{param.key.split("_").join(" ") | titlecase}}
+              </label>
+              <input
+                *ngIf="param.value.type == 'str' && !param.value.enums"
+                class="input" 
+                type="text" 
+                [placeholder]="param.value.default"
+                [(ngModel)]="parameters[param.key]"
+              >
+              <span 
+                *ngIf="param.value.type == 'str' && param.value.enums" 
+                class="select" 
+                style="width: 100%;"
+              >
+                <select 
+                  [(ngModel)]="parameters[param.key]" 
+                  style="width: 100%;"
+                >
+                  <option 
+                    *ngFor="let enum of param.value.enums"
+                    [ngValue]="enum"
+                    [selected]="enum == param.value.default"
+                  >
+                    {{enum}}
+                  </option>
+                </select>
+              </span>
+              <input
+                *ngIf="['int', 'float'].includes(param.value.type)"
+                class="input" 
+                type="number" 
+                [placeholder]="param.value.default"
+                [(ngModel)]="parameters[param.key]"
+              >
+              <span *ngIf="!['str', 'int', 'float'].includes(param.value.type)">
+                {{param.value.default}}
+              </span>
+              <span class="help">
+                {{param.value.description}}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div 
+          class="is-flex-grow-1" 
+          style="min-height: 1.5em;"
+        ></div>
+        <div class="control">
+          <button 
+            class="button is-primary is-fullwidth is-justify-content-center"
+            (click)="fetchForecast()"
+          >
+            Calculate Forecast
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-<lib-mockup [parent]="this"></lib-mockup>

@@ -2,10 +2,10 @@ import {Component, Input} from "@angular/core";
 
 import {
   ForecastType as ProphetForecastType
-} from "../../../services/prophet-forecast.service";
+} from "../../../../services/old/prophet-forecast.service";
 import {
   ForecastType as WaterUsageForecastType
-} from "../../../services/water-usage-forecasts.service";
+} from "../../../../services/old/water-usage-forecasts.service";
 
 enum ForecastService {
   WATER_USAGE,

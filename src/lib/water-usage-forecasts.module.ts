@@ -14,21 +14,9 @@ import {
 import {
   MapSelectViewComponent
 } from "./views/map-select-view/map-select-view.component";
-import {
-  ResultDataViewComponent
-} from "./views/result-data-view/result-data-view.component";
-import {
-  ResultDataComponent
-} from "./views/result-data-view/result-data/result-data.component";
-import {
-  ProphetForecastResultDataComponent
-}
-  from "./views/result-data-view/result-data/prophet-forecast-result-data/prophet-forecast-result-data.component";
-import {
-  WaterUsageForecastsResultDataComponent
-}
-  from "./views/result-data-view/result-data/water-usage-forecasts-result-data/water-usage-forecasts-result-data.component";
-import { MockupComponent } from './views/result-data-view/mockup/mockup.component';
+import {ResultDataViewComponent} from "./views/result-data-view/result-data-view.component";
+import { SelectToggleControlComponent } from './views/map-select-view/select-toggle-control/select-toggle-control.component';
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -36,17 +24,15 @@ import { MockupComponent } from './views/result-data-view/mockup/mockup.componen
     ResultDataViewComponent,
     ConsumerDetailComponent,
     WaterRightDetailComponent,
-    ResultDataComponent,
-    WaterUsageForecastsResultDataComponent,
-    ProphetForecastResultDataComponent,
-    MockupComponent
+    SelectToggleControlComponent
   ],
   imports: [
     WisdomModule,
     NgChartsModule,
     CommonModule,
     RouterModule,
-    TranslateModule
+    TranslateModule,
+    FormsModule
   ]
 })
 export class WaterUsageForecastsModule { }
