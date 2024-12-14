@@ -12,13 +12,19 @@ export class MapSelectViewComponent implements OnInit, AfterViewInit, OnDestroy 
 
   LAYERS: LayerConfig.Input = [[
     {
-      layer: "view_nds_districts", 
+      layer: "nds_counties", 
       showNames: true,
       select: true,
       control: [SelectToggleControlComponent, "topright"]
     },
     {
-      layer: "view_nds_municipals",
+      layer: "nds_municipals",
+      showNames: true,
+      select: true, 
+      control: [SelectToggleControlComponent, "topright", {show: false}]
+    },
+    {
+      layer: "nds_municipal_associations",
       showNames: true,
       select: true, 
       control: [SelectToggleControlComponent, "topright", {show: false}]
