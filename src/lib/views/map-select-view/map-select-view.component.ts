@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
-import {Resolution, BreadcrumbsService, LayoutService, ResizeDirective, LayerConfig, LayerId, LayerContent, Map2Component, ShapeKey} from "common";
+import {Resolution, BreadcrumbsService, LayoutService, ResizeDirective, LayerConfig, LayerId, LayerContent, Map2Component, ShapeKey, Map2Service} from "common";
 import { BehaviorSubject, Subscription, combineLatest, map } from "rxjs";
 import { SelectToggleControlComponent } from "./select-toggle-control/select-toggle-control.component";
 
@@ -19,12 +19,6 @@ export class MapSelectViewComponent implements OnInit, AfterViewInit, OnDestroy 
     },
     {
       layer: "nds_municipals",
-      showNames: true,
-      select: true, 
-      control: [SelectToggleControlComponent, "topright", {show: false}]
-    },
-    {
-      layer: "nds_municipal_associations",
       showNames: true,
       select: true, 
       control: [SelectToggleControlComponent, "topright", {show: false}]
