@@ -144,7 +144,7 @@ export class ResultDataViewComponent implements OnInit, AfterViewInit {
     let labels = new Set<string>();
     for (let date of forecast.data) labels.add(date.label);
     let identities = await this.geoDataService.identify(labels);
-    for (let [key, entry] of Object.entries(identities["view_nds_municipals"])) {
+    for (let [key, entry] of Object.entries(identities["nds_municipals"])) {
       this.names[key] = entry.name;
     }
 
